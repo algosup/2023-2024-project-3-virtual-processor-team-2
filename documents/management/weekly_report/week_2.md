@@ -1,7 +1,8 @@
+# Weekly report for week 2
 
-| Week | Date |
-| --- | --- |
-| Week 2 |  |
+| Week 2 |
+| --- |
+| 15/1/2024 - 19/1/2024 |
 
 ## Topics
 
