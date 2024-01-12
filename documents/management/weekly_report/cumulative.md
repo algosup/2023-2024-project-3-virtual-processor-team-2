@@ -3,13 +3,13 @@
 Quick Acces:
 
 - [Week 1](#weekly-report---week-1)
-- [Week 2 (WIP)](#week-2)
-- [Week 3 (WIP)](#week-3)
-- [Week 4 (WIP)](#week-4)
-- [Week 5 (WIP)](#week-5)
-- [Week 6 (WIP)](#week-6)
-- [Week 7 (WIP)](#week-7)
-- [Week 8 (WIP)](#week-8)
+- [Week 2 (WIP)](#weekly-report---week-2)
+- [Week 3 (WIP)](#weekly-report---week-3)
+- [Week 4 (WIP)](#weekly-report---week-4)
+- [Week 5 (WIP)](#weekly-report---week-5)
+- [Week 6 (WIP)](#weekly-report---week-6)
+- [Week 7 (WIP)](#weekly-report---week-7)
+- [Week 8 (WIP)](#weekly-report---week-8)
 
 # Weekly Report - Week 1
 [Detailed File](week_1.md)
@@ -48,22 +48,29 @@ One thing to point out is the fact we didn't have project time, all the works wa
    - Gather informations from the research.
    - Ask to the client to clarify some points
   
-3. Being writing of the technical specifications
+3. Being drafting the technical specifications
   
 ## Conclusion
 This project started off well and by working enough we should be able to meet the deadline.
 We are confident about the future and eager to see how this project will turn out and what we will learn from it.
 
-## Week 2 (WIP)
+## Weekly Report - Week 2
+(WIP)
 
-## Week 3  (WIP)
+## Weekly Report - Week 3
+(WIP)
 
-## Week 4 (WIP)
+## Weekly Report - Week 4
+(WIP)
 
-## Week 5 (WIP)
+## Weekly Report - Week 5
+(WIP)
 
-## Week 6 (WIP)
+## Weekly Report - Week 6
+(WIP)
 
-## Week 7 (WIP)
+## Weekly Report - Week 7
+(WIP)
 
-## Week 8 (WIP)
+## Weekly Report - Week 8
+(WIP)

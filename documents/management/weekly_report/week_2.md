@@ -10,6 +10,8 @@
 
 ## Challenges
 
+1. Have a meeting with the client as soon as possible to clarify some blurry points and be able to start right away.
+
 ## Plans for next week
 
 ## Team mood

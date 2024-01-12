@@ -16,16 +16,16 @@ The RACI matrix is as follows:
 
 | Name                      | Project Manager | Program Manager | Technical Leader | Software Engineer | Quality Assurance | Client | Stakeholders |
 | ------------------------- | --------------- | --------------- | ---------------- | ----------------- | ----------------- | ------ | ------------ |
-| Project brief             | I               | I               | I                | I                 | I                 | A / R  | C            |
-| Project charter           | A / R           | C / I           | C / I            | C / I             | C / I             | C      | C / I        |
-| Schedule / Gantt chart    | A / R           | C / I           | C / I            | C / I             | C / I             |        | I            |
-| Functional specifications | C               | A / R           | C                |                   | C / I             | C      | I            |
-| Technical specifications  | C               | C               | A / R            | C                 | C / I             | C      | I            |
-| Code                      |                 |                 | R                | A / R             |                   |        |              |
-| Code review               | I               |                 | A / R            | R                 | R                 |        |              |
-| Code documentation        |                 | I               | C                | A / R             | C / I             | I      |              |
-| Usage instructions        |                 | I               | C                | A / R             | C / I             | I      |              |
-| Testing plan              | I               | C               | C                | C                 | A / R             | I      |              |
+| Project brief             | I               | I               | I                | I                 | I                 | R / A  | C            |
+| Project charter           | R / A           | C / I           | C / I            | C / I             | C / I             | C      | C / I        |
+| Schedule / Gantt chart    | R / A           | C / I           | C / I            | C / I             | C / I             |        | I            |
+| Functional specifications | C               | R / A           | C                |                   | C / I             | C      | I            |
+| Technical specifications  | C               | C               | R / A            | C                 | C / I             | C      | I            |
+| Code                      |                 |                 | R                | R / A             |                   |        |              |
+| Code review               | I               |                 | R / A            | R                 | R                 |        |              |
+| Code documentation        |                 | I               | C                | R / A             | C / I             | I      |              |
+| Usage instructions        |                 | I               | C                | R / A             | C / I             | I      |              |
+| Testing plan              | I               | C               | C                | C                 | R / A             | I      |              |
 
 Key:
 | Letter | Name        | Description                                               |
@@ -36,9 +36,10 @@ Key:
 | I      | Informed    | Those who are kept up-to-date on progress, often only on completion of the task or deliverable, and with whom there is just one-way communication                      |
 |        | -           | Not involved                                              |
 
+RACI colored spreadsheet can be found here: [Link](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing)
 
 # Risks and Assumptions
- (WIP)
+(WIP)
 
 
 # Key Performance Indicators
