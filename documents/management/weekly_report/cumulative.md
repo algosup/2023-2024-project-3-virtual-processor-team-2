@@ -14,7 +14,7 @@ Quick Access:
 ## Weekly Report - Week 1
 [Detailed File](week_1.md)
 
-The first week was dedicated to project initialization and planning. Practicing the code and addressing various questions took place. A meeting request was made with the client to ensure the quality of our work and confirm our understanding. Notably, all the work was done during our free time since there was no dedicated project time.
+The first week was dedicated to project initialization and planning. Practicing the code and addressing various questions took place. A meeting request was made with the client to ensure the quality of our work and confirm our understanding. Notably, all the work was done during our free time as there was no dedicated project time.
 
 ### Accomplishments
 1. Kick-off
@@ -61,7 +61,7 @@ The first week was dedicated to project initialization and planning. Practicing 
 
 2. Share our information.
    - Gather information from the learning.
-   - Have some clarifications from the client on specific points.
+   - Seek clarifications from the client on specific points.
 
 3. Begin writing the technical specifications by the end of the week.
   

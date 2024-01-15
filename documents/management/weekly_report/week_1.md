@@ -12,7 +12,7 @@ The first week was dedicated to initiating the project and planning. Practicing 
 1. Read and analyze the call for tender.
 2. Discuss the feasibility of the project.
 3. Gather questions from team members.
-4. Request a meeting to the customer to answer the team's questions.
+4. Request a meeting to the customer to answer our questions and to meet the team.
 5. Gather information and begin writing the functional specifications.
 6. Practice the C programming language and understand how a Virtual Processor and an interpreter work.
 
@@ -62,7 +62,7 @@ The first week was dedicated to initiating the project and planning. Practicing 
 
 2. Share our information.
    - Gather information from the learning.
-   - Have some clarifications from the client on specific points.
+   - seek clarifications from the client on specific points.
 
 3. Begin writing the technical specifications by the end of the week.
 
