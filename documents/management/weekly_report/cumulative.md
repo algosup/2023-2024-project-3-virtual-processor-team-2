@@ -1,6 +1,6 @@
 # Cumulative Weekly Reports
 
-Quick Acces:
+Quick Access:
 
 - [Week 1](#weekly-report---week-1)
 - [Week 2 (WIP)](#weekly-report---week-2)
@@ -11,48 +11,63 @@ Quick Acces:
 - [Week 7 (WIP)](#weekly-report---week-7)
 - [Week 8 (WIP)](#weekly-report---week-8)
 
-# Weekly Report - Week 1
+## Weekly Report - Week 1
 [Detailed File](week_1.md)
 
-This first week was focused on the initialization of the project and the planning of it. We also started doing research for the code and the different questions we had. We made a meeting request with the client to ensure the quality of our work and be sure we understood right.
-One thing to point out is the fact we didn't have project time, all the works was made on our free time.
+The first week was dedicated to project initialization and planning. Research on the code and addressing various questions took place. A meeting request was made with the client to ensure the quality of our work and confirm our understanding. Notably, all the work was done during our free time as there was no dedicated project time.
 
-## Accomplishments
+### Accomplishments
 1. Kick-off
-   - The client presented us with the project and what he expects from us.
+   - The client presented the project and shared expectations.
+   - Analyzed the call for tenders and extracted important information.
 
-2.  Specifications
-    - We currently have most of the functional specifications ready to write and started thinking about the technical ones.
-  
+2. Understanding
+   - Made contact with the client and proposed a meeting.
+   - Prepared questions to ask the client.
+
 3. Planning
-    - The timeline is being to be defined but not written down yet.
-  
-4. Research
-   - The software team has researched informations about C, Virutal Processor, interpreter and tools we are required to do it.
-  
-## Challenges
-1. New team & roles
-   - This project started with a brand new team. Additionally, 83% of the team is composed of new students and 66% of the team has never used C and still learning it. 
-  
-   - Each person has been given a role, forcing us to learn about it and set ourselves in the correct mind, even harder for the new students who never did these roles.
-  
-2. Learning C
-    - Most of our team members never did C. Learning it and more importantly, managing to think correctly about how to use it is quite a challenge, even with a book provided by our school in the library.
-  
-## Plan for next week
+   - The timeline is being defined but not documented yet.
 
-1. Write functional specifications and planning
-   - The functional specifications must be write and completed.
+3. Documents
+   - Created the RACI Matrix.
+   - Initiated the schedule planning.
   
-2. Share our informations
-   - Gather informations from the research.
-   - Ask to the client to clarify some points
+4. Specifications
+    - Gathered information to write the functional specifications.
+
+5. Research
+   - The software team has gathered information about C, Virtual Processor, interpreter, and tools required for the project.
   
-3. Being drafting the technical specifications
+### Challenges
+
+1. New team & roles
+   - The project began with a new team, and 83% of the team comprises new students, with 66% having no prior experience in C. Each person has been assigned a role, requiring learning and adaptation, especially for the new students.
+
+2. Learning C
+    - Most team members are new to C, and learning it, along with understanding how to use it effectively, poses a significant challenge.
+
+3. Scheduling Team Meetings
+   - Finding a suitable time for a team meeting when everyone is available during their free time.
+
+4. Thorough Analysis of Call for Tenders
+   - Ensuring a clear understanding of the project requirements and goals through a comprehensive analysis of the call for tenders.
   
-## Conclusion
-This project started off well and by working enough we should be able to meet the deadline.
-We are confident about the future and eager to see how this project will turn out and what we will learn from it.
+### Plan for Next Week
+
+1. Write functional specifications and planning.
+   - Begin writing the functional specifications.
+   - Create tasks and a schedule/Gantt chart spreadsheet.
+   - Begin creation of the KPIs
+
+2. Share our information.
+   - Gather information from the research.
+   - Seek clarification from the client on certain points.
+
+3. Begin writing the technical specifications by the end of the week.
+  
+### Conclusion
+
+The project has started well, and with sufficient effort, we should meet the deadline. The client has been contacted, and initial documents have been created. It's a promising start! We are confident about the future and eager to see how this project unfolds and what valuable lessons we will learn
 
 ## Weekly Report - Week 2
 (WIP)
