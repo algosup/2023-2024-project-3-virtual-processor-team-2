@@ -1,4 +1,5 @@
 # Weekly report for week 2
+[Cumulative File](cumulative.md)
 
 | Week 2 |
 | --- |
@@ -15,5 +16,7 @@
 ## Plans for next week
 
 ## Team mood
+
+Average team mood rating: /10
 
 ## Conclusion

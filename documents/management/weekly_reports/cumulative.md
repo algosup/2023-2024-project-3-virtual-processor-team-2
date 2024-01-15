@@ -70,22 +70,29 @@ The first week was dedicated to project initialization and planning. Practicing 
 The project has started well, and with sufficient effort, we should meet the deadline. The client has been contacted, and initial documents have been created. It's a promising start! We are confident about the future, eager to see how this project unfolds and what valuable lessons we will learn.
 
 ## Weekly Report - Week 2
+[Detailed File (WIP)](week_2.md)
 (WIP)
 
 ## Weekly Report - Week 3
+[Detailed File (WIP)](week_3.md)
 (WIP)
 
 ## Weekly Report - Week 4
+[Detailed File (WIP)](week_4.md)
 (WIP)
 
 ## Weekly Report - Week 5
+[Detailed File (WIP)](week_5.md)
 (WIP)
 
 ## Weekly Report - Week 6
+[Detailed File (WIP)](week_6.md)
 (WIP)
 
 ## Weekly Report - Week 7
+[Detailed File](week_7.md)
 (WIP)
 
 ## Weekly Report - Week 8
+[Detailed File (WIP)](week_8.md)
 (WIP)

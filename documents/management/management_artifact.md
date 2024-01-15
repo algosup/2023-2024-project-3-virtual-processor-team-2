@@ -4,6 +4,8 @@ This document contains the main management artifacts:
 - [Risks and Assumptions (WIP)](#risks-and-assumptions)
 - [Key Performance Indicators (WIP)](#key-performance-indicators)
 
+You can also take a look at [cumulative weekly reports](weekly_reports/cumulative.md) file.
+
 
 # Tasks & schedules
 
