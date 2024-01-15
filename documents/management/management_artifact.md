@@ -8,7 +8,7 @@ This document contains the main management artifacts:
 # Tasks & schedules
 
 The breakdown of the tasks, their assignment, as well as the planned and actual schedule of those tasks can be found here:
-[Link (WIP)]().
+[Link](https://docs.google.com/spreadsheets/d/1nawLT6dMtwPcFpHMa4k32Nxjinokl4ZmX4GMZl1Fatc/edit?usp=sharing).
 
 # RACI matrix
 
