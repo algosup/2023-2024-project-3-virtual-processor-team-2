@@ -1,7 +1,7 @@
-# ALGOSUP | 2023-2024 | project 3 | Virtual Processor | Team 2
+# ALGOSUP | 2024 | project 3 | Virtual Processor | Team 2
 
 ## Team Members
-| **Pictures** | **Name** | **Role** | **GitHub/LinkedIn** |
+| **Picture** | **Name** | **Role** | **GitHub/LinkedIn** |
 |---|---|---|---|
 | <img src=https://ca.slack-edge.com/T06AELBCZSB-U06AS9UQZ6Z-g7986289d5c2-512 width="200" height="200">| Mathias GAGNEPAIN | Project Manager | [GitHub](https://github.com/MathiasGagnepain) \| [LinkedIn](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/) |
 | <img src=https://ca.slack-edge.com/T06AELBCZSB-U06BJ1BQE00-g3ffdd245b21-512 width="200" height="200"> | Guillaume DESPAUX | Program Manager | [GitHub](https://github.com/GuillaumeDespaux) \| [LinkedIn](https://www.linkedin.com/in/guillaume-despaux-084b10206/) |
