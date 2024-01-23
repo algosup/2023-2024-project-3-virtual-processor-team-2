@@ -2,14 +2,23 @@
 
 Quick Access:
 
-- [Week 1](#weekly-report---week-1)
-- [Week 2 (WIP)](#weekly-report---week-2)
-- [Week 3 (WIP)](#weekly-report---week-3)
-- [Week 4 (WIP)](#weekly-report---week-4)
-- [Week 5 (WIP)](#weekly-report---week-5)
-- [Week 6 (WIP)](#weekly-report---week-6)
-- [Week 7 (WIP)](#weekly-report---week-7)
-- [Week 8 (WIP)](#weekly-report---week-8)
+- [Cumulative Weekly Reports](#cumulative-weekly-reports)
+  - [Weekly Report - Week 1](#weekly-report---week-1)
+    - [Accomplishments](#accomplishments)
+    - [Challenges](#challenges)
+    - [Plan for Next Week](#plan-for-next-week)
+    - [Conclusion](#conclusion)
+  - [Weekly Report - Week 2](#weekly-report---week-2)
+    - [Accomplishments](#accomplishments-1)
+    - [Challenges](#challenges-1)
+    - [Plan for Next Week](#plan-for-next-week-1)
+    - [Conclusion](#conclusion-1)
+  - [Weekly Report - Week 3](#weekly-report---week-3)
+  - [Weekly Report - Week 4](#weekly-report---week-4)
+  - [Weekly Report - Week 5](#weekly-report---week-5)
+  - [Weekly Report - Week 6](#weekly-report---week-6)
+  - [Weekly Report - Week 7](#weekly-report---week-7)
+  - [Weekly Report - Week 8](#weekly-report---week-8)
 
 ## Weekly Report - Week 1
 [Detailed File](week_1.md)
@@ -70,22 +79,49 @@ The first week was dedicated to project initialization and planning. Practicing 
 The project has started well, and with sufficient effort, we should meet the deadline. The client has been contacted, and initial documents have been created. It's a promising start! We are confident about the future, eager to see how this project unfolds and what valuable lessons we will learn.
 
 ## Weekly Report - Week 2
-(WIP)
+[Detailed File](week_2.md)
+
+The second week was focused on clarifying project requirements and conducting research on technology and usage. All the work was completed during our free time, as there was no dedicated project time.
+
+### Accomplishments
+
+1. Successfully conducted a meeting with the client.
+2. Obtained clear viewpoints on the project.
+  
+### Challenges
+
+1. Scheduling a meeting with the client as soon as possible to clarify some unclear points and enable a prompt project start.
+2. Find working time out of class to share our ideas and brainstorm about it
+  
+### Plan for Next Week
+
+1. Write functional specifications.
+2. Gather technical information to complete management documents and prepare technical specifications.
+  
+### Conclusion
+
+With a clearer understanding of the project, we are poised to channel our efforts into focused research and in bringing the project to fruition. The recent developments have instilled confidence, and we eagerly anticipate the challenges and successes that lie ahead.
 
 ## Weekly Report - Week 3
+[Detailed File (WIP)](week_3.md)
 (WIP)
 
 ## Weekly Report - Week 4
+[Detailed File (WIP)](week_4.md)
 (WIP)
 
 ## Weekly Report - Week 5
+[Detailed File (WIP)](week_5.md)
 (WIP)
 
 ## Weekly Report - Week 6
+[Detailed File (WIP)](week_6.md)
 (WIP)
 
 ## Weekly Report - Week 7
+[Detailed File](week_7.md)
 (WIP)
 
 ## Weekly Report - Week 8
+[Detailed File (WIP)](week_8.md)
 (WIP)
