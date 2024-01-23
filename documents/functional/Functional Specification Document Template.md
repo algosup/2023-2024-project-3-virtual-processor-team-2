@@ -1,14 +1,11 @@
 ﻿# **ALGOSUP Team 2**
-### **Administrative Systems**
+### **Development team**
 ## **Functional Specification Document**
-**Project Name**
+### **Unamed for now**
 
-
-
-**DOCUMENT VERSION 0.1**
+### **DOCUMENT VERSION 0.1**
 
 **01/22/2024**
-
 
 *
 
@@ -23,8 +20,8 @@
 
 |**Date**|**Version**|**Document Revision Description**|**Document Author**|
 | :-: | :-: | :-: | :-: |
-|||||
-|||||
+|1/22/2024|0.1|?|DESPAUX Guillaume|
+|1/23/2024|0.2|?|DESPAUX Guillaume|
 |||||
 |||||
 |||||
@@ -34,18 +31,18 @@
 
 |**Approval Date**|**Approved Version**|**Approver Role**|**Approver**|
 | :-: | :-: | :-: | :-: |
+|?|0.1|QA?PM?||
 |||||
 |||||
 |||||
-|||||
-## **
+
 - [**Table of Contents**](#table-of-content)
 - [1. Introduction](#1-introduction)
    - [1.1   Purpose of the document](#11-purpose-of-the-document)
    - [1.2	Project Scope](#12-project-scope)
    - [1.3	Scope of the document](#13-scope-of-the-document)
    - [1.4 	Related documents](#14-related-documents)
-   - [1.5   Terms/Acronyms and Definitions](#15-termsacronyms-and-definitions)
+   - [1.5   Glossary](#15-glossary)
    - [1.6   Risks and Assumptions](#16-risks-and-assumptions)
 - [2.	System/Solution Overview](#2-system-solution-overview)
    - [2.1   Context Diagram/ Interface Diagram/ Data Flow Diagram, Application Screen Flow, Sitemap, Process Flow](#21-context-diagram-interface-diagram-data-flow-diagram-application-screen-flow-sitemap-process-flow)
@@ -53,6 +50,11 @@
    - [2.3  Dependencies and Change Impacts](#23-dependencies-and-change-impacts)
 - [3.	Functional Specifications](#3-functional-specifications)
    - [3.1 Title](#31-title)
+      - [3.1.1 Purpose/ Description](#311-purpose-description)
+      - [3.1.2 Use case](#312-use-case)
+      - [3.1.3 Mock up](#313-mock-up)
+      - [3.1.4 Functional Requirement](#314-functional-requirements)
+      - [3.1.5 Field level specification](#315-field-level-specifications)
 - [4.	System Configurations](#4-system-configurations)
 - [5.	Other System Requirements/ Non-Functional Requirements](#5-other-system-requirements-non-functional-requirements)
 - [6.	Reporting Requirements](#6-reporting-requirements)
@@ -64,39 +66,84 @@
    - [8.3	Data Conversion Specifications](#83-data-conversion-specifications)
 - [9.	References](#9-references)
 - [10.	Open Issues](#10-open-issues)
-- [Appendix](#11-appendix)
+- [11. Appendix](#11-appendix)
+- [11.2 Assembly Language](#112-assembly-language)
 
 
 # **1. Introduction**
-Identify and describe the business need or problem this document will address. Include background information here.
+
+The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor. We need to create our [own assembly language](#112-assembly-language), create a [C](#11-appendix) program using [C standard librairies](#11-appendix) which can read text file(*.txt or can be something else?*), detect a *bad* semantic and syntatical errors. We also need to implement a virtual system displaying text in a virtual terminal, that can be accessed from the assembly code.
 
 ## **1.1 Purpose of the document**
-   Describe what a Functional Specification Document is and its intended purpose for the audience.  Included below is a standard purpose of the FSD, but modify the description as needed.
+   __Describe what a Functional Specification Document is and its intended purpose for the audience.  Included below is a standard purpose of the FSD, but modify the description as needed.__
 
 The Functional Specification Document is a document that provides detailed information on *how* the system solution will function and the requested behavior.  This document is created based on the high-level requirements identified in the Business Requirements Document and provides traceability on the functional specifications back to the business requirements.  Included in this document will be the detailed functional requirements including use cases, system inputs and outputs, process flows, diagrams, and mock ups.
 
 ## **1.2 Project Scope**
-Describe the project scope that addresses the business need or problem.  Include high-level information on the solution.
+1. The main goal is to develop a more understandable version of assembly, along with an interpreter capable of reading and compiling these files. The compiled code can then be run on an emulated old mobile phone, providing users with an extended range of functionalities.
+
+     - We aim to enhance the functionality of an old classic phones by providing developers with the opportunity to create new applications or games for these vintage mobile devices. 
+     - Our objective is to offer a new way of using a compact phone primarily for calls and texts, while also allowing it to serve as a simple entertainment device for moments such as waiting in queues or sitting in waiting rooms. 
+     - Our intention is to promote a balanced usage, avoiding smartphone addiction, and revitalizing the appeal of old consoles and flip phones by introducing additional utilities.
+
+2. We have outlined certain out-of-scope features designed to assist developers and clients in comprehending the product's capabilities:
+ 
+   - Implementation of a debugger, facilitating a clear understanding of program execution and helping in comprehending how the Virtual Processor interprets the language.
+   - Creation of a basic application, such as a Snake Game, to showcase how our language can enhance the overall user experience.
 
 ## **1.3 Scope of the document**  
-   If there are multiple FSDs created for the project, describe the specific scope that this document will address.  Sections 1.2 and 1.3 can be combined together.
+
+   This document aims to explain the project without delving too deeply into technical explanations, making it understandable for everyone.
 
 ## **1.4 	Related documents**
-Add any related documentation that is relevant and related to the FSD. Some examples are the Project Charter, Business Requirements Document, etc..
+Add any related documentation that is relevant and related to the FSD. Some examples are the Project Charter, etc..
 
 |**Component**|**Name (with link to the document)**|**Description**|
 | :- | :- | :- |
 ||||
 
-## **1.5      Terms/Acronyms and Definitions** 
+## **1.5      Glossary** 
 State any terms and its definition that are described in the functional specifications.  Include any acronyms that are mentioned in the document.
 
 |**Term/Acronym**|**Definition**|**Description**|
 | :- | :- | :- |
-||||
+| Own Assembly Language | Assembly Language: Low-level programming language specific to a computer architecture. | A language who looks like Assembly but most easier to use and to understand created by ourself. |
 
 ## **1.6      Risks and Assumptions**
 List any assumed factors and identified risks that could affect the functional design of the system.  Included can be third-party or commercial components that will be used, issues around the operating environment, or any constraints.
+
+### Risks
+
+- **Technical challenges:**
+
+  - Unforeseen technical challenges in the virtual processor functioning, interpreter compilation or other development aspects may lead to delays or difficulties in achieving the desired functionality.
+  
+- **Resource constraints:**
+
+   - Unexpected shortages or constraints in resources, including human resources or software tools, may impact the project's ability to meet deadlines or maintain quality standards.
+  
+- **Unpredictable technical issues:**
+
+   - Unpredictable technical issues, such as compatibility problems on different systems or devices, may arise during the testing phase.
+
+### Assemptions
+
+- **Technical expertise:**
+
+  - The development team possesses the necessary technical expertise in assembly language and parser to successfully create it.
+  - The team has done a lot of research based on virtual processor functioning and architecture.
+  
+- **User engagement:**
+
+  - There is an assumption that users will engage positively with our own assembly language, fostering community participation for use it and potential future enhancements.
+
+- **Timely completion:**
+
+  - The project assumes that it will be completed within the specified timeline, avoiding significant delays or disruptions.
+  
+- **Quality assurance:**
+
+  - The testing and quality assurance processes will effectively identify and address any bugs or issues, ensuring a polished and functional virtual processor with our language and our interpreter.
 
 #   **2.  System/ Solution Overview**
 Provide a short description of the software and solution being specified and its purpose, including relevant benefits, objectives, and goals.
@@ -104,9 +151,11 @@ Provide a short description of the software and solution being specified and its
 ## **2.1     Context Diagram/ Interface Diagram/ Data Flow Diagram, Application Screen Flow, Sitemap, Process Flow**
 Provide any appropriate graphical representations that are relevant to the system and project such as a context/interface/data flow diagram, application screen flow, site map, or process flow.  Add as many as needed.
 
+__NONE FOR NOW__
+
 ## **2.2     System Actors**
 
-### **2.2.1     User Roles and Responsibilities / Authority Requirements**
+### **2.2.1     User Roles and Responsibilities**
 
 --------------------------------------------------------------------------------------------------
 
@@ -236,6 +285,8 @@ This is where you can explain the error conditions/Exceptions that normally happ
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 |||||||||
 # **11.  Appendix**
+## **11.1**
+## **11.2 ASSEMBLY LANGUAGE**
 January 22, 2024
 
 
