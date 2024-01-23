@@ -13,7 +13,8 @@ enum instKind{
     INST_OP,
     INST_ACT,
     INST_LABEL,
-    INST_CMP
+    INST_CMP,
+    INST_VAR,
 };
 
 // Operation types
