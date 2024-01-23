@@ -13,7 +13,7 @@ set(CMAKE_CXX_COMPILER "g++")
 set(CMAKE_C_COMPILER "gcc")
 
 project(
-  AT2-Interpreter
+  Interpreter-AT2
   VERSION 1.0
   LANGUAGES CXX C
 )
@@ -22,6 +22,8 @@ find_package(Threads REQUIRED)
 
 add_executable(tests
   parser.c
+  builder.c
+  runner.c
   tests.cc
   googletest/googletest/src/gtest-all.cc
 )
@@ -51,21 +53,24 @@ set_target_properties(tests
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
 )
 
-add_executable(AT2
-    parser.c 
+add_executable(iat2
+    parser.c
+    builder.c
+    runner.c
+    iat2.c
 )
 
-target_include_directories(AT2
+target_include_directories(iat2
   PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
-target_compile_options(AT2
+target_compile_options(iat2
   PRIVATE
     -Wall -Wextra -pedantic -g -O2
 )
 
-set_target_properties(AT2
+set_target_properties(iat2
   PROPERTIES
     C_STANDARD 99
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
