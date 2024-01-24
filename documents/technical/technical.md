@@ -15,10 +15,8 @@
    2. [Memory](#memory)
    3. [Display](#display)
    4. [Keypad Input](#keypad-input)
-   5. [Connectivity and Network](#connectivity-and-network)
-   6. [Sound and Audio](#sound-and-audio)
-   7. [Power Management](#power-management)
-   8. [Physical Sensations](#physical-sensations)
+   5. [Sound and Audio](#sound-and-audio)
+   6. [Power Management](#power-management)
 4. [Assembly Language Specifications](#assembly-language-specifications)
    1. [Instruction Set](#instruction-set)
    2. [Syntax and Conventions](#syntax-and-conventions)
@@ -47,7 +45,7 @@ This project involves the development of a virtual processor and a custom assemb
 ## 2. Project Overview
 
 The project's scope encompasses the creation of a generalized old mobile phone emulator, using a virtual processor with custom specifications, not limited to any specific existing hardware like the ARM7TDMI. The Nokia 3310 is used as a reference point for typical features and functionalities found in old mobile phones.
-
+<!-- You're repeating yourself, careful. -> lines 41 and 47  "The Nokia 3310 is an example" // "The Nokia 3310 is used as a reference point" -->
 ---
 
 ## 3. Hardware Specifications
@@ -56,7 +54,7 @@ The project's scope encompasses the creation of a generalized old mobile phone e
 
 #### Processor Specifications
 - Custom-designed processor specifications, tailored to emulate common functionalities of old mobile phones.
-- The processor will not replicate any specific existing hardware but will be inspired by typical characteristics of old mobile phone processors.
+- The processor will not replicate any specific existing hardware but will be inspired by typical characteristics of old mobile phone processors. <!-- You're repeating yourself, careful. -> lines 47 and 57  "not limited to any specific existing hardware" // "will not replicate any specific existing hardware" -->
 
 #### Processor Capabilities
 - Include general capabilities like handling basic arithmetic operations, managing input/output operations, and interacting with other emulated components.
@@ -70,21 +68,11 @@ The project's scope encompasses the creation of a generalized old mobile phone e
 ### 3.4 Keypad Input
 - Simulate the keypad input of old mobile phones, including numeric and function keys.
 
-### 3.5 Connectivity and Network
-- Represent basic network functionalities for demonstration purposes.
-
-### 3.6 Sound and Audio
+### 3.5 Sound and Audio
 - Emulate audio capabilities such as monophonic ringtones and beeps.
 
-### 3.7 Power Management
+### 3.6 Power Management
 - Emulator's power management will show a static battery level, either at 100% or mirroring the host computer's battery status.
-
-### 3.8 Physical Sensations
-- Include emulation of physical sensations like vibration.
-
----
-
-[Further sections 4 to 8 will follow the same format, focusing on the generalized approach rather than specific to Nokia 3310]
 
 ---
 
