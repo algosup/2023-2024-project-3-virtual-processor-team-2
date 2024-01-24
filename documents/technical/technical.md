@@ -1,9 +1,10 @@
-# Technical Specifications Document
+### Technical Specifications Document
+### ALGOSUP Project 3, 2024
 
-## Virtual Processor and Assembly Language for Old Mobile Phone Emulation
+# Virtual Processor and Assembly Language for Old Mobile Phone Emulation
 
-### Version: 0.1
-### Date: [01/24/2024]
+### Version: 0.2
+### Date: 01/24/2024
 
 ---
 
@@ -29,7 +30,7 @@
    1. [Unit Testing](#unit-testing)
    2. [Integration Testing](#integration-testing)
    3. [Performance Testing](#performance-testing)
-7. [Documentation and Versioning](#documentation-and-versioning)
+7. [Documentation](#documentation)
 8. [Appendices](#appendices)
    1. [References](#references)
    2. [Glossary](#glossary)
@@ -38,7 +39,7 @@
 
 ## 1. Introduction
 
-This project involves the development of a virtual processor and a custom assembly language to emulate the environment of typical old mobile phones, with the Nokia 3310 serving as a primary example. The goal is to create a virtualized system that accurately simulates the functionalities of such phones, focusing on general characteristics common to this category of devices.
+This project involves developing a virtual processor and a custom assembly language to emulate the environment typical of old mobile phones. It aims to create a virtualized system that accurately simulates the functionalities of these devices, focusing on general characteristics common to this category.
 
 ---
 
@@ -57,28 +58,22 @@ The project's scope encompasses the creation of a generalized old mobile phone e
 - The processor will not replicate any specific existing hardware but will be inspired by typical characteristics of old mobile phone processors. <!-- You're repeating yourself, careful. -> lines 47 and 57  "not limited to any specific existing hardware" // "will not replicate any specific existing hardware" -->
 
 #### Processor Capabilities
-- Include general capabilities like handling basic arithmetic operations, managing input/output operations, and interacting with other emulated components.
+- Capabilities include basic arithmetic operations, input/output operations, and interaction with emulated components.
 
 ### 3.2 Memory
-- Detail the memory architecture for the emulator, including ROM and RAM specifications and emulation approach.
+- Memory architecture details, including ROM and RAM specifications for the emulator.
 
 ### 3.3 Display
-- Emulate a basic monochrome LCD typical of old mobile phones, focusing on text and simple graphics rendering.
+- Emulating a basic monochrome LCD typical of old mobile phones, with text and simple graphics capabilities.
 
 ### 3.4 Keypad Input
-- Simulate the keypad input of old mobile phones, including numeric and function keys.
+- Simulating keypad input, including numeric and function keys typical of old mobile phones.
 
 ### 3.5 Sound and Audio
-- Emulate audio capabilities such as monophonic ringtones and beeps.
+- Emulating audio functions such as monophonic ringtones and beeps.
 
 ### 3.6 Power Management
-- Emulator's power management will show a static battery level, either at 100% or mirroring the host computer's battery status.
-
----
-
-## 7. Documentation and Versioning
-
-Consistent documentation and version control are crucial. Regular updates and commits will be made to ensure traceability and safeguard against data loss due to hardware issues.
+- The emulator will show a static battery level, either consistently at 100% or mirroring the host computer's battery status.
 
 ---
 
@@ -98,59 +93,44 @@ Consistent documentation and version control are crucial. Regular updates and co
 
 ---
 
-## 5. Virtual processor specifications
+## 5. Development tools
 
-### 5.1 Architecture overview
-- Structural design of the virtual processor.
-
-### 5.2 Execution model
-- Description of how the processor executes assembly instructions.
-
-### 5.3 Peripheral emulation
-- Approach to emulate the phone's peripherals like screen, keypad, etc.
-
-### 5.4 Power management emulation
-- Strategy to emulate power management of the device.
-
----
-
-## 6. Development tools
-
-### 6.1 Assembler
+### 5.1 Assembler
 - Specifications of the assembler tool for the project.
 
-### 6.2 Debugger
+### 5.2 Debugger
 - Features and capabilities of the debugging tool.
 
-### 6.3 Testing framework
+### 5.3 Testing framework
 - Overview of the testing framework and methodologies to be used.
 
 ---
 
-## 7. Testing and validation
+## 6. Testing and validation
 
-### 7.1 Unit testing
+### 6.1 Unit testing
 - Strategy for unit testing individual components.
 
-### 7.2 Integration testing
+### 6.2 Integration testing
 - Approach for testing the integrated system.
 
-### 7.3 Performance testing
+### 6.3 Performance testing
 - Methodology for assessing the performance of the emulated system.
 
 ---
 
-## 8. Documentation
-- Plan for creating and maintaining documentation for the project.
+## 7. Documentation
+
+Regular updates and version control are essential to maintain a comprehensive record of the project's progress and to protect against data loss.
 
 ---
 
-## 9. Appendices
+## 8. Appendices
 
-### 9.1 References
+### 8.1 References
 - List of references and resources used for the project.
 
-### 9.2 Glossary
+### 8.2 Glossary
 - Definitions of key terms and concepts used in the document.
 
 ---
