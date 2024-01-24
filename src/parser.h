@@ -42,4 +42,31 @@ void parseFile(instList_t *nodeList, char *filename);
     returns:
         instNode_t: instruction node
 */
-instNode_t *parseLine(char *line);
+instNode_t *parseLine(char *line, long nodeId);
+
+/*
+    Compare the first len characters of two strings
+    params:
+        line: line to be compared
+        string: string to be compared
+        len: number of characters to be compared
+    returns:
+        bool: true if the strings are same, false otherwise
+*/
+bool cmpStringFirst(char *line, char *string, int len);
+
+/*
+    Get arguments from an instruction line
+    params:
+        line: line to be parsed
+    returns:
+        char**: array of strings (no more than 2)
+*/
+char** getInstArgs(char *line);
+
+/*
+    Remove spaces from a string
+    params:
+        str: string to be parsed
+*/
+void rmSpaces(char *str);
