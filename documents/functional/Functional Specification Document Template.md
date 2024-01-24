@@ -72,10 +72,9 @@
 
 # **1. Introduction**
 
-The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor. We need to create our [own assembly language](#112-assembly-language), create a [C](#15-glossary) program using [C standard librairies](#15-glossary) which can read text file(*.txt or can be something else?*), detect semantic and syntatical errors. We also need to implement a virtual system displaying text in a virtual terminal, that can be accessed from the assembly code.
+The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor. We need to create our own [assembly language](#112-assembly-language), create a [C](#15-glossary) program using [C standard librairies](#15-glossary) which can read text file(*.txt or can be something else?*), detect semantic and syntatical errors. We also need to implement a virtual system displaying text in a virtual terminal, that can be accessed from the assembly code.
 
 ## **1.1 Purpose of the document**
-   __Describe what a Functional Specification Document is and its intended purpose for the audience.  Included below is a standard purpose of the FSD, but modify the description as needed.__
 
 The Functional Specification Document is a document that provides detailed information on *how* the system solution will function and the requested behavior.  This document is created based on the high-level requirements identified in the Business Requirements Document and provides traceability on the functional specifications back to the business requirements.  Included in this document will be the detailed functional requirements including use cases, system inputs and outputs, process flows, diagrams, and mock ups.
 
@@ -91,27 +90,23 @@ The Functional Specification Document is a document that provides detailed infor
    - Implementation of a debugger, facilitating a clear understanding of program execution and helping in comprehending how the Virtual Processor interprets the language.
    - Creation of a basic application, such as a Snake Game, to showcase how our language can enhance the overall phones capabilities.
 
-## **1.3 Scope of the document**  
-
-   This document aims to explain the project without delving too deeply into technical explanations, making it understandable for everyone.
-
-## **1.4 	Related documents**
+## **1.5 	Related documents**
 Add any related documentation that is relevant and related to the FSD. Some examples are the Project Charter, etc..
 
 |**Component**|**Name (with link to the document)**|**Description**|
 | :- | :- | :- |
 ||||
 
-## **1.5      Glossary** 
+## **1.4     Glossary** 
 State any terms and its definition that are described in the functional specifications.  Include any acronyms that are mentioned in the document.
 
 |**Term/Acronym**|**Definition**|**Description**|
 | :- | :- | :- |
 |C|C is an imperative procedural language, supporting structured programming, lexical variable scope, and recursion, with a static type system|It is referred to as a low-level language in the sense that each instruction in the language is designed to be compiled into a fairly predictable number of machine instructions|
 |C standard librairies|The C standard library is a standardized collection of header files and library routines used to implement common operations|The C standard library provides macros, type definitions and functions for tasks such as string handling, mathematical computations, input/output processing, memory management, and several other operating system services.|
-| Own Assembly Language | Assembly Language: Low-level programming language specific to a computer architecture. | A language who looks like Assembly but most easier to use and to understand created by ourself. |
+|Assembly Language|Assembly Language: Low-level programming language specific to a computer architecture.| A language who looks like Assembly but most easier to use and to understand created by ourself.|
 
-## **1.6      Risks and Assumptions**
+## **1.5      Risks and Assumptions**
 List any assumed factors and identified risks that could affect the functional design of the system.  Included can be third-party or commercial components that will be used, issues around the operating environment, or any constraints.
 
 ### Risks
@@ -149,7 +144,13 @@ List any assumed factors and identified risks that could affect the functional d
 
   - The testing and quality assurance processes will effectively identify and address any bugs or issues, ensuring a polished and functional virtual processor with our language and our interpreter.
 
-# **2.  System**
+### Constraints
+
+- **Technical constraints**
+   - The software need to be run in an environment of 16bits minimum.
+   - The software need to have at least 4 Ko minimum.  
+
+# **2.  System/ Solution Overview**
 __Provide a short description of the software and solution being specified and its purpose, including relevant benefits, objectives, and goals.__
 
 ## **2.1    Context Diagram/ Interface Diagram/ Data Flow Diagram, Application Screen Flow, Sitemap, Process Flow**
@@ -171,23 +172,48 @@ __NONE FOR NOW__
 
 ### **2.3.1 System Dependencies**
 
-- CMAKE
-- gcc
+|**System Name**|**Use Case/Utility**|**Description**|
+| :-: | :-: | :-: |
+|C Standard Libraries|Fundamental building blocks for C programs|Essential libraries that provide standard functions and macros for tasks such as input/output, string manipulation, memory management, and more.|
+|g++|Compilation of C++ unit tests|The GNU C++ compiler, used for compiling programs written in C++.|
+|gcc|Compilation of C programs|The GNU Compiler Collection, an optimizing compiler supporting various programming languages, hardware architectures, and operating systems.|
+|CMake|Build automation and configuration|Handles aspects like cross-platform builds, system introspection, and user-customized builds. CMake is used for automation, testing, packaging, and installation of software in a compiler-independent manner.|
+|Visual Studio Code|Multi-language code editor|A versatile code editor that supports coding in multiple programming languages. Visual Studio Code is free and helps users start coding quickly.|
+|New Extension: .aop|Custom File Format|Represents files in a custom format used by the software application. The software should be able to read, write, and manipulate files with the .aop extension. Ensure that users are aware of this new extension and can associate it with the software application. Consider any additional dependencies related to the handling of this custom file format.|
 
 
-### **2.3.2      Change Impacts**	
-List and identify existing systems that will be impacted by the implementation of the proposed solution.
-- assembly -> AT2
+### **2.3.2 Change Impacts**	
 
+**C Standard Libraries:**
+- **Impact:** Compatibility and Portability.
+- **Details:** Any changes to the C Standard Libraries may affect the compatibility of existing C programs that rely on specific library functions. Developers need to ensure that the code remains portable across different systems.
+
+**g++ (GNU C++ Compiler):**
+- **Impact:** Unit Testing Framework Compatibility.
+- **Details:** Updates or changes in the g++ compiler may impact the compatibility of C++ unit testing frameworks or the compilation process of existing test suites. Developers may need to update test configurations accordingly.
+
+**gcc (GNU Compiler Collection):**
+- **Impact:** Source Code Compatibility.
+- **Details:** Changes in the behavior of the GCC compiler may impact the compilation of existing C programs. Developers should review and update source code if necessary to maintain compatibility.
+
+**CMake:**
+- **Impact:** Build System Configuration.
+- **Details:** Any changes to CMake may impact the build configurations of the project. This includes adjustments for cross-platform builds, system introspection, or customized build settings. Developers need to update CMakeLists.txt files accordingly.
+
+**Visual Studio Code:**
+- **Impact:** Development Environment.
+- **Details:** Updates or changes to Visual Studio Code may introduce new features, extensions, or changes in the user interface. This could impact the development environment and workflows of developers using Visual Studio Code.
+
+**New File Extension (.aop):**
+- **Impact:** File Handling and User Interaction.
+- **Details:** The introduction of a new file extension "[.aop](#15-glossary)" implies that the software application needs to be capable of handling files in this custom format. Considerations include configuring the operating system for proper file associations, ensuring the software can read, files with the new extension, and communicating this change to users for proper interaction with the application.
 
 # **3.   Functional Specifications**
-   Start describing the specifications related to the overall system here. You may want to create a table/ index of all functionalities explained in the sections below and link them to the items below
+   <!-- Start describing the specifications related to the overall system here. You may want to create a table/ index of all functionalities explained in the sections below and link them to the items below
 
 If no separate reference/ traceability document is created for the project, use this section to map the business requirements, use cases, functional requirements and the test cases
 
-Group your functional specifications as appropriate for your project. You may want to divide them by screens, functional areas, user role, JIRA tickets or high-level functions Vs detailed functions or any other way that works for your project
-
-## **3.1 Title**
+Group your functional specifications as appropriate for your project. You may want to divide them by screens, functional areas, user role, JIRA tickets or high-level functions Vs detailed functions or any other way that works for your project -->
 
 <!-- - Input file ( [.aop](#15-glossary) )
    - Will contain all the AT2-Assembly Language code that is the basis to implement new features.
@@ -200,7 +226,9 @@ Group your functional specifications as appropriate for your project. You may wa
 
 - Virtual Terminal
    - Will display information about the program previously run in the given input file. -->
-   move later 
+
+## **3.1 Title**
+
 ### **3.1.1 Purpose/ Description**
 
 Include a high-level description and purpose of the specifications covered in the section. 
