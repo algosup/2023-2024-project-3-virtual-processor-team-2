@@ -1,11 +1,12 @@
 This document contains the main management artifacts:
-- [Tasks \& schedules (WIP)](#tasks--schedules)
+- [Tasks \& schedules](#tasks--schedules)
 - [RACI matrix](#raci-matrix)
-- [Risks and Assumptions (WIP)](#risks-and-assumptions)
-- [Key Performance Indicators (WIP)](#key-performance-indicators)
+- [Risks and Assumptions](#risks-and-assumptions)
+- [Key Performance Indicators](#key-performance-indicators)
 
 You can also take a look at [cumulative weekly reports](weekly_reports/cumulative.md) file.
 
+For this project, the meeting we had with the client on 01/16/2024 served as the project charter. You can consult the summary of the meeting [HERE](../communications/minutes_of_meeting_01_16_2024.pdf).
 
 # Tasks & schedules
 
@@ -38,7 +39,7 @@ Key:
 | I      | Informed    | Those who are kept up-to-date on progress, often only on completion of the task or deliverable, and with whom there is just one-way communication                      |
 |        | -           | Not involved                                              |
 
-RACI colored spreadsheet can be found here: [Link](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing)
+RACI colored spreadsheet easily readable can be found here: [Link](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing)
 
 # Risks and Assumptions
 (WIP)
