@@ -22,7 +22,7 @@
 | :-: | :-: | :-: | :-: |
 |1/22/2024|0.1|?|DESPAUX Guillaume|
 |1/23/2024|0.2|?|DESPAUX Guillaume|
-|||||
+|1/24/2024|0.3|?|DESPAUX Guillaume|
 |||||
 |||||
 
@@ -67,12 +67,12 @@
 - [9.	References](#9-references)
 - [10.	Open Issues](#10-open-issues)
 - [11. Appendix](#11-appendix)
-- [11.2 Assembly Language](#112-assembly-language)
+- [11.1 Assembly Language](#111-assembly-language)
 
 
 # **1. Introduction**
 
-The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor. We need to create our [own assembly language](#112-assembly-language), create a [C](#11-appendix) program using [C standard librairies](#11-appendix) which can read text file(*.txt or can be something else?*), detect a *bad* semantic and syntatical errors. We also need to implement a virtual system displaying text in a virtual terminal, that can be accessed from the assembly code.
+The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor. We need to create our [own assembly language](#112-assembly-language), create a [C](#15-glossary) program using [C standard librairies](#15-glossary) which can read text file(*.txt or can be something else?*), detect semantic and syntatical errors. We also need to implement a virtual system displaying text in a virtual terminal, that can be accessed from the assembly code.
 
 ## **1.1 Purpose of the document**
    __Describe what a Functional Specification Document is and its intended purpose for the audience.  Included below is a standard purpose of the FSD, but modify the description as needed.__
@@ -89,7 +89,7 @@ The Functional Specification Document is a document that provides detailed infor
 2. We have outlined certain out-of-scope features designed to assist developers and clients in comprehending the product's capabilities:
  
    - Implementation of a debugger, facilitating a clear understanding of program execution and helping in comprehending how the Virtual Processor interprets the language.
-   - Creation of a basic application, such as a Snake Game, to showcase how our language can enhance the overall user experience.
+   - Creation of a basic application, such as a Snake Game, to showcase how our language can enhance the overall phones capabilities.
 
 ## **1.3 Scope of the document**  
 
@@ -107,6 +107,8 @@ State any terms and its definition that are described in the functional specific
 
 |**Term/Acronym**|**Definition**|**Description**|
 | :- | :- | :- |
+|C|C is an imperative procedural language, supporting structured programming, lexical variable scope, and recursion, with a static type system|It is referred to as a low-level language in the sense that each instruction in the language is designed to be compiled into a fairly predictable number of machine instructions|
+|C standard librairies|The C standard library is a standardized collection of header files and library routines used to implement common operations|The C standard library provides macros, type definitions and functions for tasks such as string handling, mathematical computations, input/output processing, memory management, and several other operating system services.|
 | Own Assembly Language | Assembly Language: Low-level programming language specific to a computer architecture. | A language who looks like Assembly but most easier to use and to understand created by ourself. |
 
 ## **1.6      Risks and Assumptions**
@@ -116,11 +118,13 @@ List any assumed factors and identified risks that could affect the functional d
 
 - **Technical challenges:**
 
-  - Unforeseen technical challenges in the virtual processor functioning, interpreter compilation or other development aspects may lead to delays or difficulties in achieving the desired functionality.
+  - Unforeseen technical challenges in the virtual processor functioning.
+  - Interpreter compilation or other development aspects may lead to delays or difficulties in achieving the desired functionality.
   
 - **Resource constraints:**
 
    - Unexpected shortages or constraints in resources, including human resources or software tools, may impact the project's ability to meet deadlines or maintain quality standards.
+   - *The documentation of AT2 should be complete enought.*
   
 - **Unpredictable technical issues:**
 
@@ -130,7 +134,7 @@ List any assumed factors and identified risks that could affect the functional d
 
 - **Technical expertise:**
 
-  - The development team possesses the necessary technical expertise in assembly language and parser to successfully create it.
+  - The development team possesses the necessary technical expertise in assembly language, C language and parser to successfully create it.
   - The team has done a lot of research based on virtual processor functioning and architecture.
   
 - **User engagement:**
@@ -145,10 +149,10 @@ List any assumed factors and identified risks that could affect the functional d
 
   - The testing and quality assurance processes will effectively identify and address any bugs or issues, ensuring a polished and functional virtual processor with our language and our interpreter.
 
-#   **2.  System/ Solution Overview**
-Provide a short description of the software and solution being specified and its purpose, including relevant benefits, objectives, and goals.
+# **2.  System**
+__Provide a short description of the software and solution being specified and its purpose, including relevant benefits, objectives, and goals.__
 
-## **2.1     Context Diagram/ Interface Diagram/ Data Flow Diagram, Application Screen Flow, Sitemap, Process Flow**
+## **2.1    Context Diagram/ Interface Diagram/ Data Flow Diagram, Application Screen Flow, Sitemap, Process Flow**
 Provide any appropriate graphical representations that are relevant to the system and project such as a context/interface/data flow diagram, application screen flow, site map, or process flow.  Add as many as needed.
 
 __NONE FOR NOW__
@@ -163,13 +167,18 @@ __NONE FOR NOW__
 | :-: | :-: | :-: | :-: | :-: |
 |include the specified user/role such as Purchasing Manager, Dept Admin, Faculty, Student, etc|include examples of real people  in the role|describes how often they use the system. State Frequent, Occasional or Rare|describe the features of the system available for the role and any security/access permissions that should be stated|add any additional notes or supporting documentation as necessary|
 
-## **2.3  Dependencies and Change Impacts**
+## **2.3 Dependencies and Change Impacts**
 
-### **2.3.1      System Dependencies**
-List and identify any dependencies the proposed solution will have on other systems.
+### **2.3.1 System Dependencies**
+
+- CMAKE
+- gcc
+
 
 ### **2.3.2      Change Impacts**	
 List and identify existing systems that will be impacted by the implementation of the proposed solution.
+- assembly -> AT2
+
 
 # **3.   Functional Specifications**
    Start describing the specifications related to the overall system here. You may want to create a table/ index of all functionalities explained in the sections below and link them to the items below
@@ -180,6 +189,18 @@ Group your functional specifications as appropriate for your project. You may wa
 
 ## **3.1 Title**
 
+<!-- - Input file ( [.aop](#15-glossary) )
+   - Will contain all the AT2-Assembly Language code that is the basis to implement new features.
+
+- Interpreter ( [IAT2](#15-glossary) )
+   - Will be composed by three main parts:
+      - The Parser will transform AT2-Assembly Language into a [data structure](#15-glossary) for the builder.
+      - The Builder will rework the [data structure](#15-glossary) to make the program executable for the virtual processor.
+      - The Virtual processor will run the program.
+
+- Virtual Terminal
+   - Will display information about the program previously run in the given input file. -->
+   move later 
 ### **3.1.1 Purpose/ Description**
 
 Include a high-level description and purpose of the specifications covered in the section. 
@@ -261,20 +282,7 @@ This is where you can explain the error conditions/Exceptions that normally happ
 |**Exception/ Error ID**|**Error**|**Cause**|**Solution Strategy**|
 | :-: | :-: | :-: | :-: |
 |||||
-# **8.   Data Migration/ Conversion Requirements**
-   Explain in brief the data conversion plan. Provide full identifying information for the automated system, application, or situation for which the Data Conversion Plan applies. Describe briefly any assumptions, constraints or risks regarding the data conversion effort. (Provide details in section 1.6)
 
-## **8.1 Data Conversion Strategy**
-*Include the overall strategy for the Data Conversion. This includes how and when you will perform the conversion - the approach used to extract, transform and load data during the conversion process, the conversion schedule, and test plan for testing the converted data.
-
-## **8.2 Data Conversion Preparation**
-*Provide details on any prerequisites necessary for the conversion. Discuss the backup strategy, restoration process in case the conversion fails.
-
-## **8.3 Data Conversion Specifications**
-
-|**Source**|**Source Data Element**|**Target**|**Target Data Element**|**Conversion Rules**|**Notes**|
-| :-: | :-: | :-: | :-: | :-: | :-: |
-|Source location|Source Data Element Identifier |Target location|Target Data Element Identifier|Describe rules for Data conversion|Additional notes|
 
 # **9.   References**
    List all references to external material used as background information or knowledge for the FSD. Examples may include a compliancy website, Stanford website, etc
@@ -285,8 +293,7 @@ This is where you can explain the error conditions/Exceptions that normally happ
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 |||||||||
 # **11.  Appendix**
-## **11.1**
-## **11.2 ASSEMBLY LANGUAGE**
+## **11.1 ASSEMBLY LANGUAGE**
 January 22, 2024
 
 
