@@ -70,21 +70,11 @@ The project's scope encompasses the creation of a generalized old mobile phone e
 ### 3.4 Keypad Input
 - Simulate the keypad input of old mobile phones, including numeric and function keys.
 
-### 3.5 Connectivity and Network
-- Represent basic network functionalities for demonstration purposes.
-
-### 3.6 Sound and Audio
+### 3.5 Sound and Audio
 - Emulate audio capabilities such as monophonic ringtones and beeps.
 
-### 3.7 Power Management
+### 3.6 Power Management
 - Emulator's power management will show a static battery level, either at 100% or mirroring the host computer's battery status.
-
-### 3.8 Physical Sensations
-- Include emulation of physical sensations like vibration.
-
----
-
-[Further sections 4 to 8 will follow the same format, focusing on the generalized approach rather than specific to Nokia 3310]
 
 ---
 
