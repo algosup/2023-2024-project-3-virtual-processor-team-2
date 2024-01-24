@@ -8,7 +8,7 @@
 
 #define LINE_MAX_SIZE 64
 
-enum regKind target_reg = RG_0;
+enum regKind targetReg = RG_0;
 
 flags_t parseArgs(int argc, char *argv[]){
     if(argc > 3){
@@ -120,7 +120,7 @@ instNode_t *parseLine(char *line, long nodeId){
         newNode->arg0 = args[0];
         newNode->arg1 = args[1];
         // Set target register
-        newNode->target_reg = target_reg;
+        newNode->targetReg = targetReg;
         return newNode;
     }
     else if(cmpStringFirst(line, "sub ", 4) == 0 || cmpStringFirst(line, "- ", 2) == 0){
@@ -135,7 +135,7 @@ instNode_t *parseLine(char *line, long nodeId){
         newNode->arg0 = args[0];
         newNode->arg1 = args[1];
         // Set target register
-        newNode->target_reg = target_reg;
+        newNode->targetReg = targetReg;
         return newNode;
     }
     else if(cmpStringFirst(line, "mul ", 4) == 0 || cmpStringFirst(line, "* ", 2) == 0){
@@ -150,7 +150,7 @@ instNode_t *parseLine(char *line, long nodeId){
         newNode->arg0 = args[0];
         newNode->arg1 = args[1];
         // Set target register
-        newNode->target_reg = target_reg;
+        newNode->targetReg = targetReg;
         return newNode;
     }
     else if(cmpStringFirst(line, "div ", 4) == 0 || cmpStringFirst(line, "/ ", 2) == 0){
@@ -165,7 +165,7 @@ instNode_t *parseLine(char *line, long nodeId){
         newNode->arg0 = args[0];
         newNode->arg1 = args[1];
         // Set target register
-        newNode->target_reg = target_reg;
+        newNode->targetReg = targetReg;
         return newNode;
     }
     else if(cmpStringFirst(line, "mod ", 4) == 0 || cmpStringFirst(line, "% ", 2) == 0){
@@ -180,7 +180,7 @@ instNode_t *parseLine(char *line, long nodeId){
         newNode->arg0 = args[0];
         newNode->arg1 = args[1];
         // Set target register
-        newNode->target_reg = target_reg;
+        newNode->targetReg = targetReg;
         return newNode;
     }
     // TODO: add operations for r shift, l shift, binary and, binary or, binary xor, binary not

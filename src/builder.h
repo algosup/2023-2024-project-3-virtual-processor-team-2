@@ -90,10 +90,10 @@ typedef struct instNode{
         actNode_t *act;
         char *label;
     } nodeType;
-    struct instNode *next;
+    instNode_t *next;
     char *arg0;
     char *arg1;
-    enum regKind target_reg;
+    enum regKind targetReg;
 } instNode_t;
 
 // Structs for instruction list
