@@ -5,7 +5,7 @@ enum varKind{
     VAR_FLOAT,
     VAR_CHAR,
     VAR_U_CHAR,
-    VAR_STRING
+    VAR_STRING,
 };
 
 // Instruction types
@@ -89,7 +89,7 @@ typedef struct instNode{
         opNode_t *op;
         actNode_t *act;
         char *label;
-    };
+    } nodeType;
     struct instNode *next;
     char *arg0;
     char *arg1;
@@ -112,7 +112,7 @@ typedef struct var{
         char c_value;
         unsigned char u_c_value;
         char * s_value;
-        };
+        }value;
 } var_t;
 
 // Structs for variable list

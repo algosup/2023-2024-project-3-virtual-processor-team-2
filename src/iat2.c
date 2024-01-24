@@ -1,8 +1,8 @@
 #include <stdlib.h>
 
-#include "builder.h"
 #include "parser.h"
 #include "runner.h"
+#include "iat2.h"
 
 #define VERSION "0.0.1"
 
@@ -35,6 +35,11 @@ int main(int argc, char *argv[]) {
     // run runner
     // TODO: make the function run
 
+    // Free memory
+    free(varList);
+    free(labelList);
+    free(instList);
+    
     exit(EXIT_SUCCESS);
 }
 

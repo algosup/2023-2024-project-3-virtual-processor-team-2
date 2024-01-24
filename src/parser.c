@@ -18,14 +18,14 @@ flags_t parseArgs(int argc, char *argv[]){
 
     // Check if it's a flag or a file
     if(argv[1][0]=='-'){
-        flagsReader(argv[1], &flags);
+        flagsSet(argv[1], &flags);
         return flags;
     }
     else{
         // Check if the second arg is flag
         if(argc == 3){
             if(argv[2][0]=='-'){
-                flagsReader(argv[2], &flags);
+                flagsSet(argv[2], &flags);
                 return flags;
             }
             else{
@@ -40,16 +40,16 @@ flags_t parseArgs(int argc, char *argv[]){
 }
 
 void flagsSet(char *flag, flags_t *flags){
-    if(strcmp(flag, "-h") || strcmp(flag, "--help")){
+    if(strcmp(flag, "-h") == 0 || strcmp(flag, "--help") == 0){
         flags->help = true;
     }
-    else if(strcmp(flag, "-v") || strcmp(flag, "--version")){
+    else if(strcmp(flag, "-v") == 0 || strcmp(flag, "--version") == 0){
         flags->version = true;
     }
-    else if(strcmp(flag, "-d") || strcmp(flag, "--debug")){
+    else if(strcmp(flag, "-d") == 0 || strcmp(flag, "--debug") == 0){
         flags->debug = true;
     }
-    else if(strcmp(flag, "-V") || strcmp(flag, "--verbose")){
+    else if(strcmp(flag, "-V") == 0 || strcmp(flag, "--verbose") == 0) {
         flags->verbose = true;
     }
     else{

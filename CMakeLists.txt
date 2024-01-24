@@ -21,10 +21,10 @@ project(
 find_package(Threads REQUIRED)
 
 add_executable(tests
-  parser.c
-  builder.c
-  runner.c
-  tests.cc
+  src/parser.c
+  src/builder.c
+  src/runner.c
+  test/test.cc
   googletest/googletest/src/gtest-all.cc
 )
 
@@ -54,10 +54,10 @@ set_target_properties(tests
 )
 
 add_executable(iat2
-    parser.c
-    builder.c
-    runner.c
-    iat2.c
+    src/parser.c
+    src/builder.c
+    src/runner.c
+    src/iat2.c
 )
 
 target_include_directories(iat2
