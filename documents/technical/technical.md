@@ -39,7 +39,7 @@
 
 ## 1. Introduction
 
-This project involves developing a virtual processor and a custom assembly language to emulate the environment typical of old mobile phones. It aims to create a virtualized system that accurately simulates the functionalities of these devices, focusing on general characteristics common to this category.
+This project involves developing a virtual processor and a custom assembly language to emulate the typical environment of old mobile phones. It aims to create a virtualized system that accurately simulates the functionalities of these devices, focusing on general characteristics common to this category.
 
 ---
 
@@ -71,7 +71,7 @@ The project's scope encompasses the creation of a generalized old mobile phone e
 
 ### 3.5 Sound and Audio
 - Emulating audio functions such as monophonic ringtones and beeps.
-
+<!-- Try to be more consistent in your writing conventions. If you begin by listing things by verb-ing, continue until the end of the list.  -->
 ### 3.6 Power Management
 - The emulator will show a static battery level, either consistently at 100% or mirroring the host computer's battery status.
 
