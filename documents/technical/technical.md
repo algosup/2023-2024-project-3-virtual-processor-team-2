@@ -39,7 +39,7 @@
 
 ## 1. Introduction
 
-This project involves developing a virtual processor and a custom assembly language to emulate the environment typical of old mobile phones. It aims to create a virtualized system that accurately simulates the functionalities of these devices, focusing on general characteristics common to this category.
+This project involves developing a virtual processor and a custom assembly language to emulate the typical environment of old mobile phones. It aims to create a virtualized system that accurately simulates the functionalities of these devices, focusing on general characteristics common to this category.
 
 ---
 
