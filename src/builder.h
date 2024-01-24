@@ -104,10 +104,10 @@ typedef struct instList{
 // Structs for variable storage
 typedef struct var{
     char *name;
-    enum varKind kind;
+    enum varKind type;
     union{
         int i_value;
-        unsigned int u_value;
+        unsigned int u_i_value;
         float f_value;
         char c_value;
         unsigned char u_c_value;
@@ -117,7 +117,7 @@ typedef struct var{
 
 // Structs for variable list
 typedef struct varList{
-    var_t *head;
+    var_t *list;
 } varList_t;
 
 // Structs for label storage
@@ -129,5 +129,5 @@ typedef struct label{
 
 // Structs for label list
 typedef struct labelList{
-    label_t *head;
+    label_t *list;
 } labelList_t;
