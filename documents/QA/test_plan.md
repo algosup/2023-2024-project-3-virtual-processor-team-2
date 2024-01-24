@@ -289,7 +289,7 @@ We have to make a certain pattern for test reports to ensure the readability and
    - **Status:** The current status of the test case (Passed, Failed, In Progress, Not Implemented).
    - **Comment:** Testers can write a comment to be more precise during their tests (recommended).
 
-![test case pattern](./pictures/testcasepattern.png)
+![test case pattern](../images/qa_images/testcasepattern.png)
 
 2. **Progression bars:**
    - **Test Amount Representation:**
