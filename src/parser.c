@@ -104,16 +104,16 @@ void parseFile(instList_t *nodeList, char *filename){
 }
 
 instNode_t *parseLine(char *line, long nodeId, long lineNb){
-
     // check if the line is empty or a comment
     if(line[0] == '\n' || strncmp(line, "//", 2) == 0){
         return NULL;
     }
-
+    // Get the instruction
+    char *inst = getInst(line);
     // Get the arguments
     char **args = getInstArgs(line);
 
-    if(strncmp(line, "add", 3) == 0 || strncmp(line, "+", 1) == 0){
+    if(strcmp(inst, "add") == 0 || strcmp(inst, "+") == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -128,7 +128,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(strncmp(line, "sub", 3) == 0 || strncmp(line, "-", 1) == 0){
+    else if(strcmp(inst, "sub") == 0 || strcmp(inst, "-") == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -143,7 +143,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(strncmp(line, "mul", 3) == 0 || strncmp(line, "*", 1) == 0){
+    else if(strcmp(inst, "mul") == 0 || strcmp(inst, "*") == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -158,7 +158,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(strncmp(line, "div", 3) == 0 || strncmp(line, "/", 1) == 0){
+    else if(strcmp(inst, "div") == 0 || strcmp(inst, "/") == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -173,7 +173,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(strncmp(line, "mod", 3) == 0 || strncmp(line, "%", 1) == 0){
+    else if(strcmp(inst,"mod") == 0 || strcmp(inst,"%") == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -186,7 +186,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
         newNode->arg1 = args[1];
         return newNode;
     }
-    else if(strncmp(line, "shl", 3) == 0 || strncmp(line, "<<", 2) == 0){
+    else if(strcmp(inst, "shl") == 0 || strcmp(inst, "<<") == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -201,7 +201,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(strncmp(line, "and", 3) == 0 || strncmp(line, "&", 1) == 0){
+    else if(strcmp(inst, "and") == 0 || strcmp(inst, "&") == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -216,7 +216,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(strncmp(line, "or", 2) == 0 || strncmp(line, "|", 1) == 0){
+    else if(strcmp(inst, "or") == 0 || strcmp(inst, "|") == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -231,7 +231,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(strncmp(line, "xor", 3) == 0 || strncmp(line, "^", 1) == 0){
+    else if(strcmp(inst, "xor") == 0 || strcmp(inst, "^") == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -246,7 +246,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(strncmp(line, "not", 3) == 0 || strncmp(line, "!", 1) == 0){
+    else if(strcmp(inst, "not") == 0 || strcmp(inst, "!") == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -266,6 +266,26 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
     fprintf(stderr, "\"%s\" Is not a valid instruction. line %ld\n", line, lineNb);
     exit(EXIT_FAILURE);
 
+}
+
+char *getInst(char *line) {
+    char *buffer = malloc((strlen(line) + 1) * sizeof(char));
+    if (!buffer) {
+        fprintf(stderr, "Memory allocation error\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    strcpy(buffer, line);
+    
+    char *inst = strtok(buffer, " ");
+    
+    if (inst == NULL) {
+        fprintf(stderr, "No instruction found in the input line\n");
+        free(buffer);
+        exit(EXIT_FAILURE);
+    }
+
+    return inst;
 }
 
 

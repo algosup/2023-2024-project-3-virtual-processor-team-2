@@ -45,6 +45,15 @@ void parseFile(instList_t *nodeList, char *filename);
 instNode_t *parseLine(char *line, long nodeId, long lineNb);
 
 /*
+    Get instruction from line
+    params:
+        line: line to be parsed
+    returns:
+        char*: instruction
+*/
+char* getInst(char *line);
+
+/*
     Get arguments from an instruction line
     params:
         line: line to be parsed
