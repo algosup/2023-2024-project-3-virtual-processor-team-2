@@ -54,4 +54,4 @@ RACI colored spreadsheet easily readable can be found here: [Link](https://docs.
 
 # Key Performance Indicators
 
-The spreadsheet for the KPI's data and graphs can be found here: [Link (WIP)]()
+The spreadsheet for the KPI's data and graphs can be found here: [Link](https://docs.google.com/spreadsheets/d/13n8fdWMEYFlJKhJ_OWILYcpX_c6CvLBpt4ebboLiU18/edit?usp=sharing)
