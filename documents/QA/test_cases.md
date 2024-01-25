@@ -1,9 +1,11 @@
 | ID | Date  | Priority | Test case Scenario                                  | Test case Description     | Pre-conditions    | Test Steps                   | Expected Results                                                |
 | -- | --- | -------- |------------------------------------------------------------------------------------------ | ------ | --------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
-| 001 | 01/01/1970 | HIGH | run the program, and see what's displayed | make sure the 'printf' function works correctly | have the most up-dated version of the product | 1. run the program 2. see the result | "Hello World" is displayed |
+| 01/001 | 01/01/1970 | HIGH | run the program, and see what's displayed | make sure the 'printf' function works correctly | have the most up-dated version of the product | 1. run the program 2. see the result | "Hello World" is displayed |
 
 **ID**<br>
-The ID of the test case.
+The ID of the test case. It will follow a certain pattern: 
+- The first numbers are the version of the tested product -> `01`/001
+- The last numbers are the number of the test -> 01/`001`
 
 **Date**<br>
 The date when the bug has been discovered.

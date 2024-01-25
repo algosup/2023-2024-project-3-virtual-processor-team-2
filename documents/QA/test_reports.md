@@ -1,10 +1,12 @@
 
 | ID | Date  |  Priority | Description                                  | Steps     | Expected Results                                                | Status    |Comment                   |
 | -- | --- | -------- |------------------------------------------------------------------------------------------ | ------ | --------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
-| 001 | 01/01/1970 | HIGH | check function works | run the program | displays "Hello World" | Passed | The function works perfectly |
+| 01/001 | 01/01/1970 | HIGH | check function works | run the program | displays "Hello World" | Passed | The function works perfectly |
 
 **ID**<br>
-The ID of the test case.
+The ID of the test case. It will follow a certain pattern: 
+- The first numbers are the version of the tested product -> `01`/001
+- The last numbers are the number of the test -> 01/`001`
 
 **Date**<br>
 Set the date when the bug has been discovered.
