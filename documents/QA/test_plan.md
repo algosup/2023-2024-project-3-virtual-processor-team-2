@@ -12,28 +12,26 @@
       - [3.1.1. In-scope for Testing](#311-in-scope-for-testing)
       - [3.1.2. Out-of-scope for Testing](#312-out-of-scope-for-testing)
     - [3.2. Unit Tests](#32-unit-tests)
-    - [3.3. Tests Structure](#33-tests-structure)
-    - [3.4. Tests List](#34-tests-list)
-    - [3.5. Testing sessions](#35-testing-sessions)
-      - [3.5.1. Overview](#351-overview)
-      - [3.5.2. Smoke Testing](#352-smoke-testing)
-        - [3.5.2.1. Smoke Testing Scope](#3521-smoke-testing-scope)
-        - [3.5.2.2. Sequence of Smoke Testing](#3522-sequence-of-smoke-testing)
-      <!--- [3.5.3. Collaborative Testing Sessions](#353-collaborative-testing-sessions)-->
-        - [3.5.3.1. Session Scope](#3531-session-scope)
-    - [3.6. External tools](#36-external-tools)
-      - [3.6.1. GitHub](#361-github)
-        - [3.6.1.1. GitHub Overview](#3611-github-overview)
-        - [3.6.1.2. GitHub Actions](#3612-github-actions)
-          - [3.6.1.2.1. GitHub Actions Scope](#36121-github-actions-scope)
-          - [3.6.1.2.2. Workflow](#36122-workflow)
-          - [3.6.1.2.3. Configuration](#36123-configuration)
-      - [3.6.2. GitHub Issues](#362-github-issues)
-      - [3.6.3. Test Report and Meetings](#363-test-report-and-meetings)
-      - [3.6.4. Bug Data Report Spreadsheet](#364-bug-data-report-spreadsheet)
-        - [3.6.4.1. Spreadsheet Structure](#3641-spreadsheet-structure)
-    - [3.7. Documentation](#37-documentation)
-      - [3.7.1. GitHub Wiki](#371-github-wiki)
+    - [3.3. Testing sessions](#33-testing-sessions)
+      - [3.3.1. Overview](#331-overview)
+      - [3.3.2. Smoke Testing](#332-smoke-testing)
+        - [3.3.2.1. Smoke Testing Scope](#3321-smoke-testing-scope)
+        - [3.3.2.2. Sequence of Smoke Testing](#3322-sequence-of-smoke-testing)
+      <!--- [3.3.3. Collaborative Testing Sessions](#333-collaborative-testing-sessions)-->
+        - [3.3.3.1. Session Scope](#3331-session-scope)
+    - [3.4. External tools](#34-external-tools)
+      - [3.4.1. GitHub](#341-github)
+        - [3.4.1.1. GitHub Overview](#3411-github-overview)
+        - [3.4.1.2. GitHub Actions](#3412-github-actions)
+          - [3.4.1.2.1. GitHub Actions Scope](#34121-github-actions-scope)
+          - [3.4.1.2.2. Workflow](#34122-workflow)
+          - [3.4.1.2.3. Configuration](#34123-configuration)
+      - [3.4.2. GitHub Issues](#342-github-issues)
+      - [3.4.3. Test Report and Meetings](#343-test-report-and-meetings)
+      - [3.4.4. Bug Data Report Spreadsheet](#344-bug-data-report-spreadsheet)
+        - [3.4.4.1. Spreadsheet Structure](#3441-spreadsheet-structure)
+    - [3.5. Documentation](#35-documentation)
+      - [3.5.1. GitHub Wiki](#351-github-wiki)
   - [4. Test Criteria](#4-test-criteria)
     - [4.1. Suspension Criteria](#41-suspension-criteria)
     - [4.2. Exit Criteria](#42-exit-criteria)
@@ -53,7 +51,7 @@
 The project aims to create a virtual processor and an interpreter for running assembly code on that processor. The project would be developed in plain, portable, C language without the use of any external library beside 
 C standard libraries. 
 
-The assembly code would be created from scratch by us. It would deal with new names for several instructions and statements, while making sure that the purpose of an assembly language, which is be more efficient and closer to the machine, is respected.
+The assembly code would be created from scratch by us. It will deal with new names for several instructions and statements, while making sure that the purpose of an assembly language, which is to be more efficient and closer to the machine, is respected.
 
 For further details, refer to the [functional specifications](../functional/"functional".md) document.
 
@@ -68,6 +66,7 @@ For further details, refer to the [functional specifications](../functional/"fun
 | **Virtual Processor** | A processor (or processing unit) is an electrical component that performs operations on an external data source, usually memory or some other data stream. A virtual processor is basically a virtual machine that simulates the behavior of a processor. | [Wikipedia](https://en.wikipedia.org/wiki/Processor_(computing)) |
 | **GitHub Actions** | A CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. | [GitHub](https://docs.github.com/en/actions) |
 | **GitHub Issues** | A tool that allows us to create, manage, and assign issues to team members. | [GitHub](https://docs.github.com/en/issues) |
+| **GitHub Wiki** | Every GitHub repository can be equipped with a wiki, to share long-form content about your project, such as how to use it, how you designed it, or its core principles. | [GitHub](https://docs.github.com/en/communities/documenting-your-project-with-wikis/about-wikis) |
 
 
 ---
@@ -78,18 +77,20 @@ Here's the purpose of our testing strategy approach: <br> - **[Unit Tests](##32-
 
 ### 3.1. Scope of Testing
 
+Tests serve as a tool for improving the quality of the product.<br>
 Testing will focus on both memory allocating and basic instructions in assembly code to ensure that the quality of the required product is perfect. <br>The quality of all the product's features is mainly endorsed by Software Engineers and Quality assurances.
 
 #### 3.1.1. In-scope for Testing
 
 - 
 - 
-
+<!-- functional requirements -->
 
 #### 3.1.2. Out-of-scope for Testing
 
 - 
 - 
+<!-- non-functional requirements -->
 
 ---
 
@@ -107,82 +108,65 @@ These unit tests serve three crucial objectives:
 3. **Code Coverage:** Guarantee comprehensive testing to prevent future changes from unintentionally altering the original behavior of the code.
 
 
-### 3.3. Tests Structure
-
-Each test comprises the following components:
-
-1. **Function:** Identifies the function under examination.
-2. **Test Description:** Describes the purpose of the test, the specific conditions being evaluated, and the expected outcome.
-3. **Severity:** Indicates the criticality of the test, categorized as **High**, **Medium**, or **Low**.
-
-### 3.4. Tests List
-
-Mechanisms:
-| Function | Expected Result | Severity |
-| --- | --- | --- |
-| Storing an immediate value into a register | The register contains this immediate value | High |
-| Copying the value of a register into another register | The value of both registers are similar | Low |
-| Comparing the content of registers | They're not equal | Medium |
-
-
 ---
 
-### 3.5. Testing sessions
+### 3.3. Testing sessions
 
 
-#### 3.5.1. Overview
+#### 3.3.1. Overview
 
 We will perform manual 
 testing, using a combination of **[Smoke Testing](#352-smoke-testing)** and **[Collaborative Testing Sessions](#353-collaborative-testing-sessions)** to ensure the quality of the game. 
 
 
-#### 3.5.2. Smoke Testing
+#### 3.3.2. Smoke Testing
 
-Testing sessions will take place after days dedicated to the project, they will serve as smoke tests. The primary goal of smoke testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of potential show-stopping problems.
+Testing sessions will take place during and after days dedicated to the project, they will serve as smoke tests. The primary goal of smoke testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of potential show-stopping problems.
 
-##### 3.5.2.1. Smoke Testing Scope
+#### 3.3.2.1. Smoke Testing Scope
 
 The smoke testing scope will focus on the fundamental aspects of the product, including:
 
 1. **Process Launch:** Confirm that the product launches successfully without any critical errors or crashes.
 2. **Instructions functionality:** Check that basic instructions work as intended.
 
-##### 3.5.2.2. Sequence of Smoke Testing
+#### 3.3.2.2. Sequence of Smoke Testing
 
 During each smoke testing session, the following steps will be executed:
 
 1. **Product Deployment:** Deploy the latest product in the testing environment.
 2. **Test Execution:** Execute a set of [predefined test cases](./test_cases.md) covering the critical functionalities.
-3. **Archiving results:** Archive the test results [here]() for future reference.
-4. **Issue Reporting:** If critical issues are identified, report them to the development team.
+3. **Archiving results:** Archive the [test results](./test_reports.md) for future reference.
+4. **Issue Reporting:** If critical issues are identified, we need to report them to the development team.
 
 ---
 
-<!--#### 3.5.3. Collaborative Testing Sessions
+<!--#### 3.3.3. Collaborative Testing Sessions
 To gain a better overview of the project, a collaboration with other team's quality assurance was set up. This collaboration enables the teams to have an external view of the product and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods.-->
 
-##### 3.5.3.1. Session Scope
+##### 3.3.3.1. Session Scope
 
 Sessions are designed primarily to:
 
 1. **Verify that the product is working as expected:** Check that all the product's basic instructions and additional statements are working properly.
 2. **Sharing tests:** Share tests between the teams to have a better overview of their product and to find easier bugs and errors.
 3. **Identify bugs and errors:** Find bugs and errors in the product to improve it.
-4. **Identify improvements and missing features:** Find improvements and missing features in the product to bring its behavior closer to a real processor's.
+4. **Identify improvements and missing features:** Find improvements and missing features in the product to bring it as far as possible.
 
 ---
 
-### 3.6. External tools
+### 3.4. External tools
 
-#### 3.6.1. GitHub
+#### 3.4.1. GitHub
 
-##### 3.6.1.1. GitHub Overview
+#### 3.4.1.1. GitHub Overview
 
 
 GitHub serves as our central platform for version control, collaboration, and issue tracking.
+
 ---
 
-##### 3.6.1.2. GitHub Actions
+#### 3.4.1.2. GitHub Actions
 
 
 GitHub Actions are utilized for continuous integration and deployment. The workflow is triggered on each push to the main branch, ensuring the automatic execution of tests. (During the development phase, the workflow will also be triggered on each push to the dev branch.)
@@ -190,15 +174,15 @@ GitHub Actions are utilized for continuous integration and deployment. The workf
 It will allow us to know if the code is unfunctional at some points, when it appeared and which changes caused it.
 
 
-###### 3.6.1.2.1. GitHub Actions Scope
+#### 3.4.1.2.1. GitHub Actions Scope
 
 The GitHub Actions will be activated on pull requests on the dev and main branch and their scope is to:
 
 1. **Launch and Interpret:** Launch the process and ensure there is no interpreting error.
 2. **Run unit tests:** Run unit tests to ensure that the main functions of the product are working properly.
-3. **Ensure that the code on the references branches is working** Ensure that the code on the main and dev branches is working properly and avoid creating new branches from code that doesn't work.
+3. **Ensure that the code on the referenced branches is working** Ensure that the code on the main and dev branches is working properly and avoid creating new branches from code that doesn't work.
 
-###### 3.6.1.2.2. Workflow
+#### 3.4.1.2.2. Workflow
 
 The workflow consists of the following steps:
 
@@ -209,24 +193,21 @@ The workflow consists of the following steps:
 
 If any of the steps fail, the workflow will be marked as failed and the development team will be notified at which step the error occurred.
 
-###### 3.6.1.2.3. Configuration
+#### 3.4.1.2.3. Configuration
 
-Actions such as interpreting and execution of unit tests will be performed on quality assurance's computer. These actions are enabled and synchronized with GitHub, thanks to a runner provided by GitHub. Once the runner has been activated on a computer, it can be selected to execute the various workflow actions.
+Actions, such as interpreting and executing unit tests, will be performed on quality assurance's computer. These actions are enabled and synchronized with GitHub. Once the runner has been activated on the computer, it can be selected to execute the various workflow actions.
 
 This allows us to have a runner available all time and to have a better overview of the errors that may occur.
 
 ---
 
-#### 3.6.2. GitHub Issues
+#### 3.4.2. GitHub Issues
 
 GitHub Issues is a built-in issue-tracking tool that allows us to create and manage issues and assign them to team members. This is mainly the role of the Quality Assurance to create as many GitHub Issues as there are problems regarding the product.
 
 We define:
 
 - **Bugs:** Unexpected problems or code errors.
-- **Errors:** Includes all errors that do not originate in the code.
-- **Deadlines:** Specific deadlines for project stages to ensure timely
-  delivery.
 - **Documentation:** Request for documentation on a specific function or group of functions in the code.
 - **Task allocation:** Assignment and tracking of specific responsibilities.
 
@@ -241,18 +222,13 @@ We are implementing a strategy for managing GitHub issues. Here are the key comp
 
 2. **Labeling System:**
    - Utilize labels to categorize issues, such as "bug," or "enhancement".
-   - Labels aid in quickly identifying the nature of the issue and prioritizing tasks.
+   - Labels help identifying the nature of the issue and prioritizing tasks quickly.
 
 3. **Assignees and Responsibility:**
    - Assign issues to the appropriate team member or individuals responsible for addressing the problem.
    - Assignees take ownership of the task, improving accountability.
 
-4. **Use of Templates:**
-    - We have introduced issue templates to standardize the information provided for different types of issues.
-    - The template includes sections for steps to reproduce, expected and actual behavior, environment details, and more.
-    - Using templates ensures that crucial information is consistently captured for debugging and resolution.
-
-5. **Regular Issue Triage:**
+4. **Regular Issue Triage:**
     - Regularly review and triage open issues.
     - Prioritize tasks based on their urgency (Critical, High, Medium, Low).
 
@@ -260,21 +236,21 @@ By implementing these strategies, we aim to foster a more organized and efficien
 
 ---
 
-#### 3.6.3. Tests Report and Meetings
+#### 3.4.3. Tests Report and Meetings
 
 **Test Report:**
 
-The file "[test report](./test_report.md)" will contain all the test reports of the project. Each test report will be listed and named with the ID of the test and the date of the test session.
+The [test report spreadsheet](https://docs.google.com/spreadsheets/d/1d-gDcUtc-J6af9MfQXIPr_xVtwP7XKyHaRIFd1-BpWI/edit?hl=fr#gid=0) will contain all the test reports of the project. Each test report will be listed and named with the ID of the test and the date of the test session.
 
 **QA Meetings:**
 
-The QA team could also have several meetings with the SE team, to talk about specific topics regarding the project. 
+The QA team could also have several meetings with the SE team, to talk about specific topics regarding the development. 
 
 ---
 
-#### 3.6.4. Tests
+#### 3.4.4. Tests
 
-Tests serve as a tool for improving the quality of the product. To document and track easily test cases, their results, and overall testing progress, the tests would be divided into these three sections:
+To document and track easily test cases, their results, and overall testing progress, the tests would be divided into these three sections:
 
 1. **Test Case Pattern:** 
 
@@ -290,9 +266,9 @@ We also have to make a certain pattern for test reports to ensure the readabilit
 ![test report pattern](../images/qa_images/test_report_pattern.png)
 For further details, refer to the [test report](./test_report.md) document.
 
-3. **Progression bars:**
+3. **Progression:**
    - **Test Amount Representation:**
-     - A bar representing the test cases based on the amount of their status (Passed, Failed, In Progress, Not Implemented).
+     - A visual schema representing the test cases based on the amount of their status (Passed, Failed, In Progress, Not Implemented).
      - Provides a visual snapshot of the overall testing status. <br>
    - **Example:** 
       - Passed: ![](https://geps.dev/progress/50)
@@ -300,9 +276,9 @@ For further details, refer to the [test report](./test_report.md) document.
       - Work in Progress: ![](https://geps.dev/progress/85)
       - Not implemented: ![](https://geps.dev/progress/15)
 
-### 3.7. Documentation
+### 3.5. Documentation
 
-#### 3.7.1. GitHub Wiki
+#### 3.5.1. GitHub Wiki
 To enhance transparency, collaboration, and knowledge sharing within our development process, we are adopting a centralized documentation approach using GitHub Wiki. This platform will serve as a comprehensive repository for all documentation related to our codebase. 
 
 - The GitHub Wiki will function as a centralized knowledge hub for our project, housing detailed documentation on code structure, functions, and project-related information.
@@ -311,7 +287,7 @@ To enhance transparency, collaboration, and knowledge sharing within our develop
 Each complex function will have dedicated pages for in-depth information.
 Flowcharts or diagrams will be integrated to enhance the understanding of complex processes.
 
-- To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include. The template will be available on the project GitHub in the folder documents/QA, the file name is "Function-documentation-template". Developers can use it as a reference when documenting their code. Encourage developers to provide examples and use cases in their documentation to make it more practical and user-friendly.
+<!-- - To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include. The template will be available on the project GitHub in the folder documents/QA, the file name is "Function-documentation-template". Developers can use it as a reference when documenting their code. Encourage developers to provide examples and use cases in their documentation to make it more practical and user-friendly. -->
 
 - Centralized documentation simplifies onboarding for new team members by providing a single, accessible source of truth. Emphasize the importance of keeping documentation up-to-date, especially during onboarding periods, to ensure the documentation remains accurate and relevant.
 
@@ -353,11 +329,15 @@ Before the product can be considered ready for distribution, certain benchmarks 
 
 ## 5. Allocated Resources
 
-### 5.1. People
+### 5.1. Time
 
-For this project, the people involved to perform tests are the Quality Assurance of team 2<!--, but also quality assurances of other teams during the team test sessions.-->
+<!-- Test Schedule -->
 
-### 5.2. Testing Environment Requirements
+### 5.2. People
+
+For this project, the people involved to perform tests are the Quality Assurance of team 2<!--, but also quality assurances of other teams during the team test sessions-->.
+
+### 5.3. Testing Environment Requirements
 
   
 1. **Code Editor:**
