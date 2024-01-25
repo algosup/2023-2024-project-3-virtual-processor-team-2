@@ -1,13 +1,12 @@
 ﻿# **ALGOSUP Team 2**
 ### **Development team**
 ## **Functional Specification Document**
-### **Unamed for now**
+### **Unnamed for now**
 
 ### **DOCUMENT VERSION 0.1**
 
 **01/22/2024**
 
-*
 
 **AUTHORS**
 
@@ -52,10 +51,10 @@
    - [3.1 Title](#31-title)
       - [3.1.1 Purpose/ Description](#311-purpose-description)
       - [3.1.2 Use case](#312-use-case)
-      - [3.1.3 Mock up](#313-mock-up)
+      - [3.1.3 Mockup](#313-mock-up)
       - [3.1.4 Functional Requirement](#314-functional-requirements)
-      - [3.1.5 Field level specification](#315-field-level-specifications)
-- [4.	System Configurations](#4-system-configurations)
+      - [3.1.5 Field-level specification](#315-field-level-specifications)
+- [5.	System Configurations](#4-system-configurations)
 - [5.	Other System Requirements/ Non-Functional Requirements](#5-other-system-requirements-non-functional-requirements)
 - [6.	Reporting Requirements](#6-reporting-requirements)
 - [7.	Integration Requirements](#7-integration-requirements)
@@ -72,41 +71,32 @@
 
 # **1. Introduction**
 
-The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor. We need to create our own [assembly language](#112-assembly-language), create a [C](#15-glossary) program using [C standard librairies](#15-glossary) which can read text file(*.txt or can be something else?*), detect semantic and syntatical errors. We also need to implement a virtual system displaying text in a virtual terminal, that can be accessed from the assembly code.
+The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor. We need to create our [assembly language](#112-assembly-language), create a [C](#15-glossary) program using [C standard libraries](#15-glossary) that can read text files(*.txt or can be something else?*), detect semantic and syntactical errors. We also need to implement a virtual system displaying text in a virtual terminal, that can be accessed from the assembly code.
 
 ## **1.1 Purpose of the document**
 
-The Functional Specification Document is a document that provides detailed information on *how* the system solution will function and the requested behavior.  This document is created based on the high-level requirements identified in the Business Requirements Document and provides traceability on the functional specifications back to the business requirements.  Included in this document will be the detailed functional requirements including use cases, system inputs and outputs, process flows, diagrams, and mock ups.
+The Functional Specification Document is a document that provides detailed information on *how* the system solution will function and the requested behavior.  This document is created based on the high-level requirements identified in the Business Requirements Document and provides traceability on the functional specifications back to the business requirements.  Included in this document will be the detailed functional requirements including use cases, system inputs and outputs, process flows, diagrams, and mock-ups.
 
 ## **1.2 Project Scope**
 1. The main goal is to develop a more understandable version of assembly, along with an interpreter capable of reading and compiling these files. The compiled code can then be run on an emulated old mobile phone, providing users with an extended range of functionalities.
 
-     - We aim to enhance the functionality of an old classic phones by providing developers with the opportunity to create new applications or games for these vintage mobile devices. 
+     - We aim to enhance the functionality of old classic phones by providing developers with the opportunity to create new applications or games for these vintage mobile devices. 
      - Our objective is to offer a new way of using a compact phone primarily for calls and texts, while also allowing it to serve as a simple entertainment device for moments such as waiting in queues or sitting in waiting rooms. 
-     - Our intention is to promote a balanced usage, avoiding smartphone addiction, and revitalizing the appeal of old consoles and flip phones by introducing additional utilities.
+     - We intend to promote balanced usage, avoid smartphone addiction, and revitalize the appeal of old consoles and flip phones by introducing additional utilities.
 
 2. We have outlined certain out-of-scope features designed to assist developers and clients in comprehending the product's capabilities:
  
    - Implementation of a debugger, facilitating a clear understanding of program execution and helping in comprehending how the Virtual Processor interprets the language.
-   - Creation of a basic application, such as a Snake Game, to showcase how our language can enhance the overall phones capabilities.
+   - Creation of a basic application, such as a Snake Game, to showcase how our language can enhance the capabilities of the overall phone.
 
-## **1.5 	Related documents**
-Add any related documentation that is relevant and related to the FSD. Some examples are the Project Charter, etc..
+## **1.3 	Related documents**
+Add any related documentation that is relevant and related to the FSD. Some examples are the Project Charter, etc...
 
-|**Component**|**Name (with link to the document)**|**Description**|
+|**Component**|**Name**|**Description**|
 | :- | :- | :- |
-||||
+|Documentation|[Minutes of Meeting](../communications/minutes_of_meeting_01_16_2025.pdf)|This documents serve as project charter of the project|
 
-## **1.4     Glossary** 
-State any terms and its definition that are described in the functional specifications.  Include any acronyms that are mentioned in the document.
-
-|**Term/Acronym**|**Definition**|**Description**|
-| :- | :- | :- |
-|C|C is an imperative procedural language, supporting structured programming, lexical variable scope, and recursion, with a static type system|It is referred to as a low-level language in the sense that each instruction in the language is designed to be compiled into a fairly predictable number of machine instructions|
-|C standard librairies|The C standard library is a standardized collection of header files and library routines used to implement common operations|The C standard library provides macros, type definitions and functions for tasks such as string handling, mathematical computations, input/output processing, memory management, and several other operating system services.|
-|Assembly Language|Assembly Language: Low-level programming language specific to a computer architecture.| A language who looks like Assembly but most easier to use and to understand created by ourself.|
-
-## **1.5      Risks and Assumptions**
+## **1.4      Risks and Assumptions**
 List any assumed factors and identified risks that could affect the functional design of the system.  Included can be third-party or commercial components that will be used, issues around the operating environment, or any constraints.
 
 ### Risks
@@ -125,7 +115,7 @@ List any assumed factors and identified risks that could affect the functional d
 
    - Unpredictable technical issues, such as compatibility problems on different systems or devices, may arise during the testing phase.
 
-### Assemptions
+### Assumptions
 
 - **Technical expertise:**
 
@@ -147,8 +137,17 @@ List any assumed factors and identified risks that could affect the functional d
 ### Constraints
 
 - **Technical constraints**
-   - The software need to be run in an environment of 16bits minimum.
-   - The software need to have at least 4 Ko minimum.  
+   - The software needs to be run in an environment of 16 bits minimum.
+   - The software needs to have at least 4 Ko minimum.  
+
+## **1.6     Glossary** 
+State any terms and their definitions that are described in the functional specifications. Include any acronyms that are mentioned in the document.
+
+|**Term/Acronym**|**Definition**|**Description**|
+| :- | :- | :- |
+|C|C is an imperative procedural language, supporting structured programming, lexical variable scope, and recursion, with a static type system|It is referred to as a low-level language in the sense that each instruction in the language is designed to be compiled into a fairly predictable number of machine instructions|
+|C standard librairies|The C standard library is a standardized collection of header files and library routines used to implement common operations|The C standard library provides macros, type definitions and functions for tasks such as string handling, mathematical computations, input/output processing, memory management, and several other operating system services.|
+|Assembly Language|Assembly Language: Low-level programming language specific to a computer architecture.| A language who looks like Assembly but most easier to use and to understand created by ourself.|
 
 # **2.  System/ Solution Overview**
 __Provide a short description of the software and solution being specified and its purpose, including relevant benefits, objectives, and goals.__
@@ -215,95 +214,261 @@ If no separate reference/ traceability document is created for the project, use 
 
 Group your functional specifications as appropriate for your project. You may want to divide them by screens, functional areas, user role, JIRA tickets or high-level functions Vs detailed functions or any other way that works for your project -->
 
-<!-- - Input file ( [.aop](#15-glossary) )
-   - Will contain all the AT2-Assembly Language code that is the basis to implement new features.
+[Text file (.aop)](#31-input-file-aop)
+   - Will contain all the AT2-Assembly Language code that is the basis for implementing new features.
 
-- Interpreter ( [IAT2](#15-glossary) )
-   - Will be composed by three main parts:
+[Interpreter (IAT2)](#41-interpreter)
+   - Will be composed of three main parts:
       - The Parser will transform AT2-Assembly Language into a [data structure](#15-glossary) for the builder.
       - The Builder will rework the [data structure](#15-glossary) to make the program executable for the virtual processor.
       - The Virtual processor will run the program.
 
-- Virtual Terminal
-   - Will display information about the program previously run in the given input file. -->
+[Virtual Terminal](#51-interpreter)
+   - Will display information about the program previously run in the given input file.
 
-## **3.1 Title**
+## **3.1 Text file (.aop)**
 
 ### **3.1.1 Purpose/ Description**
-
-Include a high-level description and purpose of the specifications covered in the section. 
+A text file.aop is a type of computer file that stores plain text data in a human-readable format.
 
 ### **3.1.2 Use case**
-Map the functional requirement to one or more use cases mentioned in the Business Requirements document. If the use case is not described in detail in the Business Requirements document, describe the use case here. This typically includes the element s in the following table.
 
-|**UC-1** |**Use case name** |
+|**UC-1** |**Coding** |
 | :-: | :-: |
-|**Primary Actor(s)**| primary actors that participate in this use case|
-|**Stakeholders and Interest**|One sentence describing other stakeholders|
-|**Trigger**|Condition/action that initiates/starts the use-case|
-|**Pre-conditions**|Condition assumed to be true before the first step |
-|**Post-conditions**|Condition after the use case is successfully executed  |
-|**Main Success Scenario**|1. visit STARTING-POINT2. Step3. Step4. Make sure GOAL-ACHIEVED|
-|**Extensions**|If Condition, then Alternative StepsList any extended steps/ scenarios that occur, other than the main success scenario.|
-|**Priority**|indicate priority of high, medium or low|
-|**Special Requirements**|Any system related special requirements needed to fulfill the use case |
-|**Open Questions**|*Notes and questions*|
+|**Primary Actor(s)**|Software Developer|
+|**Stakeholders and Interest**|Other stakeholders such as project managers and quality assurance team are interested in ensuring that the code meets requirements and quality standards.|
+|**Trigger**|When a new feature or functionality needs to be implemented or existing code needs to be modified.|
+|**Pre-conditions**|The developer has access to the development environment, necessary tools, and requirements/specifications for the code to be implemented.|
+|**Post-conditions**|The code is successfully implemented, tested, and integrated into the existing system/repository.|
+|**Main Success Scenario**|1. Developer reviews requirements and specifications. 2. Developer writes code according to the requirements. 3. Developer tests the code to ensure functionality and correctness.|
+|**Extensions**|If code fails testing or review, developer makes necessary corrections and repeats testing/review process until successful.|
+|**Priority**|High|
+|**Special Requirements**|Version control system for code management, development environment with necessary software and libraries, code review process, testing frameworks/tools.|
 
 ### **3.1.3 Mock-up**
+```aop
+===================================
+      Example TextFile.aop
+===================================
 
-Provide the mock-up of the functionality or a mock-up of the entire page
+MOV 1, 4
++ 4, 4   // + = mnemonic ADD from AT2-Assembly Language
+
+===================================
+   End of Example TextFile.aop
+===================================
+```
 
 ### **3.1.4  Functional Requirements**
-*Describe the page level details that are not captured in section 3.1.5 below.  These may include any requirements related to Navigation Menu, Actions, transaction status, verification and validation requirements etc. 
 
-*Make sure each specification has a reference number and is explained in the following format.
+1. **Creation and Editing**:<br>
+Users should be able to create new text files and edit existing ones using appropriate text editing software.
 
-|**Spec ID**|**Specification Description**|**Business Rules/ Data Dependency**|
-| :-: | :-: | :-: |
-|Specification Identifier|Short explanation of the specification|Any validation rules or business rules|
+2. **Text Entry**:<br>
+Users should be able to enter, modify, and delete text within the text file using keyboard input or other input methods.
 
-Note: Section 3.1.4 and section 3.1.5 may be combined if there are a few functionalities on a particular page
+3. **Saving and Loading**:<br>
+Users should be able to save their changes to the text file, and the file should be loadable for viewing and further editing.
 
-### **3.1.5 Field level specifications**
-*Specify all the field data elements related to the functional requirement in both tables below.
+4. **Undo and Redo**:<br>
+Users should be able to undo and redo their actions within the text file to revert changes or repeat previous actions.
 
-**Form Elements:**
+5. **File Management**:<br>
+Users should be able to perform basic file management tasks such as renaming, copying, moving, and deleting text files.
 
-|**Call-out**|**Field Label**|**UI Control**|**Mand?**|**Editable**|**Data Type**|**Value Set**|**Default Value**|**Data Example**|**Data Source**|
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-|mock-up reference|Label name|specify what UI control will be on screen|specify if field is mandatory|specify if field is editable|Specify the data type that will be used for this field|If value is from the set, specify the entire value set here|Specify if it should be defaulted to any value|Provide an example of the data|Specify the source of the data|
-|Example: Call-out 1|User name|textbox|Yes|Yes|Alpha-numeric|none|NA|agujar|User entry|
+6. **Compatibility**:<br>
+The text file should be compatible with various text editing software and operating systems to ensure interoperability.
 
-**Form Business Rules and Dependencies:**
+## **4.1 Interpreter**
 
-|**Field Label**|**Validation / Business Rules**|**Error Messages**|**Data Dependencies**|**Additional Info/ Notes**|
-| :-: | :-: | :-: | :-: | :-: |
-|Label name|Specify the validation rules and/ or business rules applicable to the form element|List the error message that should be displayed and under what conditions|Specify if there are any date dependencies|Provide any additional information here|
-|Example: User name|User name shall be a valid Stanford Sunet ID|For incorrect user name display on setFocusOff: “Please provide a valid user name”|None|Access prohibited only to Stanford affiliates. For non-Stanford affiliates, check call-out 3.1|
+### **4.1.1 Purpose/ Description**
+An interpreter is a type of software program that reads and executes code written line by line, without the need for prior compilation into machine code. It interprets the code instructions directly into machine-readable instructions that the computer's processor can understand and execute.
 
-**Buttons, Links and Icons:**
+### **4.1.2 Use case**
+1. Read file.aop
+2. Transform content
+3. Run the program
 
-|**Button, Link, Icon Label**|**OnClick Event**|**Other Event**|**Visible**|**Enabled Vs Disabled**|**Navigate To**|**Validation**|**Dependencies**|
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-|Button label name|Specify the operation that would be performed on an on-click event|Specify the operation that would be performed on other events|Specify default visibility of the button|Specify if button is enabled or disabled and the condition, if any|Specify the link where the page will be re-directed, if any|Specify the validation rules on operation of the button|Mention if there are any dependencies on other form elements and/ or buttons|
-|Example: Submit|Verify if user name and password are correct. If yes, log the user into the system.|OnMouseHover display the following message: “Please provide your web-authentication details to sign in|Yes, always|Disabled, by default.Enabled, after first key entered in either username or password field.|User Dashboard page|Verify if Username is a valid sunet ID and user name and password match with registry data.|Disable the New user functionality on subsequent pages if user logs in through this button.|
+|**UC-1** |**Read file.aop** |
+| :-: | :-: |
+|**Primary Actor(s)**|Parser, Interpreter|
+|**Stakeholders and Interest**|Other stakeholders such as developers, system administrators, and end-users are interested in ensuring that the file can be read and processed correctly.|
+|**Trigger**|When the user or system attempts to open and read a file with the ".aop" extension.|
+|**Pre-conditions**|The file with the ".aop" extension exists and is accessible by the file reader or interpreter.|
+|**Post-conditions**|The content of the ".aop" file is successfully read and processed by the file reader.|
+|**Main Success Scenario**|1. The user or system attempts to open the ".aop" file using the appropriate software. 2. The file reader or interpreter reads the content of the file line by line. 3. The file reader or interpreter processes each line according to the syntax and semantics of the ".aop" file format. 4. The file reader or interpreter successfully completes reading and processing the entire file.|
+|**Extensions**|If the file is not found or inaccessible, an error message is displayed, and the use case terminates. If the file format is invalid or contains errors, the file reader or interpreter may display an error message and halt processing.|
+|**Priority**|Medium|
+|**Special Requirements**|The file reader or interpreter must support the ".aop" file format and be capable of interpreting the syntax and semantics defined by the language or specification associated with the ".aop" extension.|
+
+|**UC-2** |**Transform content**|
+| :-: | :-: |
+|**Primary Actor(s)**|Builder, Interpreter|
+|**Stakeholders and Interest**|Other stakeholders such as developers, system administrators, and end-users are interested in ensuring that the file can be read and processed correctly.|
+|**Trigger**|When the builder receives a request or instruction to transform content from the Parser|
+|**Pre-conditions**|The builder is initialized and ready to transform code.|
+|**Post-conditions**|The transformed code is send to the Virutal Processor|
+|**Main Success Scenario**||
+|**Extensions**|If the transformation instruction or function call is invalid or contains errors, the interpreter may throw an exception or error message and halt the interpretation process.|
+|**Priority**|Medium|
+|**Special Requirements**|The interpreter must support the specific transformation instructions or functions defined within the interpreted code.|
+
+|**UC-3** |**Run the program**|
+| :-: | :-: |
+|**Primary Actor(s)**|Virtual Processor, Interpreter|
+|**Stakeholders and Interest**|Other stakeholders such as developers, system administrators, and end-users are interested in ensuring that the file can be read and processed correctly.|
+|**Trigger**|When the builder have finish all transformation|
+|**Pre-conditions**|The builder is initialized and ready to run code.|
+|**Post-conditions**|The program is successfully executed by the virtual processor, and the expected results are produced as a result of the execution.|
+|**Main Success Scenario**||
+|**Extensions**|If the program contains errors or invalid instructions, the interpreter may throw an exception or error message and halt the execution process. If the program execution exceeds specified resource limits, the interpreter may terminate the execution and report an error.|
+|**Priority**|High|
+|**Special Requirements**|The interpreter must support the specific programming language or instruction set defined within the interpreted code.|
 
 
-# **4.   System Configurations**
+### **4.1.3 Mock-up**
+**Interpreter composition**
+![interpreter-mockup](../images/functional_images/interpreter-mockup.png)
+
+### **4.1.4  Functional Requirements**
+
+1. **Parsing and Lexical Analysis**:<br>
+The interpreter should be able to parse and analyze the syntax and structure of the input code written in the specified programming language.
+
+2. **Execution of Code**:<br>
+The interpreter should be capable of executing the parsed code instructions according to the semantics and rules defined by the programming language.
+
+3. **Error Handling**:<br>
+The interpreter should detect and handle errors in the input code, providing informative error messages to aid in debugging and troubleshooting.
+
+4. **Data Types and Operations**:<br>
+The interpreter should support various data types (e.g., integers, floating-point numbers, strings) and operations (e.g., arithmetic, logical, relational) defined by the programming language.
+
+5. **Control Flow**:<br>
+The interpreter should support control flow statements such as conditionals (if-else), loops (for, while), and branches to control the flow of execution within the code.
+
+6. **Variable Declaration and Scope**:<br>
+The interpreter should handle variable declaration, initialization, and scoping rules as defined by the programming language.
+
+7. **Input and Output**:<br>
+The interpreter should support input/output operations (e.g., reading from and writing to files, console input/output) as required by the programming language.
+
+8. **Performance Optimization**:<br>
+The interpreter should optimize code execution performance where possible, minimizing overhead and maximizing efficiency.
+
+9. **Security**:<br>
+The interpreter should implement security measures to prevent code buffer overflows and other security vulnerabilities.
+
+
+## **5.1 Virtual Terminal**
+
+### **5.1.1 Purpose/ Description**
+A text file virtual terminal is a software tool or environment that provides a text-based interface for interacting with text files stored on a computer system. It allows users to view, edit, and manipulate the contents of text files using text-based commands or applications within a virtual terminal environment.
+
+### **5.1.2 Use case**
+1. Command-Line Interface (CLI)
+2. Programming and Development
+3. Text-Based Applications
+4. Automation and Scripting
+5. Legacy System Access ????????
+
+|**UC-1** |**Command-Line Interface (CLI)** |
+| :-: | :-: |
+|**Primary Actor(s)**|End User, Developer|
+|**Stakeholders and Interest**|Other stakeholders such as software developers and end-users are interested in efficiently interacting with the computer system through the command-line interface for various tasks and operations.|
+|**Trigger**|User initiates a request to access the command-line interface for executing commands and performing tasks.|
+|**Pre-conditions**|The computer system is operational, and the user has the necessary credentials to access the command-line interface.|
+|**Post-conditions**|The user has successfully executed the desired commands in the command-line interface, and the system may have undergone changes or performed specific tasks based on the commands.|
+|**Main Success Scenario**|1. User logs in to the system. 2. User navigates to the command-line interface. 3. User enters command(s) to perform a specific task. 4. The system processes the commands and executes the requested task. 5. The command-line interface displays the results of the executed commands.|
+|**Extensions**|If the user enters an invalid command, the system provides an error message, and the user may need to re-enter a valid command.|
+|**Priority**|High|
+|**Special Requirements**|The command-line interface must support a variety of commands for system management, file manipulation, and other tasks.|
+
+|**UC-2** |**Programming and Development** |
+| :-: | :-: |
+|**Primary Actor(s)**|Software Developer|
+|**Stakeholders and Interest**|Developers and stakeholders interested in the development, testing, and debugging of software applications using a virtual terminal environment.|
+|**Trigger**|Developer initiates a request to use the virtual terminal for programming and development tasks, such as coding, compiling, and debugging.|
+|**Pre-conditions**|Developer has access to the virtual terminal environment and necessary permissions to perform programming and development tasks.|
+|**Post-conditions**|Developer has completed programming and development tasks within the virtual terminal environment, including coding, compiling, and debugging software applications.|
+|**Main Success Scenario**||
+|**Extensions**|If the source code contains syntax errors or logical bugs, the developer may need to debug and fix the issues iteratively until the code compiles and runs without errors.|
+|**Priority**|High|
+|**Special Requirements**|The virtual terminal should provide efficient text-based editors and compilers tools to facilitate coding and development tasks.|
+
+|**UC-3** |**Text-Based Applications** |
+| :-: | :-: |
+|**Primary Actor(s)**|User|
+|**Stakeholders and Interest**|Users interested in using text-based applications within a virtual terminal environment for various tasks such as text editing, email communication, and web browsing.|
+|**Trigger**|User initiates a request to access and use text-based applications within the virtual terminal environment.|
+|**Pre-conditions**|The virtual terminal environment is operational and accessible to the user. Text-based applications are installed and available within the virtual terminal environment.|
+|**Post-conditions**|The user has successfully used text-based applications within the virtual terminal environment to perform desired tasks such as editing text files.|
+|**Main Success Scenario**|1. User logs in to the system. 2. User navigates to the command-line interface. 3. User enters command(s) to perform a specific task. 4. The system processes the commands and executes the requested task. 5. The command-line interface displays the results of the executed commands.|
+|**Extensions**| If the user encounters errors or issues while using the text-based application, they may need to troubleshoot or seek assistance to resolve the issues.|
+|**Priority**|Low|
+|**Special Requirements**|The virtual terminal environment should provide a variety of text-based applications commonly used for tasks such as text editing.|
+
+|**UC-4** |**Automation and Scripting** |
+| :-: | :-: |
+|**Primary Actor(s)**|System Administrator, Developer, Automated System|
+|**Stakeholders and Interest**|Users, administrators, and automated systems interested in automating tasks and performing scripting operations within the virtual terminal environment.|
+|**Trigger**|System administrator, developer, or automated system initiates a request to automate tasks or perform scripting operations within the virtual terminal environment.|
+|**Pre-conditions**|The virtual terminal environment is operational and accessible. Required scripting languages and automation tools are installed and available within the virtual terminal environment.|
+|**Post-conditions**|The tasks are successfully automated, and scripting operations are executed within the virtual terminal environment, resulting in the desired outcomes or actions.|
+|**Main Success Scenario**|1. Actor accesses the virtual terminal environment. 2. Actor writes or modifies scripts using scripting languages within the virtual terminal environment to automate tasks or perform specific actions. 3. Actor executes the scripts, triggering the automation of tasks or execution of scripting operations. 4. The virtual terminal environment processes the scripts and performs the specified actions or tasks automatically. 5. The desired outcomes or actions are achieved successfully.|
+|**Extensions**|If the scripts contain errors or encounter issues during execution, the actor may need to troubleshoot the scripts and revise them accordingly.|
+|**Priority**|High|
+|**Special Requirements**|Security measures should be implemented to ensure the safety and integrity of automated tasks and scripting operations within the virtual terminal environment.|
+
+
+### **5.1.3 Mock-up**
+**Virtual Terminal**
+![virtual-terminal](../images/functional_images/virtual-terminal.png)
+
+### **5.1.4  Functional Requirements**
+
+1. **User Interface**:<br>
+Provide a text-based interface for interacting with the system.
+Display text output from the system.
+Accept text input from the user.
+
+2. **Terminal Emulation**:<br>
+Emulate the behavior of physical terminals (e.g., DEC VT100, ANSI).
+Support terminal control sequences for cursor movement, text formatting, and other display control features.
+
+3. **Scrolling and Paging**:<br>
+Provide scrolling functionality to view previous output.
+Support paging for long text output, allowing users to navigate through large amounts of text.
+
+4. **Compatibility**:<br>
+Ensure compatibility with a wide range of operating systems and platforms.
+
+5. **Accessibility**:<br>
+Provide accessibility features for users with disabilities, such as screen readers and keyboard navigation support.
+
+6. **Security**:<br>
+Implement security measures to protect terminal sessions and prevent unauthorized access.
+
+
+
+
+
+
+# **6.   System Configurations**
    Provide an overview of all the steps or the set ups required to configure an application/program. Also state the intent or purpose behind each set up or configuration. Discuss the possible alternatives, customizations, workaround’s, conditions and dependencies in a particular configuration. In case of Oracle applications, please list all applicable BR100’s or Application set up documents
 
-# **5.   Other System Requirements/ Non-Functional Requirements**
+# **7.   Other System Requirements/ Non-Functional Requirements**
    *This section is used in contrast with stated functional requirements to highlight the additional details on the quality related aspects as well as other behavioral aspects of a system. This section is used to capture the stakeholders’ implicit expectations about how well the system will work under a given circumstance. Here you can  state the specific SLA’s related to system response times (Data search and retrieval), Performance needs and metrics, Latencies in a particular timeframe or during high volume transactions, System failures and recovery management, Security levels and accessibility constraints, Data Backup and archiving Capabilities, Legal compliance needs etc. The broader definition of the term ‘system’ also includes integrations with all types of Mobile platforms, Mobile devices, Tablets and Smart phones. 
 
-# **6.   Reporting Requirements**
+# **8.   Reporting Requirements**
    *This section is used to capture the reporting needs, including but not limited to the scope and format of the report, data elements and contents required on the report, file types and extraction mechanisms, user base and accessibility levels, frequency of report extractions etc. Also provide the mock up of the report if needed.  If necessary, create a separate document for reporting requirements. 
 
-# **7.   Integration Requirements**
+# **9.   Integration Requirements**
    Identify the integration needs and state all required interfaces with anything external to this solution including hardware, software, and users. Include Architectural overview diagrams, high level data flow diagrams, table structures and schema, interface protocols, API’s, Error conditions, Error validations and messaging needs, Auto processing requirements etc. You can optionally state hardware and software dependencies, Upgrade requirements, compatibility issues with existing frameworks and solutions, etc
 
 (Data Flow Diagrams, Interface Diagrams – if necessary)
 
-## **7.1  Exception Handling/ Error Reporting**
+## **9.1  Exception Handling/ Error Reporting**
 This is where you can explain the error conditions/Exceptions that normally happen in Interfaces or cross flow system integrations. Explain the nature of exception, Error Id, Root cause of the error and also the strategy to handle the scenario. You can also indicate if there are any concurrent programs designed to automatically handle the error records or error conditions. State if there are any error reports generated or notifications utilized to alarm the support teams and system Administrators during the interface failures or outages
 
 
@@ -312,16 +477,16 @@ This is where you can explain the error conditions/Exceptions that normally happ
 |||||
 
 
-# **9.   References**
+# **10.   References**
    List all references to external material used as background information or knowledge for the FSD. Examples may include a compliancy website, Stanford website, etc
 
-# **10.  Open Issues**
+# **11.  Open Issues**
 
 |**Issue ID**|**Issue**|**Raised By**|**Raised On**|**Solution/ Decision**|**Resolved By**|**Resolved On**|**Status**|
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 |||||||||
-# **11.  Appendix**
-## **11.1 ASSEMBLY LANGUAGE**
+# **12.  Appendix**
+## **12.1 ASSEMBLY LANGUAGE**
 January 22, 2024
 
 
