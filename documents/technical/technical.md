@@ -23,6 +23,7 @@
    2. [Syntax and conventions](#42-syntax-and-conventions)
    3. [Memory management](#43-memory-management)
    4. [Input and output handling](#44-input-and-output-handling)
+   5. [Interpreter](#45-interpreter)
 5. [Development tools](#5-development-tools)
    1. [Assembler](#51-assembler)
    2. [Debugger](#52-debugger)
@@ -41,13 +42,13 @@
 
 ## 1. Introduction
 
-This project involves developing a **[virtual processor](#virtual-processor)** and a custom **[Assembly language](#Assembly-language)** to emulate the typical environment of old mobile phones. It aims to create a virtualized system that accurately simulates the functionalities of these devices, focusing on general characteristics common to this category.
+The goal of this project is to create a **[virtual processor](#virtual-processor)** and an **[interpreter](#interpreter)** to run a custom **[Assembly language](#Assembly-language)** that we created on our own. We chose to focus the development of the virtual processor on the goal of making it emulate the typical environment of old mobile phones. It aims to create a virtualized system that accurately simulates the functionalities of these devices, focusing on general characteristics common to this category.
 
 ---
 
 ## 2. Project overview
 
-The project's scope encompasses the creation of a generalized old mobile phone **[emulator](#emulator)**, using a virtual processor with custom specifications, not limited to any specific existing hardware. The Nokia 3310 is used as a reference point for typical features and functionalities found in old mobile phones.
+The project's scope includes the creation of a generalized old mobile phone **[emulator](#emulator)**, using a virtual processor and an interpreter with custom specifications. We inspired from old devices with ARM processor for typical features and functionalities.
 
 ---
 
@@ -55,23 +56,30 @@ The project's scope encompasses the creation of a generalized old mobile phone *
 
 ### 3.1 Virtual processor
 
-<<<<<<< HEAD
 #### Processor specifications
-- Custom-designed **[processor](#processor)** specifications, tailored to emulate common functionalities of old mobile phones.
-=======
-#### Processor Specifications
-- Custom-designed processor, tailored to emulate common functionalities of old mobile phones.
->>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
-- The processor will be inspired by typical characteristics of old mobile phone processors.
+- Custom-designed **[processor](#processor)**, tailored to emulate common functionalities of old mobile phones.
+- The processor will be inspired by typical characteristics of ARM old mobile phone processors.
 
 #### Processor capabilities
 - Capabilities include basic arithmetic operations, input/output operations, and interaction with emulated components.
 
 ### 3.2 Memory
-- Memory architecture details, including **[ROM](#rom)** and **[RAM](#ram)** specifications for the emulator.
+
+#### Memory Architecture
+- The emulator's memory architecture is designed to replicate the structure of old mobile phones, with dedicated allocations for ROM and RAM.
+
+#### **[ROM](#rom)** (Read-Only Memory)
+- **Size and location**: Allocated 16 KB, situated at the beginning of the memory address space (`0x00000000` to `0x00003FFF`).
+- **Content**: Primarily used for storing the clock functionality, with some capacity for minor future expansions.
+
+#### **[RAM](#ram)** (Random Access Memory)
+- **Size**: Configured to 32 KB, reflecting the limited memory resources of old mobile phones.
+- **Location**: Positioned immediately after the ROM in the memory address space. Occupies addresses from `0x00004000` to `0x0000BFFF`.
+- **Usage**: Used for dynamic data storage and program execution, simulating the volatile working memory of an old mobile device.
+
 
 ### 3.3 Display
-- Emulating a basic monochrome LCD typical of old mobile phones, with text and simple graphics capabilities.
+- Emulating a basic 84x48 monochrome LCD typical of old mobile phones, with text and simple graphics capabilities.
 
 ### 3.4 Keypad input
 - Simulating keypad input, including numeric and function keys typical of old mobile phones.
@@ -100,15 +108,9 @@ The project's scope encompasses the creation of a generalized old mobile phone *
   - `OP_B_NOT`: Bitwise NOT operation. Inverts the bits of the operand.
   - `OP_B_XOR`: Bitwise XOR operation. Performs bitwise exclusive OR on two operands.
 
-<<<<<<< HEAD
 #### Comparison types (`cmpKind`)
 - **Logical operations for conditional processing**:
   - `CMP_OR`: Logical OR comparison. Evaluates to true if either of the operands is true.
-=======
-#### Comparison Types (`cmpKind`)
-- **Logical Operations for Conditional Processing**:
-  - `CMP_OR`: Logical OR comparison. Evaluates to true if whether of the operands is true.
->>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
   - `CMP_AND`: Logical AND comparison. Evaluates to true only if both operands are true.
   - `CMP_NOT`: Logical NOT comparison. Inverts the truth value of the operand.
   - `CMP_XOR`: Logical XOR comparison. Evaluates to true if operands are different.
@@ -136,8 +138,6 @@ The project's scope encompasses the creation of a generalized old mobile phone *
 - **Register enumeration for the virtual processor**:
   - `RG_0`, `RG_1`, ..., `RG_7`: Enumeration of registers available in the virtual processor. These registers are used for storing temporary data, performing operations, and maintaining state within the processor.
 
-<!-- Reading the list above, I have no clue if it's the 'true' assembly language or the new one. Which am I supposed to use as a SE? -->
-
 ### 4.2 Syntax and conventions
 
 The **[syntax](#syntax)** and conventions of the Assembly language are designed to be intuitive and aligned with standard practices in Assembly language programming. This section outlines the fundamental syntax rules for instructions, registers, **[memory addressing](#memory-addressing1)**, and data types.
@@ -159,20 +159,15 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 - **Binary and hexadecimal support**: The language supports both **[binary](#binary)** (`0b0101`) and **[hexadecimal](#hexadecimal)** (`0x1A`) literals for ease of low-level programming.
 
 #### Conventions
-- **Case sensitivity**: The language is case-sensitive. All instructions and register names must be used in the correct case.
+- **Case sensitivity**: All instructions and register names must be used in the correct case.
 - **Whitespace**: Whitespace is used to separate the elements of an instruction but is otherwise not significant.
-<<<<<<< HEAD
 - **Comments**: Comments start with either "//" for one-line comments or "/*........*/" for multiple-lines comments, the same comments convention as C language. For example "// Add the value 3 to myFunction"
-=======
-- **Comments**: Comments start with a semicolon (`;`) and continue to the end of the line. For example, `OP_ADD RG_0, RG_1 ; Add RG_1 to RG_0`.
-<!-- Just above, it is comments for the 'true' assembly, the new assembly will comment the same way as C, with // or /* */ -->
->>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
 
 ### 4.3 Memory management
 
 #### Memory architecture
 - **Memory types**: The virtual processor will simulate a basic memory architecture comprising both ROM (Read-Only Memory) and RAM (Random Access Memory).
-- **ROM**: Used to store the emulator's firmware and immutable data. It mimics the non-volatile memory of a mobile phone.
+- **ROM**: Used to store the emulator's clock. It mimics the non-volatile memory of a mobile phone.
 - **RAM**: Utilized for executing programs and temporary data storage. It represents the volatile working memory of the device.
 
 #### Memory allocation and access
@@ -181,7 +176,7 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 
 #### Data handling
 - **Data storage**: Data can be stored in memory as immediate values, binary data, or ASCII characters.
-- **Data retrieval**: Instructions can retrieve data from memory for processing and manipulate it as required by the program.
+- **Data retrieval**: Instructions can recover data from memory for processing and manipulate it as required by the program.
 
 #### Memory operations
 - **Load and store instructions**: Specific instructions will be used for loading data from memory into registers (`LOAD`) and storing data from registers back into memory (`STORE`).
@@ -193,17 +188,10 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 
 ### 4.4 Input and output handling
 
-<<<<<<< HEAD
 #### Display output handling
 - **Display interface**: Specific instructions to display operations will enable the manipulation of the virtual screen, such as writing text or drawing basic graphics.
 - **Output commands**: The Assembly language will include commands like `DISP_WRITE` to output data to the screen. These commands will handle the conversion of data (numeric or character) into a visual representation on the emulator's display.
 - **Screen buffering**: A screen buffer will be implemented, where output data is first written to a buffer before being rendered on the screen. This allows for efficient screen updates and control over how and when display changes occur.
-=======
-#### Display Output Handling
-- **Display Interface**: Specific instructions to display operations will enable the manipulation of the virtual screen, such as writing text or drawing basic graphics.
-- **Output Commands**: The assembly language will include commands like `DISP_WRITE` to output data to the screen. These commands will handle the conversion of data (numeric or character) into a visual representation on the emulator's display.
-- **Screen Buffering**: A screen buffer will be implemented, where output data is first written to a buffer before being rendered on the screen. This allows for efficient screen updates and control over how and when display changes occur.
->>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
 
 #### Keypad input handling
 - **Input polling**: The Assembly language will support polling methods to check the state of the keypad. This involves instructions to read the current input state, allowing the program to react to user inputs.
@@ -213,6 +201,22 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 #### Combined I/O operations
 - **Synchronization**: Mechanisms to synchronize input and output operations will ensure that the display and keypad interactions do not conflict, maintaining a smooth user experience.
 - **I/O in program flow**: The Assembly language will enable the integration of I/O operations within the flow of the program, allowing for dynamic and interactive applications that respond to user inputs and provide immediate feedback.
+
+### 4.5 Interpreter
+
+#### Interpreter functions
+- **Code interpretation**: The interpreter reads and analyzes each line of assembly code, translating it into operations that the virtual processor can understand and execute.
+- **Execution flow control**: It manages the flow of execution based on control instructions like loops, conditional statements, and jumps.
+- **Error handling**: Includes robust error detection and reporting mechanisms to handle syntax and logical errors in the assembly code.
+
+#### Integration with virtual processor
+- **Execution**: The interpreter works closely with the virtual processor to ensure smooth execution of assembly programs, simulating a real processor's behavior.
+- **Resource management**: It efficiently manages the processor's resources, such as memory and registers, during the execution of assembly code.
+
+#### User interaction
+- **Interactive mode**: The interpreter offers an interactive mode, allowing users to enter and execute assembly instructions one at a time, which is beneficial for learning and debugging.
+- **Script mode**: For more complex programs, the interpreter can execute pre-written scripts containing multiple assembly instructions.
+
 
 ---
 
@@ -233,15 +237,9 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 - **Performance analysis**: Tools for analyzing the performance of Assembly programs, such as execution time and resource usage, will be included, assisting in optimizing code for efficiency.
 - **Extensibility**: The testing framework will be designed to be extensible, allowing additional tests and functionalities to be added as the project evolves.
 
-<<<<<<< HEAD
 ### 5.4 Code organization
 - **Header files (`.h`)**: The prototype and comments of the functions are in the header files. All enumerations and structures/typedefs are also defined in these files. This approach helps in providing a clear interface for each module.
 - **Implementation files (`.c`)**: The function definitions (implementations) are in the `.c` files. Comments explaining the implementation details should also be included in these files. This separation of interface and implementation facilitates maintainability and readability of the code.
-=======
-### 5.4 Code Organization
-- **Header Files (`.h`)**: The prototype and comments of the functions are in the header files. All enumerations and structures/typedefs are also defined in these files. This approach helps in providing a clear interface for each module.
-- **Implementation Files (`.c`)**: The function definitions (implementations) are in the `.c` files. Comments explaining the implementation details should also be included in these files. This separation of interface and implementation facilitates maintainability and readability of the code.
->>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
 
 ---
 
@@ -257,13 +255,8 @@ While a detailed testing document will be provided separately by the Quality Ass
 - The development team will closely collaborate with the Quality Assurance team to align testing strategies and ensure comprehensive coverage of all functionalities.
 - Feedback from QA testing will be integral to the iterative development process, guiding enhancements and refinements in the emulator and Assembly language.
 
-<<<<<<< HEAD
 ### Reference to QA document
 - For detailed testing procedures, methodologies, and specific test cases, refer to the dedicated [test plan](../QA/test_plan.md) prepared by the Quality Assurance team.
-=======
-### Reference to QA Document
-- For detailed testing procedures, methodologies, and specific test cases, refer to the [dedicated test plan](../QA/test_plan.md) prepared by the Quality Assurance team.
->>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
 
 ---
 
@@ -311,6 +304,7 @@ While a detailed testing document will be provided separately by the Quality Ass
 | <a id="emulator"></a>**Emulator**    | Software that enables one computer system to behave like another computer system. | Core of the project, emulating old mobile phone hardware. |
 | <a id="hexadecimal"></a>**Hexadecimal** | A base-16 number system used in computing. | Used for representing binary data in a more readable format in Assembly code. |
 | <a id="instruction-set"></a>**Instruction set** | The collection of instructions that a processor can execute. | Defines the capabilities of the virtual processor. |
+| <a id="interpreter"></a>**Interpreter** | A program that executes instructions written in a programming or scripting language without requiring them to be compiled into machine language. | Responsible for reading and executing the custom assembly language instructions on the virtual processor, acting as the bridge between the assembly code and the virtual hardware. |
 | <a id="machine-code"></a>**Machine code** | The lowest-level programming language, consisting of binary code. | The end product of the assembler, run by the virtual processor. |
 | <a id="memory-addressing1"></a>**Memory addressing** | The method by which a processor can access data stored in memory. | Essential for the emulator's handling of memory operations. |
 | <a id="opcode"></a>**Opcode**      | The part of a machine language instruction that specifies the operation. | Used in defining the functionality of Assembly instructions. |
