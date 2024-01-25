@@ -1,0 +1,1 @@
+![Data structure diagram](../images/technical_images/data_structure_diagram.jpg)
