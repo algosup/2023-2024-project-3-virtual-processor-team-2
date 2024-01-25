@@ -1,1 +1,1 @@
-![Architecture diagram](archi_interpreter_diagram.jpg "Architecture Diagram")
+![Architecture diagram](archi_interpreter_diagram.jpg)
