@@ -69,17 +69,22 @@ void parseFile(instList_t *nodeList, char *filename){
         exit(EXIT_FAILURE);
     }
 
+    // Check the file extension 
+    checkAOPFile(filename);
+
     char line[LINE_MAX_SIZE];
     instNode_t *lastNode = NULL;
     long nodeId = 0;
+    long lineNb = 0;
 
     // read the file line by line
     while(fgets(line, LINE_MAX_SIZE, file)){
         // parse the line
-        instNode_t *node = parseLine(line, nodeId);
+        instNode_t *node = parseLine(line, nodeId, lineNb);
 
         // continue if the line is empty
         if(node == NULL){
+            ++ lineNb;
             continue;
         }
 
@@ -92,25 +97,23 @@ void parseFile(instList_t *nodeList, char *filename){
         }
         lastNode = node;
         ++ nodeId;
+        ++ lineNb;
     }
     // close the file
     fclose(file);
 }
 
-instNode_t *parseLine(char *line, long nodeId){
+instNode_t *parseLine(char *line, long nodeId, long lineNb){
 
     // check if the line is empty or a comment
-    if(line[0] == '\n' || strcmp(line, "//") == 0){
+    if(line[0] == '\n' || strncmp(line, "//", 2) == 0){
         return NULL;
     }
-
-    // TODO: check extention 
 
     // Get the arguments
     char **args = getInstArgs(line);
 
-    // Check if the line is an operation
-    if(cmpStringFirst(line, "add ", 4) == 0 || cmpStringFirst(line, "+ ", 2) == 0){
+    if(strncmp(line, "add", 3) == 0 || strncmp(line, "+", 1) == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -125,7 +128,7 @@ instNode_t *parseLine(char *line, long nodeId){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(cmpStringFirst(line, "sub ", 4) == 0 || cmpStringFirst(line, "- ", 2) == 0){
+    else if(strncmp(line, "sub", 3) == 0 || strncmp(line, "-", 1) == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -140,7 +143,7 @@ instNode_t *parseLine(char *line, long nodeId){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(cmpStringFirst(line, "mul ", 4) == 0 || cmpStringFirst(line, "* ", 2) == 0){
+    else if(strncmp(line, "mul", 3) == 0 || strncmp(line, "*", 1) == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -155,7 +158,7 @@ instNode_t *parseLine(char *line, long nodeId){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(cmpStringFirst(line, "div ", 4) == 0 || cmpStringFirst(line, "/ ", 2) == 0){
+    else if(strncmp(line, "div", 3) == 0 || strncmp(line, "/", 1) == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -170,7 +173,7 @@ instNode_t *parseLine(char *line, long nodeId){
         newNode->targetReg = targetReg;
         return newNode;
     }
-    else if(cmpStringFirst(line, "mod ", 4) == 0 || cmpStringFirst(line, "% ", 2) == 0){
+    else if(strncmp(line, "mod", 3) == 0 || strncmp(line, "%", 1) == 0){
         instNode_t *newNode = malloc(sizeof(instNode_t));
         newNode->id = nodeId;
         // Set type of instruction
@@ -181,27 +184,90 @@ instNode_t *parseLine(char *line, long nodeId){
         // Set arguments
         newNode->arg0 = args[0];
         newNode->arg1 = args[1];
+        return newNode;
+    }
+    else if(strncmp(line, "shl", 3) == 0 || strncmp(line, "<<", 2) == 0){
+        instNode_t *newNode = malloc(sizeof(instNode_t));
+        newNode->id = nodeId;
+        // Set type of instruction
+        newNode->inst = INST_OP;
+        newNode->nodeType.op = malloc(sizeof(opNode_t));
+        // Set type of operation
+        newNode->nodeType.op->op = OP_L_SHIFT;
+        // Set arguments
+        newNode->arg0 = args[0];
+        newNode->arg1 = args[1];
         // Set target register
         newNode->targetReg = targetReg;
         return newNode;
     }
-    // TODO: add operations for r shift, l shift, binary and, binary or, binary xor, binary not
-
-    return NULL;
-}
-
-bool cmpStringFirst(char *line, char *string, int len){
-    for(int i = 0; i < len; i++){
-        // check if the strings are ended
-        if(line[i] == '\n' || line[i] == '\0' || string[i] == '\0'){
-            return false;
-        }
-        if(line[i] != string[i]){
-            return false;
-        }
+    else if(strncmp(line, "and", 3) == 0 || strncmp(line, "&", 1) == 0){
+        instNode_t *newNode = malloc(sizeof(instNode_t));
+        newNode->id = nodeId;
+        // Set type of instruction
+        newNode->inst = INST_OP;
+        newNode->nodeType.op = malloc(sizeof(opNode_t));
+        // Set type of operation
+        newNode->nodeType.op->op = OP_B_AND;
+        // Set arguments
+        newNode->arg0 = args[0];
+        newNode->arg1 = args[1];
+        // Set target register
+        newNode->targetReg = targetReg;
+        return newNode;
     }
-    return true;
+    else if(strncmp(line, "or", 2) == 0 || strncmp(line, "|", 1) == 0){
+        instNode_t *newNode = malloc(sizeof(instNode_t));
+        newNode->id = nodeId;
+        // Set type of instruction
+        newNode->inst = INST_OP;
+        newNode->nodeType.op = malloc(sizeof(opNode_t));
+        // Set type of operation
+        newNode->nodeType.op->op = OP_B_OR;
+        // Set arguments
+        newNode->arg0 = args[0];
+        newNode->arg1 = args[1];
+        // Set target register
+        newNode->targetReg = targetReg;
+        return newNode;
+    }
+    else if(strncmp(line, "xor", 3) == 0 || strncmp(line, "^", 1) == 0){
+        instNode_t *newNode = malloc(sizeof(instNode_t));
+        newNode->id = nodeId;
+        // Set type of instruction
+        newNode->inst = INST_OP;
+        newNode->nodeType.op = malloc(sizeof(opNode_t));
+        // Set type of operation
+        newNode->nodeType.op->op = OP_B_XOR;
+        // Set arguments
+        newNode->arg0 = args[0];
+        newNode->arg1 = args[1];
+        // Set target register
+        newNode->targetReg = targetReg;
+        return newNode;
+    }
+    else if(strncmp(line, "not", 3) == 0 || strncmp(line, "!", 1) == 0){
+        instNode_t *newNode = malloc(sizeof(instNode_t));
+        newNode->id = nodeId;
+        // Set type of instruction
+        newNode->inst = INST_OP;
+        newNode->nodeType.op = malloc(sizeof(opNode_t));
+        // Set type of operation
+        newNode->nodeType.op->op = OP_B_NOT;
+        // Set arguments
+        newNode->arg0 = args[0];
+        newNode->arg1 = args[1];
+        // Set target register
+        newNode->targetReg = targetReg;
+        return newNode;
+    }
+
+    // Trow error if the line is not an instruction
+    fprintf(stderr, "\"%s\" Is not a valid instruction. line %ld\n", line, lineNb);
+    exit(EXIT_FAILURE);
+
 }
+
 
 char **getInstArgs(char *line) {
     char **args = (char **)malloc(2 * sizeof(char *));
@@ -230,7 +296,6 @@ char **getInstArgs(char *line) {
                 exit(EXIT_FAILURE);
             }
             // Remove spaces
-            rmSpaces(token);
             strcpy(args[i], token);
         }
     }
@@ -238,35 +303,13 @@ char **getInstArgs(char *line) {
     return args;
 }
 
-void rmSpaces(char* str) {
-    char* buffer = str;
-    do {
-        while (*buffer == ' ') {
-            ++buffer;
-        }
-    } while (*str++ = *buffer++);
-}
 
+void checkAOPFile(char* fileName) {
+    size_t size = strlen(fileName);
 
-bool checkAOPFile(char* fileName)
-{
-    int size = strlen(fileName);
-    if (size < 5)
-    {//If a file contains at least ".aop", its filename length should be at least 5
-        printf("The filename's size is unvalid, it should be at least 5.\n");
-        return false;
+    if (size < 5 || fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') {
+        // trow error
+        fprintf(stderr, "The filename is invalid. Please enter a valid .aop filename.\n");
+        exit(EXIT_FAILURE);
     }
-
-    char firstLast = fileName[size-4];
-    char secondLast = fileName[size-3];
-    char thirdLast = fileName[size-2];
-    char fourthLast = fileName[size-1];
-
-    if (fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') //Do the last 4 characters of the filename are '.', 'a', 'o' and 'p' ?
-    {
-        printf("The filename is unvalid. Please enter a .aop filename.\n");
-        return false;
-    }
-    printf("Your filename is an .aop !");
-    return true;
 }

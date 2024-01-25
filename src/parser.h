@@ -42,18 +42,7 @@ void parseFile(instList_t *nodeList, char *filename);
     returns:
         instNode_t: instruction node
 */
-instNode_t *parseLine(char *line, long nodeId);
-
-/*
-    Compare the first len characters of two strings
-    params:
-        line: line to be compared
-        string: string to be compared
-        len: number of characters to be compared
-    returns:
-        bool: true if the strings are same, false otherwise
-*/
-bool cmpStringFirst(char *line, char *string, int len);
+instNode_t *parseLine(char *line, long nodeId, long lineNb);
 
 /*
     Get arguments from an instruction line
@@ -65,17 +54,8 @@ bool cmpStringFirst(char *line, char *string, int len);
 char** getInstArgs(char *line);
 
 /*
-    Remove spaces from a string
-    params:
-        str: string to be parsed
-*/
-void rmSpaces(char *str);
-
-/*
-    Checks if the filename ends by .aop or not.
+    Checks if the filename ends by .aop or trows an error
     params:
         filename: name of the file to check
-    returns:
-        boolean: true or false
 */
-bool checkAOPFile(char* fileName);
+void checkAOPFile(char* fileName);

@@ -90,7 +90,7 @@ typedef struct instNode{
         actNode_t *act;
         char *label;
     } nodeType;
-    instNode_t *next;
+    struct instNode *next;
     char *arg0;
     char *arg1;
     enum regKind targetReg;
@@ -131,3 +131,11 @@ typedef struct label{
 typedef struct labelList{
     label_t *list;
 } labelList_t;
+
+/*
+    Print the instruction list to a file
+    params:
+        list: pointer to the instruction list
+        dest: destination file
+*/
+void printInstList(instList_t *list, char *dest);

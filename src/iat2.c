@@ -19,15 +19,20 @@ int main(int argc, char *argv[]) {
 
     // Init variables list struct
     varList_t *varList = malloc(sizeof(varList_t));
+    varList->list = NULL;
 
     // Init labels list struct
     labelList_t *labelList = malloc(sizeof(labelList_t));
+    labelList->list = NULL;
 
     // Init instructions list struct
     instList_t *instList = malloc(sizeof(instList_t));
+    instList->head = NULL;
 
     // run parser
     parseFile(instList, argv[1]);
+
+    printInstList(instList, "../bin/out.txt");
 
     // run builder
     // TODO: make the function build

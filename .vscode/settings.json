@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "cassert": "cpp",
-        "builder.h": "c"
+        "builder.h": "c",
+        "cstdlib": "c"
     }
 }
