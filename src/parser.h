@@ -70,3 +70,12 @@ char** getInstArgs(char *line);
         str: string to be parsed
 */
 void rmSpaces(char *str);
+
+/*
+    Checks if the filename ends by .aop or not.
+    params:
+        filename: name of the file to check
+    returns:
+        boolean: true or false
+*/
+bool checkAOPFile(char* fileName);

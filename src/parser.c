@@ -104,6 +104,8 @@ instNode_t *parseLine(char *line, long nodeId){
         return NULL;
     }
 
+    // TODO: check extention 
+
     // Get the arguments
     char **args = getInstArgs(line);
 
@@ -243,4 +245,28 @@ void rmSpaces(char* str) {
             ++buffer;
         }
     } while (*str++ = *buffer++);
+}
+
+
+bool checkAOPFile(char* fileName)
+{
+    int size = strlen(fileName);
+    if (size < 5)
+    {//If a file contains at least ".aop", its filename length should be at least 5
+        printf("The filename's size is unvalid, it should be at least 5.\n");
+        return false;
+    }
+
+    char firstLast = fileName[size-4];
+    char secondLast = fileName[size-3];
+    char thirdLast = fileName[size-2];
+    char fourthLast = fileName[size-1];
+
+    if (fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') //Do the last 4 characters of the filename are '.', 'a', 'o' and 'p' ?
+    {
+        printf("The filename is unvalid. Please enter a .aop filename.\n");
+        return false;
+    }
+    printf("Your filename is an .aop !");
+    return true;
 }
