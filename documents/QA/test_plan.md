@@ -280,16 +280,38 @@ Tests reports serve as a tool for documenting and tracking test cases, their res
 
 1. **Test Case Pattern:** <br>
 We have to make a certain pattern for test reports to ensure the readability and consistency of the work:
-   - **Date:** The date of each test case.
-   - **Name:** The function or feature being tested.
-   - **Priority:** The priority level of the test case (High 🟥, Medium 🟧, Low 🟨).
-   - **Test Description:** A concise description of the test case.
-   - **Steps:** Input values or conditions applied during testing.
-   - **Expected Result:** The expected outcome or behavior.
-   - **Status:** The current status of the test case (Passed, Failed, In Progress, Not Implemented).
-   - **Comment:** Testers can write a comment to be more precise during their tests (recommended).
+   - **Date**<br>
+Set the date when the bug has been discovered.
+
+   - **Function**<br>
+The name of the function/piece of code that has been tested.
+
+   - **Priority**<br>
+The priority level of the test case (High, Medium, Low)
+
+   - **Description** <br>
+A clear and concise description of what the test deals with.
+
+   - **Input**<br>
+Conditions applied during testing, add some steps to reproduce the behavior:
+
+      1. Go to '...'
+      2. Click on '....'
+      3. Scroll down to '....'
+      4. See error
+
+   - **Expected results**<br>
+A clear and concise description of what you expected to happen.
+
+   - **Status:**<br> 
+The current status of the test case (Passed, Failed, In Progress, Not Implemented).
+
+   - **Comment**<br>
+Add any other context about the problem here.
 
 ![test case pattern](../images/qa_images/testcasepattern.png)
+
+This template is already done is the [test report file](./test_report.md), therefore the testers will be able to use it easily. 
 
 2. **Progression bars:**
    - **Test Amount Representation:**
@@ -301,7 +323,22 @@ We have to make a certain pattern for test reports to ensure the readability and
       - Work in Progress: ![](https://geps.dev/progress/85)
       - Not implemented: ![](https://geps.dev/progress/15)
 
+### 3.7. Documentation
 
+#### 3.7.1. GitHub Wiki
+To enhance transparency, collaboration, and knowledge sharing within our development process, we are adopting a centralized documentation approach using GitHub Wiki. This platform will serve as a comprehensive repository for all documentation related to our codebase. 
+
+- The GitHub Wiki will function as a centralized knowledge hub for our project, housing detailed documentation on code structure, functions, and project-related information.
+
+- Documentation will be organized in a structured manner, with a table of contents for easy navigation.
+Each complex function will have dedicated pages for in-depth information.
+Flowcharts or diagrams will be integrated to enhance the understanding of complex processes.
+
+- To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include. The template will be available on the project GitHub in the folder documents/QA, the file name is "Function-documentation-template". Developers can use it as a reference when documenting their code. Encourage developers to provide examples and use cases in their documentation to make it more practical and user-friendly.
+
+- Centralized documentation simplifies onboarding for new team members by providing a single, accessible source of truth. Emphasize the importance of keeping documentation up-to-date, especially during onboarding periods, to ensure the documentation remains accurate and relevant.
+
+- Implement a feedback mechanism or suggestion process within the Wiki to encourage continuous improvement and collaboration among team members.
 ---
 
 
