@@ -55,8 +55,13 @@ The project's scope encompasses the creation of a generalized old mobile phone *
 
 ### 3.1 Virtual processor
 
+<<<<<<< HEAD
 #### Processor specifications
 - Custom-designed **[processor](#processor)** specifications, tailored to emulate common functionalities of old mobile phones.
+=======
+#### Processor Specifications
+- Custom-designed processor, tailored to emulate common functionalities of old mobile phones.
+>>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
 - The processor will be inspired by typical characteristics of old mobile phone processors.
 
 #### Processor capabilities
@@ -95,9 +100,15 @@ The project's scope encompasses the creation of a generalized old mobile phone *
   - `OP_B_NOT`: Bitwise NOT operation. Inverts the bits of the operand.
   - `OP_B_XOR`: Bitwise XOR operation. Performs bitwise exclusive OR on two operands.
 
+<<<<<<< HEAD
 #### Comparison types (`cmpKind`)
 - **Logical operations for conditional processing**:
   - `CMP_OR`: Logical OR comparison. Evaluates to true if either of the operands is true.
+=======
+#### Comparison Types (`cmpKind`)
+- **Logical Operations for Conditional Processing**:
+  - `CMP_OR`: Logical OR comparison. Evaluates to true if whether of the operands is true.
+>>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
   - `CMP_AND`: Logical AND comparison. Evaluates to true only if both operands are true.
   - `CMP_NOT`: Logical NOT comparison. Inverts the truth value of the operand.
   - `CMP_XOR`: Logical XOR comparison. Evaluates to true if operands are different.
@@ -125,6 +136,7 @@ The project's scope encompasses the creation of a generalized old mobile phone *
 - **Register enumeration for the virtual processor**:
   - `RG_0`, `RG_1`, ..., `RG_7`: Enumeration of registers available in the virtual processor. These registers are used for storing temporary data, performing operations, and maintaining state within the processor.
 
+<!-- Reading the list above, I have no clue if it's the 'true' assembly language or the new one. Which am I supposed to use as a SE? -->
 
 ### 4.2 Syntax and conventions
 
@@ -149,7 +161,12 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 #### Conventions
 - **Case sensitivity**: The language is case-sensitive. All instructions and register names must be used in the correct case.
 - **Whitespace**: Whitespace is used to separate the elements of an instruction but is otherwise not significant.
+<<<<<<< HEAD
 - **Comments**: Comments start with either "//" for one-line comments or "/*........*/" for multiple-lines comments, the same comments convention as C language. For example "// Add the value 3 to myFunction"
+=======
+- **Comments**: Comments start with a semicolon (`;`) and continue to the end of the line. For example, `OP_ADD RG_0, RG_1 ; Add RG_1 to RG_0`.
+<!-- Just above, it is comments for the 'true' assembly, the new assembly will comment the same way as C, with // or /* */ -->
+>>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
 
 ### 4.3 Memory management
 
@@ -176,10 +193,17 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 
 ### 4.4 Input and output handling
 
+<<<<<<< HEAD
 #### Display output handling
 - **Display interface**: Specific instructions to display operations will enable the manipulation of the virtual screen, such as writing text or drawing basic graphics.
 - **Output commands**: The Assembly language will include commands like `DISP_WRITE` to output data to the screen. These commands will handle the conversion of data (numeric or character) into a visual representation on the emulator's display.
 - **Screen buffering**: A screen buffer will be implemented, where output data is first written to a buffer before being rendered on the screen. This allows for efficient screen updates and control over how and when display changes occur.
+=======
+#### Display Output Handling
+- **Display Interface**: Specific instructions to display operations will enable the manipulation of the virtual screen, such as writing text or drawing basic graphics.
+- **Output Commands**: The assembly language will include commands like `DISP_WRITE` to output data to the screen. These commands will handle the conversion of data (numeric or character) into a visual representation on the emulator's display.
+- **Screen Buffering**: A screen buffer will be implemented, where output data is first written to a buffer before being rendered on the screen. This allows for efficient screen updates and control over how and when display changes occur.
+>>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
 
 #### Keypad input handling
 - **Input polling**: The Assembly language will support polling methods to check the state of the keypad. This involves instructions to read the current input state, allowing the program to react to user inputs.
@@ -209,9 +233,15 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 - **Performance analysis**: Tools for analyzing the performance of Assembly programs, such as execution time and resource usage, will be included, assisting in optimizing code for efficiency.
 - **Extensibility**: The testing framework will be designed to be extensible, allowing additional tests and functionalities to be added as the project evolves.
 
+<<<<<<< HEAD
 ### 5.4 Code organization
 - **Header files (`.h`)**: The prototype and comments of the functions are in the header files. All enumerations and structures/typedefs are also defined in these files. This approach helps in providing a clear interface for each module.
 - **Implementation files (`.c`)**: The function definitions (implementations) are in the `.c` files. Comments explaining the implementation details should also be included in these files. This separation of interface and implementation facilitates maintainability and readability of the code.
+=======
+### 5.4 Code Organization
+- **Header Files (`.h`)**: The prototype and comments of the functions are in the header files. All enumerations and structures/typedefs are also defined in these files. This approach helps in providing a clear interface for each module.
+- **Implementation Files (`.c`)**: The function definitions (implementations) are in the `.c` files. Comments explaining the implementation details should also be included in these files. This separation of interface and implementation facilitates maintainability and readability of the code.
+>>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
 
 ---
 
@@ -227,8 +257,13 @@ While a detailed testing document will be provided separately by the Quality Ass
 - The development team will closely collaborate with the Quality Assurance team to align testing strategies and ensure comprehensive coverage of all functionalities.
 - Feedback from QA testing will be integral to the iterative development process, guiding enhancements and refinements in the emulator and Assembly language.
 
+<<<<<<< HEAD
 ### Reference to QA document
 - For detailed testing procedures, methodologies, and specific test cases, refer to the dedicated [test plan](../QA/test_plan.md) prepared by the Quality Assurance team.
+=======
+### Reference to QA Document
+- For detailed testing procedures, methodologies, and specific test cases, refer to the [dedicated test plan](../QA/test_plan.md) prepared by the Quality Assurance team.
+>>>>>>> b08321431ae0a4e58881728dced1b35bc857beb7
 
 ---
 
