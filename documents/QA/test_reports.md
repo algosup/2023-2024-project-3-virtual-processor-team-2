@@ -1,5 +1,5 @@
 
-| ID | Date  |  Priority | Description                                  | Input     | Expected Results                                                | Status    |Comment                   |
+| ID | Date  |  Priority | Description                                  | Steps     | Expected Results                                                | Status    |Comment                   |
 | -- | --- | -------- |------------------------------------------------------------------------------------------ | ------ | --------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
 | 001 | 01/01/1970 | HIGH | check function works | run the program | displays "Hello World" | Passed | The function works perfectly |
 
@@ -15,7 +15,7 @@ The priority level of the test case (High, Medium, Low)
 **Description** <br>
 A clear and concise description of what the test deals with. If the Priority is 'High', the tester needs to precise what the piece of code that has been tested is.
 
-**Input**<br>
+**Steps**<br>
 Conditions applied during testing, add some steps to reproduce the behavior:
 
 1. Go to '...'
