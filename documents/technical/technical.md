@@ -18,7 +18,7 @@
    4. [Keypad input](#34-keypad-input)
    5. [Sound and audio](#35-sound-and-audio)
    6. [Power management](#36-power-management)
-4. [Assembly language specifications](#4-Assembly-language-specifications)
+4. [Our new Assembly language specifications](#4-our-new-assembly-language-specifications)
    1. [Instruction set](#41-instruction-set)
    2. [Syntax and conventions](#42-syntax-and-conventions)
    3. [Memory management](#43-memory-management)
@@ -79,7 +79,7 @@ The project's scope encompasses the creation of a generalized old mobile phone *
 
 ---
 
-## 4. Assembly language specifications
+## 4. Our new Assembly language specifications
 
 ### 4.1 **[Instruction set](#instruction-set)**
 - **Arithmetic and [bitwise operations](#bitwise-operation)**:
@@ -149,7 +149,7 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 #### Conventions
 - **Case sensitivity**: The language is case-sensitive. All instructions and register names must be used in the correct case.
 - **Whitespace**: Whitespace is used to separate the elements of an instruction but is otherwise not significant.
-- **Comments**: Comments start with a semicolon (`;`) and continue to the end of the line. For example, `OP_ADD RG_0, RG_1 ; Add RG_1 to RG_0`.
+- **Comments**: Comments start with either "//" for one-line comments or "/*........*/" for multiple-lines comments, the same comments convention as C language. For example "// Add the value 3 to myFunction"
 
 ### 4.3 Memory management
 
@@ -177,7 +177,7 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 ### 4.4 Input and output handling
 
 #### Display output handling
-- **Display interface**: Instructions specific to display operations will enable the manipulation of the virtual screen, such as writing text or drawing basic graphics.
+- **Display interface**: Specific instructions to display operations will enable the manipulation of the virtual screen, such as writing text or drawing basic graphics.
 - **Output commands**: The Assembly language will include commands like `DISP_WRITE` to output data to the screen. These commands will handle the conversion of data (numeric or character) into a visual representation on the emulator's display.
 - **Screen buffering**: A screen buffer will be implemented, where output data is first written to a buffer before being rendered on the screen. This allows for efficient screen updates and control over how and when display changes occur.
 
@@ -210,7 +210,7 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 - **Extensibility**: The testing framework will be designed to be extensible, allowing additional tests and functionalities to be added as the project evolves.
 
 ### 5.4 Code organization
-- **Header files (`.h`)**: The prototype and comments of the functions are in the header files. All enumerations and structures/typedefs are also defined in these files. This approach aids in providing a clear interface for each module.
+- **Header files (`.h`)**: The prototype and comments of the functions are in the header files. All enumerations and structures/typedefs are also defined in these files. This approach helps in providing a clear interface for each module.
 - **Implementation files (`.c`)**: The function definitions (implementations) are in the `.c` files. Comments explaining the implementation details should also be included in these files. This separation of interface and implementation facilitates maintainability and readability of the code.
 
 ---
@@ -221,14 +221,14 @@ While a detailed testing document will be provided separately by the Quality Ass
 
 ### General testing philosophy
 - The project adheres to a rigorous testing philosophy to ensure reliability and accuracy in the emulation of old mobile phone functionalities.
-- Testing encompasses a range of methods, from unit tests for individual components to integration tests that assess the system as a whole.
+- Testing encompasses a range of methods, from unit tests for individual components to integration tests that assess the whole system.
 
 ### Coordination with QA
 - The development team will closely collaborate with the Quality Assurance team to align testing strategies and ensure comprehensive coverage of all functionalities.
 - Feedback from QA testing will be integral to the iterative development process, guiding enhancements and refinements in the emulator and Assembly language.
 
 ### Reference to QA document
-- For detailed testing procedures, methodologies, and specific test cases, refer to the dedicated testing document prepared by the Quality Assurance team.
+- For detailed testing procedures, methodologies, and specific test cases, refer to the dedicated [test plan](../QA/test_plan.md) prepared by the Quality Assurance team.
 
 ---
 
