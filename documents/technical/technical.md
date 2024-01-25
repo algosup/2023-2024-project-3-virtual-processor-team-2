@@ -47,7 +47,7 @@ This project involves developing a **[virtual processor](#virtual-processor)** a
 
 ## 2. Project overview
 
-The project's scope encompasses the creation of a generalized old mobile phone **[emulator](#emulator)**, using a virtual processor with custom specifications, not limited to any specific existing hardware like the ARM7TDMI. The Nokia 3310 is used as a reference point for typical features and functionalities found in old mobile phones.
+The project's scope encompasses the creation of a generalized old mobile phone **[emulator](#emulator)**, using a virtual processor with custom specifications, not limited to any specific existing hardware. The Nokia 3310 is used as a reference point for typical features and functionalities found in old mobile phones.
 
 ---
 
