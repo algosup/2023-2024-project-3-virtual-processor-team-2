@@ -264,56 +264,33 @@ By implementing these strategies, we aim to foster a more organized and efficien
 
 **Test Report:**
 
-The file "[test report](./test_report.md)" will contain all the test reports of the project. Each test report will be listed and named with the date of the test session and the name of the tester as follows: `YYYY-MM-DD-TesterName`.
+The file "[test report](./test_report.md)" will contain all the test reports of the project. Each test report will be listed and named with the ID of the test and the date of the test session.
 
 **QA Meetings:**
 
 The QA team could also have several meetings with the SE team, to talk about specific topics regarding the project. 
+
 ---
 
-#### 3.6.4. Test Reports
+#### 3.6.4. Tests
 
-Tests reports serve as a tool for documenting and tracking test cases, their results, and overall testing progress. They would be divided into two sections: Test Case Pattern and Progression bars.
+Tests serve as a tool for improving the quality of the product. To document and track easily test cases, their results, and overall testing progress, the tests would be divided into these three sections:
 
+1. **Test Case Pattern:** 
 
-##### 3.6.4.1. Test Reports Structure
+We have to make a certain pattern for test cases to ensure the readability and consistency of the work:
 
-1. **Test Case Pattern:** <br>
-We have to make a certain pattern for test reports to ensure the readability and consistency of the work:
-   - **Date**<br>
-Set the date when the bug has been discovered.
+![test case pattern](../images/qa_images/test_case_pattern.png)
+For further details, refer to the [test case](./test_cases.md) document.
 
-   - **Function**<br>
-The name of the function/piece of code that has been tested.
+2. **Test reports Pattern:**
 
-   - **Priority**<br>
-The priority level of the test case (High, Medium, Low)
+We also have to make a certain pattern for test reports to ensure the readability and consistency of the work:
 
-   - **Description** <br>
-A clear and concise description of what the test deals with.
+![test report pattern](../images/qa_images/test_report_pattern.png)
+For further details, refer to the [test report](./test_report.md) document.
 
-   - **Input**<br>
-Conditions applied during testing, add some steps to reproduce the behavior:
-
-      1. Go to '...'
-      2. Click on '....'
-      3. Scroll down to '....'
-      4. See error
-
-   - **Expected results**<br>
-A clear and concise description of what you expected to happen.
-
-   - **Status:**<br> 
-The current status of the test case (Passed, Failed, In Progress, Not Implemented).
-
-   - **Comment**<br>
-Add any other context about the problem here.
-
-![test case pattern](../images/qa_images/testcasepattern.png)
-
-This template is already done is the [test report file](./test_report.md), therefore the testers will be able to use it easily. 
-
-2. **Progression bars:**
+3. **Progression bars:**
    - **Test Amount Representation:**
      - A bar representing the test cases based on the amount of their status (Passed, Failed, In Progress, Not Implemented).
      - Provides a visual snapshot of the overall testing status. <br>
