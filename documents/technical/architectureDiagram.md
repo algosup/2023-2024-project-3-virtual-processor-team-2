@@ -1,1 +1,0 @@
-![Architecture diagram](archi_interpreter_diagram.jpg)

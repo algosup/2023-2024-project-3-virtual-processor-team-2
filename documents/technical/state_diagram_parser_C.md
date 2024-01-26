@@ -1,1 +1,0 @@
-![State diagram](../images/technical_images/State-Diagram-parserC.jpg)

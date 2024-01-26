@@ -1,29 +1,29 @@
 ### Technical Specifications Document
 ### ALGOSUP Project 3, 2024
 
-# Virtual processor and Assembly language for old mobile phone emulation
+# Virtual processor and interpreter for Assembly
 
-### Version: 0.2
-### Date: 01/25/2024
+### Version: 1.0
+### Date: 01/26/2024
 
 ---
 
-## Table of contents
+<details>
+<summary>Table of contents</summary>
+
 1. [Introduction](#1-introduction)
+   1. [Target audience](#11-target-audience)
+   2. [Main deliverable](#12-main-deliverable)
+   3. [Constraints](#13-constraints)
 2. [Project overview](#2-project-overview)
 3. [Hardware specifications](#3-hardware-specifications)
    1. [Virtual processor](#31-virtual-processor)
    2. [Memory](#32-memory)
-   3. [Display](#33-display)
-   4. [Keypad input](#34-keypad-input)
-   5. [Sound and audio](#35-sound-and-audio)
-   6. [Power management](#36-power-management)
 4. [Our new Assembly language specifications](#4-our-new-assembly-language-specifications)
    1. [Instruction set](#41-instruction-set)
    2. [Syntax and conventions](#42-syntax-and-conventions)
-   3. [Memory management](#43-memory-management)
-   4. [Input and output handling](#44-input-and-output-handling)
-   5. [Interpreter](#45-interpreter)
+   3. [Input and output handling](#43-input-and-output-handling)
+   4. [Interpreter](#44-interpreter)
 5. [Development tools](#5-development-tools)
    1. [Assembler](#51-assembler)
    2. [Debugger](#52-debugger)
@@ -37,18 +37,41 @@
 8. [Appendices](#8-appendices)
    1. [References](#81-references)
    2. [Glossary](#82-glossary)
+</details>
 
 ---
 
 ## 1. Introduction
 
-The goal of this project is to create a **[virtual processor](#virtual-processor)** and an **[interpreter](#interpreter)** to run a custom **[Assembly language](#Assembly-language)** that we created on our own. We chose to focus the development of the virtual processor on the goal of making it emulate the typical environment of old mobile phones. It aims to create a virtualized system that accurately simulates the functionalities of these devices, focusing on general characteristics common to this category.
+The goal of this project is to create a **[virtual processor](#virtual-processor)** and an **[interpreter](#interpreter)** to run a custom **[Assembly language](#Assembly-language)** that we created on our own, whether from scratch or by inspiring of already existing Assembly. We chose to focus the development of the virtual processor on the goal of making it emulate the typical environment of small and limited processor like **[ARM](#arm)** 16 bits. It aims to create a virtualized system that accurately simulates the functionalities of these devices, focusing on general characteristics common to this category.
+
+### 1.1 Target audience
+
+**This document is meant mainly for:**
+
+**1.** Software engineers - to help them understand the technical as well as the client requirements and to provide direction for planning and decision-making. Assist them in understanding the risk and difficulties, customer demands, extra technical specifications, and decisions taken.
+
+2. Program manager - to verify against client expectations and the functional specification.
+
+3. Quality assurance - to help with test plan preparation and to validate issues with it.
+
+4. Project manager: to assist in determining dependencies and hazards.
+
+
+### 1.2 Main deliverable
+
+The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor.
+
+
+### 1.3 Constraints
+
+The project will be developed in plain, portable, C language without using any external library besides C standard libraries.
 
 ---
 
 ## 2. Project overview
 
-The project's scope includes the creation of a generalized old mobile phone **[emulator](#emulator)**, using a virtual processor and an interpreter with custom specifications. We inspired from old devices with ARM processor for typical features and functionalities.
+The project's scope includes the creation of a small and limited processor like ARM 16 bits **[emulator](#emulator)**, using a virtual processor and an interpreter with custom specifications. We inspired from old devices with ARM processor for typical features and functionalities.
 
 ---
 
@@ -57,38 +80,57 @@ The project's scope includes the creation of a generalized old mobile phone **[e
 ### 3.1 Virtual processor
 
 #### Processor specifications
-- Custom-designed **[processor](#processor)**, tailored to emulate common functionalities of old mobile phones.
-- The processor will be inspired by typical characteristics of ARM old mobile phone processors.
+- Custom-designed **[processor](#processor)**, tailored to emulate common functionalities of small and limited processor like ARM 16 bits.
 
 #### Processor capabilities
 - Capabilities include basic arithmetic operations, input/output operations, and interaction with emulated components.
 
 ### 3.2 Memory
 
-#### Memory Architecture
-- The emulator's memory architecture is designed to replicate the structure of old mobile phones, with dedicated allocations for ROM and RAM.
+#### Memory architecture
 
-#### **[ROM](#rom)** (Read-Only Memory)
-- **Size and location**: Allocated 16 KB, situated at the beginning of the memory address space (`0x00000000` to `0x00003FFF`).
-- **Content**: Primarily used for storing the clock functionality, with some capacity for minor future expansions.
+- The emulator's memory architecture is designed to replicate the structure of small and limited processor like ARM 16 bits, with dedicated allocations for ROM and RAM.
 
-#### **[RAM](#ram)** (Random Access Memory)
-- **Size**: Configured to 32 KB, reflecting the limited memory resources of old mobile phones.
-- **Location**: Positioned immediately after the ROM in the memory address space. Occupies addresses from `0x00004000` to `0x0000BFFF`.
-- **Usage**: Used for dynamic data storage and program execution, simulating the volatile working memory of an old mobile device.
+#### Memory allocation and access
 
+- **Static memory allocation**: 
+   - The emulator initializes its memory segments at startup with fixed sizes and addresses. For example:
+     - **ROM**: Allocated 16 KB, starting at address `0x00000000` and ending at `0x00003FFF`.
+     - **RAM**: Allocated 32 KB, immediately following ROM, starting at `0x00004000` and ending at `0x0000BFFF`.
+   - This allocation model simplifies memory management by avoiding dynamic reallocation during runtime.
 
-### 3.3 Display
-- Emulating a basic 84x48 monochrome LCD typical of old mobile phones, with text and simple graphics capabilities.
+- **Direct and indirect addressing**: 
+   - **Direct addressing**: Implemented to allow assembly instructions to directly reference specific memory addresses. For instance, an instruction could directly access the address `0x00004005` to read or write data in RAM.
+   - **Indirect addressing**: Facilitated through register use, where a register holds a memory address. For example, if register `RG_1` holds `0x00004005`, an instruction can indirectly access this RAM address via `RG_1`.
 
-### 3.4 Keypad input
-- Simulating keypad input, including numeric and function keys typical of old mobile phones.
+#### Data handling
 
-### 3.5 Sound and audio
-- Emulating audio functions such as monophonic ringtones and beeps.
+- **Data storage**: The emulator allows storage of:
+   - **Immediate values**: Direct storage in instructions, like `LOAD RG_0, #5` to load the value 5 into `RG_0`.
+   - **Binary data**: Stored in specific formats, like flags or counters, within designated memory regions.
+   - **ASCII characters**: For text handling, stored in RAM, enabling operations like string processing or display output.
 
-### 3.6 Power management
-- The emulator will show a static battery level, either consistently at 100% or mirroring the host computer's battery status.
+- **Data retrieval**: 
+   - Implemented via instructions like `LOAD RG_0, [0x00004005]` to read data from memory into registers for processing or manipulation.
+
+#### Memory operations
+
+- **Load and store instructions**: 
+   - **`LOAD`**: Transfers data from a specified memory address to a register. E.g., `LOAD RG_0, [0x00004005]` loads data from RAM address `0x00004005` into `RG_0`.
+   - **`STORE`**: Moves data from a register to a specified memory address. E.g., `STORE RG_0, [0x00004005]` writes the data in `RG_0` to RAM address `0x00004005`.
+
+- **Memory safety**: 
+   - Includes range checking to ensure memory access operations do not exceed allocated memory bounds, preventing buffer overflows and unauthorized access.
+
+#### Memory mapping
+
+- **Mapping scheme**: 
+   - Memory is organized into clear segments, each with a designated purpose and address range. For instance:
+     - **ROM**: `0x00000000` to `0x00003FFF` for system firmware.
+     - **RAM**: `0x00004000` to `0x0000BFFF` for dynamic data storage and program execution.
+
+- **I/O mapping**: 
+   - A specific range is reserved for I/O operations. For example, addresses `0x0000C000` to `0x0000C00F` might be mapped to virtual hardware components like display or keypad input.
 
 ---
 
@@ -125,7 +167,7 @@ The project's scope includes the creation of a generalized old mobile phone **[e
   - `ACT_JMP`: Unconditional jump. Alters the flow of execution to a new address.
   - `ACT_CALL`: Calls a subroutine. Jumps to subroutine address and maintains return address.
   - `ACT_RET`: Return from subroutine. Returns control to the calling function.
-  - `ACT_GET_CLK`: Retrieves the current value of the system clock or timer.
+  - `ACT_GET_CLK`: Retrieves the current value of the system clock.
 
 #### Instruction types (`instKind`)
 - **Categorization of assembly instructions**:
@@ -150,10 +192,6 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 - **Usage**: Registers are referred to by their names, such as `RG_0`, `RG_1`, etc.
 - **Context**: Used as operands in instructions for operations like data movement, arithmetic operations, etc.
 
-#### Memory addressing
-- **Direct Addressing**: Accesses the memory directly using an address. For example, `[address]` where `address` is a memory location.
-- **Indirect addressing**: Uses a register to point to a memory address. For example, `[RG_0]` would access the memory location pointed to by `RG_0`.
-
 #### Data types
 - **Immediate values**: Constants or literals directly used in instructions. For example, `OP_ADD RG_0, 5` adds the value `5` to the contents of `RG_0`.
 - **Binary and hexadecimal support**: The language supports both **[binary](#binary)** (`0b0101`) and **[hexadecimal](#hexadecimal)** (`0x1A`) literals for ease of low-level programming.
@@ -163,30 +201,7 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 - **Whitespace**: Whitespace is used to separate the elements of an instruction but is otherwise not significant.
 - **Comments**: Comments start with either "//" for one-line comments or "/*........*/" for multiple-lines comments, the same comments convention as C language. For example "// Add the value 3 to myFunction"
 
-### 4.3 Memory management
-
-#### Memory architecture
-- **Memory types**: The virtual processor will simulate a basic memory architecture comprising both ROM (Read-Only Memory) and RAM (Random Access Memory).
-- **ROM**: Used to store the emulator's clock. It mimics the non-volatile memory of a mobile phone.
-- **RAM**: Utilized for executing programs and temporary data storage. It represents the volatile working memory of the device.
-
-#### Memory allocation and access
-- **Static memory allocation**: The emulator follows a simple, static allocation model, where the size and location of memory segments are predetermined.
-- **Direct and indirect addressing**: The Assembly language supports both direct addressing (accessing memory by specific addresses) and indirect addressing (using registers to point to memory addresses).
-
-#### Data handling
-- **Data storage**: Data can be stored in memory as immediate values, binary data, or ASCII characters.
-- **Data retrieval**: Instructions can recover data from memory for processing and manipulate it as required by the program.
-
-#### Memory operations
-- **Load and store instructions**: Specific instructions will be used for loading data from memory into registers (`LOAD`) and storing data from registers back into memory (`STORE`).
-- **Memory safety**: Basic memory safety mechanisms will be implemented to prevent unauthorized access and ensure data integrity.
-
-#### Memory mapping
-- **Mapping scheme**: A simple mapping scheme will be used to define the relationship between the memory addresses and the corresponding data or instructions.
-- **I/O mapping**: Special memory addresses may be reserved for I/O operations, enabling interaction with the virtual hardware components like the display and keypad.
-
-### 4.4 Input and output handling
+### 4.3 Input and output handling
 
 #### Display output handling
 - **Display interface**: Specific instructions to display operations will enable the manipulation of the virtual screen, such as writing text or drawing basic graphics.
@@ -202,7 +217,7 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 - **Synchronization**: Mechanisms to synchronize input and output operations will ensure that the display and keypad interactions do not conflict, maintaining a smooth user experience.
 - **I/O in program flow**: The Assembly language will enable the integration of I/O operations within the flow of the program, allowing for dynamic and interactive applications that respond to user inputs and provide immediate feedback.
 
-### 4.5 Interpreter
+### 4.4 Interpreter
 
 #### Interpreter functions
 - **Code interpretation**: The interpreter reads and analyzes each line of assembly code, translating it into operations that the virtual processor can understand and execute.
@@ -214,7 +229,7 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 - **Resource management**: It efficiently manages the processor's resources, such as memory and registers, during the execution of assembly code.
 
 #### User interaction
-- **Interactive mode**: The interpreter offers an interactive mode, allowing users to enter and execute assembly instructions one at a time, which is beneficial for learning and debugging.
+- **Interactive mode**: The interpreter allows for users to enter and execute assembly instructions one at a time, which is beneficial for learning and debugging.
 - **Script mode**: For more complex programs, the interpreter can execute pre-written scripts containing multiple assembly instructions.
 
 
@@ -248,7 +263,7 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 While a detailed testing document will be provided separately by the Quality Assurance, this section briefly outlines the general approach to testing and validation for the virtual processor and Assembly language.
 
 ### General testing philosophy
-- The project adheres to a rigorous testing philosophy to ensure reliability and accuracy in the emulation of old mobile phone functionalities.
+- The project adheres to a rigorous testing philosophy to ensure reliability and accuracy in the emulation of small and limited processor like ARM 16 bits functionalities.
 - Testing encompasses a range of methods, from unit tests for individual components to integration tests that assess the whole system.
 
 ### Coordination with QA
@@ -285,23 +300,23 @@ While a detailed testing document will be provided separately by the Quality Ass
 ## 8. Appendices
 
 ### 8.1 References
-1. Meiners, J. "Write your Own Virtual Machine." Tutorial on writing a virtual machine that can run Assembly language programs. Available at: [www.jmeiners.com](https://www.jmeiners.com)
-2. "Assembly language." Gentoo Wiki. Overview and resources related to Assembly language programming. Available at: [wiki.gentoo.org](https://wiki.gentoo.org/wiki/Assembly_language)
-3. "How to create your own virtual machine." CodeProject. Tutorial on creating an emulator targeting a specific computer. Available at: [www.codeproject.com](https://www.codeproject.com)
-4. Streanga, L. "Assembler Project." GitHub repository. An Assembler for converting Assembly language for a virtual processor into machine code. Available at: [github.com/lucas-streanga/Assembler-Project](https://github.com/lucas-streanga/Assembler-Project)
-5. "Introduction to Assembly language." Baeldung on Computer Science. A guide covering the basics of Assembly language. Available at: [www.baeldung.com](https://www.baeldung.com/cs/Assembly-language-intro)
-6. "Virtualization for Cost-Effective Teaching of Assembly language Programming." IEEE Xplore. Discusses a virtual system that emulates an ARM-based processor machine for teaching Assembly language. Available at: [ieeexplore.ieee.org](https://ieeexplore.ieee.org/document/5619589)
+
+1. "Assembly language." Gentoo Wiki. Overview and resources related to Assembly language programming. Available at: [wiki.gentoo.org](https://wiki.gentoo.org/wiki/Assembly_language)
+2. Streanga, L. "Assembler Project." GitHub repository. An Assembler for converting Assembly language for a virtual processor into machine code. Available at: [github.com/lucas-streanga/Assembler-Project](https://github.com/lucas-streanga/Assembler-Project)
+3. Edu4Java, "Compiler, interpreter and virtual machine.", educational website. Provides tutorials and explanations on compilers, interpreters, and virtual machines. Available at: [edu4java.com/en/concepts/compiler-interpreter-virtual-machine](http://www.edu4java.com/en/concepts/compiler-interpreter-virtual-machine.html)
+
 
 ## 8.2 Glossary
 
-| Term            | Definition | Use in project |
-|-----------------|------------|----------------|
+| Term             | Definition | Use in Project |
+|------------------|------------|----------------|
+| <a id="arm"></a>**ARM (Advanced RISC Machine)** | ARM is a family of Reduced Instruction Set Computing (RISC) architectures for computer processors, known for their energy efficiency and widespread use in mobile devices. | While the project does not directly use ARM architecture, understanding its principles and efficiency is beneficial in designing the custom virtual processor and assembly language, especially considering the emulation of small and limited processor like ARM 16 bits environments. |
 | <a id="assembler"></a>**Assembler**   | A tool that converts Assembly language code into a **[machine code](#machine-code)** or an executable format. | Used to translate written Assembly code into a format that the virtual processor can execute. |
 | <a id="Assembly-language"></a>**Assembly language** | A low-level programming language used to write instructions that a processor can understand directly. | The primary language used for programming the virtual processor. |
 | <a id="binary"></a>**Binary**      | A base-2 numerical system used in digital electronics and computing. | Fundamental representation of data in the virtual processor. |
 | <a id="bitwise-operation"></a>**Bitwise operation** | An operation that directly manipulates bits. | Used in Assembly language for low-level data manipulation. |
 | <a id="debugger"></a>**Debugger**    | A tool used to test and debug programs. | Utilized for identifying and resolving issues in Assembly code. |
-| <a id="emulator"></a>**Emulator**    | Software that enables one computer system to behave like another computer system. | Core of the project, emulating old mobile phone hardware. |
+| <a id="emulator"></a>**Emulator**    | Software that enables one computer system to behave like another computer system. | Core of the project, emulating small and limited processor like ARM 16 bits hardware. |
 | <a id="hexadecimal"></a>**Hexadecimal** | A base-16 number system used in computing. | Used for representing binary data in a more readable format in Assembly code. |
 | <a id="instruction-set"></a>**Instruction set** | The collection of instructions that a processor can execute. | Defines the capabilities of the virtual processor. |
 | <a id="interpreter"></a>**Interpreter** | A program that executes instructions written in a programming or scripting language without requiring them to be compiled into machine language. | Responsible for reading and executing the custom assembly language instructions on the virtual processor, acting as the bridge between the assembly code and the virtual hardware. |
@@ -312,8 +327,8 @@ While a detailed testing document will be provided separately by the Quality Ass
 | <a id="processor"></a>**Processor**   | The component that performs the instructions of a computer program. | The virtual processor is the central component of the emulator. |
 | <a id="ram"></a>**RAM (Random Access Memory)** | Memory that can be accessed randomly, used for storing working data and machine code. | Simulated in the emulator for temporary data storage during program execution. |
 | <a id="register"></a>**Register**    | A small, quickly accessible storage location in a processor. | Used in the virtual processor for holding temporary data and intermediate computation results. |
-| <a id="rom"></a>**ROM (Read-Only Memory)** | Non-volatile memory used in computers and other devices. | Emulated to store the firmware and immutable data of the virtual mobile phone. |
-| <a id="syntax"></a>**Syntax**      | The rules defining the structure of correctly formatted programs in a language. | Governs how Assembly language code is written for the emulator. |
-| <a id="virtual-processor"></a>**Virtual processor** | A software-based emulation of a processor. | Executes Assembly language programs as if running on an actual old mobile phone processor. |
+| <a id="rom"></a>**ROM (Read-Only Memory)** | Non-volatile memory used in computers and other devices. | Emulated to store the firmware and immutable data of the virtual ARM processor. |
+| <a id="syntax"></a>**Syntax**      | The rules defining the structure of correctly formatted programs in a language. | Decides how Assembly language code is written for the emulator. |
+| <a id="virtual-processor"></a>**Virtual processor** | A software-based emulation of a processor. | Executes Assembly language programs as if running on an actual small and limited processor like ARM 16 bits processor. |
 
 ---
