@@ -23,13 +23,12 @@
    5. [Out of scope](#15-out-of-scope)
    6. [Algorithm architecture](#16-algorithm-architecture)
 2. [Project overview](#2-project-overview)
-3. [Hardware specifications](#3-hardware-specifications)
+3. [Virtual processor specifications](#3-virtual-processor-specifications)
    1. [Virtual processor](#31-virtual-processor)
-   2. [Memory](#32-memory)
-4. [Our new Assembly language specifications](#4-our-new-assembly-language-specifications)
+4. [AT2 language specifications](#4-at2-language-specifications)
    1. [Instruction set](#41-instruction-set)
    2. [Syntax and conventions](#42-syntax-and-conventions)
-   3. [Input and output handling](#43-input-and-output-handling)
+   <!--3. [Input and output handling](#43-input-and-output-handling)-->
    4. [Interpreter](#44-interpreter)
 5. [Development tools](#5-development-tools)
    1. [Assembler](#51-assembler)
@@ -40,232 +39,208 @@
    1. [Unit testing](#61-unit-testing)
    2. [Integration testing](#62-integration-testing)
    3. [Performance testing](#63-performance-testing)
-7. [Documentation](#7-documentation)
-8. [Appendices](#8-appendices)
-   1. [References](#81-references)
-   2. [Glossary](#82-glossary)
+7. [Risks and challenges](#7-risks-and-challenges)
+   1. [Risks](#71-risks)
+   2. [Challenges](#72-challenges)
+8. [Documentation](#8-documentation)
+9. [Appendices](#9-appendices)
+   1. [References](#91-references)
+   2. [Glossary](#92-glossary)
 </details>
 
 ---
 
 ## 1. Introduction
 
-The goal of this project is to create a **[virtual processor](#virtual-processor)** and an **[interpreter](#interpreter)** to run a custom **[Assembly language](#Assembly-language)** that we created on our own, whether from scratch or by inspiring of already existing Assembly. We chose to focus the development of the virtual processor on the goal of making it emulate the typical environment of small and limited processor like **[ARM](#arm)** 16 bits. It aims to create a virtualized system that accurately simulates the functionalities of these devices, focusing on general characteristics common to this category.
+The goal of this project is to create an **[interpreter](#interpreter)** to run a new **[Assembly language](#Assembly-language)** on its **[virtual processor](#virtual-processor)** that we created on our own, whether from scratch or by inspiring of already existing Assembly. We chose to focus the development of the project on small and limited 16 bits processor. 
 
 ### 1.1 Target audience
 
 **This document is meant mainly for:**
 
-**1.** Software engineers - to help them understand the technical as well as the client requirements and to provide direction for planning and decision-making. Assist them in understanding the risk and difficulties, customer demands, extra technical specifications, and decisions taken.
+- Software engineers - to help them understand the technical as well as the client requirements and to provide direction for planning and decision-making. Assist them in understanding the risk and difficulties, customer demands, extra technical specifications, and decisions taken.
 
-2. Program manager - to verify against client expectations and the functional specification.
+- Program manager - to verify against client expectations and the functional specification.
 
-3. Quality assurance - to help with test plan preparation and to validate issues with it.
+- Quality assurance - to help with test plan preparation and to validate issues with it.
 
-4. Project manager: to assist in determining dependencies and hazards.
+- Project manager: to assist in determining dependencies and hazards.
 
 
 ### 1.2 Main deliverable
 
-The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor.
+The goal of the project is to create an interpreter for running Assembly code on its virtual processor.
 
 ### 1.3 Functional and technical requirements
 
 #### Functional requirements
 
-- **Programmer efficiency**: Easy-to-understand syntax for efficient assembly programming.
+- **Programmer efficiency**: Easy-to-understand syntax for efficient Assembly programming.
 - **Educational value**: Clarity in demonstrating low-level programming and processor architecture interaction.
-- **Emulator accuracy**: Realistic emulation of a 16-bit ARM processor for testing and debugging.
+- **Emulator accuracy**: Realistic emulation of a 16-bit processor for testing and debugging.
 - **Error handling**: Clear, informative error messages from the assembler and emulator for quick issue resolution.
 
 The complete functional specifications document here: [functional specification](../functional/Functional%20Specification%20Document%20Template.md)
 
 #### Technical requirements
 
-- **Architecture**: Emulates a 16-bit ARM processor environment, including registers, memory, and basic I/O.
+- **Architecture**: Emulates a 16-bit processor environment, including registers, memory, and basic I/O.
 - **Development**: Written in C, using standard libraries for compatibility and efficiency.
-- **Performance**: Efficient execution with minimal latency; scalable design for future enhancements.
-- **Security and reliability**: Robust memory access controls and error handling for system stability.
-- **Documentation**: Comprehensive guides for both users and developers.
+- **Documentation**: Comprehensive and exhaustive guides for both users and developers.
 - **Testing**: Comprehensive unit and integration testing for ensuring system integrity.
 
 ### 1.4 Constraints
 
-The project will be developed in plain, portable, C language without using any external library besides C standard libraries.
+- The project will be developed in plain, portable, C language without using any external library besides C standard libraries.
 
 ### 1.5 Out of scope
 
-- Emulating an old phone like the first Nokia 3310, with all the graphical and sounding features
-- Advanced UI
-- A translator of the user input to binary code
+- The product does not require to have an advanced UI.
+- The product has no purpose to be an assembler to return binary files. 
 
 ### 1.6 Algorithm architecture
-![Alt text](image.png)
+![Alt text](./image.png)
 
 ---
 
 ## 2. Project overview
 
-The project's scope includes the creation of a small and limited processor like ARM 16 bits **[emulator](#emulator)**, using a virtual processor and an interpreter with custom specifications. We inspired from old devices with ARM processor for typical features and functionalities.
+The project's scope includes the creation of a small and limited 16 bits virtual processor and its interpreter with new specifications. We inspired from old devices with processor for typical features and functionalities.
 
 ---
 
-## 3. Hardware specifications
+## 3. Virtual processor specifications 
 
 ### 3.1 Virtual processor
 
-#### Processor specifications
-- Custom-designed **[processor](#processor)**, tailored to emulate common functionalities of small and limited processor like ARM 16 bits.
+#### Processor details 
+- 16-bit processor
+- 8 registers (including 1 dedicated to the clock)
 
 #### Processor capabilities
-- Capabilities include basic arithmetic operations, input/output operations, and interaction with emulated components.
+- Basic arithmetic operations
+- Input/output operations
 
-### 3.2 Memory
-
-#### Memory architecture
-
-- The emulator's memory architecture is designed to replicate the structure of small and limited processor like ARM 16 bits, with dedicated allocations for ROM and RAM.
-
-#### Memory allocation and access
-
-- **Static memory allocation**: 
-   - The emulator initializes its memory segments at startup with fixed sizes and addresses. For example:
-     - **ROM**: Allocated 16 KB, starting at address `0x00000000` and ending at `0x00003FFF`.
-     - **RAM**: Allocated 32 KB, immediately following ROM, starting at `0x00004000` and ending at `0x0000BFFF`.
-   - This allocation model simplifies memory management by avoiding dynamic reallocation during runtime.
-
-- **Direct and indirect addressing**: 
-   - **Direct addressing**: Implemented to allow assembly instructions to directly reference specific memory addresses. For instance, an instruction could directly access the address `0x00004005` to read or write data in RAM.
-   - **Indirect addressing**: Facilitated through register use, where a register holds a memory address. For example, if register `RG_1` holds `0x00004005`, an instruction can indirectly access this RAM address via `RG_1`.
-
-#### Data handling
-
-- **Data storage**: The emulator allows storage of:
-   - **Immediate values**: Direct storage in instructions, like `LOAD RG_0, #5` to load the value 5 into `RG_0`.
-   - **Binary data**: Stored in specific formats, like flags or counters, within designated memory regions.
-   - **ASCII characters**: For text handling, stored in RAM, enabling operations like string processing or display output.
-
-- **Data retrieval**: 
-   - Implemented via instructions like `LOAD RG_0, [0x00004005]` to read data from memory into registers for processing or manipulation.
-
-#### Memory operations
-
-- **Load and store instructions**: 
-   - **`LOAD`**: Transfers data from a specified memory address to a register. E.g., `LOAD RG_0, [0x00004005]` loads data from RAM address `0x00004005` into `RG_0`.
-   - **`STORE`**: Moves data from a register to a specified memory address. E.g., `STORE RG_0, [0x00004005]` writes the data in `RG_0` to RAM address `0x00004005`.
-
-- **Memory safety**: 
-   - Includes range checking to ensure memory access operations do not exceed allocated memory bounds, preventing buffer overflows and unauthorized access.
-
-#### Memory mapping
-
-- **Mapping scheme**: 
-   - Memory is organized into clear segments, each with a designated purpose and address range. For instance:
-     - **ROM**: `0x00000000` to `0x00003FFF` for system firmware.
-     - **RAM**: `0x00004000` to `0x0000BFFF` for dynamic data storage and program execution.
-
-- **I/O mapping**: 
-   - A specific range is reserved for I/O operations. For example, addresses `0x0000C000` to `0x0000C00F` might be mapped to virtual hardware components like display or keypad input.
+#### Processor runner
+- Runner for a **[processor](#processor)**, with common functionalities of small and limited 16 bits processor.
 
 ---
 
-## 4. Our new Assembly language specifications
-
+## 4. AT2 language specifications
+Our new Assembly language will be named AT2 (Assembly Team 2). Its extension will be .aop (Assembly Operation Processor). 
 ### 4.1 **[Instruction set](#instruction-set)**
 - **Arithmetic and [bitwise operations](#bitwise-operation)**:
-  - `OP_ADD`: Addition operation. Adds values of two **[registers](#register)** or a register and an immediate value.
-  - `OP_SUB`: Subtraction operation. Subtracts the second **[operand](#operand)** from the first.
-  - `OP_DIV`: Division operation. Divides the first operand by the second.
-  - `OP_MUL`: Multiplication operation. Multiplies two operands.
-  - `OP_MOD`: Modulus operation. Computes the remainder of division of two operands.
-  - `OP_R_SHIFT`: Right shift operation. Shifts bits of the operand to the right.
-  - `OP_L_SHIFT`: Left shift operation. Shifts bits of the operand to the left.
-  - `OP_B_OR`: Bitwise OR operation. Performs bitwise OR on two operands.
-  - `OP_B_AND`: Bitwise AND operation. Performs bitwise AND on two operands.
-  - `OP_B_NOT`: Bitwise NOT operation. Inverts the bits of the operand.
-  - `OP_B_XOR`: Bitwise XOR operation. Performs bitwise exclusive OR on two operands.
+  - `add`, `+`: Addition operation. Adds values of two **[registers](#register)** or a register and an immediate value.
+  - `sub`, `-`: Subtraction operation. Subtracts the second **[operand](#operand)** from the first.
+  - `div`, `/`: Division operation. Divides the first operand by the second.
+  - `mul`, `*`: Multiplication operation. Multiplies two operands.
+  - `mod`, `%`: Modulus operation. Computes the remainder of division of two operands.
+  - `shr`, `>>`: Right shift operation. Shifts bits of the operand to the right.
+  - `shl`, `<<`: Left shift operation. Shifts bits of the operand to the left.
+  - `or`, `|`: Bitwise OR operation. Performs bitwise OR on two operands.
+  - `and`, `&`: Bitwise AND operation. Performs bitwise AND on two operands.
+  - `not`, `!`: Bitwise NOT operation. Inverts the bits of the operand.
+  - `xor`, `^`: Bitwise XOR operation. Performs bitwise exclusive OR on two operands.
 
 #### Comparison types (`cmpKind`)
 - **Logical operations for conditional processing**:
-  - `CMP_OR`: Logical OR comparison. Evaluates to true if either of the operands is true.
-  - `CMP_AND`: Logical AND comparison. Evaluates to true only if both operands are true.
-  - `CMP_NOT`: Logical NOT comparison. Inverts the truth value of the operand.
-  - `CMP_XOR`: Logical XOR comparison. Evaluates to true if operands are different.
+  - `or`, `||`: Logical OR comparison. Evaluates to true if either of the operands is true.
+  - `and`, `&&`: Logical AND comparison. Evaluates to true only if both operands are true.
+  - `not`, `!`: Logical NOT comparison. Inverts the truth value of the operand.
+  - `xor`, `^`: Logical XOR comparison. Evaluates to true if operands are different.
 
 #### Action types (`actionKind`)
 - **Control flow instructions**:
-  - `ACT_IF`: Conditional execution. Executes theAssembly language following block if the condition is true.
-  - `ACT_ELSE`: Else block for a conditional. Executes if the `ACT_IF` condition is false.
-  - `ACT_LOOP`: Begins a loop structure. Continues execution until a condition is met.
-  - `ACT_END`: Marks the end of a control flow block, like the end of an if-else or loop.
-  - `ACT_MOV`: Move operation. Transfers data from one register to another or to/from memory.
-  - `ACT_JMP`: Unconditional jump. Alters the flow of execution to a new address.
-  - `ACT_CALL`: Calls a subroutine. Jumps to subroutine address and maintains return address.
-  - `ACT_RET`: Return from subroutine. Returns control to the calling function.
-  - `ACT_GET_CLK`: Retrieves the current value of the system clock.
-
-#### Instruction types (`instKind`)
-- **Categorization of assembly instructions**:
-  - `INST_OP`: Denotes an operation instruction, performing arithmetic or bitwise computation.
-  - `INST_CMP`: Represents a comparison instruction, used in conditional statements.
-  - `INST_ACT`: Action instruction that influences the control flow or performs a specific task.
-  - `INST_LABEL`: A label instruction, used as a marker or target for jumps and calls.
+  - `if`: Conditional execution. Executes the AT2 language following block if the condition is true.
+  - `else`: Else block for a conditional. Executes if the `if` condition is false.
+  - `loop`: Begins a loop structure. Continues execution until a condition is met.
+  - `exit`: Marks the end of a control flow block, like the end of an if-else or loop.
+  - `mov`: Move operation. Transfers data from one register to another or to/from memory.
+  - `jmp`, `goto`: Unconditional jump. Alters the flow of execution to a new address.
+  - `call`: Calls a subroutine. Jumps to subroutine address and maintains return address.
+  - `ret`: Return from subroutine. Returns control to the calling function.
+  - `clk`: Retrieves the current value of the system clock.
 
 #### Register types (`regKind`)
 - **Register enumeration for the virtual processor**:
-  - `RG_0`, `RG_1`, ..., `RG_7`: Enumeration of registers available in the virtual processor. These registers are used for storing temporary data, performing operations, and maintaining state within the processor.
+  - `rg0`, `rg1`, ..., `rg6`: Enumeration of registers available in the virtual processor. These registers are used for storing temporary data, performing operations, and maintaining state within the processor.
+  - `rg7`: Dedicated for the clock.
+
+#### Variables declarations
+  - `var name, value` will be the convention for a variable declaration.
+#### Function declaration
+  - `lab name` will be the convention for a function declaration.
+#### File inclusion
+  - `get "filename.aop"` will be the convention for a file inclusion.
+
 
 ### 4.2 Syntax and conventions
 
-The **[syntax](#syntax)** and conventions of the Assembly language are designed to be intuitive and aligned with standard practices in Assembly language programming. This section outlines the fundamental syntax rules for instructions, registers, **[memory addressing](#memory-addressing1)**, and data types.
+The **[syntax](#syntax)** and conventions of the AT2 language are designed to be intuitive and aligned with standard practices in Assembly language programming. This section outlines the fundamental syntax rules for instructions, registers, **[memory addressing](#memory-addressing1)**, and data types.
 
 #### Instruction syntax
-- **Format**: Instructions generally follow the format of `INSTRUCTION <operands>`. Operands can be registers, immediate values, or memory addresses.
-- **Example**: `OP_ADD RG_0, RG_1` - This instruction adds the contents of `RG_1` to `RG_0`.
+- **Format**: Instructions generally follow the format of `instruction arg0, arg1`. Operands can be registers, immediate values, or memory addresses.
+- **Example**: `+ rg0, rg1` - This instruction adds the content of `rg1` to `rg0`.
 
 #### Register syntax
-- **Usage**: Registers are referred to by their names, such as `RG_0`, `RG_1`, etc.
+- **Usage**: Registers are referred to by their names, such as `rg0`, `rg1`, etc.
 - **Context**: Used as operands in instructions for operations like data movement, arithmetic operations, etc.
 
 #### Data types
-- **Immediate values**: Constants or literals directly used in instructions. For example, `OP_ADD RG_0, 5` adds the value `5` to the contents of `RG_0`.
-- **Binary and hexadecimal support**: The language supports both **[binary](#binary)** (`0b0101`) and **[hexadecimal](#hexadecimal)** (`0x1A`) literals for ease of low-level programming.
+- **Immediate values**: Constants or literals directly used in instructions. For example, `+ rg0, 5` adds the value `5` to the content of `rg0`.
+- **Binary and hexadecimal support**: The language supports both **[binary](#binary)** and **[hexadecimal](#hexadecimal)**  literals for ease of low-level programming. However, you need to specify the type of your literal. For instance, `0b` for binary and `0x` for hexadecimal at the beginning.
+- **Strings**: Strings should be defined with double quotes: `"string"`.
+- **Characters**: Characters should be defined with simple quotes: `'q'`.
 
 #### Conventions
 - **Case sensitivity**: All instructions and register names must be used in the correct case.
 - **Whitespace**: Whitespace is used to separate the elements of an instruction but is otherwise not significant.
-- **Comments**: Comments start with either "//" for one-line comments or "/*........*/" for multiple-lines comments, the same comments convention as C language. For example "// Add the value 3 to myFunction"
+- **Comments**: Comments start with `//` for one-line comments, the same comments convention as C language. For example: `// This is a comment`
 
-### 4.3 Input and output handling
+
+<!-- ### 4.3 Input and output handling
 
 #### Display output handling
-- **Display interface**: Specific instructions to display operations will enable the manipulation of the virtual screen, such as writing text or drawing basic graphics.
-- **Output commands**: The Assembly language will include commands like `DISP_WRITE` to output data to the screen. These commands will handle the conversion of data (numeric or character) into a visual representation on the emulator's display.
+- **Display interface**: Specific instructions to display operations will enable the manipulation of the virtual screen, such as writing text or drawing basic graphics. 
+- **Output commands**: The AT2 language will include commands `` to output data to the screen. These commands will handle the conversion of data (numeric or character) into a visual representation on the emulator's display.
 - **Screen buffering**: A screen buffer will be implemented, where output data is first written to a buffer before being rendered on the screen. This allows for efficient screen updates and control over how and when display changes occur.
 
+
 #### Keypad input handling
-- **Input polling**: The Assembly language will support polling methods to check the state of the keypad. This involves instructions to read the current input state, allowing the program to react to user inputs.
-- **Key mapping**: Each key on the virtual keypad will be mapped to a specific value. Assembly programs can use these values to determine which key was pressed and execute corresponding actions.
+- **Input polling**: The AT2 language will support polling methods to check the state of the keypad. This involves instructions to read the current input state, allowing the program to react to user inputs.
+- **Key mapping**: Each key on the virtual keypad will be mapped to a specific value. AT2 programs can use these values to determine which key was pressed and execute corresponding actions.
 - **Interrupts for input**: Optionally, the system may support interrupt-driven input, where the program can execute a specific routine in response to a keypress, improving the responsiveness and efficiency of input handling.
 
 #### Combined I/O operations
 - **Synchronization**: Mechanisms to synchronize input and output operations will ensure that the display and keypad interactions do not conflict, maintaining a smooth user experience.
-- **I/O in program flow**: The Assembly language will enable the integration of I/O operations within the flow of the program, allowing for dynamic and interactive applications that respond to user inputs and provide immediate feedback.
+- **I/O in program flow**: The AT2 language will enable the integration of I/O operations within the flow of the program, allowing for dynamic and interactive applications that respond to user inputs and provide immediate feedback.
+-> IMPROVEMENTS-->
 
 ### 4.4 Interpreter
 
 #### Interpreter functions
-- **Code interpretation**: The interpreter reads and analyzes each line of assembly code, translating it into operations that the virtual processor can understand and execute.
+- **Parser** <br>The parser is the first part of the interpreter: 
+   - Reads input files.
+   - Analyses the instructions.
+   - Put the instructions in an algorithmic structure.
+- **Builder**<br>The builder is the second part of the interpreter:
+   - Reads the algorithmic structure.
+   - Replaces some parts to make them readable for the Virtual processor.
+- **Virtual processor**<br>The last part of the interpreter:
+   - Executes the program regarding the algorithmic structure.
+
+# WE LAST STOPPED HERE 
+
 - **Execution flow control**: It manages the flow of execution based on control instructions like loops, conditional statements, and jumps.
-- **Error handling**: Includes robust error detection and reporting mechanisms to handle syntax and logical errors in the assembly code.
+- **Error handling**: Includes robust error detection and reporting mechanisms to handle syntax and logical errors in the AT2 code.
 
 #### Integration with virtual processor
-- **Execution**: The interpreter works closely with the virtual processor to ensure smooth execution of assembly programs, simulating a real processor's behavior.
-- **Resource management**: It efficiently manages the processor's resources, such as memory and registers, during the execution of assembly code.
+- **Execution**: The interpreter works closely with the virtual processor to ensure smooth execution of AT2 programs, simulating a real processor's behavior.
+- **Resource management**: It efficiently manages the processor's resources, such as memory and registers, during the execution of AT2 code.
 
 #### User interaction
-- **Interactive mode**: The interpreter allows for users to enter and execute assembly instructions one at a time, which is beneficial for learning and debugging.
-- **Script mode**: For more complex programs, the interpreter can execute pre-written scripts containing multiple assembly instructions.
+- **Interactive mode**: The interpreter allows for users to enter and execute AT2 instructions one at a time, which is beneficial for learning and debugging.
+- **Script mode**: For more complex programs, the interpreter can execute pre-written scripts containing multiple AT2 instructions.
 
 
 ---
@@ -273,18 +248,18 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 ## 5. Development tools
 
 ### 5.1 Assembler
-- **Functionality**: The **[assembler](#assembler)** is responsible for converting Assembly language code into a format that can be executed by the virtual processor. It parses the textual Assembly code and translates it into an internal representation suitable for execution.
-- **Error handling**: The assembler will include robust error handling to provide meaningful feedback on syntax and semantic errors in the Assembly code.
-- **Support for directives**: In addition to instruction translation, the assembler will handle various directives that aid in the Assembly process, such as data allocation and setting starting points for execution.
+- **Functionality**: The **[assembler](#assembler)** is responsible for converting AT2 language code into a format that can be executed by the virtual processor. It parses the textual AT2 code and translates it into an internal representation suitable for execution.
+- **Error handling**: The assembler will include robust error handling to provide meaningful feedback on syntax and semantic errors in the AT2 code.
+- **Support for directives**: In addition to instruction translation, the assembler will handle various directives that aid in the AT2 process, such as data allocation and setting starting points for execution.
 
 ### 5.2 Debugger
-- **Capabilities**: The **[debugger](#debugger)** will allow users to step through their Assembly code, inspect the contents of registers and memory, and set breakpoints. This tool is vital for understanding program flow and diagnosing issues in Assembly code.
+- **Capabilities**: The **[debugger](#debugger)** will allow users to step through their AT2 code, inspect the contents of registers and memory, and set breakpoints. This tool is vital for understanding program flow and diagnosing issues in AT2 code.
 - **User interface**: The debugger will feature a user-friendly interface, displaying key information in an easily understandable format and providing intuitive controls for program execution and inspection.
 - **Integration with assembler**: Seamless integration with the assembler ensures that users can quickly identify and fix issues in their code.
 
 ### 5.3 Testing framework
-- **Automated testing**: The framework will support automated testing of Assembly programs, enabling systematic verification of program functionality against predefined test cases.
-- **Performance analysis**: Tools for analyzing the performance of Assembly programs, such as execution time and resource usage, will be included, assisting in optimizing code for efficiency.
+- **Automated testing**: The framework will support automated testing of AT2 programs, enabling systematic verification of program functionality against predefined test cases.
+- **Performance analysis**: Tools for analyzing the performance of AT2 programs, such as execution time and resource usage, will be included, assisting in optimizing code for efficiency.
 - **Extensibility**: The testing framework will be designed to be extensible, allowing additional tests and functionalities to be added as the project evolves.
 
 ### 5.4 Code organization
@@ -295,30 +270,98 @@ The **[syntax](#syntax)** and conventions of the Assembly language are designed 
 
 ## 6. Testing and validation
 
-While a detailed testing document will be provided separately by the Quality Assurance, this section briefly outlines the general approach to testing and validation for the virtual processor and Assembly language.
+While a detailed testing document will be provided separately by the Quality Assurance, this section briefly outlines the general approach to testing and validation for the virtual processor and AT2 language.
 
 ### General testing philosophy
-- The project adheres to a rigorous testing philosophy to ensure reliability and accuracy in the emulation of small and limited processor like ARM 16 bits functionalities.
+- The project adheres to a rigorous testing philosophy to ensure reliability and accuracy in the emulation of small and limited 16 bits processor functionalities.
 - Testing encompasses a range of methods, from unit tests for individual components to integration tests that assess the whole system.
 
 ### Coordination with QA
 - The development team will closely collaborate with the Quality Assurance team to align testing strategies and ensure comprehensive coverage of all functionalities.
-- Feedback from QA testing will be integral to the iterative development process, guiding enhancements and refinements in the emulator and Assembly language.
+- Feedback from QA testing will be integral to the iterative development process, guiding enhancements and refinements in the emulator and AT2 language.
 
 ### Reference to QA document
 - For detailed testing procedures, methodologies, and specific test cases, refer to the dedicated [test plan](../QA/test_plan.md) prepared by the Quality Assurance team.
 
 ---
 
-## 7. Documentation
+## 7. Risks and challenges
+
+### 7.1 Risks 
+- Risk: Developing an accurate and efficient interpreter for a custom assembly language is technically complex. There's a risk of underestimating the development time and resources needed.
+
+- Mitigation: Allocate sufficient time for research and development. Conduct regular reviews and assessments to adjust timelines and resources as needed.
+---
+- Risk: The interpreter might not perform optimally, leading to slow execution of assembly code, which can frustrate users.
+
+- Mitigation: Focus on performance optimization from the start. Benchmark regularly and optimize critical parts of the code.
+---
+- Risk: The interpreter may face compatibility issues on different operating systems or hardware configurations.
+
+- Mitigation: Test the interpreter across multiple platforms early and regularly. Use portable libraries and follow standard programming practices.
+---
+- Risk: Difficulty in gaining traction and adoption among the target user base, potentially due to a steep learning curve or lack of awareness.
+
+- Mitigation: Develop comprehensive documentation and tutorials. Engage with the community through forums, social media, and workshops.
+---
+- Risk: There's a possibility of misinterpretation or bugs in how assembly instructions are processed, leading to incorrect program behavior.
+
+- Mitigation: Implement extensive testing, including unit tests, integration tests, and user testing, to catch and fix bugs early.
+---
+- Risk: Inadequate documentation and learning resources can hinder user understanding and adoption.
+
+- Mitigation: Invest in creating detailed, user-friendly documentation and interactive learning materials. Update these resources regularly.
+---
+- Risk: The interpreter may not be scalable or flexible enough to accommodate future enhancements or changes in technology.
+
+- Mitigation: Design the interpreter with scalability in mind. Use modular architecture to facilitate future enhancements.
+---
+- Risk: Potential security vulnerabilities in the interpreter could lead to exploitation, especially if it becomes widely used.
+
+- Mitigation: Conduct regular security audits and incorporate security best practices in the development process.
+---
+- Risk: Mismanagement of resources or poor project management could lead to project delays or failure.
+
+- Mitigation: Use effective project management tools and methodologies. Ensure clear communication and responsibilities within the project team.
+
+### 7.2 Challenges
+- Creating a comprehensive and functional 16-bit processor architecture from scratch, balancing simplicity with the need for essential features.
+
+- Ensuring the virtual processor accurately simulates the behavior of a typical 16-bit processor, including handling of memory, arithmetic operations, and control flows.
+
+- Defining an intuitive yet powerful AT2 language suited for a 16-bit processor, considering the limited address space and data width.
+
+- Ensuring the interpreter executes the AT2 code efficiently, a challenge given the inherent overhead of interpretation.
+
+- Optimizing the execution speed to provide a smooth development and testing experience for users.
+
+- Developing the interpreter to work consistently across different operating systems, addressing platform-specific challenges.
+
+- Ensuring a uniform user experience in various environments, including differing file systems and user interfaces.
+
+- Implementing robust error detection in the interpreter for syntactical and runtime errors in AT2 code.
+
+- Providing clear, helpful error messages and diagnostics to aid in debugging and code correction.
+
+- Compiling comprehensive documentation that clearly explains how to use the interpreter and write code in the new AT2 language.
+
+- Keeping documentation aligned with updates and enhancements to the interpreter and AT2 language.
+
+- Actively incorporating user insights and suggestions into ongoing development for continuous improvement.
+
+
+
+---
+
+## 8. Documentation
 
 ### Documentation strategy
 - **Comprehensive coverage**: All aspects of the project, from design and development to testing and deployment, will be thoroughly documented. This includes technical specifications, user manuals, and developer guides.
 - **Clarity and accessibility**: Documentation will be written in clear, concise language to ensure it is accessible to all team members and stakeholders, regardless of their technical background.
 
 ### Types of documentation
-- **Technical specifications**: Detailed descriptions of the virtual processor's architecture, the Assembly language's syntax and semantics, and the development tools.
-- **User manuals**: Guides for end-users on how to use the virtual processor and write programs in the Assembly language. This will include examples and tutorials.
+- **Technical specifications**: Detailed descriptions of the virtual processor's architecture, the AT2 language's syntax and semantics, and the development tools.
+- **User manuals**: Guides for end-users on how to use the virtual processor and write programs in the AT2 language. This will include examples and tutorials.
 - **Developer guides**: Instructions and best practices for developers working on the project, covering coding standards, project setup, and contribution guidelines.
 - **QA Testing document**: A separate document provided by the Quality Assurance team, detailing testing methodologies, test cases, and results.
 
@@ -332,38 +375,36 @@ While a detailed testing document will be provided separately by the Quality Ass
 
 ---
 
-## 8. Appendices
+## 9. Appendices
 
-### 8.1 References
+### 9.1 References
 
 1. "Assembly language." Gentoo Wiki. Overview and resources related to Assembly language programming. Available at: [wiki.gentoo.org](https://wiki.gentoo.org/wiki/Assembly_language)
 2. Streanga, L. "Assembler Project." GitHub repository. An Assembler for converting Assembly language for a virtual processor into machine code. Available at: [github.com/lucas-streanga/Assembler-Project](https://github.com/lucas-streanga/Assembler-Project)
 3. Edu4Java, "Compiler, interpreter and virtual machine.", educational website. Provides tutorials and explanations on compilers, interpreters, and virtual machines. Available at: [edu4java.com/en/concepts/compiler-interpreter-virtual-machine](http://www.edu4java.com/en/concepts/compiler-interpreter-virtual-machine.html)
 
 
-## 8.2 Glossary
+## 9.2 Glossary
 
 | Term             | Definition | Use in Project |
 |------------------|------------|----------------|
-| <a id="arm"></a>**ARM (Advanced RISC Machine)** | ARM is a family of Reduced Instruction Set Computing (RISC) architectures for computer processors, known for their energy efficiency and widespread use in mobile devices. | While the project does not directly use ARM architecture, understanding its principles and efficiency is beneficial in designing the custom virtual processor and assembly language, especially considering the emulation of small and limited processor like ARM 16 bits environments. |
 | <a id="assembler"></a>**Assembler**   | A tool that converts Assembly language code into a **[machine code](#machine-code)** or an executable format. | Used to translate written Assembly code into a format that the virtual processor can execute. |
 | <a id="Assembly-language"></a>**Assembly language** | A low-level programming language used to write instructions that a processor can understand directly. | The primary language used for programming the virtual processor. |
 | <a id="binary"></a>**Binary**      | A base-2 numerical system used in digital electronics and computing. | Fundamental representation of data in the virtual processor. |
 | <a id="bitwise-operation"></a>**Bitwise operation** | An operation that directly manipulates bits. | Used in Assembly language for low-level data manipulation. |
 | <a id="debugger"></a>**Debugger**    | A tool used to test and debug programs. | Utilized for identifying and resolving issues in Assembly code. |
-| <a id="emulator"></a>**Emulator**    | Software that enables one computer system to behave like another computer system. | Core of the project, emulating small and limited processor like ARM 16 bits hardware. |
 | <a id="hexadecimal"></a>**Hexadecimal** | A base-16 number system used in computing. | Used for representing binary data in a more readable format in Assembly code. |
 | <a id="instruction-set"></a>**Instruction set** | The collection of instructions that a processor can execute. | Defines the capabilities of the virtual processor. |
-| <a id="interpreter"></a>**Interpreter** | A program that executes instructions written in a programming or scripting language without requiring them to be compiled into machine language. | Responsible for reading and executing the custom assembly language instructions on the virtual processor, acting as the bridge between the assembly code and the virtual hardware. |
+| <a id="interpreter"></a>**Interpreter** | A program that executes instructions written in a programming or scripting language without requiring them to be compiled into machine language. | Responsible for reading and executing the AT2 language instructions on the virtual processor, acting as the bridge between the AT2 code and the virtual hardware. |
 | <a id="machine-code"></a>**Machine code** | The lowest-level programming language, consisting of binary code. | The end product of the assembler, run by the virtual processor. |
 | <a id="memory-addressing1"></a>**Memory addressing** | The method by which a processor can access data stored in memory. | Essential for the emulator's handling of memory operations. |
-| <a id="opcode"></a>**Opcode**      | The part of a machine language instruction that specifies the operation. | Used in defining the functionality of Assembly instructions. |
-| <a id="operand"></a>**Operand**     | The part of a computer instruction that specifies what data is to be operated on. | Used in Assembly instructions for specifying data or memory locations. |
+| <a id="opcode"></a>**Opcode**      | The part of a machine language instruction that specifies the operation. | Used in defining the functionality of AT2 instructions. |
+| <a id="operand"></a>**Operand**     | The part of a computer instruction that specifies what data is to be operated on. | Used in AT2 instructions for specifying data or memory locations. |
 | <a id="processor"></a>**Processor**   | The component that performs the instructions of a computer program. | The virtual processor is the central component of the emulator. |
 | <a id="ram"></a>**RAM (Random Access Memory)** | Memory that can be accessed randomly, used for storing working data and machine code. | Simulated in the emulator for temporary data storage during program execution. |
 | <a id="register"></a>**Register**    | A small, quickly accessible storage location in a processor. | Used in the virtual processor for holding temporary data and intermediate computation results. |
-| <a id="rom"></a>**ROM (Read-Only Memory)** | Non-volatile memory used in computers and other devices. | Emulated to store the firmware and immutable data of the virtual ARM processor. |
-| <a id="syntax"></a>**Syntax**      | The rules defining the structure of correctly formatted programs in a language. | Decides how Assembly language code is written for the emulator. |
-| <a id="virtual-processor"></a>**Virtual processor** | A software-based emulation of a processor. | Executes Assembly language programs as if running on an actual small and limited processor like ARM 16 bits processor. |
+| <a id="rom"></a>**ROM (Read-Only Memory)** | Non-volatile memory used in computers and other devices. | Emulated to store the firmware and immutable data of the virtual processor. |
+| <a id="syntax"></a>**Syntax**      | The rules defining the structure of correctly formatted programs in a language. | Decides how AT2 language code is written for the emulator. |
+| <a id="virtual-processor"></a>**Virtual processor** | A software-based emulation of a processor. | Executes AT2 language programs as if running on an actual small and limited 16 bits processor processor. |
 
 ---
