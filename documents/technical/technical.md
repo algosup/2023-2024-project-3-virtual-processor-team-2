@@ -2,9 +2,13 @@
 ### ALGOSUP Project 3, 2024
 
 # Virtual processor and interpreter for Assembly
-
-### Version: 1.0
-### Date: 01/26/2024
+| | |
+| ----- | ----- |
+| Author | Guillaume Deramchi |
+| Team | 2 |
+| Reviewers | Enzo Guillouche(QA), Mathias Gagnepain(PM), Paul Nowak and Maxime Caron(both SEs) |
+| Created on | 01/22/2024 |
+| Last updated | 01/26/2024 |
 
 ---
 
@@ -14,7 +18,10 @@
 1. [Introduction](#1-introduction)
    1. [Target audience](#11-target-audience)
    2. [Main deliverable](#12-main-deliverable)
-   3. [Constraints](#13-constraints)
+   3. [Functional and technical requirements](#13-functional-and-technical-requirements)
+   4. [Constraints](#14-constraints)
+   5. [Out of scope](#15-out-of-scope)
+   6. [Algorithm architecture](#16-algorithm-architecture)
 2. [Project overview](#2-project-overview)
 3. [Hardware specifications](#3-hardware-specifications)
    1. [Virtual processor](#31-virtual-processor)
@@ -62,10 +69,38 @@ The goal of this project is to create a **[virtual processor](#virtual-processor
 
 The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor.
 
+### 1.3 Functional and technical requirements
 
-### 1.3 Constraints
+#### Functional requirements
+
+- **Programmer efficiency**: Easy-to-understand syntax for efficient assembly programming.
+- **Educational value**: Clarity in demonstrating low-level programming and processor architecture interaction.
+- **Emulator accuracy**: Realistic emulation of a 16-bit ARM processor for testing and debugging.
+- **Error handling**: Clear, informative error messages from the assembler and emulator for quick issue resolution.
+
+The complete functional specifications document here: [functional specification](../functional/Functional%20Specification%20Document%20Template.md)
+
+#### Technical requirements
+
+- **Architecture**: Emulates a 16-bit ARM processor environment, including registers, memory, and basic I/O.
+- **Development**: Written in C, using standard libraries for compatibility and efficiency.
+- **Performance**: Efficient execution with minimal latency; scalable design for future enhancements.
+- **Security and reliability**: Robust memory access controls and error handling for system stability.
+- **Documentation**: Comprehensive guides for both users and developers.
+- **Testing**: Comprehensive unit and integration testing for ensuring system integrity.
+
+### 1.4 Constraints
 
 The project will be developed in plain, portable, C language without using any external library besides C standard libraries.
+
+### 1.5 Out of scope
+
+- Emulating an old phone like the first Nokia 3310, with all the graphical and sounding features
+- Advanced UI
+- A translator of the user input to binary code
+
+### 1.6 Algorithm architecture
+![Alt text](image.png)
 
 ---
 
