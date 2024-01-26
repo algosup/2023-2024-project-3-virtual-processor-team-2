@@ -1,9 +1,7 @@
 ﻿# **ALGOSUP Team 2**
-### **Development team**
 ## **Functional Specification Document**
-### **Unnamed for now**
 
-### **DOCUMENT VERSION 0.1**
+### **DOCUMENT VERSION 0.4.1**
 
 **01/22/2024**
 
@@ -17,12 +15,13 @@
 
 **DOCUMENT HISTORY**
 
-|**Date**|**Version**|**Document Revision Description**|**Document Author**|
+|**Date**|**Version**|**Reviewer**|**Document Author**|
 | :-: | :-: | :-: | :-: |
-|1/22/2024|0.1|?|DESPAUX Guillaume|
-|1/23/2024|0.2|?|DESPAUX Guillaume|
-|1/24/2024|0.3|?|DESPAUX Guillaume|
-|||||
+|1/22/2024|0.1|GUILLOUCHE Enzo|DESPAUX Guillaume|
+|1/23/2024|0.2|GUILLOUCHE Enzo|DESPAUX Guillaume|
+|1/24/2024|0.3|GUILLOUCHE Enzo|DESPAUX Guillaume|
+|1/24/2024|0.4|GUILLOUCHE Enzo|DESPAUX Guillaume|
+|1/24/2024|0.4.1|GUILLOUCHE Enzo|DESPAUX Guillaume|
 |||||
 
 
@@ -30,9 +29,9 @@
 
 |**Approval Date**|**Approved Version**|**Approver Role**|**Approver**|
 | :-: | :-: | :-: | :-: |
-|?|0.1|QA?PM?||
-|||||
-|||||
+|1/30/2024|0.1|ProgM|DESPAUX Guillaume|
+|1/30/2024|0.1|QA|GUILLOUCHE Enzo|
+|1/30/2024|0.1|PM|GAGNEPAIN Mathias|
 |||||
 
 - [**Table of Contents**](#table-of-content)
@@ -70,106 +69,107 @@
 
 
 # **1. Introduction**
-
-The goal of the project is to create a virtual processor and an interpreter for running assembly code on that processor. We need to create our [assembly language](#112-assembly-language), create a [C](#15-glossary) program using [C standard libraries](#15-glossary) that can read text files(*.txt or can be something else?*), detect semantic and syntactical errors. We also need to implement a virtual system displaying text in a virtual terminal, that can be accessed from the assembly code.
+The goal of the project is to create a Virtual Processor and an interpreter for running assembly code on that processor. We need to create our [Assembly Language](#112-assembly-language), create a [C](#15-glossary) program using [C Standard Libraries](#15-glossary) that can read text files, detect semantic and syntactical errors. We also need to implement a virtual system displaying text in a virtual terminal, that can be accessed from the assembly code.
 
 ## **1.1 Purpose of the document**
-
-The Functional Specification Document is a document that provides detailed information on *how* the system solution will function and the requested behavior.  This document is created based on the high-level requirements identified in the Business Requirements Document and provides traceability on the functional specifications back to the business requirements.  Included in this document will be the detailed functional requirements including use cases, system inputs and outputs, process flows, diagrams, and mock-ups.
+The Functional Specification Document is a document that provides detailed information on the system solution will function and the requested behavior. This document is created based on the high-level requirements identified in the Call For Tender and provides traceability on the functional specifications. Included in this document will be the detailed functional requirements including use cases, system inputs and outputs, process flows, diagrams, and mock-ups.
 
 ## **1.2 Project Scope**
-1. The main goal is to develop a more understandable version of assembly, along with an interpreter capable of reading and compiling these files. The compiled code can then be run on an emulated old mobile phone, providing users with an extended range of functionalities.
+The main goal is to create our own Assembly Language, which would be more understandable, readable, easier to use than traditional Assembly Languages.
+ Moreover, also create an interpreter capable of reading and compiling these files. The compiled code can then be run on an emulated small and limited devices, providing an extended range of functionalities for users.
+   - 
+   - Creation of a specialized Assembly Language for small devices with a limited amount of capacities.
+   - Creation of an interpreter which will be able to run the code provided in our new language. 
 
-     - We aim to enhance the functionality of old classic phones by providing developers with the opportunity to create new applications or games for these vintage mobile devices. 
-     - Our objective is to offer a new way of using a compact phone primarily for calls and texts, while also allowing it to serve as a simple entertainment device for moments such as waiting in queues or sitting in waiting rooms. 
-     - We intend to promote balanced usage, avoid smartphone addiction, and revitalize the appeal of old consoles and flip phones by introducing additional utilities.
-
-2. We have outlined certain out-of-scope features designed to assist developers and clients in comprehending the product's capabilities:
+## **1.3 Out of Scope** 
+### **1.3.1 Facilities**
+We have outlined certain out-of-scope features designed to assist developers and clients in comprehending the product's amelioration:
  
    - Implementation of a debugger, facilitating a clear understanding of program execution and helping in comprehending how the Virtual Processor interprets the language.
-   - Creation of a basic application, such as a Snake Game, to showcase how our language can enhance the capabilities of the overall phone.
+   - The implementation of a verbose mode which gives more information when the code is running.
+   
+### **1.3.2 Code Structure**
+- In the future, we aim to create an assembler system which would give more efficiency for the program execution. 
 
-## **1.3 	Related documents**
-Add any related documentation that is relevant and related to the FSD. Some examples are the Project Charter, etc...
+## **1.4 Related documents**
 
 |**Component**|**Name**|**Description**|
 | :- | :- | :- |
-|Documentation|[Minutes of Meeting](../communications/minutes_of_meeting_01_16_2025.pdf)|This documents serve as project charter of the project|
+|Documentation|[Minutes of Meeting](../communications/minutes_of_meeting_01_16_2025.pdf)|This documents serve as project charter for the project|
 
-## **1.4      Risks and Assumptions**
-List any assumed factors and identified risks that could affect the functional design of the system.  Included can be third-party or commercial components that will be used, issues around the operating environment, or any constraints.
-
+## **1.5 Risks and Assumptions**
 ### Risks
-
 - **Technical challenges:**
+  - Unforeseen technical challenges in the Virtual Processor functioning.
+  - Achieving the project in time without delays, developing the desired functionalities.
 
-  - Unforeseen technical challenges in the virtual processor functioning.
-  - Interpreter compilation or other development aspects may lead to delays or difficulties in achieving the desired functionality.
-  
 - **Resource constraints:**
-
    - Unexpected shortages or constraints in resources, including human resources or software tools, may impact the project's ability to meet deadlines or maintain quality standards.
-   - *The documentation of AT2 should be complete enought.*
+   - The documentation of AT2 should be complete enough.
   
 - **Unpredictable technical issues:**
-
    - Unpredictable technical issues, such as compatibility problems on different systems or devices, may arise during the testing phase.
 
 ### Assumptions
-
 - **Technical expertise:**
-
-  - The development team possesses the necessary technical expertise in assembly language, C language and parser to successfully create it.
-  - The team has done a lot of research based on virtual processor functioning and architecture.
+  - The development team possesses the necessary technical expertise in Assembly Language, C language and Parser to successfully create it.
+  - The team has done a lot of research based on Virtual Processor functioning and architecture.
   
 - **User engagement:**
-
-  - There is an assumption that users will engage positively with our own assembly language, fostering community participation for use it and potential future enhancements.
+  - Users will engage positively with our own Assembly Language, fostering community participation for use it and potential future enhancements.
 
 - **Timely completion:**
-
   - The project assumes that it will be completed within the specified timeline, avoiding significant delays or disruptions.
   
 - **Quality assurance:**
-
-  - The testing and quality assurance processes will effectively identify and address any bugs or issues, ensuring a polished and functional virtual processor with our language and our interpreter.
+  - The testing and quality assurance processes will effectively identify and address any bugs or issues, ensuring a polished and functional Virtual Processor with our language and our interpreter.
 
 ### Constraints
-
 - **Technical constraints**
    - The software needs to be run in an environment of 16 bits minimum.
-   - The software needs to have at least 4 Ko minimum.  
+   - The software needs to have at least 32 kilobyte minimum of RAM.  
 
 ## **1.6     Glossary** 
 State any terms and their definitions that are described in the functional specifications. Include any acronyms that are mentioned in the document.
 
 |**Term/Acronym**|**Definition**|**Description**|
 | :- | :- | :- |
+|.aop|Extension of our text file|A new file extension which is basically text file.|
+|16 Bits Environment|A computing environment that operates with 16-bit data units|Refers to a system architecture where data is processed in chunks of 16 bits, common in earlier computer systems.|
+|Assembler|A program that translates assembly language into machine code|Converts human-readable assembly code into binary machine code that can be executed by a computer's central processing unit (CPU).|
+|Assembly Language|Assembly Language: Low-level programming language specific to a computer architecture.|A language that resembles Assembly but is easier to use and understand, often created for specific purposes or projects.|
+|AT2|"Assembly Team 2" |Refers to our Assembly Language.|
+|Build|The process of compiling and linking source code to create an executable program|Involves translating human-readable code into machine code and combining it with necessary libraries and resources.|
 |C|C is an imperative procedural language, supporting structured programming, lexical variable scope, and recursion, with a static type system|It is referred to as a low-level language in the sense that each instruction in the language is designed to be compiled into a fairly predictable number of machine instructions|
-|C standard librairies|The C standard library is a standardized collection of header files and library routines used to implement common operations|The C standard library provides macros, type definitions and functions for tasks such as string handling, mathematical computations, input/output processing, memory management, and several other operating system services.|
-|Assembly Language|Assembly Language: Low-level programming language specific to a computer architecture.| A language who looks like Assembly but most easier to use and to understand created by ourself.|
+|C Standard Libraries|The C standard library is a standardized collection of header files and library routines used to implement common operations|The C standard library provides macros, type definitions and functions for tasks such as string handling, mathematical computations, input/output processing, memory management, and several other operating system services.|
+|Compiler|A program that translates high-level programming code into machine code|Converts source code written in a programming language into a form that can be executed by a computer's CPU.|
+|Debugger|A tool used in software development to identify and fix bugs or errors in a program|Allows developers to inspect variables, set breakpoints, and step through code to understand and resolve issues.|
+|GNU|GNU's Not Unix|A recursive acronym for the GNU operating system, which is a free and open-source Unix-like operating system. The GNU project develops various software, including compilers and utilities.|
+|IAT2|"Interpreter Assembly Team 2"|Refers to our interpreter which will interpret our Assembly Language.|
+|Interpreter|A program that directly executes instructions written in a programming language|Translates and executes code line by line without the need for a separate compilation step.|
+|Kilobyte|A unit of digital information equal to 1024 bytes|Commonly used to measure the size of computer memory or storage capacity.|
+|Parser|A tool or program that analyzes the syntax of a programming language|Breaks down code into its components and checks whether it conforms to the language's grammar rules.|
+|RAM|Random Access Memory|A type of computer memory that is volatile and used for temporarily storing data that is actively being used or processed by a computer.|
+|Virtual Processor|An emulation of a physical processor in a virtualized environment|Allows multiple virtual machines to run on a single physical machine, each with its own isolated processor instance.|
+|Virtual Terminal|A software interface that emulates a physical computer terminal|Enables communication with a computer system through text-based commands and responses.|
 
 # **2.  System/ Solution Overview**
 __Provide a short description of the software and solution being specified and its purpose, including relevant benefits, objectives, and goals.__
+Our system is made up of three parts, which are:
+- The Parser
+- The Builder
+- The Virtual Processor
 
-## **2.1    Context Diagram/ Interface Diagram/ Data Flow Diagram, Application Screen Flow, Sitemap, Process Flow**
-Provide any appropriate graphical representations that are relevant to the system and project such as a context/interface/data flow diagram, application screen flow, site map, or process flow.  Add as many as needed.
-
-__NONE FOR NOW__
-
-## **2.2     System Actors**
-
-### **2.2.1     User Roles and Responsibilities**
-
---------------------------------------------------------------------------------------------------
+## **2.1 System Actors**
+### **2.1.1 User Roles and Responsibilities**
 
 |**User/Role**|**Example**|**Frequency of Use**|**Security/Access, Features Used**|**Additional Notes**|
 | :-: | :-: | :-: | :-: | :-: |
-|include the specified user/role such as Purchasing Manager, Dept Admin, Faculty, Student, etc|include examples of real people  in the role|describes how often they use the system. State Frequent, Occasional or Rare|describe the features of the system available for the role and any security/access permissions that should be stated|add any additional notes or supporting documentation as necessary|
+|Developers||describes how often they use the system. State Frequent, Occasional or Rare|describe the features of the system available for the role and any security/access permissions that should be stated|add any additional notes or supporting documentation as necessary|
 
-## **2.3 Dependencies and Change Impacts**
 
-### **2.3.1 System Dependencies**
+## **2.2 Dependencies and Change Impacts**
+### **2.2.1 System Dependencies**
 
 |**System Name**|**Use Case/Utility**|**Description**|
 | :-: | :-: | :-: |
@@ -180,9 +180,7 @@ __NONE FOR NOW__
 |Visual Studio Code|Multi-language code editor|A versatile code editor that supports coding in multiple programming languages. Visual Studio Code is free and helps users start coding quickly.|
 |New Extension: .aop|Custom File Format|Represents files in a custom format used by the software application. The software should be able to read, write, and manipulate files with the .aop extension. Ensure that users are aware of this new extension and can associate it with the software application. Consider any additional dependencies related to the handling of this custom file format.|
 
-
-### **2.3.2 Change Impacts**	
-
+### **2.2.2 Change Impacts**	
 **C Standard Libraries:**
 - **Impact:** Compatibility and Portability.
 - **Details:** Any changes to the C Standard Libraries may affect the compatibility of existing C programs that rely on specific library functions. Developers need to ensure that the code remains portable across different systems.
@@ -208,31 +206,23 @@ __NONE FOR NOW__
 - **Details:** The introduction of a new file extension "[.aop](#15-glossary)" implies that the software application needs to be capable of handling files in this custom format. Considerations include configuring the operating system for proper file associations, ensuring the software can read, files with the new extension, and communicating this change to users for proper interaction with the application.
 
 # **3.   Functional Specifications**
-   <!-- Start describing the specifications related to the overall system here. You may want to create a table/ index of all functionalities explained in the sections below and link them to the items below
-
-If no separate reference/ traceability document is created for the project, use this section to map the business requirements, use cases, functional requirements and the test cases
-
-Group your functional specifications as appropriate for your project. You may want to divide them by screens, functional areas, user role, JIRA tickets or high-level functions Vs detailed functions or any other way that works for your project -->
-
 [Text file (.aop)](#31-input-file-aop)
    - Will contain all the AT2-Assembly Language code that is the basis for implementing new features.
 
 [Interpreter (IAT2)](#41-interpreter)
    - Will be composed of three main parts:
-      - The Parser will transform AT2-Assembly Language into a [data structure](#15-glossary) for the builder.
-      - The Builder will rework the [data structure](#15-glossary) to make the program executable for the virtual processor.
-      - The Virtual processor will run the program.
+      - The Parser will transform AT2-Assembly Language into a [data structure](#15-glossary) for the Builder.
+      - The Builder will rework the [data structure](#15-glossary) to make the program executable for the Virtual Processor.
+      - The Virtual Processor will run the program.
 
 [Virtual Terminal](#51-interpreter)
    - Will display information about the program previously run in the given input file.
 
 ## **3.1 Text file (.aop)**
-
 ### **3.1.1 Purpose/ Description**
 A text file.aop is a type of computer file that stores plain text data in a human-readable format.
 
 ### **3.1.2 Use case**
-
 |**UC-1** |**Coding** |
 | :-: | :-: |
 |**Primary Actor(s)**|Software Developer|
@@ -251,8 +241,9 @@ A text file.aop is a type of computer file that stores plain text data in a huma
       Example TextFile.aop
 ===================================
 
-MOV 1, 4
-+ 4, 4   // + = mnemonic ADD from AT2-Assembly Language
+mov 1, 4
+// + = mnemonic add from AT2-Assembly Language
++ 4, 4
 
 ===================================
    End of Example TextFile.aop
@@ -261,22 +252,22 @@ MOV 1, 4
 
 ### **3.1.4  Functional Requirements**
 
-1. **Creation and Editing**:<br>
+- **Creation and Editing**:<br>
 Users should be able to create new text files and edit existing ones using appropriate text editing software.
 
-2. **Text Entry**:<br>
+- **Text Entry**:<br>
 Users should be able to enter, modify, and delete text within the text file using keyboard input or other input methods.
 
-3. **Saving and Loading**:<br>
+- **Saving and Loading**:<br>
 Users should be able to save their changes to the text file, and the file should be loadable for viewing and further editing.
 
-4. **Undo and Redo**:<br>
+- **Undo and Redo**:<br>
 Users should be able to undo and redo their actions within the text file to revert changes or repeat previous actions.
 
-5. **File Management**:<br>
+- **File Management**:<br>
 Users should be able to perform basic file management tasks such as renaming, copying, moving, and deleting text files.
 
-6. **Compatibility**:<br>
+- **Compatibility**:<br>
 The text file should be compatible with various text editing software and operating systems to ensure interoperability.
 
 ## **4.1 Interpreter**
@@ -305,8 +296,8 @@ An interpreter is a type of software program that reads and executes code writte
 | :-: | :-: |
 |**Primary Actor(s)**|Builder, Interpreter|
 |**Stakeholders and Interest**|Other stakeholders such as developers, system administrators, and end-users are interested in ensuring that the file can be read and processed correctly.|
-|**Trigger**|When the builder receives a request or instruction to transform content from the Parser|
-|**Pre-conditions**|The builder is initialized and ready to transform code.|
+|**Trigger**|When the Builder receives a request or instruction to transform content from the Parser|
+|**Pre-conditions**|The Builder is initialized and ready to transform code.|
 |**Post-conditions**|The transformed code is send to the Virutal Processor|
 |**Main Success Scenario**||
 |**Extensions**|If the transformation instruction or function call is invalid or contains errors, the interpreter may throw an exception or error message and halt the interpretation process.|
@@ -317,9 +308,9 @@ An interpreter is a type of software program that reads and executes code writte
 | :-: | :-: |
 |**Primary Actor(s)**|Virtual Processor, Interpreter|
 |**Stakeholders and Interest**|Other stakeholders such as developers, system administrators, and end-users are interested in ensuring that the file can be read and processed correctly.|
-|**Trigger**|When the builder have finish all transformation|
-|**Pre-conditions**|The builder is initialized and ready to run code.|
-|**Post-conditions**|The program is successfully executed by the virtual processor, and the expected results are produced as a result of the execution.|
+|**Trigger**|When the Builder have finish all transformation|
+|**Pre-conditions**|The Builder is initialized and ready to run code.|
+|**Post-conditions**|The program is successfully executed by the Virtual Processor, and the expected results are produced as a result of the execution.|
 |**Main Success Scenario**||
 |**Extensions**|If the program contains errors or invalid instructions, the interpreter may throw an exception or error message and halt the execution process. If the program execution exceeds specified resource limits, the interpreter may terminate the execution and report an error.|
 |**Priority**|High|
@@ -332,31 +323,31 @@ An interpreter is a type of software program that reads and executes code writte
 
 ### **4.1.4  Functional Requirements**
 
-1. **Parsing and Lexical Analysis**:<br>
+- **Parsing and Lexical Analysis**:<br>
 The interpreter should be able to parse and analyze the syntax and structure of the input code written in the specified programming language.
 
-2. **Execution of Code**:<br>
+- **Execution of Code**:<br>
 The interpreter should be capable of executing the parsed code instructions according to the semantics and rules defined by the programming language.
 
-3. **Error Handling**:<br>
+- **Error Handling**:<br>
 The interpreter should detect and handle errors in the input code, providing informative error messages to aid in debugging and troubleshooting.
 
-4. **Data Types and Operations**:<br>
+- **Data Types and Operations**:<br>
 The interpreter should support various data types (e.g., integers, floating-point numbers, strings) and operations (e.g., arithmetic, logical, relational) defined by the programming language.
 
-5. **Control Flow**:<br>
+- **Control Flow**:<br>
 The interpreter should support control flow statements such as conditionals (if-else), loops (for, while), and branches to control the flow of execution within the code.
 
-6. **Variable Declaration and Scope**:<br>
+- **Variable Declaration and Scope**:<br>
 The interpreter should handle variable declaration, initialization, and scoping rules as defined by the programming language.
 
-7. **Input and Output**:<br>
+- **Input and Output**:<br>
 The interpreter should support input/output operations (e.g., reading from and writing to files, console input/output) as required by the programming language.
 
-8. **Performance Optimization**:<br>
+- **Performance Optimization**:<br>
 The interpreter should optimize code execution performance where possible, minimizing overhead and maximizing efficiency.
 
-9. **Security**:<br>
+- **Security**:<br>
 The interpreter should implement security measures to prevent code buffer overflows and other security vulnerabilities.
 
 
@@ -427,26 +418,26 @@ A text file virtual terminal is a software tool or environment that provides a t
 
 ### **5.1.4  Functional Requirements**
 
-1. **User Interface**:<br>
+- **User Interface**:<br>
 Provide a text-based interface for interacting with the system.
 Display text output from the system.
 Accept text input from the user.
 
-2. **Terminal Emulation**:<br>
+- **Terminal Emulation**:<br>
 Emulate the behavior of physical terminals (e.g., DEC VT100, ANSI).
 Support terminal control sequences for cursor movement, text formatting, and other display control features.
 
-3. **Scrolling and Paging**:<br>
+- **Scrolling and Paging**:<br>
 Provide scrolling functionality to view previous output.
 Support paging for long text output, allowing users to navigate through large amounts of text.
 
-4. **Compatibility**:<br>
+- **Compatibility**:<br>
 Ensure compatibility with a wide range of operating systems and platforms.
 
-5. **Accessibility**:<br>
+- **Accessibility**:<br>
 Provide accessibility features for users with disabilities, such as screen readers and keyboard navigation support.
 
-6. **Security**:<br>
+- **Security**:<br>
 Implement security measures to protect terminal sessions and prevent unauthorized access.
 
 
@@ -482,9 +473,6 @@ This is where you can explain the error conditions/Exceptions that normally happ
 
 # **11.  Open Issues**
 
-|**Issue ID**|**Issue**|**Raised By**|**Raised On**|**Solution/ Decision**|**Resolved By**|**Resolved On**|**Status**|
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-|||||||||
 # **12.  Appendix**
 ## **12.1 ASSEMBLY LANGUAGE**
 January 22, 2024
