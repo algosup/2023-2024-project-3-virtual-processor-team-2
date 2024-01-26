@@ -24,7 +24,7 @@ The RACI matrix is as follows:
 | Schedule / Gantt chart    | R / A           | C / I           | C / I            | C / I             | C / I             |        | I            |
 | Functional specifications | C               | R / A           | C                |                   | C / I             | C      | I            |
 | Technical specifications  | C               | C               | R / A            | C                 | C / I             | C      | I            |
-| Code                      |                 |                 | R                | R / A             |                   |        |              |
+| Code                      |                 |                 | R                | R / A             | I                 |        |              |
 | Code review               | I               |                 | R / A            | R                 | R                 |        |              |
 | Code documentation        |                 | I               | C                | R / A             | C / I             | I      |              |
 | Usage instructions        |                 | I               | C                | R / A             | C / I             | I      |              |
