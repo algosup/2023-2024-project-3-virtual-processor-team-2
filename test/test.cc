@@ -3,7 +3,6 @@
 #include <cstring>
 
 #include "gtest/gtest.h"
-#include "parser.h"
 #include "runner.h"
 
 int main(int argc, char *argv[]) {

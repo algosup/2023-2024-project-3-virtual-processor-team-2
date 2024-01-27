@@ -1,6 +1,4 @@
 #include <stdlib.h>
-
-#include "parser.h"
 #include "runner.h"
 #include "iat2.h"
 
