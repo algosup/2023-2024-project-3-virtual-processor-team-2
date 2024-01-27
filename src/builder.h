@@ -5,7 +5,7 @@ enum varKind{
     VAR_FLOAT,
     VAR_CHAR,
     VAR_U_CHAR,
-    VAR_STRING,
+    VAR_STRING
 };
 
 // Instruction types
@@ -14,7 +14,7 @@ enum instKind{
     INST_ACT,
     INST_LABEL,
     INST_CMP,
-    INST_VAR,
+    INST_VAR
 };
 
 // Operation types
@@ -29,18 +29,28 @@ enum opKind{
     OP_B_AND,
     OP_B_OR,
     OP_B_XOR,
-    OP_B_NOT
+    OP_B_NOT,
+    OP_B_NEG,
+    OP_INC,
+    OP_DEC
 };
 
 // Action types
 enum actKind{
-    ACT_PRINT,
+    ACT_MOV,
+    ACT_GOTO,
+    ACT_CALL,
     ACT_RET,
+    ACT_CLOK,
+    ACT_DRAW,
     ACT_IF,
     ACT_ELSE,
-    ACT_MOV,
-    ACT_R_CLK,
-    ACT_EXIT
+    ACT_EXIT,
+    ACT_PUSH,
+    ACT_POP,
+    ACT_PUSH_A,
+    ACT_POP_A,
+    ACT_OB1
 };
 
 // Comparison types
@@ -49,6 +59,10 @@ enum cmpKind{
     CMP_AND,
     CMP_NOT,
     CMP_XOR,
+    CMP_LT, // less than
+    CMP_GT, // greater than
+    CMP_LTE, // less than or equal
+    CMP_GTE, // greater than or equal
     CMP_EQ,
     CMP_NEQ // not equal
 };
@@ -62,7 +76,7 @@ enum regKind{
     RG_4,
     RG_5,
     RG_6,
-    RG_7,
+    RG_7
 };
 
 // Structs for operations nodes

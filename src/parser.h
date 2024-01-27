@@ -45,6 +45,26 @@ void parseFile(instList_t *nodeList, char *filename);
 instNode_t *parseLine(char *line, long nodeId, long lineNb);
 
 /*
+    Read the line and check if it is an operation
+    params:
+        char*: instruction to be checked
+        instNode_t*: pointer to the instruction node
+    returns:
+        bool: true if it is an operation
+*/
+bool isOp(char *inst, instNode_t *newNode);
+
+/*
+    Read the line and check if it is an action
+    params:
+        char*: instruction to be checked
+        instNode_t*: pointer to the instruction node
+    returns:
+        bool: true if it is an action
+*/
+bool isAct(char *inst, instNode_t *newNode);
+
+/*
     Get instruction from line
     params:
         line: line to be parsed
