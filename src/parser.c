@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <string.h>
 
-
+#include "stringPlus.h"
 #include "parser.h"
 
 #define LINE_MAX_SIZE 64
@@ -374,7 +374,6 @@ char *getInst(char *line) {
     return inst;
 }
 
-
 char **getInstArgs(char *line) {
     char **args = (char **)malloc(2 * sizeof(char *));
     if (!args) {
@@ -410,6 +409,13 @@ char **getInstArgs(char *line) {
 }
 
 void setArgs(instNode_t *node, char **args) {
+    // Clean the arguments
+    for (int i = 0; i < 2; i++) {
+        if (args[i] != NULL) {
+            args[i] = cleanString(args[i]);
+        }
+    }
+
     // Check type of the arguments
     if (args[0] == NULL) {
         node->arg0.i_value = 0;
@@ -620,66 +626,6 @@ bool isTarget(char *arg) {
     }
 
     return true;
-}
-
-int strToBin(char *arg) {
-    // Convert a string to binary
-    int bin = 0;
-    size_t size = strlen(arg);
-    for (size_t i = 2; i < size; i++) {
-        bin = bin * 2 + (arg[i] - '0');
-    }
-
-    return bin;
-}
-
-int strToOct(char *arg) {
-    // Convert a string to octal
-    int oct = 0;
-    size_t size = strlen(arg);
-    for (size_t i = 2; i < size; i++) {
-        oct = oct * 8 + (arg[i] - '0');
-    }
-
-    return oct;
-}
-
-int strToHex(char *arg) {
-    // Convert a string to hexadecimal
-    int hex = 0;
-    size_t size = strlen(arg);
-    for (size_t i = 2; i < size; i++) {
-        if (arg[i] >= '0' && arg[i] <= '9') {
-            hex = hex * 16 + (arg[i] - '0');
-        } else if (arg[i] >= 'a' && arg[i] <= 'f') {
-            hex = hex * 16 + (arg[i] - 'a' + 10);
-        } else if (arg[i] >= 'A' && arg[i] <= 'F') {
-            hex = hex * 16 + (arg[i] - 'A' + 10);
-        }
-    }
-
-    return hex;
-}
-
-char strToChar(char *arg) {
-    // Remove quotes from a string to get the char
-    return arg[1];
-}
-
-char *strToString(char *arg) {
-    // Remove quotes from a string to get the string
-    size_t size = strlen(arg);
-    char *string = malloc((size - 1) * sizeof(char));
-    if (!string) {
-        fprintf(stderr, "Memory allocation error\n");
-        exit(EXIT_FAILURE);
-    }
-
-    for (size_t i = 1; i < size - 1; i++) {
-        string[i - 1] = arg[i];
-    }
-
-    return string;
 }
 
 enum regKind strToReg(char *arg) {

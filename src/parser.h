@@ -182,51 +182,6 @@ bool isReg(char *arg);
 bool isTarget(char *arg);
 
 /*
-    Convert a string to binary
-    params:
-        arg: string to be converted
-    returns:
-        int: binary number
-*/
-int strToBin(char *arg);
-
-/*
-    Convert a string to octal
-    params:
-        arg: string to be converted
-    returns:
-        int: octal number
-*/
-int strToOct(char *arg);
-
-/*
-    Convert a string to hexadecimal
-    params:
-        arg: string to be converted
-    returns:
-        int: hexadecimal number
-*/
-int strToHex(char *arg);
-
-/*
-    Remove quotes from a string to get the char
-    params:
-        arg: string to be converted
-    returns:
-        char: char
-*/
-char strToChar(char *arg);
-
-/*
-    Remove quotes from a string to get the string
-    params:
-        arg: string to be converted
-    returns:
-        char*: string
-*/
-char *strToString(char *arg);
-
-/*
     Convert a string to a register
     params:
         arg: string to be converted
