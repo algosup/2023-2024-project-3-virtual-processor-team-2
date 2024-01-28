@@ -35,7 +35,7 @@ int strToHex(char *arg);
 char strToChar(char *arg);
 
 /*
-    Remove quotes from a string to get the string
+    Remove quotes at beginning and at the end of a string
     params:
         arg: string to be converted
     returns:

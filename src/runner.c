@@ -48,13 +48,17 @@ void runOpNode(instNode_t *node, varList_t *varList, labelList_t *labelList){
 }
 
 void runActNode(instNode_t *node, varList_t *varList, labelList_t *labelList){
-
+    // TODO: implement
 }
 
 void runLabelNode(instNode_t *node, labelList_t *labelList){
-
+    // TODO: implement
 }
 
 void opAdd(instNode_t *node, varList_t *varList){
-    
+    // TODO: implement
 }
+
+// TODO: implement other operations (sub, mul, div, mod, rshift, lshift, and, or, xor, not, neg, inc, dec)
+
+// TODO: implement actions (mov, goto, draw, call, ret, push, pop, pusha, popa, ngr, ob1, clok, if, else)

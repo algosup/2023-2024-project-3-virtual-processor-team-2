@@ -190,6 +190,24 @@ void printInstList(instList_t *list, char *dest);
 char *printArgs(instNode_t *node);
 
 /*
+    Print the kind of an operation
+    params:
+        op: operation kind
+    returns:
+        char*: string with the operation kind
+*/
+char *printOPKind(enum opKind op);
+
+/*
+    Print the kind of an action
+    params:
+        act: action kind
+    returns:
+        char*: string with the action kind
+*/
+char *printACTKind(enum actKind act);
+
+/*
     Read nodes from the instruction list and build the program
     params:
         nodeList: pointer to the instruction list

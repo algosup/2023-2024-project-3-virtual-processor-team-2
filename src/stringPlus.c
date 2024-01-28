@@ -50,19 +50,18 @@ char strToChar(char *arg) {
 }
 
 char *strToString(char *arg) {
-    // Remove quotes from a string to get the string
+    // Remove quotes at beginning and at the end of a string
     size_t size = strlen(arg);
-    char *string = malloc((size - 1) * sizeof(char));
-    if (!string) {
+    char *str = malloc((size - 1) * sizeof(char));
+    if (!str) {
         fprintf(stderr, "Memory allocation error\n");
         exit(EXIT_FAILURE);
     }
 
-    for (size_t i = 1; i < size - 1; i++) {
-        string[i - 1] = arg[i];
-    }
+    strncpy(str, arg + 1, size - 2);
+    str[size - 2] = '\0';  // Null-terminate the string
 
-    return string;
+    return str;
 }
 
 char *cleanString(char *str) {
