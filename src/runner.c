@@ -1,3 +1,7 @@
+/*
+    This file contains the functions that run the instructions in the instList_t
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 

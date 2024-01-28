@@ -1,3 +1,7 @@
+/*
+    This file contains functions to manipulate strings.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -105,18 +105,20 @@ typedef struct var{
 
 // Structs for variable list
 typedef struct varList{
+    size_t size;
     var_t *list;
 } varList_t;
 
 // Structs for label storage
 typedef struct label{
     char *name;
-    long node_id;
+    long nodeId;
     long id;
 } label_t;
 
 // Structs for label list
 typedef struct labelList{
+    size_t size;
     label_t *list;
 } labelList_t;
 
@@ -208,9 +210,50 @@ char *printOPKind(enum opKind op);
 char *printACTKind(enum actKind act);
 
 /*
+    Print variable list to a file
+    params:
+        list: pointer to the variable list
+        dest: destination file
+*/
+void printVarList(varList_t *list, char *dest);
+
+/*
+    Print label list to a file
+    params:
+        list: pointer to the label list
+        dest: destination file
+*/
+void printLabelList(labelList_t *list, char *dest);
+
+/*
     Read nodes from the instruction list and build the program
     params:
         nodeList: pointer to the instruction list
         labelList: pointer to the label list    
 */
 void build(instList_t *nodeList, labelList_t *labelList);
+
+/*
+    Build an operation node
+    params:
+        node: pointer to the instruction node
+        varList: pointer to the variable list
+*/
+void buildOpNode(instNode_t *node, varList_t *varList);
+
+/*
+    Build an action node
+    params:
+        node: pointer to the instruction node
+        varList: pointer to the variable list
+        labelList: pointer to the label list
+*/
+void buildActNode(instNode_t *node, varList_t *varList, labelList_t *labelList);
+
+/*
+    Build a label node
+    params:
+        node: pointer to the instruction node
+        labelList: pointer to the label list
+*/
+void buildLabelNode(instNode_t *node, labelList_t *labelList);

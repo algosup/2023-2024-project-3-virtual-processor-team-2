@@ -1,3 +1,8 @@
+/*
+    This file aims to be the main file of the project
+    It will call the parser, builder and runner
+*/
+
 #include <stdlib.h>
 #include "runner.h"
 #include "iat2.h"
@@ -17,10 +22,12 @@ int main(int argc, char *argv[]) {
 
     // Init variables list struct
     varList_t *varList = malloc(sizeof(varList_t));
+    varList->size = 0;
     varList->list = NULL;
 
     // Init labels list struct
     labelList_t *labelList = malloc(sizeof(labelList_t));
+    labelList->size = 0;
     labelList->list = NULL;
 
     // Init instructions list struct
@@ -30,10 +37,19 @@ int main(int argc, char *argv[]) {
     // run parser
     parseFile(instList, argv[1]);
 
-    printInstList(instList, "../bin/out.txt");
-
+    if(flags.debug) {
+        printInstList(instList, "../bin/out0.txt");
+        printVarList(varList, "../bin/out0.txt");
+        printLabelList(labelList, "../bin/out0.txt");
+    }
     // run builder
-    // TODO: make the function build
+    // build(instList, labelList);
+
+    // if(flags.debug) {
+    //     printInstList(instList, "../bin/out1.txt");
+    //     printVarList(varList, "../bin/out1.txt");
+    //     printLabelList(labelList, "../bin/out1.txt");
+    // }
 
     // run runner
     // TODO: make the function run

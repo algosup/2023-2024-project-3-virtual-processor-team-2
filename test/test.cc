@@ -1,3 +1,7 @@
+/*
+  This file is part of the test suite of at2 project
+*/
+
 #include <cassert>
 #include <cstdlib>
 #include <cstring>

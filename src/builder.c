@@ -1,5 +1,11 @@
+/*
+    This file is the builder of the project
+    It will read the instruction list and build the program
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "builder.h"
 
@@ -19,7 +25,7 @@ void printInstList(instList_t *list, char *dest){
                 fprintf(file, "%ld(ACT): %s %s\n", node->id, printACTKind(node->nodeType.act->act), printArgs(node));
                 break;
             case INST_LABEL:
-                fprintf(file, "%ld(LAB): %s:\n", node->id, node->nodeType.label);
+                fprintf(file, "%ld(LAB): %s\n", node->id, node->arg0.target);
                 break;
             case INST_VAR:
                 fprintf(file, "%ld(VAR): %s\n", node->id, printArgs(node));
@@ -161,6 +167,76 @@ char *printACTKind(enum actKind act){
     }
 }
 
+void printVarList(varList_t *list, char *dest){
+    FILE *file = fopen(dest, "a");
+    if(file == NULL){
+        fprintf(stderr, "Error opening file\n");
+        exit(EXIT_FAILURE);
+    }
+    for(size_t i = 0; i < list->size; i++){
+        switch(list->list[i].type){
+            case VAR_INT:
+                fprintf(file, "%s: %d(int)\n", list->list[i].name, list->list[i].value.i_value);
+                break;
+            case VAR_FLOAT:
+                fprintf(file, "%s: %f(float)\n", list->list[i].name, list->list[i].value.f_value);
+                break;
+            case VAR_CHAR:
+                fprintf(file, "%s: %c(char)\n", list->list[i].name, list->list[i].value.c_value);
+                break;
+            case VAR_STRING:
+                fprintf(file, "%s: %s(string)\n", list->list[i].name, list->list[i].value.s_value);
+                break;
+            default:
+                fprintf(stderr, "Invalid variable type\n");
+                exit(EXIT_FAILURE);
+        }
+    }
+    
+    fclose(file);
+}
+
+void printLabelList(labelList_t *list, char *dest){
+    FILE *file = fopen(dest, "a");
+    if(file == NULL){
+        fprintf(stderr, "Error opening file\n");
+        exit(EXIT_FAILURE);
+    }
+    for(size_t i = 0; i < list->size; i++){
+        fprintf(file, "%s: %ld, node id: %ld\n", list->list[i].name, list->list[i].id, list->list[i].nodeId);
+    }
+    fclose(file);
+}
+
 void build(instList_t *nodeList, labelList_t *labelList){
-    // TODO: make the function build
+    // read the list of instructions
+    instNode_t *currNode = nodeList->head;
+    while (currNode != NULL)
+    {
+        // Check if node is an operation
+        // Build operation
+
+        // Check if node is an action
+        // Build action
+
+        // Check if node is a label
+        // Build label
+    }
+    
+}
+
+void buildOpNode(instNode_t *node, varList_t *varList){
+}
+
+void buildActNode(instNode_t *node, varList_t *varList, labelList_t *labelList){
+}
+
+void buildLabelNode(instNode_t *node, labelList_t *labelList){
+    // Check if label is already in the list
+    for(size_t i = 0; i < labelList->size; i++){
+        if(strcmp(labelList->list[i].name, node->arg0.target) == 0){
+            fprintf(stderr, "Label %s already declared\n", node->arg0.target);
+            exit(EXIT_FAILURE);
+        }
+    }
 }

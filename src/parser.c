@@ -1,3 +1,7 @@
+/*
+    This file aims to be the parser of the project
+    It will parse the file and create the instruction list
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
