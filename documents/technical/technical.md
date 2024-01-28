@@ -1,3 +1,10 @@
+<!-- TODO:
+- Changing the way I'm linking the definition for the glossary, removing the part use in it
+- Complete the parts:
+   - File architecture
+   - Development environment
+   - Adding a convention part with all the conventions used for the project (commits, etc...). Use technical of team 3 as a model-->
+
 ### Technical Specifications Document
 ### ALGOSUP Project 3, 2024
 
@@ -16,12 +23,14 @@
 <summary>Table of contents</summary>
 
 1. [Introduction](#1-introduction)
-   1. [Target audience](#11-target-audience)
-   2. [Main deliverable](#12-main-deliverable)
-   3. [Functional and technical requirements](#13-functional-and-technical-requirements)
-   4. [Constraints](#14-constraints)
-   5. [Out of scope](#15-out-of-scope)
-   6. [Algorithm architecture](#16-algorithm-architecture)
+   1. [File architecture](#11-file-architecture)
+   2. [Target audience](#12-target-audience)
+   3. [Main deliverable](#13-main-deliverable)
+   4. [Development environment](#14-development-environment))
+   5. [Functional and technical requirements](#15-functional-and-technical-requirements)
+   6. [Constraints](#16-constraints)
+   7. [Out of scope](#17-out-of-scope)
+   8. [Algorithm architecture](#18-algorithm-architecture)
 2. [Project overview](#2-project-overview)
 3. [Virtual processor specifications](#3-virtual-processor-specifications)
    1. [Virtual processor](#31-virtual-processor)
@@ -54,7 +63,11 @@
 
 The goal of this project is to create an **[interpreter](#interpreter)** to run a new **[Assembly language](#Assembly-language)** on its **[virtual processor](#virtual-processor)** that we created on our own, whether from scratch or by inspiring of already existing Assembly. We chose to focus the development of the project on small and limited 16 bits processor. 
 
-### 1.1 Target audience
+### 1.1 File architecture
+
+**TODO**
+
+### 1.2 Target audience
 
 **This document is meant mainly for:**
 
@@ -67,11 +80,15 @@ The goal of this project is to create an **[interpreter](#interpreter)** to run 
 - Project manager: to assist in determining dependencies and hazards.
 
 
-### 1.2 Main deliverable
+### 1.3 Main deliverable
 
 The goal of the project is to create an interpreter for running Assembly code on its virtual processor.
 
-### 1.3 Functional and technical requirements
+### 1.4 Development environment
+
+**TODO**
+
+### 1.5 Functional and technical requirements
 
 #### Functional requirements
 
@@ -89,16 +106,16 @@ The complete functional specifications document here: [functional specification]
 - **Documentation**: Comprehensive and exhaustive guides for both users and developers.
 - **Testing**: Comprehensive unit and integration testing for ensuring system integrity.
 
-### 1.4 Constraints
+### 1.6 Constraints
 
 - The project will be developed in plain, portable, C language without using any external library besides C standard libraries.
 
-### 1.5 Out of scope
+### 1.7 Out of scope
 
 - The product does not require to have an advanced UI.
 - The product has no purpose to be an assembler to return binary files. 
 
-### 1.6 Algorithm architecture
+### 1.8 Algorithm architecture
 ![Alt text](./image.png)
 
 ---
