@@ -8,8 +8,6 @@
 
 #define LINE_MAX_SIZE 64
 
-enum regKind targetReg = RG_0;
-
 flags_t parseArgs(int argc, char *argv[]){
     if(argc > 3){
         fprintf(stderr, "Too many arguments\n Try 'iat2 --help' for more information\n");
@@ -116,10 +114,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
     newNode->id = nodeId;
 
     // Set arguments
-    newNode->arg0 = args[0];
-    newNode->arg1 = args[1];
-    // Set target register
-    newNode->targetReg = targetReg;
+    setArgs(newNode, args);
 
     bool isThatKind = false;
     // Check if the instruction is an operation
@@ -143,7 +138,6 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
     // Trow error if the line is not an instruction
     fprintf(stderr, "\"%s\" Is not a valid instruction. line %ld\n", line, lineNb);
     exit(EXIT_FAILURE);
-
 }
 
 bool isOp(char *inst, instNode_t *newNode){
@@ -415,6 +409,303 @@ char **getInstArgs(char *line) {
     return args;
 }
 
+void setArgs(instNode_t *node, char **args) {
+    // Check type of the arguments
+    if (args[0] == NULL) {
+        node->arg0.i_value = 0;
+    }
+    else{
+        if (isInt(args[0])) {
+            node->arg0.i_value = atoi(args[0]);
+            node->arg0Type = VAR_INT;
+        }
+        else if(isBinary(args[0])){
+            node->arg0.i_value = strToBin(args[0]);
+            node->arg0Type = VAR_INT;
+        }
+        else if(isOctal(args[0])){
+            node->arg0.i_value = strToOct(args[0]);
+            node->arg0Type = VAR_INT;
+        }
+        else if(isHex(args[0])){
+            node->arg0.i_value = strToHex(args[0]);
+            node->arg0Type = VAR_INT;
+        }
+        else if(isFloat(args[0])){
+            node->arg0.f_value = strtof(args[0], NULL);
+            node->arg0Type = VAR_FLOAT;
+        }
+        else if(isChar(args[0])){
+            node->arg0.c_value = strToChar(args[0]);
+            node->arg0Type = VAR_CHAR;
+        }
+        else if(isString(args[0])){
+            node->arg0.s_value = strToString(args[0]);
+            node->arg0Type = VAR_STRING;
+        }
+        else if(isReg(args[0])){
+            node->arg0.reg = strToReg(args[0]);
+            node->arg0Type = VAR_REG;
+        }
+        else if(isTarget(args[0])){
+            node->arg0.target = args[0];
+            node->arg0Type = VAR_TARGET;
+        }
+        else{
+            fprintf(stderr, "Invalid argument\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    if (args[1] == NULL) {
+        node->arg1.i_value = 0;
+    }
+    else{
+        if (isInt(args[1])) {
+            node->arg1.i_value = atoi(args[1]);
+            node->arg1Type = VAR_INT;
+        }
+        else if(isBinary(args[1])){
+            node->arg1.i_value = strToBin(args[1]);
+            node->arg1Type = VAR_INT;
+        }
+        else if(isOctal(args[1])){
+            node->arg1.i_value = strToOct(args[1]);
+            node->arg1Type = VAR_INT;
+        }
+        else if(isHex(args[1])){
+            node->arg1.i_value = strToHex(args[1]);
+            node->arg1Type = VAR_INT;
+        }
+        else if(isFloat(args[1])){
+            node->arg1.f_value = strtof(args[1], NULL);
+            node->arg1Type = VAR_FLOAT;
+        }
+        else if(isChar(args[1])){
+            node->arg1.c_value = strToChar(args[1]);
+            node->arg1Type = VAR_CHAR;
+        }
+        else if(isString(args[1])){
+            node->arg1.s_value = strToString(args[1]);
+            node->arg1Type = VAR_STRING;
+        }
+        else if(isReg(args[1])){
+            node->arg1.reg = strToReg(args[1]);
+            node->arg1Type = VAR_REG;
+        }
+        else if(isTarget(args[1])){
+            node->arg1.target = args[1];
+            node->arg1Type = VAR_TARGET;
+        }
+        else{
+            fprintf(stderr, "Invalid argument\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+}
+
+bool isInt(char *arg) {
+    // Check if the argument is a number
+    size_t size = strlen(arg);
+    for (size_t i = 0; i < size; i++) {
+        if (arg[i] < '0' || arg[i] > '9') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool isBinary(char *arg) {
+    // Check if the argument is a binary number
+    size_t size = strlen(arg);
+    if (size < 3 || arg[0] != '0' || arg[1] != 'b') {
+        return false;
+    }
+
+    for (size_t i = 2; i < size; i++) {
+        if (arg[i] != '0' && arg[i] != '1') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool isOctal(char *arg) {
+    // Check if the argument is a octal number
+    size_t size = strlen(arg);
+    if (size < 3 || arg[0] != '0' || arg[1] != 'o') {
+        return false;
+    }
+
+    for (size_t i = 2; i < size; i++) {
+        if (arg[i] < '0' || arg[i] > '7') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool isHex(char *arg) {
+    // Check if the argument is a hexadecimal number
+    size_t size = strlen(arg);
+    if (size < 3 || arg[0] != '0' || arg[1] != 'x') {
+        return false;
+    }
+
+    for (size_t i = 2; i < size; i++) {
+        if ((arg[i] < '0' || arg[i] > '9') && (arg[i] < 'a' || arg[i] > 'f') && (arg[i] < 'A' || arg[i] > 'F')) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool isFloat(char *arg) {
+    // Check if the argument is a float
+    size_t size = strlen(arg);
+    bool dot = false;
+    for (size_t i = 0; i < size; i++) {
+        if (arg[i] < '0' || arg[i] > '9') {
+            if (arg[i] == '.' && !dot) {
+                dot = true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+bool isChar(char *arg) {
+    // Check if the argument is a char
+    size_t size = strlen(arg);
+    if (size != 3 || arg[0] != '\'' || arg[2] != '\'') {
+        return false;
+    }
+
+    return true;
+}
+
+bool isString(char *arg) {
+    // Check if the argument is a string
+    size_t size = strlen(arg);
+    if (size < 3 || arg[0] != '"' || arg[size - 1] != '"') {
+        return false;
+    }
+
+    return true;
+}
+
+bool isReg(char *arg) {
+    // Check if the argument is a register
+    if (strlen(arg) != 3 || arg[0] != 'r' || arg[1] != 'g' || arg[2] < '0' || arg[2] > '7') {
+        return false;
+    }
+
+    return true;
+}
+
+bool isTarget(char *arg) {
+    // Check if the argument contain other characters than letters, numbers and underscores
+    for (size_t i = 0; i < strlen(arg); i++) {
+        if ((arg[i] < 'a' || arg[i] > 'z') && (arg[i] < 'A' || arg[i] > 'Z') && (arg[i] < '0' || arg[i] > '9') && arg[i] != '_') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int strToBin(char *arg) {
+    // Convert a string to binary
+    int bin = 0;
+    size_t size = strlen(arg);
+    for (size_t i = 2; i < size; i++) {
+        bin = bin * 2 + (arg[i] - '0');
+    }
+
+    return bin;
+}
+
+int strToOct(char *arg) {
+    // Convert a string to octal
+    int oct = 0;
+    size_t size = strlen(arg);
+    for (size_t i = 2; i < size; i++) {
+        oct = oct * 8 + (arg[i] - '0');
+    }
+
+    return oct;
+}
+
+int strToHex(char *arg) {
+    // Convert a string to hexadecimal
+    int hex = 0;
+    size_t size = strlen(arg);
+    for (size_t i = 2; i < size; i++) {
+        if (arg[i] >= '0' && arg[i] <= '9') {
+            hex = hex * 16 + (arg[i] - '0');
+        } else if (arg[i] >= 'a' && arg[i] <= 'f') {
+            hex = hex * 16 + (arg[i] - 'a' + 10);
+        } else if (arg[i] >= 'A' && arg[i] <= 'F') {
+            hex = hex * 16 + (arg[i] - 'A' + 10);
+        }
+    }
+
+    return hex;
+}
+
+char strToChar(char *arg) {
+    // Remove quotes from a string to get the char
+    return arg[1];
+}
+
+char *strToString(char *arg) {
+    // Remove quotes from a string to get the string
+    size_t size = strlen(arg);
+    char *string = malloc((size - 1) * sizeof(char));
+    if (!string) {
+        fprintf(stderr, "Memory allocation error\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (size_t i = 1; i < size - 1; i++) {
+        string[i - 1] = arg[i];
+    }
+
+    return string;
+}
+
+enum regKind strToReg(char *arg) {
+    // Convert a string to a register
+    switch (arg[2]) {
+        case '0':
+            return RG_0;
+        case '1':
+            return RG_1;
+        case '2':
+            return RG_2;
+        case '3':
+            return RG_3;
+        case '4':
+            return RG_4;
+        case '5':
+            return RG_5;
+        case '6':
+            return RG_6;
+        case '7':
+            return RG_7;
+        default:
+            fprintf(stderr, "Invalid register\n");
+            exit(EXIT_FAILURE);
+    }
+}
 
 void checkAOPFile(char* fileName) {
     size_t size = strlen(fileName);

@@ -1,11 +1,11 @@
 // Variables types
 enum varKind{
     VAR_INT,
-    VAR_U_INT,
     VAR_FLOAT,
     VAR_CHAR,
-    VAR_U_CHAR,
-    VAR_STRING
+    VAR_STRING,
+    VAR_REG,
+    VAR_TARGET,
 };
 
 // Instruction types
@@ -79,6 +79,47 @@ enum regKind{
     RG_7
 };
 
+// Struct for register
+typedef struct reg{
+    enum regKind name;
+    enum varKind type;
+    union{
+        int i_value;
+        float f_value;
+        char c_value;
+        char * s_value;
+        }value;
+} reg_t;
+
+// Structs for variable storage
+typedef struct var{
+    char *name;
+    enum varKind type;
+    union{
+        int i_value;
+        float f_value;
+        char c_value;
+        char * s_value;
+        }value;
+} var_t;
+
+// Structs for variable list
+typedef struct varList{
+    var_t *list;
+} varList_t;
+
+// Structs for label storage
+typedef struct label{
+    char *name;
+    long node_id;
+    long id;
+} label_t;
+
+// Structs for label list
+typedef struct labelList{
+    label_t *list;
+} labelList_t;
+
 // Structs for operations nodes
 typedef struct opNode{
     enum opKind op;
@@ -105,8 +146,24 @@ typedef struct instNode{
         char *label;
     } nodeType;
     struct instNode *next;
-    char *arg0;
-    char *arg1;
+    enum varKind arg0Type;
+    union{
+        int i_value;
+        float f_value;
+        char c_value;
+        char * s_value;
+        enum regKind reg;
+        char * target; // to target variable or label
+        }arg0;
+    enum varKind arg1Type;
+    union{
+        int i_value;
+        float f_value;
+        char c_value;
+        char * s_value;
+        enum regKind reg;
+        char * target;
+        }arg1;
     enum regKind targetReg;
 } instNode_t;
 
@@ -115,37 +172,6 @@ typedef struct instList{
     instNode_t *head;
 } instList_t;
 
-// Structs for variable storage
-typedef struct var{
-    char *name;
-    enum varKind type;
-    union{
-        int i_value;
-        unsigned int u_i_value;
-        float f_value;
-        char c_value;
-        unsigned char u_c_value;
-        char * s_value;
-        }value;
-} var_t;
-
-// Structs for variable list
-typedef struct varList{
-    var_t *list;
-} varList_t;
-
-// Structs for label storage
-typedef struct label{
-    char *name;
-    long node_id;
-    long id;
-} label_t;
-
-// Structs for label list
-typedef struct labelList{
-    label_t *list;
-} labelList_t;
-
 /*
     Print the instruction list to a file
     params:
@@ -153,3 +179,20 @@ typedef struct labelList{
         dest: destination file
 */
 void printInstList(instList_t *list, char *dest);
+
+/*
+    Print arguments of an instruction node
+    params:
+        node: pointer to the instruction node
+    returns:
+        char*: string with the arguments
+*/
+char *printArgs(instNode_t *node);
+
+/*
+    Read nodes from the instruction list and build the program
+    params:
+        nodeList: pointer to the instruction list
+        labelList: pointer to the label list    
+*/
+void build(instList_t *nodeList, labelList_t *labelList);
