@@ -21,6 +21,9 @@ void printInstList(instList_t *list, char *dest){
             case INST_LABEL:
                 fprintf(file, "%ld: %s:\n", node->id, node->nodeType.label);
                 break;
+            case INST_VAR:
+                fprintf(file, "%ld: %s %s\n", node->id, node->arg0, node->arg1);
+                break;
             default:
                 fprintf(stderr, "Invalid instruction\n");
                 exit(EXIT_FAILURE);

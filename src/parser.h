@@ -65,6 +65,18 @@ bool isOp(char *inst, instNode_t *newNode);
 bool isAct(char *inst, instNode_t *newNode);
 
 /*
+    Read the line and check if it is a declaration for a label or a variable
+    params:
+        char*: instruction to be checked
+        instNode_t*: pointer to the instruction node
+    returns:
+        bool: true if it is a label
+*/
+bool isDecla(char *inst, instNode_t *newNode);
+
+
+
+/*
     Get instruction from line
     params:
         line: line to be parsed

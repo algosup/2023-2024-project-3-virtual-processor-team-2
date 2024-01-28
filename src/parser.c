@@ -75,7 +75,7 @@ void parseFile(instList_t *nodeList, char *filename){
     char line[LINE_MAX_SIZE];
     instNode_t *lastNode = NULL;
     long nodeId = 0;
-    long lineNb = 0;
+    long lineNb = 1;
 
     // read the file line by line
     while(fgets(line, LINE_MAX_SIZE, file)){
@@ -130,6 +130,12 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
 
     // Check if the instruction is an action
     isThatKind = isAct(inst, newNode);
+    if(isThatKind){
+        return newNode;
+    }
+
+    // Check if the instruction is a declaration
+    isThatKind = isDecla(inst, newNode);
     if(isThatKind){
         return newNode;
     }
@@ -335,6 +341,19 @@ bool isAct(char *inst, instNode_t *newNode){
         newNode->nodeType.act = malloc(sizeof(actNode_t));
         // Set type of action
         newNode->nodeType.act->act = ACT_OB1;
+        return true;
+    }
+
+    return false;
+}
+
+bool isDecla(char *inst, instNode_t *newNode){
+    if(strcmp(inst, "lab") == 0){
+        newNode->inst = INST_LABEL;
+        return true;
+    }
+    else if(strcmp(inst, "var") == 0){
+        newNode->inst = INST_VAR;
         return true;
     }
 
