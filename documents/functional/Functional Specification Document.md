@@ -1,7 +1,7 @@
 ﻿# **ALGOSUP Team 2**
 ## **Functional Specification Document**
 
-### **DOCUMENT VERSION 0.5**
+### **DOCUMENT VERSION 0.6**
 
 **01/22/2024**
 
@@ -23,6 +23,7 @@
 | 1/26/2024 |    0.4.1    | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
 | 1/26/2024 |    0.4.2    | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
 | 1/27/2024 |     0.5     | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
+| 1/27/2024 |     0.6     | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
 |           |             |                 |                     |
 
 **APPROVALS**
@@ -80,28 +81,28 @@
 </details>
 
 # **1. Introduction**
-The goal of the project is to create a [Virtual Processor](#Virtual-Processor-id) and an [Interpreter](#Interpreter-id) for running assembly code on that processor. We need to create our [Assembly Language](#112-assembly-language), create a [C](#C-id) program using [C Standard Libraries](#C-Standard-Libraries_id) that can read text files, detect semantic and syntactical errors. We also need to implement a virtual system displaying text in a [Virtual Terminal](#Virtual-Terminal-id), that can be accessed from the assembly code.
+The goal of the project is to create a [virtual processor](#Virtual-Processor-id) and an [interpreter](#Interpreter-id) for running assembly code on that processor. We need to create our [assembly language](#112-assembly-language), create a [C](#C-id) program using [C Standard Libraries](#C-Standard-Libraries_id) that can read text files, detect semantic and syntactical errors. We also need to implement a virtual system displaying text in a [Virtual Terminal](#Virtual-Terminal-id), that can be accessed from the assembly code.
 
 ## **1.1 Purpose of the document**
 The Functional Specification Document is a document that provides detailed information. This document is created based on the high-level requirements identified in the Call For Tender and provides traceability on the functional specifications. Included in this document will be the detailed functional requirements including use cases, system inputs and outputs, process flows, diagrams, and mock-ups.
 
 ## **1.2 Project Scope**
-The main goal is to create our own [Assembly Language](#Assembly-Language-id), which would be more understandable, readable, and easier to use than traditional Assembly Languages.
- Moreover, also creates an [Interpreter](#Interpreter-id) capable of reading and compiling these files. The compiled code can then be run on emulated small and limited devices, providing an extended range of functionalities for users.
+The main goal is to create our own [assembly language](#Assembly-Language-id), which would be more understandable, readable, and easier to use than traditional Assembly Languages.
+ Moreover, also creates an [interpreter](#Interpreter-id) capable of reading and compiling these files. The compiled code can then be run on emulated small and limited devices, providing an extended range of functionalities for users.
 
-   - Creation of a specialized [Assembly Language](#Assembly-Language-id) for small devices with a limited amount of capacities.
-   - Creation of an [Interpreter](#Interpreter-id) which will be able to run the code provided in our new language.
+   - Creation of a specialized [assembly language](#Assembly-Language-id) for small devices with a limited amount of capacities.
+   - Creation of an [interpreter](#Interpreter-id) which will be able to run the code provided in our new language.
    - The whole project will be create using [C](#C-id) language (version [C99](#C99-id))
 
 ## **1.3 Out of Scope** 
 ### **1.3.1 Facilities**
 We have outlined certain out-of-scope features designed to assist developers and clients in comprehending the product's amelioration:
  
-   - Implementation of a [Debugger](#Debugger-id), facilitating a clear understanding of program execution and helping in comprehending how the [Virtual Processor](#Virtual-Processor-id) interprets the language.
-   - The implementation of a verbose mode which gives more information when the code is running.
+   - Implementation of a [debugger](#Debugger-id), facilitating a clear understanding of program execution and helping in comprehending how the [virtual processor](#Virtual-Processor-id) interprets the language.
+   - The implementation of a [verbose mode](#Verbose-mode-id) which gives more information when the code is running.
    
 ### **1.3.2 Code Structure**
-- In the future, we aim to create an [Assembler](#Assembler-id) system that would give more efficiency for the program execution. 
+- In the future, we aim to create an [assembler](#Assembler-id) system that would give more efficiency for the program execution. 
 
 ## **1.4 Related documents**
 
@@ -112,7 +113,7 @@ We have outlined certain out-of-scope features designed to assist developers and
 ## **1.5 Risks and Assumptions**
 ### Risks
 - **Technical challenges:**
-  - Unforeseen technical challenges in the [Virtual Processor](#Virtual-Processor-id) functioning.
+  - Unforeseen technical challenges in the [virtual processor](#Virtual-Processor-id) functioning.
   - Achieving the project in time without delays, developing the desired functionalities.
 
 - **Resource constraints:**
@@ -124,17 +125,17 @@ We have outlined certain out-of-scope features designed to assist developers and
 
 ### Assumptions
 - **Technical expertise:**
-  - The development team possesses the necessary technical expertise in [Assembly Language](#Assembly-Language-id), [C](#C-id) language and Parser to successfully create it.
-  - The team has done a lot of research based on [Virtual Processor](#Virtual-Processor-id) functioning and architecture.
+  - The development team possesses the necessary technical expertise in [assembly language](#Assembly-Language-id), [C](#C-id) language and Parser to successfully create it.
+  - The team has done a lot of research based on [virtual processor](#Virtual-Processor-id) functioning and architecture.
   
 - **User engagement:**
-  - Users will engage positively with our own [Assembly Language](#Assembly-Language-id), fostering community participation for its use it and potential future enhancements.
+  - Users will engage positively with our own [assembly language](#Assembly-Language-id), fostering community participation for its use it and potential future enhancements.
 
 - **Timely completion:**
   - The project assumes that it will be completed within the specified timeline, avoiding significant delays or disruptions.
   
 - **Quality assurance:**
-  - The testing and quality assurance processes will effectively identify and address any bugs or issues, ensuring a polished and functional [Virtual Processor](#Virtual-Processor-id) with our language and our [Interpreter](#Interpreter-id).
+  - The testing and quality assurance processes will effectively identify and address any bugs or issues, ensuring a polished and functional [virtual processor](#Virtual-Processor-id) with our language and our [interpreter](#Interpreter-id).
 
 # **2. System/ Solution Overview**
 Our system is made up of three parts, which are:
@@ -149,7 +150,7 @@ Our system is made up of three parts, which are:
 | :-----------: | :-----------------------------: | :------------------: | :-------------------------------------------------------------------: |
 |  Developers   | Alex Johnson, Software Engineer |         Rare         | Want to update his own server to make it more efficient and optimized |
 |  Student   | Chelseah Mehr, High School Student |         Rare         | Want to learn about programming languages and to be introduced to Assembly Language|
-|  Administration | Richard Richards, System adminitrator |         Occasional         | Want to create dependencies to allow some developpers of his team to work with the [Virtual Processor](#Virtual-Processor-id) |
+|  Administration | Richard Richards, System adminitrator |         Occasional         | Want to create dependencies to allow some developpers of his team to work with the [virtual processor](#Virtual-Processor-id) |
 
 ## **2.2 Dependencies and Change Impacts**
 ### **2.2.1 System Dependencies**
@@ -157,9 +158,9 @@ Our system is made up of three parts, which are:
 |   **System Name**    |            **Use Case/Utility**            |                                                                                                                                                                        **Description**                                                                                                                                                                         |
 | :------------------: | :----------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | [C Standard Libraries](#C-Standard-Libraries-id) | Fundamental building blocks for [C](#C-id) programs |                                                                                                        Essential libraries that provide standard functions and macros for tasks such as input/output, string manipulation, memory management, and more.                                                                                                        |
-|         g++          |       Compilation of C++ unit tests        |                                                                                                                                               The [GNU](#GNU-id) C++ [Compiler](#Compiler-id), used for compiling programs written in C++.                                                                                                                                                |
-|         gcc          |         Compilation of [C](#C-id) programs          |                                                                                                          The [GNU](#GNU-id) [Compiler](#Compiler-id) Collection, an optimizing [Compiler](#Compiler-id) supporting various programming languages, hardware architectures, and operating systems.                                                                                                          |
-|        CMake         |     [Build](#Build-id) automation and configuration     |                                                                         Handles aspects like cross-platform builds, system introspection, and user-customized builds. CMake is used for automation, testing, packaging, and installation of software in a [Compiler](#Compiler-id)-independent manner.                                                                         |
+|         g++          |       Compilation of C++ unit tests        |                                                                                                                                               The [GNU](#GNU-id) C++ [compiler](#Compiler-id), used for compiling programs written in C++.                                                                                                                                                |
+|         gcc          |         Compilation of [C](#C-id) programs          |                                                                                                          The [GNU](#GNU-id) [compiler](#Compiler-id) Collection, an optimizing [compiler](#Compiler-id) supporting various programming languages, hardware architectures, and operating systems.                                                                                                          |
+|        CMake         |     [build](#Build-id) automation and configuration     |                                                                         Handles aspects like cross-platform builds, system introspection, and user-customized builds. CMake is used for automation, testing, packaging, and installation of software in a [compiler](#Compiler-id)-independent manner.                                                                         |
 |  Visual Studio Code  |         Multi-language code editor         |                                                                                                        A versatile code editor that supports coding in multiple programming languages. Visual Studio Code is free and helps users start coding quickly.                                                                                                        |
 | New Extension: [.aop](#aop-id)  |             Custom File Format             | Represents files in a custom format used by the software application. The software should be able to read, write, and manipulate files with the [.aop](#aop-id) extension. Ensure that users are aware of this new extension and can associate it with the software application. Consider any additional dependencies related to the handling of this custom file format. |
 
@@ -170,15 +171,15 @@ Our system is made up of three parts, which are:
 
 **G++ (GNU C++ Compiler):**
 - **Impact:** Unit Testing Framework Compatibility.
-- **Details:** Updates or changes in the G++ [Compiler](#Compiler-id) may impact the compatibility of C++ unit testing frameworks or the compilation process of existing test suites. Developers may need to update test configurations accordingly.
+- **Details:** Updates or changes in the G++ [compiler](#Compiler-id) may impact the compatibility of C++ unit testing frameworks or the compilation process of existing test suites. Developers may need to update test configurations accordingly.
 
 **GCC (GNU Compiler Collection):**
 - **Impact:** Source Code Compatibility.
-- **Details:** Changes in the behavior of the GCC [Compiler](#Compiler-id) may impact the compilation of existing [C](#C-id) programs. Developers should review and update source code if necessary to maintain compatibility.
+- **Details:** Changes in the behavior of the GCC [compiler](#Compiler-id) may impact the compilation of existing [C](#C-id) programs. Developers should review and update source code if necessary to maintain compatibility.
 
 **CMake:**
-- **Impact:** [Build](#Build-id) System Configuration.
-- **Details:** Any changes to CMake may impact the [Build](#Build-id) configurations of the project. This includes adjustments for cross-platform builds, system introspection, or customized [Build](#Build-id) settings. Developers need to update CMakeLists.txt files accordingly.
+- **Impact:** [build](#Build-id) System Configuration.
+- **Details:** Any changes to CMake may impact the [build](#Build-id) configurations of the project. This includes adjustments for cross-platform builds, system introspection, or customized [build](#Build-id) settings. Developers need to update CMakeLists.txt files accordingly.
 
 **Visual Studio Code:**
 - **Impact:** Development Environment.
@@ -195,8 +196,8 @@ Text file (.aop)
 Interpreter ([IAT2](#IAT2-id))
    - Will be composed of three main parts:
       - The Parser will transform AT2 into adata structure for the Builder.
-      - The Builder will rework the data structure to make the program executable for the [Virtual Processor](#Virtual-Processor-id).
-      - The [Virtual Processor](#Virtual-Processor-id) will run the program.
+      - The Builder will rework the data structure to make the program executable for the [virtual processor](#Virtual-Processor-id).
+      - The [virtual processor](#Virtual-Processor-id) will run the program.
 
 [Virtual Terminal](#Virtual-Terminal-id)
    - Will display information about the program previously run in the given input file.
@@ -267,7 +268,7 @@ The text file should be compatible with various text editing software and operat
 ## **4.1 Interpreter**
 
 ### **4.1.1 Purpose/ Description**
-An [Interpreter](#Interpreter-id) is a type of software program that reads and executes code written line by line, without the need for prior compilation into machine code. It interprets the code instructions directly into machine-readable instructions that the computer's processor can understand and execute.
+An [interpreter](#Interpreter-id) is a type of software program that reads and executes code written line by line, without the need for prior compilation into machine code. It interprets the code instructions directly into machine-readable instructions that the computer's processor can understand and execute.
 
 ### **4.1.2 Use case**
 1. Read file[.aop](#aop-id)
@@ -279,11 +280,11 @@ An [Interpreter](#Interpreter-id) is a type of software program that reads and e
 |     **Primary Actor(s)**      |                                                                                                           Parser, [Interpreter](#Interpreter-id)                                                                                                            |
 | **Stakeholders and Interest** |                                        Other stakeholders such as developers, system administrators, and end-users are interested in ensuring that the file can be read and processed correctly.                                         |
 |          **Trigger**          |                                                                           When the user or system attempts to open and read a file with the "[.aop](#aop-id)" extension.                                                                            |
-|      **Pre-conditions**       |                                                                      The file with the "[.aop](#aop-id)" extension exists and is accessible by the file reader or [Interpreter](#Interpreter-id).                                                                      |
+|      **Pre-conditions**       |                                                                      The file with the "[.aop](#aop-id)" extension exists and is accessible by the file reader or [interpreter](#Interpreter-id).                                                                      |
 |      **Post-conditions**      |                                                                          The content of the "[.aop](#aop-id)" file is successfully read and processed by the file reader.                                                                           |
-|        **Extensions**         | If the file is not found or inaccessible, an error message is displayed, and the use case terminates. If the file format is invalid or contains errors, the file reader or [Interpreter](#Interpreter-id) may display an error message and halt processing. |
+|        **Extensions**         | If the file is not found or inaccessible, an error message is displayed, and the use case terminates. If the file format is invalid or contains errors, the file reader or [interpreter](#Interpreter-id) may display an error message and halt processing. |
 |         **Priority**          |                                                                                                                  Medium                                                                                                                  |
-|   **Special Requirements**    |                The file reader or [Interpreter](#Interpreter-id) must support the "[.aop](#aop-id)" file format and be capable of interpreting the syntax and semantics defined by the language or specification associated with the "[.aop](#aop-id)" extension.                 |
+|   **Special Requirements**    |                The file reader or [interpreter](#Interpreter-id) must support the "[.aop](#aop-id)" file format and be capable of interpreting the syntax and semantics defined by the language or specification associated with the "[.aop](#aop-id)" extension.                 |
 
 |           **UC-2**            |                                                                             **Transform content**                                                                              |
 | :---------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -292,9 +293,9 @@ An [Interpreter](#Interpreter-id) is a type of software program that reads and e
 |          **Trigger**          |                                            When the Builder receives a request or instruction to transform content from the Parser                                             |
 |      **Pre-conditions**       |                                                            The Builder is initialized and ready to transform code.                                                             |
 |      **Post-conditions**      |                                                             The transformed code is send to the Virutal Processor                                                              |
-|        **Extensions**         | If the transformation instruction or function call is invalid or contains errors, the [Interpreter](#Interpreter-id) may throw an exception or error message and halt the interpretation process. |
+|        **Extensions**         | If the transformation instruction or function call is invalid or contains errors, the [interpreter](#Interpreter-id) may throw an exception or error message and halt the interpretation process. |
 |         **Priority**          |                                                                                     Medium                                                                                     |
-|   **Special Requirements**    |                            The [Interpreter](#Interpreter-id) must support the specific transformation instructions or functions defined within the interpreted code.                             |
+|   **Special Requirements**    |                            The [interpreter](#Interpreter-id) must support the specific transformation instructions or functions defined within the interpreted code.                             |
 
 |           **UC-3**            |                                                                                                                             **Run the program**                                                                                                                              |
 | :---------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -302,10 +303,10 @@ An [Interpreter](#Interpreter-id) is a type of software program that reads and e
 | **Stakeholders and Interest** |                                                          Other stakeholders such as developers, system administrators, and end-users are interested in ensuring that the file can be read and processed correctly.                                                           |
 |          **Trigger**          |                                                                                                               When the Builder have finish all transformation                                                                                                                |
 |      **Pre-conditions**       |                                                                                                              The Builder is initialized and ready to run code.                                                                                                               |
-|      **Post-conditions**      |                                                                      The program is successfully executed by the [Virtual Processor](#Virtual-Processor-id), and the expected results are produced as a result of the execution.                                                                      |
-|        **Extensions**         | If the program contains errors or invalid instructions, the [Interpreter](#Interpreter-id) may throw an exception or error message and halt the execution process. If the program execution exceeds specified resource limits, the [Interpreter](#Interpreter-id) may terminate the execution and report an error. |
+|      **Post-conditions**      |                                                                      The program is successfully executed by the [virtual processor](#Virtual-Processor-id), and the expected results are produced as a result of the execution.                                                                      |
+|        **Extensions**         | If the program contains errors or invalid instructions, the [interpreter](#Interpreter-id) may throw an exception or error message and halt the execution process. If the program execution exceeds specified resource limits, the [interpreter](#Interpreter-id) may terminate the execution and report an error. |
 |         **Priority**          |                                                                                                                                     High                                                                                                                                     |
-|   **Special Requirements**    |                                                                            The [Interpreter](#Interpreter-id) must support the specific programming language or instruction set defined within the interpreted code.                                                                            |
+|   **Special Requirements**    |                                                                            The [interpreter](#Interpreter-id) must support the specific programming language or instruction set defined within the interpreted code.                                                                            |
 
 
 ### **4.1.3 Mock-up**
@@ -315,31 +316,31 @@ An [Interpreter](#Interpreter-id) is a type of software program that reads and e
 ### **4.1.4  Functional Requirements**
 
 - **Parsing and Lexical Analysis**:<br>
-The [Interpreter](#Interpreter-id) should be able to parse and analyze the syntax and structure of the input code written in the specified programming language.
+The [interpreter](#Interpreter-id) should be able to parse and analyze the syntax and structure of the input code written in the specified programming language.
 
 - **Execution of Code**:<br>
-The [Interpreter](#Interpreter-id) should be capable of executing the parsed code instructions according to the semantics and rules defined by the programming language.
+The [interpreter](#Interpreter-id) should be capable of executing the parsed code instructions according to the semantics and rules defined by the programming language.
 
 - **Error Handling**:<br>
-The [Interpreter](#Interpreter-id) should detect and handle errors in the input code, providing informative error messages to aid in debugging and troubleshooting.
+The [interpreter](#Interpreter-id) should detect and handle errors in the input code, providing informative error messages to aid in debugging and troubleshooting.
 
 - **Data Types and Operations**:<br>
-The [Interpreter](#Interpreter-id) should support various data types (e.g., integers, floating-point numbers, strings) and operations (e.g., arithmetic, logical, relational) defined by the programming language.
+The [interpreter](#Interpreter-id) should support various data types (e.g., integers, floating-point numbers, strings) and operations (e.g., arithmetic, logical, relational) defined by the programming language.
 
 - **Control Flow**:<br>
-The [Interpreter](#Interpreter-id) should support control flow statements such as conditionals (if-else), loops (for, while), and branches to control the flow of execution within the code.
+The [interpreter](#Interpreter-id) should support control flow statements such as conditionals (if-else), loops (for, while), and branches to control the flow of execution within the code.
 
 - **Variable Declaration and Scope**:<br>
-The [Interpreter](#Interpreter-id) should handle variable declaration, initialization, and scoping rules as defined by the programming language.
+The [interpreter](#Interpreter-id) should handle variable declaration, initialization, and scoping rules as defined by the programming language.
 
 - **Input and Output**:<br>
-The [Interpreter](#Interpreter-id) should support input/output operations (e.g., reading from and writing to files, console input/output) as required by the programming language.
+The [interpreter](#Interpreter-id) should support input/output operations (e.g., reading from and writing to files, console input/output) as required by the programming language.
 
 - **Performance Optimization**:<br>
-The [Interpreter](#Interpreter-id) should optimize code execution performance where possible, minimizing overhead and maximizing efficiency.
+The [interpreter](#Interpreter-id) should optimize code execution performance where possible, minimizing overhead and maximizing efficiency.
 
 - **Security**:<br>
-The [Interpreter](#Interpreter-id) should implement security measures to prevent code buffer overflows and other security vulnerabilities.
+The [interpreter](#Interpreter-id) should implement security measures to prevent code buffer overflows and other security vulnerabilities.
 
 ## **5.1 Virtual Terminal**
 ### **5.1.1 Purpose/ Description**
@@ -417,11 +418,13 @@ Implement security measures to protect terminal sessions and prevent unauthorize
    - CPU : [16 Bits Environment](#16-Bits-Environment-id)
    - [RAM](#RAM-id) : 32 [Kilobytes](#Kilobyte-id)
 ## **6.2 Installation**
+- Download the project from the [GitHub repository](https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2).
+- Extract the files as a known location.
+- All the instructions are provided in the [README.md](https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/blob/main/README.md).
 
 # **7. Other System Requirements/ Non-Functional Requirements**
 - **Performance**:
    - Response time: The program must respond to user interactions under 5 seconds.
-   <!-- - Resource usage: The program should not use more thant XX of memory. -->
 
 - **Usability**:
    - User interface responsiveness: The user must be able to see each code manipulation after each execution.
@@ -431,12 +434,7 @@ Implement security measures to protect terminal sessions and prevent unauthorize
    - Documentation: Code should be well-documented following the team's 2 standard documentation format.
 
 - **Reliability**:
-   - Availability:
-   - Disaster recovery:
-
-- **Compliance**:
-   - Regulatory compliance:
-   - Industry standards:
+   - Availability: The program will be free and under [MIT](#MIT-id) license. It is available at any time on the GitHub repository.
 
 # **8. Integration Requirements**
 ## **8.1  Exception Handling/ Error Reporting**
@@ -466,7 +464,7 @@ Implement security measures to protect terminal sessions and prevent unauthorize
    |**Purpose**|**Link**|
    | :- | :- |
    |Documentation|[x86 Assembly Language](https://docs.oracle.com/cd/E19253-01/817-5477/817-5477.pdf)|
-   |||
+   |Error Code|[Assembler Errors](https://documentation.help/Microchip-MPASM-Assembler/hlpMPASMAsm_10_2.html)|
 
 ## **10 Glossary** 
 State any terms and their definitions that are described in the functional specifications. Include any acronyms that are mentioned in the document.
@@ -488,11 +486,12 @@ State any terms and their definitions that are described in the functional speci
 |<a id="IAT2-id"></a>IAT2                 | "Interpreter Assembly Team 2"                                                                                                               | Refers to our interpreter which will interpret our Assembly Language.                                                                                                                                                         |
 |<a id="Interpreter-id"></a>Interpreter          | A program that directly executes instructions written in a programming language                                                             | Translates and executes code line by line without the need for a separate compilation step.                                                                                                                                   |
 |<a id="Kilobyte-id"></a>Kilobyte             | A unit of digital information equal to 1024 bytes                                                                                           | Commonly used to measure the size of computer memory or storage capacity.                                                                                                                                                     |
+|<a id="MIT-id"></a>MIT             | The MIT License is a template for a software license that grants permission to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of a software or other work under certain conditions. It's characterized by its permissive nature, meaning that it allows users to do almost anything they want with the licensed software, as long as they include a copy of the original license and copyright notice in the redistributed software or documentation.                                                                                          | The MIT License is a simple and permissive license that allows developers to use, modify, and distribute software freely, typically with minimal restrictions. It's often chosen by developers and organizations because of its simplicity and flexibility, making it suitable for both commercial and non-commercial projects.                                                                                                                                                     |
 |<a id="Parser-id"></a>Parser               | A tool or program that analyzes the syntax of a programming language                                                                        | Breaks down code into its components and checks whether it conforms to the language's grammar rules.                                                                                                                          |
 |<a id="RAM-id"></a>RAM                  | Random Access Memory                                                                                                                        | A type of computer memory that is volatile and used for temporarily storing data that is actively being used or processed by a computer.                                                                                      |
+|<a id="Verbose-mode-id"></a>Verbose mode                  | Verbose mode is an option available in many computer operating systems and programming languages that provides additional details.                                                                                                                        | Verbose mode, in the context of computing and software development, refers to a setting or option that enables a program to provide more detailed or comprehensive output during its operation. This mode is particularly useful for troubleshooting, debugging, or understanding the inner workings of a program.                                                                                      |
 |<a id="Virtual-Processor-id"></a>Virtual Processor    | An emulation of a physical processor in a virtualized environment                                                                           | Allows multiple virtual machines to run on a single physical machine, each with its own isolated processor instance.                                                                                                          |
 |<a id="Virtual-Terminal-id"></a>Virtual Terminal     | A software interface that emulates a physical computer terminal                                                                             | Enables communication with a computer system through text-based commands and responses.                                                                                                                                       |
-|<a id="anchor-id"></a>dzdada     | A software interface that emulates a physical computer terminal                                                                             | Enables communication with a computer system through text-based commands and responses.                                                                                                                                       |
 
 # **11.  Appendix**
 ## **11.1 ASSEMBLY LANGUAGE**
