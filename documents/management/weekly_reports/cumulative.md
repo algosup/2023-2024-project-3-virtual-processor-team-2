@@ -109,17 +109,17 @@ With a clearer understanding of the project, we are poised to channel our effort
 ## Weekly Report - Week 3
 [Detailed File](week_3.md)
 
-The third week was focused on sharing all informations among the team, gather latent informations from the clients and start to define our technical specifications paralelly to the functional specifications.
+The third week was focused on sharing all the information within the team, gather latent information from the client and start to define our technical specifications in parallel to the functional specifications.
 
 ### Accomplishments
 
-1. Successfully identify the target.
-2. Everyone has the same informations and a clear way to work.
-3. Tasks has been established.
-4. The functional specifications has been completed.
-5. The technical specifications began to be write.
+1. Successfully identified the target.
+2. Everyone has the same information and a clear way to work.
+3. Tasks have been established and split.
+4. The functional specifications has been almost completed.
+5. The technical specifications began to be written.
 6. The template of our test-plan has been created.
-7. Completed KPI's expectations and adding data for week 1 & 2.
+7. Completed KPI's expectations and added data for week 1 & 2.
 8. Parser coding:
     - Read file
     - Create instruction Node
@@ -128,8 +128,8 @@ The third week was focused on sharing all informations among the team, gather la
 ### Challenges
 
 1. Choose the target for our product, which isn't too easy but not unfeasable within this time frame.
-2. clearly understand what the client means by "interpreter".
-3. Gather enough detailed informations to start writing the technical specifications.
+2. Clearly understand what the client means by "interpreter".
+3. Gather enough detailed information to start writing the technical specifications.
 
 ### Plans for next week
 
@@ -141,7 +141,7 @@ The third week was focused on sharing all informations among the team, gather la
 
 ### Conclusion
 
-The project is progressing forward; we've managed to catch up on our delay for the first two weeks, despite the absence of dedicated project time. However, even though the project has just started, the satisfaction of our team is already below our expectations. We need to work on improving satisfaction and fostering a positive mood within the team.
+The project is progressing forward; we've managed to catch up on our delay for the first two weeks, despite the absence of dedicated project time. Even though, the project has just started, and the satisfaction of our team is already below our expectations. We need to work on improving satisfaction and fostering a positive mood within the team.
 
 ## Weekly Report - Week 4
 [Detailed File (WIP)](week_4.md)
