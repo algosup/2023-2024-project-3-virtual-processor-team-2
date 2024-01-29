@@ -17,7 +17,7 @@
       - [3.3.2. Smoke Testing](#332-smoke-testing)
         - [3.3.2.1. Smoke Testing Scope](#3321-smoke-testing-scope)
         - [3.3.2.2. Sequence of Smoke Testing](#3322-sequence-of-smoke-testing)
-      <!--- [3.3.3. Collaborative Testing Sessions](#333-collaborative-testing-sessions)-->
+      - [3.3.3. Collaborative Testing Sessions](#333-collaborative-testing-sessions)-->
         - [3.3.3.1. Session Scope](#3331-session-scope)
     - [3.4. External tools](#34-external-tools)
       - [3.4.1. GitHub](#341-github)
@@ -141,8 +141,9 @@ During each smoke testing session, the following steps will be executed:
 
 ---
 
-<!--#### 3.3.3. Collaborative Testing Sessions
-To gain a better overview of the project, a collaboration with other team's quality assurance was set up. This collaboration enables the teams to have an external view of the product and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods.-->
+#### 3.3.3. Collaborative Testing Sessions
+To obtain a better overview of the project, a collaboration with other teams' Quality Assurance was set up. This collaboration enables the teams to have an external view of the product and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
+A meeting with the Software Engineers of the team 2 will be planned the day after each collaborative testing session.
 
 ##### 3.3.3.1. Session Scope
 
@@ -287,7 +288,7 @@ To enhance transparency, collaboration, and knowledge sharing within our develop
 Each complex function will have dedicated pages for in-depth information.
 Flowcharts or diagrams will be integrated to enhance the understanding of complex processes.
 
-<!-- - To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include. The template will be available on the project GitHub in the folder documents/QA, the file name is "Function-documentation-template". Developers can use it as a reference when documenting their code. Encourage developers to provide examples and use cases in their documentation to make it more practical and user-friendly. -->
+- To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include. The template will be available on the project GitHub in the folder documents/qa, the file name is "code_documentation_template". Developers have to use it as a reference when documenting their code. 
 
 - Centralized documentation simplifies onboarding for new team members by providing a single, accessible source of truth. Emphasize the importance of keeping documentation up-to-date, especially during onboarding periods, to ensure the documentation remains accurate and relevant.
 
@@ -332,13 +333,31 @@ Before the product can be considered ready for distribution, certain benchmarks 
 ### 5.1. Time
 
 <!-- Test Schedule -->
+| Task | Start Date | End Date |
+| ---- | ---------- | -------- |
+| Review the documentation | January 15, 2024 | February 23, 2024 |
+| First meeting with Dev team | January 23, 2024 | January 23, 2024 |
+| Create and give template for GitHub Wiki documentation | January 29, 2024 | January 29, 2024 |
+| Unit tests | November 27, 2023 | February 23, 2024 |
+| First meeting with other teams' QA | January 29, 2024 | January 29, 2024 |
+| Second meeting with Dev team | January 30, 2024 | January 30, 2024 |
+| GitHub Actions | January 30, 2024 | February 23, 2024 |
+| Second meeting with other teams' QA  | February 5, 2024 | February 5, 2024 |
+| Third meeting with other teams' QA  | February 12, 2024 | February 12, 2024 |
+| Third meeting with Dev team | February 13, 2024 | February 13, 2024 |
+| Fourth meeting with other teams' QA | February 19, 2024 | February 19, 2024 |
+| Fourth meeting with Dev team | February 20, 2024 | February 20, 2024 |
 
 ### 5.2. People
 
-For this project, the people involved to perform tests are the Quality Assurance of team 2<!--, but also quality assurances of other teams during the team test sessions-->.
+For this project, the people involved to perform tests are the Quality Assurance of team 2, but also Quality Assurances of other teams during the team test sessions:
+- Enzo GUILLOUCHE - Team 2
+- Séréna BAVAROIS - Team 1
+- Maxime THIZEAU - Team 4
+- Arthur LEMOINE - Team 3
+- Atifa AMIRI - Team 
 
 ### 5.3. Testing Environment Requirements
-
   
 1. **Code Editor:**
      - Visual Studio Code: Version 1.61.2 or later
