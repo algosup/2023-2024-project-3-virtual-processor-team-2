@@ -142,7 +142,7 @@ During each smoke testing session, the following steps will be executed:
 ---
 
 #### 3.3.3. Collaborative Testing Sessions
-To obtain a better overview of the project, a collaboration with other teams' Quality Assurance was set up. This collaboration enables the teams to have an external view of the product and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
+To obtain a better overview of the project, a collaboration with other teams' Quality Assurance was set up. This collaboration enables the teams to have an external view of the product and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. All the meetings' content will be written back in the [meetings reports](./meetings_reports.md) file.<br>
 A meeting with the Software Engineers of the team 2 will be planned the day after each collaborative testing session.
 
 ##### 3.3.3.1. Session Scope
@@ -288,7 +288,7 @@ To enhance transparency, collaboration, and knowledge sharing within our develop
 Each complex function will have dedicated pages for in-depth information.
 Flowcharts or diagrams will be integrated to enhance the understanding of complex processes.
 
-- To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include. The template will be available on the project GitHub in the folder documents/qa, the file name is "code_documentation_template". Developers have to use it as a reference when documenting their code. 
+- To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include. The template will be available on the project GitHub [here](./code_documentation_template.md). Developers have to use it as a reference when documenting their code. 
 
 - Centralized documentation simplifies onboarding for new team members by providing a single, accessible source of truth. Emphasize the importance of keeping documentation up-to-date, especially during onboarding periods, to ensure the documentation remains accurate and relevant.
 
