@@ -1,10 +1,9 @@
 ﻿# **ALGOSUP Team 2**
 ## **Functional Specification Document**
 
-### **DOCUMENT VERSION 0.4.2**
+### **DOCUMENT VERSION 0.5**
 
 **01/22/2024**
-
 
 **AUTHORS**
 
@@ -23,6 +22,7 @@
 | 1/25/2024 |     0.4     | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
 | 1/26/2024 |    0.4.1    | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
 | 1/26/2024 |    0.4.2    | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
+| 1/27/2024 |     0.5     | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
 |           |             |                 |                     |
 
 **APPROVALS**
@@ -71,37 +71,37 @@
    - [6.1 Minimum requirements](#61-minimum-requirements)
    - [6.2 Installation](#62-installation)
  - [7. Other System Requirements/ Non-Functional Requirements](#7-other-system-requirements-non-functional-requirements)
- - [8. Reporting Requirements](#8-reporting-requirements)
- - [9. Integration Requirements](#9-integration-requirements)
-   - [9.1 Exception Handling/ Error Reporting](#91-exception-handling-error-reporting)
- - [10. References](#10-references)
- - [11 Glossary](#11-glossary)
- - [12. Appendix](#12-appendix)
-   - [12.1 ASSEMBLY LANGUAGE](#121-assembly-language)
+ - [8. Integration Requirements](#8-integration-requirements)
+   - [8.1 Exception Handling/ Error Reporting](#81-exception-handling-error-reporting)
+ - [9. References](#9-references)
+ - [10 Glossary](#10-glossary)
+ - [11. Appendix](#11-appendix)
+   - [11.1 ASSEMBLY LANGUAGE](#111-assembly-language)
 </details>
 
 # **1. Introduction**
-The goal of the project is to create a [Virtual Processor](#11-glossary) and an [Interpreter](#11-glossary) for running assembly code on that processor. We need to create our [Assembly Language](#112-assembly-language), create a [C](#15-glossary) program using [C Standard Libraries](#15-glossary) that can read text files, detect semantic and syntactical errors. We also need to implement a virtual system displaying text in a [Virtual Terminal](#11-glossary), that can be accessed from the assembly code.
+The goal of the project is to create a [Virtual Processor](#Virtual-Processor-id) and an [Interpreter](#Interpreter-id) for running assembly code on that processor. We need to create our [Assembly Language](#112-assembly-language), create a [C](#C-id) program using [C Standard Libraries](#C-Standard-Libraries_id) that can read text files, detect semantic and syntactical errors. We also need to implement a virtual system displaying text in a [Virtual Terminal](#Virtual-Terminal-id), that can be accessed from the assembly code.
 
 ## **1.1 Purpose of the document**
 The Functional Specification Document is a document that provides detailed information. This document is created based on the high-level requirements identified in the Call For Tender and provides traceability on the functional specifications. Included in this document will be the detailed functional requirements including use cases, system inputs and outputs, process flows, diagrams, and mock-ups.
 
 ## **1.2 Project Scope**
-The main goal is to create our own [Assembly Language](#11-glossary), which would be more understandable, readable, and easier to use than traditional Assembly Languages.
- Moreover, also creates an [Interpreter](#11-glossary) capable of reading and compiling these files. The compiled code can then be run on emulated small and limited devices, providing an extended range of functionalities for users.
+The main goal is to create our own [Assembly Language](#Assembly-Language-id), which would be more understandable, readable, and easier to use than traditional Assembly Languages.
+ Moreover, also creates an [Interpreter](#Interpreter-id) capable of reading and compiling these files. The compiled code can then be run on emulated small and limited devices, providing an extended range of functionalities for users.
 
-   - Creation of a specialized [Assembly Language](#11-glossary) for small devices with a limited amount of capacities.
-   - Creation of an [Interpreter](#11-glossary) which will be able to run the code provided in our new language. 
+   - Creation of a specialized [Assembly Language](#Assembly-Language-id) for small devices with a limited amount of capacities.
+   - Creation of an [Interpreter](#Interpreter-id) which will be able to run the code provided in our new language.
+   - The whole project will be create using [C](#C-id) language (version [C99](#C99-id))
 
 ## **1.3 Out of Scope** 
 ### **1.3.1 Facilities**
 We have outlined certain out-of-scope features designed to assist developers and clients in comprehending the product's amelioration:
  
-   - Implementation of a [Debugger](#11-glossary), facilitating a clear understanding of program execution and helping in comprehending how the [Virtual Processor](#11-glossary) interprets the language.
+   - Implementation of a [Debugger](#Debugger-id), facilitating a clear understanding of program execution and helping in comprehending how the [Virtual Processor](#Virtual-Processor-id) interprets the language.
    - The implementation of a verbose mode which gives more information when the code is running.
    
 ### **1.3.2 Code Structure**
-- In the future, we aim to create an [Assembler](#11-glossary) system that would give more efficiency for the program execution. 
+- In the future, we aim to create an [Assembler](#Assembler-id) system that would give more efficiency for the program execution. 
 
 ## **1.4 Related documents**
 
@@ -112,98 +112,98 @@ We have outlined certain out-of-scope features designed to assist developers and
 ## **1.5 Risks and Assumptions**
 ### Risks
 - **Technical challenges:**
-  - Unforeseen technical challenges in the [Virtual Processor](#11-glossary) functioning.
+  - Unforeseen technical challenges in the [Virtual Processor](#Virtual-Processor-id) functioning.
   - Achieving the project in time without delays, developing the desired functionalities.
 
 - **Resource constraints:**
    - Unexpected shortages or constraints in resources, including human resources or software tools, may impact the project's ability to meet deadlines or maintain quality standards.
-   - The documentation of [AT2](#11-glossary) should be complete enough.
+   - The documentation of [AT2](#AT2-id) should be complete enough.
   
 - **Unpredictable technical issues:**
    - Unpredictable technical issues, such as compatibility problems on different systems or devices, may arise during the testing phase.
 
 ### Assumptions
 - **Technical expertise:**
-  - The development team possesses the necessary technical expertise in [Assembly Language](#11-glossary), [C](#11-glossary) language and Parser to successfully create it.
-  - The team has done a lot of research based on [Virtual Processor](#11-glossary) functioning and architecture.
+  - The development team possesses the necessary technical expertise in [Assembly Language](#Assembly-Language-id), [C](#C-id) language and Parser to successfully create it.
+  - The team has done a lot of research based on [Virtual Processor](#Virtual-Processor-id) functioning and architecture.
   
 - **User engagement:**
-  - Users will engage positively with our own [Assembly Language](#11-glossary), fostering community participation for its use it and potential future enhancements.
+  - Users will engage positively with our own [Assembly Language](#Assembly-Language-id), fostering community participation for its use it and potential future enhancements.
 
 - **Timely completion:**
   - The project assumes that it will be completed within the specified timeline, avoiding significant delays or disruptions.
   
 - **Quality assurance:**
-  - The testing and quality assurance processes will effectively identify and address any bugs or issues, ensuring a polished and functional [Virtual Processor](#11-glossary) with our language and our [Interpreter](#11-glossary).
+  - The testing and quality assurance processes will effectively identify and address any bugs or issues, ensuring a polished and functional [Virtual Processor](#Virtual-Processor-id) with our language and our [Interpreter](#Interpreter-id).
 
 # **2. System/ Solution Overview**
 Our system is made up of three parts, which are:
 - The Parser
 - The Builder
-- The [Virtual Processor](#11-glossary)
+- The [Virtual Processor](#Virtual-Processor-id)
 
 ## **2.1 System Actors**
 ### **2.1.1 User Roles and Responsibilities**
 
-| **User/Role** |           **Example**           | **Frequency of Use** |                           **Features Used**                           |                       **Additional Notes**                        |
-| :-----------: | :-----------------------------: | :------------------: | :-------------------------------------------------------------------: | :---------------------------------------------------------------: |
-|  Developers   | Alex Johnson, Software Engineer |         Rare         | Want to update his own server to make it more efficient and optimized | add any additional notes or supporting documentation as necessary |
-|  Student   | Chelseah Mehr, High School Student |         Rare         | Want to learn about programming languages and to be introduced to Assembly | add any additional notes or supporting documentation as necessary |
-|  Administration | Richard Richards, System adminitrator |         Occasional         | Want to create dependencies to allow some developpers of his team to work with the [Virtual Processor](#11-glossary) | add any additional notes or supporting documentation as necessary |
+| **User/Role** |           **Example**           | **Frequency of Use** |                           **Features Used**                           |
+| :-----------: | :-----------------------------: | :------------------: | :-------------------------------------------------------------------: |
+|  Developers   | Alex Johnson, Software Engineer |         Rare         | Want to update his own server to make it more efficient and optimized |
+|  Student   | Chelseah Mehr, High School Student |         Rare         | Want to learn about programming languages and to be introduced to Assembly Language|
+|  Administration | Richard Richards, System adminitrator |         Occasional         | Want to create dependencies to allow some developpers of his team to work with the [Virtual Processor](#Virtual-Processor-id) |
 
 ## **2.2 Dependencies and Change Impacts**
 ### **2.2.1 System Dependencies**
 
 |   **System Name**    |            **Use Case/Utility**            |                                                                                                                                                                        **Description**                                                                                                                                                                         |
 | :------------------: | :----------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [C Standard Libraries](#11-glossary) | Fundamental building blocks for [C](#11-glossary) programs |                                                                                                        Essential libraries that provide standard functions and macros for tasks such as input/output, string manipulation, memory management, and more.                                                                                                        |
-|         g++          |       Compilation of C++ unit tests        |                                                                                                                                               The [GNU](#11-glossary) C++ [Compiler](#11-glossary), used for compiling programs written in C++.                                                                                                                                                |
-|         gcc          |         Compilation of [C](#11-glossary) programs          |                                                                                                          The [GNU](#11-glossary) [Compiler](#11-glossary) Collection, an optimizing [Compiler](#11-glossary) supporting various programming languages, hardware architectures, and operating systems.                                                                                                          |
-|        CMake         |     [Build](#11-glossary) automation and configuration     |                                                                         Handles aspects like cross-platform builds, system introspection, and user-customized builds. CMake is used for automation, testing, packaging, and installation of software in a [Compiler](#11-glossary)-independent manner.                                                                         |
+| [C Standard Libraries](#C-Standard-Libraries-id) | Fundamental building blocks for [C](#C-id) programs |                                                                                                        Essential libraries that provide standard functions and macros for tasks such as input/output, string manipulation, memory management, and more.                                                                                                        |
+|         g++          |       Compilation of C++ unit tests        |                                                                                                                                               The [GNU](#GNU-id) C++ [Compiler](#Compiler-id), used for compiling programs written in C++.                                                                                                                                                |
+|         gcc          |         Compilation of [C](#C-id) programs          |                                                                                                          The [GNU](#GNU-id) [Compiler](#Compiler-id) Collection, an optimizing [Compiler](#Compiler-id) supporting various programming languages, hardware architectures, and operating systems.                                                                                                          |
+|        CMake         |     [Build](#Build-id) automation and configuration     |                                                                         Handles aspects like cross-platform builds, system introspection, and user-customized builds. CMake is used for automation, testing, packaging, and installation of software in a [Compiler](#Compiler-id)-independent manner.                                                                         |
 |  Visual Studio Code  |         Multi-language code editor         |                                                                                                        A versatile code editor that supports coding in multiple programming languages. Visual Studio Code is free and helps users start coding quickly.                                                                                                        |
-| New Extension: [.aop](#11-glossary)  |             Custom File Format             | Represents files in a custom format used by the software application. The software should be able to read, write, and manipulate files with the [.aop](#11-glossary) extension. Ensure that users are aware of this new extension and can associate it with the software application. Consider any additional dependencies related to the handling of this custom file format. |
+| New Extension: [.aop](#aop-id)  |             Custom File Format             | Represents files in a custom format used by the software application. The software should be able to read, write, and manipulate files with the [.aop](#aop-id) extension. Ensure that users are aware of this new extension and can associate it with the software application. Consider any additional dependencies related to the handling of this custom file format. |
 
 ### **2.2.2 Change Impacts**	
 **C Standard Libraries:**
 - **Impact:** Compatibility and Portability.
-- **Details:** Any changes to the [C Standard Libraries](#11-glossary) may affect the compatibility of existing [C](#11-glossary) programs that rely on specific library functions. Developers need to ensure that the code remains portable across different systems.
+- **Details:** Any changes to the [C Standard Libraries](#C-Standard-Libraries-id) may affect the compatibility of existing [C](#C-id) programs that rely on specific library functions. Developers need to ensure that the code remains portable across different systems.
 
 **G++ (GNU C++ Compiler):**
 - **Impact:** Unit Testing Framework Compatibility.
-- **Details:** Updates or changes in the G++ [Compiler](#11-glossary) may impact the compatibility of C++ unit testing frameworks or the compilation process of existing test suites. Developers may need to update test configurations accordingly.
+- **Details:** Updates or changes in the G++ [Compiler](#Compiler-id) may impact the compatibility of C++ unit testing frameworks or the compilation process of existing test suites. Developers may need to update test configurations accordingly.
 
 **GCC (GNU Compiler Collection):**
 - **Impact:** Source Code Compatibility.
-- **Details:** Changes in the behavior of the GCC [Compiler](#11-glossary) may impact the compilation of existing [C](#11-glossary) programs. Developers should review and update source code if necessary to maintain compatibility.
+- **Details:** Changes in the behavior of the GCC [Compiler](#Compiler-id) may impact the compilation of existing [C](#C-id) programs. Developers should review and update source code if necessary to maintain compatibility.
 
 **CMake:**
-- **Impact:** [Build](#11-glossary) System Configuration.
-- **Details:** Any changes to CMake may impact the [Build](#11-glossary) configurations of the project. This includes adjustments for cross-platform builds, system introspection, or customized [Build](#11-glossary) settings. Developers need to update CMakeLists.txt files accordingly.
+- **Impact:** [Build](#Build-id) System Configuration.
+- **Details:** Any changes to CMake may impact the [Build](#Build-id) configurations of the project. This includes adjustments for cross-platform builds, system introspection, or customized [Build](#Build-id) settings. Developers need to update CMakeLists.txt files accordingly.
 
 **Visual Studio Code:**
 - **Impact:** Development Environment.
 - **Details:** Updates or changes to Visual Studio Code may introduce new features, extensions, or changes in the user interface. This could impact the development environment and workflows of developers using Visual Studio Code.
 
-**New File Extension ([.aop](#11-glossary)):**
+**New File Extension ([.aop](#aop-id)):**
 - **Impact:** File Handling and User Interaction.
-- **Details:** The introduction of a new file extension "[.aop](#11-glossary)" implies that the software application needs to be capable of handling files in this custom format. Considerations include configuring the operating system for proper file associations, ensuring the software can read, files with the new extension, and communicating this change to users for proper interaction with the application.
+- **Details:** The introduction of a new file extension "[.aop](#aop-id)" implies that the software application needs to be capable of handling files in this custom format. Considerations include configuring the operating system for proper file associations, ensuring the software can read, files with the new extension, and communicating this change to users for proper interaction with the application.
 
 # **3. Functional Specifications**
 Text file (.aop)
    - Will contain all the AT2 code that is the basis for implementing new features.
 
-Interpreter ([IAT2](#11-glossary))
+Interpreter ([IAT2](#IAT2-id))
    - Will be composed of three main parts:
-      - The Parser will transform AT2 into a [data structure](#15-glossary) for the Builder.
-      - The Builder will rework the [data structure](#15-glossary) to make the program executable for the [Virtual Processor](#11-glossary).
-      - The [Virtual Processor](#11-glossary) will run the program.
+      - The Parser will transform AT2 into adata structure for the Builder.
+      - The Builder will rework the data structure to make the program executable for the [Virtual Processor](#Virtual-Processor-id).
+      - The [Virtual Processor](#Virtual-Processor-id) will run the program.
 
-[Virtual Terminal](#11-glossary)
+[Virtual Terminal](#Virtual-Terminal-id)
    - Will display information about the program previously run in the given input file.
 
 ## **3.1 Text file .aop**
 ### **3.1.1 Purpose/ Description**
-A text file[.aop](#11-glossary) is a type of computer file that stores plain text data in a human-readable format.
+A text file[.aop](#aop-id) is a type of computer file that stores plain text data in a human-readable format.
 
 ### **3.1.2 Use case**
 |           **UC-1**            |                                                                        **Coding**                                                                         |
@@ -267,45 +267,45 @@ The text file should be compatible with various text editing software and operat
 ## **4.1 Interpreter**
 
 ### **4.1.1 Purpose/ Description**
-An [Interpreter](#11-glossary) is a type of software program that reads and executes code written line by line, without the need for prior compilation into machine code. It interprets the code instructions directly into machine-readable instructions that the computer's processor can understand and execute.
+An [Interpreter](#Interpreter-id) is a type of software program that reads and executes code written line by line, without the need for prior compilation into machine code. It interprets the code instructions directly into machine-readable instructions that the computer's processor can understand and execute.
 
 ### **4.1.2 Use case**
-1. Read file[.aop](#11-glossary)
+1. Read file[.aop](#aop-id)
 2. Transform content
 3. Run the program
 
-|           **UC-1**            |                                                                                                            **Read file[.aop](#11-glossary)**                                                                                                             |
+|           **UC-1**            |                                                                                                            **Read file[.aop](#aop-id)**                                                                                                             |
 | :---------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|     **Primary Actor(s)**      |                                                                                                           Parser, [Interpreter](#11-glossary)                                                                                                            |
+|     **Primary Actor(s)**      |                                                                                                           Parser, [Interpreter](#Interpreter-id)                                                                                                            |
 | **Stakeholders and Interest** |                                        Other stakeholders such as developers, system administrators, and end-users are interested in ensuring that the file can be read and processed correctly.                                         |
-|          **Trigger**          |                                                                           When the user or system attempts to open and read a file with the "[.aop](#11-glossary)" extension.                                                                            |
-|      **Pre-conditions**       |                                                                      The file with the "[.aop](#11-glossary)" extension exists and is accessible by the file reader or [Interpreter](#11-glossary).                                                                      |
-|      **Post-conditions**      |                                                                          The content of the "[.aop](#11-glossary)" file is successfully read and processed by the file reader.                                                                           |
-|        **Extensions**         | If the file is not found or inaccessible, an error message is displayed, and the use case terminates. If the file format is invalid or contains errors, the file reader or [Interpreter](#11-glossary) may display an error message and halt processing. |
+|          **Trigger**          |                                                                           When the user or system attempts to open and read a file with the "[.aop](#aop-id)" extension.                                                                            |
+|      **Pre-conditions**       |                                                                      The file with the "[.aop](#aop-id)" extension exists and is accessible by the file reader or [Interpreter](#Interpreter-id).                                                                      |
+|      **Post-conditions**      |                                                                          The content of the "[.aop](#aop-id)" file is successfully read and processed by the file reader.                                                                           |
+|        **Extensions**         | If the file is not found or inaccessible, an error message is displayed, and the use case terminates. If the file format is invalid or contains errors, the file reader or [Interpreter](#Interpreter-id) may display an error message and halt processing. |
 |         **Priority**          |                                                                                                                  Medium                                                                                                                  |
-|   **Special Requirements**    |                The file reader or [Interpreter](#11-glossary) must support the "[.aop](#11-glossary)" file format and be capable of interpreting the syntax and semantics defined by the language or specification associated with the "[.aop](#11-glossary)" extension.                 |
+|   **Special Requirements**    |                The file reader or [Interpreter](#Interpreter-id) must support the "[.aop](#aop-id)" file format and be capable of interpreting the syntax and semantics defined by the language or specification associated with the "[.aop](#aop-id)" extension.                 |
 
 |           **UC-2**            |                                                                             **Transform content**                                                                              |
 | :---------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|     **Primary Actor(s)**      |                                                                              Builder, [Interpreter](#11-glossary)                                                                              |
+|     **Primary Actor(s)**      |                                                                              Builder, [Interpreter](#Interpreter-id)                                                                              |
 | **Stakeholders and Interest** |           Other stakeholders such as developers, system administrators, and end-users are interested in ensuring that the file can be read and processed correctly.            |
 |          **Trigger**          |                                            When the Builder receives a request or instruction to transform content from the Parser                                             |
 |      **Pre-conditions**       |                                                            The Builder is initialized and ready to transform code.                                                             |
 |      **Post-conditions**      |                                                             The transformed code is send to the Virutal Processor                                                              |
-|        **Extensions**         | If the transformation instruction or function call is invalid or contains errors, the [Interpreter](#11-glossary) may throw an exception or error message and halt the interpretation process. |
+|        **Extensions**         | If the transformation instruction or function call is invalid or contains errors, the [Interpreter](#Interpreter-id) may throw an exception or error message and halt the interpretation process. |
 |         **Priority**          |                                                                                     Medium                                                                                     |
-|   **Special Requirements**    |                            The [Interpreter](#11-glossary) must support the specific transformation instructions or functions defined within the interpreted code.                             |
+|   **Special Requirements**    |                            The [Interpreter](#Interpreter-id) must support the specific transformation instructions or functions defined within the interpreted code.                             |
 
 |           **UC-3**            |                                                                                                                             **Run the program**                                                                                                                              |
 | :---------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|     **Primary Actor(s)**      |                                                                                                                        [Virtual Processor](#11-glossary), [Interpreter](#11-glossary)                                                                                                                        |
+|     **Primary Actor(s)**      |                                                                                                                        [Virtual Processor](#Virtual-Processor-id), [Interpreter](#Interpreter-id)                                                                                                                        |
 | **Stakeholders and Interest** |                                                          Other stakeholders such as developers, system administrators, and end-users are interested in ensuring that the file can be read and processed correctly.                                                           |
 |          **Trigger**          |                                                                                                               When the Builder have finish all transformation                                                                                                                |
 |      **Pre-conditions**       |                                                                                                              The Builder is initialized and ready to run code.                                                                                                               |
-|      **Post-conditions**      |                                                                      The program is successfully executed by the [Virtual Processor](#11-glossary), and the expected results are produced as a result of the execution.                                                                      |
-|        **Extensions**         | If the program contains errors or invalid instructions, the [Interpreter](#11-glossary) may throw an exception or error message and halt the execution process. If the program execution exceeds specified resource limits, the [Interpreter](#11-glossary) may terminate the execution and report an error. |
+|      **Post-conditions**      |                                                                      The program is successfully executed by the [Virtual Processor](#Virtual-Processor-id), and the expected results are produced as a result of the execution.                                                                      |
+|        **Extensions**         | If the program contains errors or invalid instructions, the [Interpreter](#Interpreter-id) may throw an exception or error message and halt the execution process. If the program execution exceeds specified resource limits, the [Interpreter](#Interpreter-id) may terminate the execution and report an error. |
 |         **Priority**          |                                                                                                                                     High                                                                                                                                     |
-|   **Special Requirements**    |                                                                            The [Interpreter](#11-glossary) must support the specific programming language or instruction set defined within the interpreted code.                                                                            |
+|   **Special Requirements**    |                                                                            The [Interpreter](#Interpreter-id) must support the specific programming language or instruction set defined within the interpreted code.                                                                            |
 
 
 ### **4.1.3 Mock-up**
@@ -315,35 +315,35 @@ An [Interpreter](#11-glossary) is a type of software program that reads and exec
 ### **4.1.4  Functional Requirements**
 
 - **Parsing and Lexical Analysis**:<br>
-The [Interpreter](#11-glossary) should be able to parse and analyze the syntax and structure of the input code written in the specified programming language.
+The [Interpreter](#Interpreter-id) should be able to parse and analyze the syntax and structure of the input code written in the specified programming language.
 
 - **Execution of Code**:<br>
-The [Interpreter](#11-glossary) should be capable of executing the parsed code instructions according to the semantics and rules defined by the programming language.
+The [Interpreter](#Interpreter-id) should be capable of executing the parsed code instructions according to the semantics and rules defined by the programming language.
 
 - **Error Handling**:<br>
-The [Interpreter](#11-glossary) should detect and handle errors in the input code, providing informative error messages to aid in debugging and troubleshooting.
+The [Interpreter](#Interpreter-id) should detect and handle errors in the input code, providing informative error messages to aid in debugging and troubleshooting.
 
 - **Data Types and Operations**:<br>
-The [Interpreter](#11-glossary) should support various data types (e.g., integers, floating-point numbers, strings) and operations (e.g., arithmetic, logical, relational) defined by the programming language.
+The [Interpreter](#Interpreter-id) should support various data types (e.g., integers, floating-point numbers, strings) and operations (e.g., arithmetic, logical, relational) defined by the programming language.
 
 - **Control Flow**:<br>
-The [Interpreter](#11-glossary) should support control flow statements such as conditionals (if-else), loops (for, while), and branches to control the flow of execution within the code.
+The [Interpreter](#Interpreter-id) should support control flow statements such as conditionals (if-else), loops (for, while), and branches to control the flow of execution within the code.
 
 - **Variable Declaration and Scope**:<br>
-The [Interpreter](#11-glossary) should handle variable declaration, initialization, and scoping rules as defined by the programming language.
+The [Interpreter](#Interpreter-id) should handle variable declaration, initialization, and scoping rules as defined by the programming language.
 
 - **Input and Output**:<br>
-The [Interpreter](#11-glossary) should support input/output operations (e.g., reading from and writing to files, console input/output) as required by the programming language.
+The [Interpreter](#Interpreter-id) should support input/output operations (e.g., reading from and writing to files, console input/output) as required by the programming language.
 
 - **Performance Optimization**:<br>
-The [Interpreter](#11-glossary) should optimize code execution performance where possible, minimizing overhead and maximizing efficiency.
+The [Interpreter](#Interpreter-id) should optimize code execution performance where possible, minimizing overhead and maximizing efficiency.
 
 - **Security**:<br>
-The [Interpreter](#11-glossary) should implement security measures to prevent code buffer overflows and other security vulnerabilities.
+The [Interpreter](#Interpreter-id) should implement security measures to prevent code buffer overflows and other security vulnerabilities.
 
 ## **5.1 Virtual Terminal**
 ### **5.1.1 Purpose/ Description**
-A text file [Virtual Terminal](#11-glossary) is a software tool or environment that provides a text-based interface for interacting with text files stored on a computer system. It allows users to view, edit, and manipulate the contents of text files using text-based commands or applications within a [Virtual Terminal](#11-glossary) environment.
+A text file [Virtual Terminal](#Virtual-Terminal-id) is a software tool or environment that provides a text-based interface for interacting with text files stored on a computer system. It allows users to view, edit, and manipulate the contents of text files using text-based commands or applications within a [Virtual Terminal](#Virtual-Terminal-id) environment.
 
 ### **5.1.2 Use case**
 1. Command-Line Interface (CLI)
@@ -364,26 +364,25 @@ A text file [Virtual Terminal](#11-glossary) is a software tool or environment t
 |           **UC-2**            |                                                                      **Programming and Development**                                                                       |
 | :---------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |     **Primary Actor(s)**      |                                                                             Software Developer                                                                             |
-| **Stakeholders and Interest** |              Developers and stakeholders interested in the development, testing, and debugging of software applications using a [Virtual Terminal](#11-glossary) environment.              |
-|          **Trigger**          |                 Developer initiates a request to use the [Virtual Terminal](#11-glossary) for programming and development tasks, such as coding, compiling, and debugging.                 |
-|      **Pre-conditions**       |                      Developer has access to the [Virtual Terminal](#11-glossary) environment and necessary permissions to perform programming and development tasks.                      |
-|      **Post-conditions**      |    Developer has completed programming and development tasks within the [Virtual Terminal](#11-glossary) environment, including coding, compiling, and debugging software applications.    |
+| **Stakeholders and Interest** |              Developers and stakeholders interested in the development, testing, and debugging of software applications using a [Virtual Terminal](#Virtual-Terminal-id) environment.              |
+|          **Trigger**          |                 Developer initiates a request to use the [Virtual Terminal](#Virtual-Terminal-id) for programming and development tasks, such as coding, compiling, and debugging.                 |
+|      **Pre-conditions**       |                      Developer has access to the [Virtual Terminal](#Virtual-Terminal-id) environment and necessary permissions to perform programming and development tasks.                      |
+|      **Post-conditions**      |    Developer has completed programming and development tasks within the [Virtual Terminal](#Virtual-Terminal-id) environment, including coding, compiling, and debugging software applications.    |
 |        **Extensions**         | If the source code contains syntax errors or logical bugs, the developer may need to debug and fix the issues iteratively until the code compiles and runs without errors. |
 |         **Priority**          |                                                                                    High                                                                                    |
-|   **Special Requirements**    |                      The [Virtual Terminal](#11-glossary) should provide efficient text-based editors and compilers tools to facilitate coding and development tasks.                      |
+|   **Special Requirements**    |                      The [Virtual Terminal](#Virtual-Terminal-id) should provide efficient text-based editors and compilers tools to facilitate coding and development tasks.                      |
 
 |           **UC-3**            |                                                                              **Automation and Scripting**                                                                              |
 | :---------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |     **Primary Actor(s)**      |                                                                   System Administrator, Developer, Automated System                                                                    |
-| **Stakeholders and Interest** |                Users, administrators, and automated systems interested in automating tasks and performing scripting operations within the [Virtual Terminal](#11-glossary) environment.                |
-|          **Trigger**          |          System administrator, developer, or automated system initiates a request to automate tasks or perform scripting operations within the [Virtual Terminal](#11-glossary) environment.           |
-|      **Pre-conditions**       | The [Virtual Terminal](#11-glossary) environment is operational and accessible. Required scripting languages and automation tools are installed and available within the [Virtual Terminal](#11-glossary) environment. |
-|      **Post-conditions**      |           The tasks are successfully automated, and scripting operations are executed within the [Virtual Terminal](#11-glossary) environment, resulting in the desired outcomes or actions.           |
+| **Stakeholders and Interest** |                Users, administrators, and automated systems interested in automating tasks and performing scripting operations within the [Virtual Terminal](#Virtual-Terminal-id) environment.                |
+|          **Trigger**          |          System administrator, developer, or automated system initiates a request to automate tasks or perform scripting operations within the [Virtual Terminal](#Virtual-Terminal-id) environment.           |
+|      **Pre-conditions**       | The [Virtual Terminal](#Virtual-Terminal-id) environment is operational and accessible. Required scripting languages and automation tools are installed and available within the [Virtual Terminal](#Virtual-Terminal-id) environment. |
+|      **Post-conditions**      |           The tasks are successfully automated, and scripting operations are executed within the [Virtual Terminal](#Virtual-Terminal-id) environment, resulting in the desired outcomes or actions.           |
 |        **Extensions**         |                    If the scripts contain errors or encounter issues during execution, the actor may need to troubleshoot the scripts and revise them accordingly.                     |
 |         **Priority**          |                                                                                          High                                                                                          |
-|   **Special Requirements**    |            Security measures should be implemented to ensure the safety and integrity of automated tasks and scripting operations within the [Virtual Terminal](#11-glossary) environment.             |
+|   **Special Requirements**    |            Security measures should be implemented to ensure the safety and integrity of automated tasks and scripting operations within the [Virtual Terminal](#Virtual-Terminal-id) environment.             |
 
-<!-- I think there are too much use cases for too specific features. Perhaps there should be more general ones. -->
 
 
 ### **5.1.3 Mock-up**
@@ -391,7 +390,6 @@ A text file [Virtual Terminal](#11-glossary) is a software tool or environment t
 ![virtual-terminal](../images/functional_images/virtual-terminal.png)
 
 ### **5.1.4  Functional Requirements**
-
 - **User Interface**:<br>
 Provide a text-based interface for interacting with the system.
 Display text output from the system.
@@ -416,22 +414,32 @@ Implement security measures to protect terminal sessions and prevent unauthorize
 
 # **6. System Configurations**
 ## **6.1 Minimum requirements**
-   - CPU : [16 Bits Environment](#11-glossary)
-   - [RAM](#11-glossary) : 32 [Kilobytes](#11-glossary)
+   - CPU : [16 Bits Environment](#16-Bits-Environment-id)
+   - [RAM](#RAM-id) : 32 [Kilobytes](#Kilobyte-id)
 ## **6.2 Installation**
 
 # **7. Other System Requirements/ Non-Functional Requirements**
-   *This section is used in contrast with stated functional requirements to highlight the additional details on the quality related aspects as well as other behavioral aspects of a system. This section is used to capture the stakeholders’ implicit expectations about how well the system will work under a given circumstance. Here you can  state the specific SLA’s related to system response times (Data search and retrieval), Performance needs and metrics, Latencies in a particular timeframe or during high volume transactions, System failures and recovery management, Security levels and accessibility constraints, Data Backup and archiving Capabilities, Legal compliance needs etc. The broader definition of the term ‘system’ also includes integrations with all types of Mobile platforms, Mobile devices, Tablets and Smart phones. 
+- **Performance**:
+   - Response time: The program must respond to user interactions under 5 seconds.
+   <!-- - Resource usage: The program should not use more thant XX of memory. -->
 
-# **8. Reporting Requirements**
-   *This section is used to capture the reporting needs, including but not limited to the scope and format of the report, data elements and contents required on the report, file types and extraction mechanisms, user base and accessibility levels, frequency of report extractions etc. Also provide the mock up of the report if needed.  If necessary, create a separate document for reporting requirements. 
+- **Usability**:
+   - User interface responsiveness: The user must be able to see each code manipulation after each execution.
+   - Consistency: The user interface must maintain a consistent and understable design during the whole execution.
 
-# **9. Integration Requirements**
-   Identify the integration needs and state all required interfaces with anything external to this solution including hardware, software, and users. Include Architectural overview diagrams, high level data flow diagrams, table structures and schema, interface protocols, API’s, Error conditions, Error validations and messaging needs, Auto processing requirements etc. You can optionally state hardware and software dependencies, Upgrade requirements, compatibility issues with existing frameworks and solutions, etc
+- **Maintainability**:
+   - Documentation: Code should be well-documented following the team's 2 standard documentation format.
 
-(Data Flow Diagrams, Interface Diagrams – if necessary)
+- **Reliability**:
+   - Availability:
+   - Disaster recovery:
 
-## **9.1  Exception Handling/ Error Reporting**
+- **Compliance**:
+   - Regulatory compliance:
+   - Industry standards:
+
+# **8. Integration Requirements**
+## **8.1  Exception Handling/ Error Reporting**
 
 | **Exception/ Error ID** |           **Error**            |                                                                                          **Cause**                                                                                           |                   **Solution Strategy**                    |
 | :---------------------: | :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------: |
@@ -454,33 +462,44 @@ Implement security measures to protect terminal sessions and prevent unauthorize
 |           117           | Include files nested too deep. |                                                                     The maximum include file nesting level was exceeded.                                                                     | STOP INCLUDING FILES FOUND ON INTERNET ! (No enough space) |
 
 
-# **10.   References**
-   List all references to external material used as background information or knowledge for the FSD. Examples may include a compliancy website, Stanford website, etc
+# **9.   References**
+   |**Purpose**|**Link**|
+   | :- | :- |
+   |Documentation|[x86 Assembly Language](https://docs.oracle.com/cd/E19253-01/817-5477/817-5477.pdf)|
+   |||
 
-## **11 Glossary** 
+## **10 Glossary** 
 State any terms and their definitions that are described in the functional specifications. Include any acronyms that are mentioned in the document.
 
 | **Term/Acronym**     | **Definition**                                                                                                                              | **Description**                                                                                                                                                                                                               |
 | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| .aop                 | Extension of our text file                                                                                                                  | A new file extension which is basically text file.                                                                                                                                                                            |
-| 16 Bits Environment  | A computing environment that operates with 16-bit data units                                                                                | Refers to a system architecture where data is processed in chunks of 16 bits, common in earlier computer systems.                                                                                                             |
-| Assembler            | A program that translates assembly language into machine code                                                                               | Converts human-readable assembly code into binary machine code that can be executed by a computer's central processing unit (CPU).                                                                                            |
-| Assembly Language    | Assembly Language: Low-level programming language specific to a computer architecture.                                                      | A language that resembles Assembly but is easier to use and understand, often created for specific purposes or projects.                                                                                                      |
-| AT2                  | "Assembly Team 2" is our Assembly Language                                                                                                  | Refers to our Assembly Language.                                                                                                                                                                                              |
-| Build                | The process of compiling and linking source code to create an executable program                                                            | Involves translating human-readable code into machine code and combining it with necessary libraries and resources.                                                                                                           |
-| C                    | C is an imperative procedural language, supporting structured programming, lexical variable scope, and recursion, with a static type system | It is referred to as a low-level language in the sense that each instruction in the language is designed to be compiled into a fairly predictable number of machine instructions                                              |
-| C Standard Libraries | The C standard library is a standardized collection of header files and library routines used to implement common operations                | The C standard library provides macros, type definitions and functions for tasks such as string handling, mathematical computations, input/output processing, memory management, and several other operating system services. |
-| Compiler             | A program that translates high-level programming code into machine code                                                                     | Converts source code written in a programming language into a form that can be executed by a computer's CPU.                                                                                                                  |
-| Debugger             | A tool used in software development to identify and fix bugs or errors in a program                                                         | Allows developers to inspect variables, set breakpoints, and step through code to understand and resolve issues.                                                                                                              |
-| GNU                  | GNU's Not Unix                                                                                                                              | A recursive acronym for the GNU operating system, which is a free and open-source Unix-like operating system. The GNU project develops various software, including compilers and utilities.                                   |
-| IAT2                 | "Interpreter Assembly Team 2"                                                                                                               | Refers to our interpreter which will interpret our Assembly Language.                                                                                                                                                         |
-| Interpreter          | A program that directly executes instructions written in a programming language                                                             | Translates and executes code line by line without the need for a separate compilation step.                                                                                                                                   |
-| Kilobyte             | A unit of digital information equal to 1024 bytes                                                                                           | Commonly used to measure the size of computer memory or storage capacity.                                                                                                                                                     |
-| Parser               | A tool or program that analyzes the syntax of a programming language                                                                        | Breaks down code into its components and checks whether it conforms to the language's grammar rules.                                                                                                                          |
-| RAM                  | Random Access Memory                                                                                                                        | A type of computer memory that is volatile and used for temporarily storing data that is actively being used or processed by a computer.                                                                                      |
-| Virtual Processor    | An emulation of a physical processor in a virtualized environment                                                                           | Allows multiple virtual machines to run on a single physical machine, each with its own isolated processor instance.                                                                                                          |
-| Virtual Terminal     | A software interface that emulates a physical computer terminal                                                                             | Enables communication with a computer system through text-based commands and responses.                                                                                                                                       |
+|<a id="aop-id"></a>.aop                 | Extension of our text file                                                                                                                  | A new file extension which is basically text file.                                                                                                                                                                            |
+|<a id="16-Bits-Environment-id"></a>16 Bits Environment  | A computing environment that operates with 16-bit data units                                                                                | Refers to a system architecture where data is processed in chunks of 16 bits, common in earlier computer systems.                                                                                                             |
+|<a id="Assembler-id"></a>Assembler            | A program that translates assembly language into machine code                                                                               | Converts human-readable assembly code into binary machine code that can be executed by a computer's central processing unit (CPU).                                                                                            |
+|<a id="Assembly-Language-id"></a>Assembly Language    | Assembly Language: Low-level programming language specific to a computer architecture.                                                      | A language that resembles Assembly but is easier to use and understand, often created for specific purposes or projects.                                                                                                      |
+|<a id="AT2-id"></a>AT2                  | "Assembly Team 2" is our Assembly Language                                                                                                  | Refers to our Assembly Language.                                                                                                                                                                                              |
+|<a id="Build-id"></a>Build                | The process of compiling and linking source code to create an executable program                                                            | Involves translating human-readable code into machine code and combining it with necessary libraries and resources.                                                                                                           |
+|<a id="C99-id"></a>C99                    | C99 refers to the 1999 revision of the C programming language standard, known as C99 or ISO/IEC 9899:1999. | C99 introduced several new features and improvements to the language, enhancing its expressiveness, flexibility, and safety.                                               |
+|<a id="C-id"></a>C                    | C is an imperative procedural language, supporting structured programming, lexical variable scope, and recursion, with a static type system | It is referred to as a low-level language in the sense that each instruction in the language is designed to be compiled into a fairly predictable number of machine instructions                                              |
+|<a id="C-Standard-Libraries-id"></a>C Standard Libraries | The C standard library is a standardized collection of header files and library routines used to implement common operations                | The C standard library provides macros, type definitions and functions for tasks such as string handling, mathematical computations, input/output processing, memory management, and several other operating system services. |
+|<a id="Compiler-id"></a>Compiler             | A program that translates high-level programming code into machine code                                                                     | Converts source code written in a programming language into a form that can be executed by a computer's CPU.                                                                                                                  |
+|<a id="Debugger-id"></a>Debugger             | A tool used in software development to identify and fix bugs or errors in a program                                                         | Allows developers to inspect variables, set breakpoints, and step through code to understand and resolve issues.                                                                                                              |
+|<a id="GNU-id"></a>GNU                  | GNU's Not Unix                                                                                                                              | A recursive acronym for the GNU operating system, which is a free and open-source Unix-like operating system. The GNU project develops various software, including compilers and utilities.                                   |
+|<a id="IAT2-id"></a>IAT2                 | "Interpreter Assembly Team 2"                                                                                                               | Refers to our interpreter which will interpret our Assembly Language.                                                                                                                                                         |
+|<a id="Interpreter-id"></a>Interpreter          | A program that directly executes instructions written in a programming language                                                             | Translates and executes code line by line without the need for a separate compilation step.                                                                                                                                   |
+|<a id="Kilobyte-id"></a>Kilobyte             | A unit of digital information equal to 1024 bytes                                                                                           | Commonly used to measure the size of computer memory or storage capacity.                                                                                                                                                     |
+|<a id="Parser-id"></a>Parser               | A tool or program that analyzes the syntax of a programming language                                                                        | Breaks down code into its components and checks whether it conforms to the language's grammar rules.                                                                                                                          |
+|<a id="RAM-id"></a>RAM                  | Random Access Memory                                                                                                                        | A type of computer memory that is volatile and used for temporarily storing data that is actively being used or processed by a computer.                                                                                      |
+|<a id="Virtual-Processor-id"></a>Virtual Processor    | An emulation of a physical processor in a virtualized environment                                                                           | Allows multiple virtual machines to run on a single physical machine, each with its own isolated processor instance.                                                                                                          |
+|<a id="Virtual-Terminal-id"></a>Virtual Terminal     | A software interface that emulates a physical computer terminal                                                                             | Enables communication with a computer system through text-based commands and responses.                                                                                                                                       |
+|<a id="anchor-id"></a>dzdada     | A software interface that emulates a physical computer terminal                                                                             | Enables communication with a computer system through text-based commands and responses.                                                                                                                                       |
 
-# **12.  Appendix**
-## **12.1 ASSEMBLY LANGUAGE**
+# **11.  Appendix**
+## **11.1 ASSEMBLY LANGUAGE**
+[AT2 Documentation](./AT2-Assembly-Language-Documentation.md) 
+
 January 26, 2024
+
+
+
+
