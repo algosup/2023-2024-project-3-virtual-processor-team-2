@@ -257,3 +257,19 @@ void buildActNode(instNode_t *node, varList_t *varList, labelList_t *labelList);
         labelList: pointer to the label list
 */
 void buildLabelNode(instNode_t *node, labelList_t *labelList);
+
+/*
+    Add a label to the label list
+    params:
+        list: pointer to the label list
+        name: label name
+        nodeId: node id
+*/
+void addLabel(labelList_t *list, char *name, long nodeId);
+
+/*
+    Upgrades the size of the variable list
+    params:
+        list: pointer to the variable list
+*/
+void incLabelList(labelList_t *list);

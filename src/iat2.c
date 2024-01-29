@@ -7,7 +7,7 @@
 #include "runner.h"
 #include "iat2.h"
 
-#define VERSION "0.0.1"
+#define VERSION "0.0.2"
 
 int main(int argc, char *argv[]) {
     // Parse program arguments and get flags
@@ -22,14 +22,20 @@ int main(int argc, char *argv[]) {
 
     // Init variables list struct
     varList_t *varList = malloc(sizeof(varList_t));
-    varList->size = 0;
-    varList->list = NULL;
+    varList->size = 10;
+    varList->list = malloc(sizeof(var_t) * varList->size);
+    // Init variables list
+    for(size_t i = 0; i < varList->size; i++){
+        varList->list[i].name = NULL;
+    }
 
     // Init labels list struct
     labelList_t *labelList = malloc(sizeof(labelList_t));
-    labelList->size = 0;
-    labelList->list = NULL;
-
+    labelList->size = 10;
+    labelList->list = malloc(sizeof(label_t) * labelList->size);
+    for(size_t i = 0; i < labelList->size; i++){
+        labelList->list[i].name = NULL;
+    }
     // Init instructions list struct
     instList_t *instList = malloc(sizeof(instList_t));
     instList->head = NULL;
@@ -43,13 +49,13 @@ int main(int argc, char *argv[]) {
         printLabelList(labelList, "../bin/out0.txt");
     }
     // run builder
-    // build(instList, labelList);
+    build(instList, labelList);
 
-    // if(flags.debug) {
-    //     printInstList(instList, "../bin/out1.txt");
-    //     printVarList(varList, "../bin/out1.txt");
-    //     printLabelList(labelList, "../bin/out1.txt");
-    // }
+    if(flags.debug) {
+        printInstList(instList, "../bin/out1.txt");
+        printVarList(varList, "../bin/out1.txt");
+        printLabelList(labelList, "../bin/out1.txt");
+    }
 
     // run runner
     // TODO: make the function run

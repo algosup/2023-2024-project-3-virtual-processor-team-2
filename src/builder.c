@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "builder.h"
 
@@ -174,18 +175,21 @@ void printVarList(varList_t *list, char *dest){
         exit(EXIT_FAILURE);
     }
     for(size_t i = 0; i < list->size; i++){
+        if(list->list[i].name == NULL){
+            continue;
+        }
         switch(list->list[i].type){
             case VAR_INT:
-                fprintf(file, "%s: %d(int)\n", list->list[i].name, list->list[i].value.i_value);
+                fprintf(file, "%s: %d(INT)\n", list->list[i].name, list->list[i].value.i_value);
                 break;
             case VAR_FLOAT:
-                fprintf(file, "%s: %f(float)\n", list->list[i].name, list->list[i].value.f_value);
+                fprintf(file, "%s: %f(FLOAT)\n", list->list[i].name, list->list[i].value.f_value);
                 break;
             case VAR_CHAR:
-                fprintf(file, "%s: %c(char)\n", list->list[i].name, list->list[i].value.c_value);
+                fprintf(file, "%s: %c(CHAR)\n", list->list[i].name, list->list[i].value.c_value);
                 break;
             case VAR_STRING:
-                fprintf(file, "%s: %s(string)\n", list->list[i].name, list->list[i].value.s_value);
+                fprintf(file, "%s: %s(STRING)\n", list->list[i].name, list->list[i].value.s_value);
                 break;
             default:
                 fprintf(stderr, "Invalid variable type\n");
@@ -202,8 +206,12 @@ void printLabelList(labelList_t *list, char *dest){
         fprintf(stderr, "Error opening file\n");
         exit(EXIT_FAILURE);
     }
+    fprintf(file, "\n\nLABELS:\n");
     for(size_t i = 0; i < list->size; i++){
-        fprintf(file, "%s: %ld, node id: %ld\n", list->list[i].name, list->list[i].id, list->list[i].nodeId);
+        if(list->list[i].name == NULL){
+            continue;
+        }
+        fprintf(file, "(NAME): %s, (ID)%ld, (NODE ID): %ld\n", list->list[i].name, list->list[i].id, list->list[i].nodeId);
     }
     fclose(file);
 }
@@ -220,7 +228,11 @@ void build(instList_t *nodeList, labelList_t *labelList){
         // Build action
 
         // Check if node is a label
-        // Build label
+        if(currNode->inst == INST_LABEL){
+            buildLabelNode(currNode, labelList);
+        }
+
+        currNode = currNode->next;
     }
     
 }
@@ -234,9 +246,54 @@ void buildActNode(instNode_t *node, varList_t *varList, labelList_t *labelList){
 void buildLabelNode(instNode_t *node, labelList_t *labelList){
     // Check if label is already in the list
     for(size_t i = 0; i < labelList->size; i++){
-        if(strcmp(labelList->list[i].name, node->arg0.target) == 0){
+        if(labelList->list[i].name == NULL){
+            continue;
+        }
+        else if(strcmp(labelList->list[i].name, node->arg0.target) == 0){
             fprintf(stderr, "Label %s already declared\n", node->arg0.target);
             exit(EXIT_FAILURE);
         }
+    }
+    // Add label to the list
+    addLabel(labelList, node->arg0.target, node->id);
+}
+
+void addLabel(labelList_t *list, char *name, long nodeId){
+    // Check if list is full
+    bool full = true;
+    for(size_t i = 0; i < list->size; i++){
+        if(list->list[i].name == NULL){
+            full = false;
+            break;
+        }
+    }
+    if(full){
+        // Increase list size
+        incLabelList(list);
+    }
+
+    // Add label to the list
+    for(size_t i = 0; i < list->size; i++){
+        if(list->list[i].name == NULL){
+            list->list[i].name = name;
+            list->list[i].nodeId = nodeId;
+            list->list[i].id = (long)i;
+            break;
+        }
+    }
+}
+
+void incLabelList(labelList_t *list){
+    // Increase list size
+    list->size *= 2;
+    list->list = (label_t *)realloc(list->list, sizeof(label_t) * list->size);
+    if(list->list == NULL){
+        fprintf(stderr, "Error reallocating memory\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Init new memory
+    for(size_t i = list->size / 2; i < list->size; i++){
+        list->list[i].name = NULL;
     }
 }
