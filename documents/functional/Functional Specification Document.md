@@ -1,9 +1,9 @@
 ﻿# **ALGOSUP Team 2**
 ## **Functional Specification Document**
 
-### **DOCUMENT VERSION 0.6**
+### **DOCUMENT VERSION 1.0**
 
-**01/22/2024**
+**01/29/2024**
 
 **AUTHORS**
 
@@ -24,7 +24,8 @@
 | 1/26/2024 |    0.4.2    | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
 | 1/27/2024 |     0.5     | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
 | 1/27/2024 |     0.6     | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
-|           |             |                 |                     |
+| 1/29/2024 |     1.0     | GUILLOUCHE Enzo |  DESPAUX Guillaume  |
+
 
 **APPROVALS**
 
@@ -33,7 +34,7 @@
 |     1/30/2024     |         0.1          |       ProgM       | DESPAUX Guillaume |
 |     1/30/2024     |         0.1          |        QA         |  GUILLOUCHE Enzo  |
 |     1/30/2024     |         0.1          |        PM         | GAGNEPAIN Mathias |
-|                   |                      |                   |                   |
+
 
 <details>
 <summary>Table of Contents</summary>
@@ -495,7 +496,7 @@ State any terms and their definitions that are described in the functional speci
 
 # **11.  Appendix**
 ## **11.1 ASSEMBLY LANGUAGE**
-[AT2 Documentation](./AT2-Assembly-Language-Documentation.md) 
+[AT2 Documentation](./AT2-Language-Documenation.pdf) 
 
 January 26, 2024
 
