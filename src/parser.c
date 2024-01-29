@@ -112,14 +112,19 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
     }
     // Get the instruction
     char *inst = getInst(line);
+    inst = cleanString(inst);
+
     // Get the arguments
     char **args = getInstArgs(line);
     instNode_t *newNode = malloc(sizeof(instNode_t));
     newNode->id = nodeId;
+    newNode->lineNb = lineNb;
+
+    newNode->next = NULL;
 
     // Set arguments
     setArgs(newNode, args);
-
+    
     bool isThatKind = false;
     // Check if the instruction is an operation
     isThatKind = isOp(inst, newNode);
@@ -129,6 +134,12 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
 
     // Check if the instruction is an action
     isThatKind = isAct(inst, newNode);
+    if(isThatKind){
+        return newNode;
+    }
+
+    // Check if the instruction is a comparison
+    isThatKind = isCmp(inst, newNode);
     if(isThatKind){
         return newNode;
     }
@@ -285,20 +296,6 @@ bool isAct(char *inst, instNode_t *newNode){
         newNode->nodeType.act->act = ACT_DRAW;
         return true;
     }
-    else if(strcmp(inst, "if") == 0){
-        instNode_t *newNode = malloc(sizeof(instNode_t));
-        newNode->nodeType.act = malloc(sizeof(actNode_t));
-        // Set type of action
-        newNode->nodeType.act->act = ACT_IF;
-        return true;
-    }
-    else if(strcmp(inst, "else") == 0){
-        newNode->inst = INST_ACT;
-        newNode->nodeType.act = malloc(sizeof(actNode_t));
-        // Set type of action
-        newNode->nodeType.act->act = ACT_ELSE;
-        return true;
-    }
     else if(strcmp(inst, "ngr") == 0){
         newNode->inst = INST_ACT;
         newNode->nodeType.act = malloc(sizeof(actNode_t));
@@ -339,6 +336,33 @@ bool isAct(char *inst, instNode_t *newNode){
         newNode->nodeType.act = malloc(sizeof(actNode_t));
         // Set type of action
         newNode->nodeType.act->act = ACT_OB1;
+        return true;
+    }
+
+    return false;
+}
+
+bool isCmp(char *inst, instNode_t *newNode){
+    if(strcmp(inst, "if") == 0){
+        newNode->inst = INST_ACT;
+        newNode->nodeType.act = malloc(sizeof(actNode_t));
+        // Set type of action
+        newNode->nodeType.act->act = ACT_CMP;
+        return true;
+    }
+    else if(strcmp(inst, "else") == 0){
+        newNode->inst = INST_ACT;
+        newNode->nodeType.act = malloc(sizeof(actNode_t));
+        // Set type of action
+        newNode->nodeType.act->act = ACT_CMP;
+        return true;
+    }
+
+    else if(strcmp(inst, "end") == 0){
+        newNode->inst = INST_ACT;
+        newNode->nodeType.act = malloc(sizeof(actNode_t));
+        // Set type of action
+        newNode->nodeType.act->act = ACT_CMP;
         return true;
     }
 
@@ -462,8 +486,10 @@ void setArgs(instNode_t *node, char **args) {
             node->arg0Type = VAR_TARGET;
         }
         else{
-            fprintf(stderr, "Invalid argument\n");
-            exit(EXIT_FAILURE);
+            node->arg0.s_value = NULL;
+            node->arg0Type = VAR_NONE;
+            return;
+            return;
         }
     }
 
@@ -508,8 +534,9 @@ void setArgs(instNode_t *node, char **args) {
             node->arg1Type = VAR_TARGET;
         }
         else{
-            fprintf(stderr, "Invalid argument\n");
-            exit(EXIT_FAILURE);
+            node->arg1.s_value = NULL;
+            node->arg1Type = VAR_NONE;
+            return;
         }
     }
 

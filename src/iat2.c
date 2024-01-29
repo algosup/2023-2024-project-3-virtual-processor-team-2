@@ -44,17 +44,19 @@ int main(int argc, char *argv[]) {
     parseFile(instList, argv[1]);
 
     if(flags.debug) {
-        printInstList(instList, "../bin/out0.txt");
-        printVarList(varList, "../bin/out0.txt");
-        printLabelList(labelList, "../bin/out0.txt");
+        printInstList(instList, "../others/parsing.log");
+        printVarList(varList, "../others/parsing.log");
+        printLabelList(labelList, "../others/parsing.log");
     }
+
+    
     // run builder
     build(instList, labelList);
 
     if(flags.debug) {
-        printInstList(instList, "../bin/out1.txt");
-        printVarList(varList, "../bin/out1.txt");
-        printLabelList(labelList, "../bin/out1.txt");
+        printInstList(instList, "../others/building.log");
+        printVarList(varList, "../others/building.log");
+        printLabelList(labelList, "../others/building.log");
     }
 
     // run runner

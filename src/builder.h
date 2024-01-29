@@ -6,6 +6,7 @@ enum varKind{
     VAR_STRING,
     VAR_REG,
     VAR_TARGET,
+    VAR_NONE
 };
 
 // Instruction types
@@ -13,7 +14,6 @@ enum instKind{
     INST_OP,
     INST_ACT,
     INST_LABEL,
-    INST_CMP,
     INST_VAR
 };
 
@@ -43,14 +43,20 @@ enum actKind{
     ACT_RET,
     ACT_CLOK,
     ACT_DRAW,
-    ACT_IF,
-    ACT_ELSE,
+    ACT_CMP,
     ACT_EXIT,
     ACT_PUSH,
     ACT_POP,
     ACT_PUSH_A,
     ACT_POP_A,
     ACT_OB1
+};
+
+// comparison statements
+enum cmpStatem{
+    CMP_IF,
+    CMP_ELSE,
+    CMP_END
 };
 
 // Comparison types
@@ -129,6 +135,7 @@ typedef struct opNode{
 
 // Structs for comparison nodes
 typedef struct cmpNode{
+    enum cmpStatem statem;
     enum cmpKind cmp;
 } cmpNode_t;
 
@@ -141,6 +148,7 @@ typedef struct actNode{
 // Structs for instruction nodes
 typedef struct instNode{
     long id;
+    long lineNb;
     enum instKind inst;
     union{
         opNode_t *op;
@@ -209,6 +217,16 @@ char *printOPKind(enum opKind op);
 */
 char *printACTKind(enum actKind act);
 
+
+/*
+    Print the kind of a comparison
+    params:
+        cmp: comparison kind
+    returns:
+        char*: string with the comparison kind
+*/
+char *printCMPKind(enum cmpKind cmp);
+
 /*
     Print variable list to a file
     params:
@@ -237,18 +255,16 @@ void build(instList_t *nodeList, labelList_t *labelList);
     Build an operation node
     params:
         node: pointer to the instruction node
-        varList: pointer to the variable list
 */
-void buildOpNode(instNode_t *node, varList_t *varList);
+void buildOpNode(instNode_t *node);
 
 /*
     Build an action node
     params:
         node: pointer to the instruction node
-        varList: pointer to the variable list
         labelList: pointer to the label list
 */
-void buildActNode(instNode_t *node, varList_t *varList, labelList_t *labelList);
+void buildActNode(instNode_t *node, labelList_t *labelList);
 
 /*
     Build a label node

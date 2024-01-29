@@ -64,6 +64,18 @@ bool isOp(char *inst, instNode_t *newNode);
 */
 bool isAct(char *inst, instNode_t *newNode);
 
+
+/*
+    Read the line and check if it is a comparison
+    params:
+        char*: instruction to be checked
+        instNode_t*: pointer to the instruction node
+    returns:
+        bool: true if it is a comparison
+
+*/
+bool isCmp(char *inst, instNode_t *newNode);
+
 /*
     Read the line and check if it is a declaration for a label or a variable
     params:

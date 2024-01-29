@@ -23,8 +23,13 @@ void printInstList(instList_t *list, char *dest){
                 fprintf(file, "%ld(OP): %s %s\n", node->id, printOPKind(node->nodeType.op->op), printArgs(node));
                 break;
             case INST_ACT:
-                fprintf(file, "%ld(ACT): %s %s\n", node->id, printACTKind(node->nodeType.act->act), printArgs(node));
-                break;
+                if(node->nodeType.act->act != ACT_CMP){
+                    fprintf(file, "%ld(ACT): %s %s\n", node->id, printACTKind(node->nodeType.act->act), printArgs(node));
+                    break;
+                }
+                else{
+                    break;
+                }
             case INST_LABEL:
                 fprintf(file, "%ld(LAB): %s\n", node->id, node->arg0.target);
                 break;
@@ -62,8 +67,7 @@ char *printArgs(instNode_t *node){
         sprintf(arg0, "%s(target)", node->arg0.target);
     }
     else{
-        fprintf(stderr, "Invalid argument type\n");
-        exit(EXIT_FAILURE);
+        sprintf(arg0, "(none)");
     }
 
     char *arg1 = malloc(sizeof(char) * 128);
@@ -86,8 +90,7 @@ char *printArgs(instNode_t *node){
         sprintf(arg1, "%s(target)", node->arg1.target);
     }
     else{
-        fprintf(stderr, "Invalid argument type\n");
-        exit(EXIT_FAILURE);
+        sprintf(arg1, "(none)");
     }
 
     char *args = malloc(sizeof(char) * 256);
@@ -146,10 +149,8 @@ char *printACTKind(enum actKind act){
             return "CLOK";
         case ACT_DRAW:
             return "DRAW";
-        case ACT_IF:
-            return "IF";
-        case ACT_ELSE:
-            return "ELSE";
+        case ACT_CMP:
+            return "DRAW";
         case ACT_EXIT:
             return "EXIT";
         case ACT_PUSH:
@@ -166,6 +167,35 @@ char *printACTKind(enum actKind act){
             fprintf(stderr, "Invalid action\n");
             exit(EXIT_FAILURE);
     }
+}
+
+char *printCMPKind(enum cmpKind cmp){
+    switch(cmp){
+        case CMP_OR:
+            return "OR";
+        case CMP_AND:
+            return "AND";
+        case CMP_NOT:
+            return "NOT";
+        case CMP_XOR:
+            return "XOR";
+        case CMP_LT:
+            return "LT";
+        case CMP_GT:
+            return "GT";
+        case CMP_LTE:
+            return "LTE";
+        case CMP_GTE:
+            return "GTE";
+        case CMP_EQ:
+            return "EQ";
+        case CMP_NEQ:
+            return "NEQ";
+        default:
+            fprintf(stderr, "Invalid comparison\n");
+            exit(EXIT_FAILURE);
+    }
+
 }
 
 void printVarList(varList_t *list, char *dest){
@@ -225,7 +255,9 @@ void build(instList_t *nodeList, labelList_t *labelList){
         // Build operation
 
         // Check if node is an action
-        // Build action
+         if(currNode->inst == INST_ACT){
+            buildActNode(currNode, labelList);
+        }
 
         // Check if node is a label
         if(currNode->inst == INST_LABEL){
@@ -237,10 +269,11 @@ void build(instList_t *nodeList, labelList_t *labelList){
     
 }
 
-void buildOpNode(instNode_t *node, varList_t *varList){
+void buildOpNode(instNode_t *node){
 }
 
-void buildActNode(instNode_t *node, varList_t *varList, labelList_t *labelList){
+void buildActNode(instNode_t *node, labelList_t *labelList){
+
 }
 
 void buildLabelNode(instNode_t *node, labelList_t *labelList){
