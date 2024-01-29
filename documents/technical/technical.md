@@ -86,7 +86,31 @@ The methodology outlined in the document will provide valuable insights to other
 
 ### 1.3 File architecture
 
-
+``` folder
+|-- 2023-2024-project-3-virtual-processor-team-2 (root)
+|   |-- documents
+|   |   |-- functional
+|   |   |   |-- 2023-2024 Project 3 Virtual Processor.pdf
+|   |   |   |-- AT2-Assembly-Language-Documentation.md
+|   |   |   |-- Functional Specification Document Template.md
+|   |   |-- management
+|   |   |   |-- weekly_reports
+|   |   |   |   |-- cumulative.md
+|   |   |   |   |-- week_1.md
+|   |   |   |   |-- week_2.md
+|   |   |   |   |-- week_3.md
+|   |   |   |   |-- week_4.md
+|   |   |   |   |-- week_5.md
+|   |   |   |   |-- week_6.md
+|   |   |   |   |-- week_7.md
+|   |   |   |   |-- week_8.md
+|   |   |   |   |-- management_artifact.md
+|   |   |-- qa
+|   |   |   |-- test_plan.md
+|   |   |-- technical
+|   |   |   |-- roadmap.md
+|   |   |   |--technical.md
+```
 
 ### 1.4 Development environment
 
