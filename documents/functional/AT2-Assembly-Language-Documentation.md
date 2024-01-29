@@ -1,31 +1,45 @@
+# AT2 Assembly Language
+# Reference Manual
+
+<details>
+<summary>Table of Contents</summary>
+
+ - [1. Introduction](#1-introduction)
+
+</details>
+
 ## General-Purpose Instructions
 ### Data Transfer Instructions
 The data transfer instructions move data between memory and the general-purpose and
-segment registers, and perform operations such as conditional moves, stack access, and data
-conversion.
-MOV -> MOV
+segment registers, and perform operations such as conditional moves, stack access, and data conversion.
 
 ### Binary Arithmetic Instructions
-The binary arithmetic instructions perform basic integer computions on operands in memory
-or the general-purpose registers.
-ADD -> +
-SUB -> -
-MUL -> *
-DIV -> /
-MOD -> %
-*CMP -> IF/ELSE*
-
-B_AND -> &
-*B_NOT -> ?*
-*B_OR -> ?*
-*B_XOR -> ?*
+The binary arithmetic instructions perform basic integer computions on operands in memory or the general-purpose registers.
+|AT2 Mnemonic|Description|
+| :- | :- |
+|+|addition|
+|-|substraction|
+|/|division|
+|*|multiplication|
+|%|modulo|
+|>>|shift right|
+|<<|shift left|
+|\||or|
+|&|and|
+|^|xor|
+|!|not|
+|**neg**||
+|++|increment|
+|--|decrement|
 
 ### Logical Instructions
 The logical instructions perform basic logical operations on their operands.
-AND -> &&
-NOT -> !
-OR -> ||
-XOR -> XOR
+|AT2 Mnemonic|Description|
+| :- | :- |
+|&&|AND|
+|!|NOT|
+|\|\||OR|
+|^|XOR|
 
 ### Control Transfer Instructions
 The control transfer instructions control the flow of program execution.
