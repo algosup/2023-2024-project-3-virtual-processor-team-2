@@ -82,15 +82,16 @@ Testing will focus on both memory allocating and basic instructions in assembly 
 
 #### 3.1.1. In-scope for Testing
 
-- 
-- 
-<!-- functional requirements -->
+- Test if users can be able to enter, modify, and delete text within the text file using keyboard input or other input methods.
+- Test if the interpreter can be capable of executing the parsed code instructions according to the semantics and rules defined by the programming language.
+- Test if the interface can display text output from the system and accept text input from the user. <br><br>
+For further details, refer to the [functional specifications](../functional/"functional".md) document.
 
 #### 3.1.2. Out-of-scope for Testing
 
-- 
-- 
-<!-- non-functional requirements -->
+- Test the implementation of a debugger.
+- Test an assembler system. <br><br>
+For further details, refer to the [functional specifications](../functional/"functional".md) document.
 
 ---
 
