@@ -3,39 +3,75 @@
 #include <stdbool.h>
 
 int main(){
+    // FILE *fp;
+    // char ch;
+    // int lineCount = 0;
+    
+    // fp = fopen("test2.aop", "r");
+    // if (fp == NULL)
+    // {
+    //     printf("Couldn't open file\n");
+    //     return 1;
+    // }
+
+    // int count = 0;
+
+    // while (ch != EOF)
+    // {
+    //     do
+    //     {
+    //         ch = fgetc(fp);
+    //         count++;
+    //     } while (ch != '\n' && ch != EOF);
+    //     printf("Line %d has %d characters.\n", lineCount, count);
+    //     lineCount = lineCount + 1;
+    //     count = 0;
+    // }    
+ 
+    // // Closing the file
+    // fclose(fp);
+    // printf("LineCount = %d\n", lineCount);
+
+    char* fileName = "test2.aop";
+
+    charNumbcheck(fileName);
+
+    return 0;
+}
+
+bool charNumbcheck(char* filename){
     FILE *fp;
     char ch;
-    int count;
     int lineCount = 0;
-    
-    fp = fopen("test2.aop", "r");
+    bool conditionChecked;
+    fp = fopen(filename, "r");
     if (fp == NULL)
     {
         printf("Couldn't open file\n");
-        return 1;
+        exit(0);
     }
+    int count = 0;
 
-    // Extract characters from file and store in character c
-    for (char c = getc(fp); c != EOF; c = getc(fp))
-        if (c == '\n') // Increment count if this character is newline
+    while (ch != EOF)
+    {
+        do
+        {
+            ch = fgetc(fp);
+            count++;
+            
+        } while (ch != '\n' && ch != EOF);
+        printf("Line %d has %d characters.\n", lineCount, count);
+        if (count <= 64)
+        {
+            conditionChecked = true;
             lineCount = lineCount + 1;
-
+            count = 0;
+        }
+        conditionChecked = false;
+        
+    }    
     printf("LineCount = %d\n", lineCount);
-
-     // Printing what is written in file
-    // character by character using loop.
-    do {
-        ch = fgetc(fp);
-        // printf("%c", ch);
-        count++;
-        // Checking if character is not EOF.
-        // If it is EOF stop reading.
-    } while (ch != EOF);
- 
     // Closing the file
     fclose(fp);
-
-    printf("Count = %d\n", count-1);
-
-    return 0;
+    return conditionChecked;
 }

@@ -429,13 +429,13 @@ void checkAOPFile(char* fileName) {
     }
 }
 
-int checkCharNumb(char* line){
-    int count = 0;
-    for (c = getc(line); c != '\n'; c = getc(line)) 
+// void checkCharNumb(FILE* fileName){
+//     int count = 0;
+//     for (c = getc(line); c != '\n'; c = getc(line)) 
   
-        // Increment count for this character 
-        printf("%c", c);
-        count = count + 1; 
-    printf("Count = %d", count);
-    return count;    
-}
+//         // Increment count for this character 
+//         printf("%c", c);
+//         count = count + 1; 
+//     printf("Count = %d", count);
+//     return count;    
+// }
