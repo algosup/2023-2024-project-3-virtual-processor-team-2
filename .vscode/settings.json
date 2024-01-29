@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "cassert": "cpp",
+        "builder.h": "c",
+        "cstdlib": "c",
+        "stdlib.h": "c"
+    }
+}
