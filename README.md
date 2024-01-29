@@ -1,8 +1,12 @@
 # ALGOSUP | 2024 | project 3 | Virtual Processor | Team 2
 
 <div align="center">
-    <img src="https://img.shields.io/badge/Made%20in-Vierzon-success.svg">
-    <img src="https://img.shields.io/badge/Made%20at-ALGOSUP-blue.svg">
+    <a href="https://en.wikipedia.org/wiki/Vierzon">
+        <img src="https://img.shields.io/badge/Made%20in-Vierzon-success.svg">
+    </a>
+    <a href="https://algosup.com/">
+        <img src="https://img.shields.io/badge/Made%20at-ALGOSUP-blue.svg">
+    </a>
 </div>
 
 <!-- ![Logo]() -->
