@@ -1,9 +1,10 @@
 <!-- TODO:
-- Changing the way I'm linking the definition for the glossary, removing the part use in it
+- Changing the way I'm linking the definition for the glossary, removing the part "use" in it
 - Complete the parts:
    - File architecture
    - Development environment
-   - Adding a convention part with all the conventions used for the project (commits, etc...). Use technical of team 3 as a model-->
+   - Adding a convention part with all the conventions used for the project (commits, etc...). Use technical of team 3 as a model
+- Define C standard libraries in the glossary-->
 
 ### Technical Specifications Document
 ### ALGOSUP Project 3, 2024
@@ -23,17 +24,19 @@
 <summary>Table of contents</summary>
 
 1. [Introduction](#1-introduction)
+   1. [Project goal]()
+   2. [Document purpose]()
    1. [File architecture](#11-file-architecture)
    2. [Target audience](#12-target-audience)
-   3. [Main deliverable](#13-main-deliverable)
-   4. [Development environment](#14-development-environment))
-   5. [Functional and technical requirements](#15-functional-and-technical-requirements)
-   6. [Constraints](#16-constraints)
-   7. [Out of scope](#17-out-of-scope)
-   8. [Algorithm architecture](#18-algorithm-architecture)
+   3. [Development environment](#13-development-environment))
+   4. [Functional and technical requirements](#14-functional-and-technical-requirements)
+   5. [Constraints](#15-constraints)
+   6. [Out of scope](#16-out-of-scope)
+   7. [Algorithm architecture](#17-algorithm-architecture)
 2. [Project overview](#2-project-overview)
-3. [Virtual processor specifications](#3-virtual-processor-specifications)
+3. [Technical specifications]()
    1. [Virtual processor](#31-virtual-processor)
+   4. [Interpreter](#44-interpreter)
 4. [AT2 language specifications](#4-at2-language-specifications)
    1. [Instruction set](#41-instruction-set)
    2. [Syntax and conventions](#42-syntax-and-conventions)
@@ -61,13 +64,15 @@
 
 ## 1. Introduction
 
+### 1.1 Project goal
+
 The goal of this project is to create an **[interpreter](#interpreter)** to run a new **[Assembly language](#Assembly-language)** on its **[virtual processor](#virtual-processor)** that we created on our own, whether from scratch or by inspiring of already existing Assembly. We chose to focus the development of the project on small and limited 16 bits processor. 
 
-### 1.1 File architecture
+### 1.2 Document purpose
 
-**TODO**
+The methodology outlined in the document will provide valuable insights to other stakeholders and project owners, benefiting them greatly. Additionally, it can serve as a reliable point of reference for future maintenance purposes.
 
-### 1.2 Target audience
+#### 1.2.1 Target audience
 
 **This document is meant mainly for:**
 
@@ -77,12 +82,11 @@ The goal of this project is to create an **[interpreter](#interpreter)** to run 
 
 - Quality assurance - to help with test plan preparation and to validate issues with it.
 
-- Project manager: to assist in determining dependencies and hazards.
+- Project manager - to assist in determining dependencies and hazards.
+
+### 1.3 File architecture
 
 
-### 1.3 Main deliverable
-
-The goal of the project is to create an interpreter for running Assembly code on its virtual processor.
 
 ### 1.4 Development environment
 
@@ -106,23 +110,24 @@ The complete functional specifications document here: [functional specification]
 - **Documentation**: Comprehensive and exhaustive guides for both users and developers.
 - **Testing**: Comprehensive unit and integration testing for ensuring system integrity.
 
-### 1.6 Constraints
+### 1.6 Project constraints
 
-- The project will be developed in plain, portable, C language without using any external library besides C standard libraries.
+- We can only use C standard libraries for the project
+- It has to be plain and portable C
 
 ### 1.7 Out of scope
 
 - The product does not require to have an advanced UI.
 - The product has no purpose to be an assembler to return binary files. 
 
-### 1.8 Algorithm architecture
-![Alt text](./image.png)
-
 ---
 
 ## 2. Project overview
 
-The project's scope includes the creation of a small and limited 16 bits virtual processor and its interpreter with new specifications. We inspired from old devices with processor for typical features and functionalities.
+The project's scope includes the creation of a small and limited 16 bits virtual processor and its interpreter with new specifications. We inspired from old devices with small and limited processor for typical features and functionalities.
+
+
+We chose the C99 version of C language to develop our virtual processor. We chose it for its modern features that enhance code readability and maintainability, its support for performance optimization through inline functions, and its widespread platform compatibility, ensuring our virtual processor and interpreter development is efficient and broadly applicable.
 
 ---
 
@@ -141,10 +146,38 @@ The project's scope includes the creation of a small and limited 16 bits virtual
 #### Processor runner
 - Runner for a **[processor](#processor)**, with common functionalities of small and limited 16 bits processor.
 
+### 4.4 Interpreter
+
+#### Interpreter functions
+![Alt text](../images/technical_images/archi_interpreter_diagram.jpg)
+
+- **Parser** <br>The parser is the first part of the interpreter: 
+   - Reads input files.
+   - Analyses the instructions.
+   - Put the instructions in an algorithmic structure.
+- **Builder**<br>The builder is the second part of the interpreter:
+   - Reads the algorithmic structure.
+   - Replaces some parts to make them readable for the Virtual processor.
+- **Virtual processor**<br>The last part of the interpreter:
+   - Executes the program regarding the algorithmic structure.
+
+# WE LAST STOPPED HERE 
+
+- **Execution flow control**: It manages the flow of execution based on control instructions like loops, conditional statements, and jumps.
+- **Error handling**: Includes robust error detection and reporting mechanisms to handle syntax and logical errors in the AT2 code.
+
+#### Integration with virtual processor
+- **Execution**: The interpreter works closely with the virtual processor to ensure smooth execution of AT2 programs, simulating a real processor's behavior.
+- **Resource management**: It efficiently manages the processor's resources, such as memory and registers, during the execution of AT2 code.
+
+#### User interaction
+- **Interactive mode**: The interpreter allows for users to enter and execute AT2 instructions one at a time, which is beneficial for learning and debugging.
+
 ---
 
 ## 4. AT2 language specifications
 Our new Assembly language will be named AT2 (Assembly Team 2). Its extension will be .aop (Assembly Operation Processor). 
+
 ### 4.1 **[Instruction set](#instruction-set)**
 - **Arithmetic and [bitwise operations](#bitwise-operation)**:
   - `add`, `+`: Addition operation. Adds values of two **[registers](#register)** or a register and an immediate value.
@@ -180,7 +213,7 @@ Our new Assembly language will be named AT2 (Assembly Team 2). Its extension wil
 
 #### Register types (`regKind`)
 - **Register enumeration for the virtual processor**:
-  - `rg0`, `rg1`, ..., `rg6`: Enumeration of registers available in the virtual processor. These registers are used for storing temporary data, performing operations, and maintaining state within the processor.
+  - `rg0`, `rg1`, ..., `rg6`: Enumeration of registers available in the virtual processor. These registers are used for storing temporary data, performing operations, and maintaining state within the processor.  
   - `rg7`: Dedicated for the clock.
 
 #### Variables declarations
@@ -210,69 +243,33 @@ The **[syntax](#syntax)** and conventions of the AT2 language are designed to be
 - **Characters**: Characters should be defined with simple quotes: `'q'`.
 
 #### Conventions
-- **Case sensitivity**: All instructions and register names must be used in the correct case.
+- **Case sensitivity**: All instructions and register names must be used in the correct case:
+   - Each functions name will be written in snake_case.
+
+   - Variable names will be written in camelCase.
+
+   - All variable will be written at the same place.
+
+   - All #define will be written in SNAKE_CASE and in uppercase.
+
+   - All #define will be written at the same place.
 - **Whitespace**: Whitespace is used to separate the elements of an instruction but is otherwise not significant.
 - **Comments**: Comments start with `//` for one-line comments, the same comments convention as C language. For example: `// This is a comment`
-
-
-<!-- ### 4.3 Input and output handling
-
-#### Display output handling
-- **Display interface**: Specific instructions to display operations will enable the manipulation of the virtual screen, such as writing text or drawing basic graphics. 
-- **Output commands**: The AT2 language will include commands `` to output data to the screen. These commands will handle the conversion of data (numeric or character) into a visual representation on the emulator's display.
-- **Screen buffering**: A screen buffer will be implemented, where output data is first written to a buffer before being rendered on the screen. This allows for efficient screen updates and control over how and when display changes occur.
-
-
-#### Keypad input handling
-- **Input polling**: The AT2 language will support polling methods to check the state of the keypad. This involves instructions to read the current input state, allowing the program to react to user inputs.
-- **Key mapping**: Each key on the virtual keypad will be mapped to a specific value. AT2 programs can use these values to determine which key was pressed and execute corresponding actions.
-- **Interrupts for input**: Optionally, the system may support interrupt-driven input, where the program can execute a specific routine in response to a keypress, improving the responsiveness and efficiency of input handling.
-
-#### Combined I/O operations
-- **Synchronization**: Mechanisms to synchronize input and output operations will ensure that the display and keypad interactions do not conflict, maintaining a smooth user experience.
-- **I/O in program flow**: The AT2 language will enable the integration of I/O operations within the flow of the program, allowing for dynamic and interactive applications that respond to user inputs and provide immediate feedback.
--> IMPROVEMENTS-->
-
-### 4.4 Interpreter
-
-#### Interpreter functions
-- **Parser** <br>The parser is the first part of the interpreter: 
-   - Reads input files.
-   - Analyses the instructions.
-   - Put the instructions in an algorithmic structure.
-- **Builder**<br>The builder is the second part of the interpreter:
-   - Reads the algorithmic structure.
-   - Replaces some parts to make them readable for the Virtual processor.
-- **Virtual processor**<br>The last part of the interpreter:
-   - Executes the program regarding the algorithmic structure.
-
-# WE LAST STOPPED HERE 
-
-- **Execution flow control**: It manages the flow of execution based on control instructions like loops, conditional statements, and jumps.
-- **Error handling**: Includes robust error detection and reporting mechanisms to handle syntax and logical errors in the AT2 code.
-
-#### Integration with virtual processor
-- **Execution**: The interpreter works closely with the virtual processor to ensure smooth execution of AT2 programs, simulating a real processor's behavior.
-- **Resource management**: It efficiently manages the processor's resources, such as memory and registers, during the execution of AT2 code.
-
-#### User interaction
-- **Interactive mode**: The interpreter allows for users to enter and execute AT2 instructions one at a time, which is beneficial for learning and debugging.
-- **Script mode**: For more complex programs, the interpreter can execute pre-written scripts containing multiple AT2 instructions.
-
 
 ---
 
 ## 5. Development tools
 
+<!-- NOT SURE ABOUT THE FACT THAT ITS ASSEMBLER AND NOT INTERPRETER, NEED TO CHECK IT BY MAXIME CARON-->
 ### 5.1 Assembler
-- **Functionality**: The **[assembler](#assembler)** is responsible for converting AT2 language code into a format that can be executed by the virtual processor. It parses the textual AT2 code and translates it into an internal representation suitable for execution.
+- **Functionality**: The **[assembler](#assembler)** is responsible for converting AT2 code into a format that can be executed by the virtual processor. It parses the textual AT2 code and translates it into an internal representation suitable for execution.
 - **Error handling**: The assembler will include robust error handling to provide meaningful feedback on syntax and semantic errors in the AT2 code.
-- **Support for directives**: In addition to instruction translation, the assembler will handle various directives that aid in the AT2 process, such as data allocation and setting starting points for execution.
+- **Support for directives**: In addition to instruction translation, the assembler will handle various directives that help in the AT2 process, such as data allocation and setting starting points for execution.
 
 ### 5.2 Debugger
-- **Capabilities**: The **[debugger](#debugger)** will allow users to step through their AT2 code, inspect the contents of registers and memory, and set breakpoints. This tool is vital for understanding program flow and diagnosing issues in AT2 code.
-- **User interface**: The debugger will feature a user-friendly interface, displaying key information in an easily understandable format and providing intuitive controls for program execution and inspection.
-- **Integration with assembler**: Seamless integration with the assembler ensures that users can quickly identify and fix issues in their code.
+- **Capabilities**: The **[debugger](#debugger)** will allow users to step through their code, inspect the contents of registers and memory, and set breakpoints.
+- **User interface**: The debugger will have a user-friendly interface, displaying understandable information.
+- **Integration with assembler**: A good integration with the assembler ensures that users can quickly identify and fix issues in their code.
 
 ### 5.3 Testing framework
 - **Automated testing**: The framework will support automated testing of AT2 programs, enabling systematic verification of program functionality against predefined test cases.
@@ -290,15 +287,15 @@ The **[syntax](#syntax)** and conventions of the AT2 language are designed to be
 While a detailed testing document will be provided separately by the Quality Assurance, this section briefly outlines the general approach to testing and validation for the virtual processor and AT2 language.
 
 ### General testing philosophy
-- The project adheres to a rigorous testing philosophy to ensure reliability and accuracy in the emulation of small and limited 16 bits processor functionalities.
+- The project adheres to a rigorous testing philosophy to ensure reliability and accuracy for our virtual processor.
 - Testing encompasses a range of methods, from unit tests for individual components to integration tests that assess the whole system.
 
 ### Coordination with QA
-- The development team will closely collaborate with the Quality Assurance team to align testing strategies and ensure comprehensive coverage of all functionalities.
-- Feedback from QA testing will be integral to the iterative development process, guiding enhancements and refinements in the emulator and AT2 language.
+- The development team will closely collaborate with the Quality Assurance team to align testing strategies and ensure complete coverage of all functionalities.
+- Feedback from QA testing will be integral to the iterative development process, guiding enhancements and refinements in the virtual processor and AT2 language.
 
 ### Reference to QA document
-- For detailed testing procedures, methodologies, and specific test cases, refer to the dedicated [test plan](../QA/test_plan.md) prepared by the Quality Assurance team.
+- For detailed testing procedures, methodologies, and specific test cases, refer to the dedicated [test plan](../QA/test_plan.md) prepared by the Quality Assurance.
 
 ---
 
