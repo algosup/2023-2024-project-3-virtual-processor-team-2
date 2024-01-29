@@ -100,3 +100,10 @@ char** getInstArgs(char *line);
         filename: name of the file to check
 */
 void checkAOPFile(char* fileName);
+
+/*
+    Checks if a line in a file is below or equal 64 characters or not
+    params:
+        line: name of the line to check
+*/
+int checkCharNumb(char* line);

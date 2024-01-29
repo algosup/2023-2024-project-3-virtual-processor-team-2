@@ -108,6 +108,9 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
     if(line[0] == '\n' || strncmp(line, "//", 2) == 0){
         return NULL;
     }
+    //Check if line >64 characters
+    checkCharNumb(line);
+
     // Get the instruction
     char *inst = getInst(line);
     // Get the arguments
@@ -424,4 +427,15 @@ void checkAOPFile(char* fileName) {
         fprintf(stderr, "The filename is invalid. Please enter a valid .aop filename.\n");
         exit(EXIT_FAILURE);
     }
+}
+
+int checkCharNumb(char* line){
+    int count = 0;
+    for (c = getc(line); c != '\n'; c = getc(line)) 
+  
+        // Increment count for this character 
+        printf("%c", c);
+        count = count + 1; 
+    printf("Count = %d", count);
+    return count;    
 }
