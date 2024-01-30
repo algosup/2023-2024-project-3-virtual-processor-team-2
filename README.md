@@ -2,14 +2,17 @@
 
 <div align="center">
     <a href="https://en.wikipedia.org/wiki/Vierzon">
-        <img src="https://img.shields.io/badge/Made%20in-Vierzon-success.svg">
+        <img src="https://img.shields.io/badge/Made%20in-Vierzon-success.svg" alt="Made in Vierzon">
     </a>
     <a href="https://algosup.com/">
-        <img src="https://img.shields.io/badge/Made%20at-ALGOSUP-blue.svg">
+        <img src="https://img.shields.io/badge/Made%20at-ALGOSUP-blue.svg" alt="Made at ALGOSUP">
     </a>
+    <div>
+    <!-- ![Logo]() -->
+    <div>
 </div>
 
-<!-- ![Logo]() -->
+
 
 ## 🫂 Who are we ?
 | **Picture**                                                                                           | **Name**           | **Role**          | **GitHub**                                                                                                                                                         | **LinkedIn**                                                                                                                                                                                  |
@@ -38,3 +41,6 @@ IAT2 stands for **I**nterpreter **A**ssembly **T**eam **2**, serving as the sole
 ## 💾 Why we choose .aop as extension ?
 
 We selected the `.aop` extension to signify **A**op **O**riginal **P**rogram, embodying an infinite recursive loop inspired by [GNU](https://en.wikipedia.org/wiki/GNU#Name).
+
+
+<a href="https://algosup.com/"> ![ALGOSUP](documents\images\management\algosup.png)</a>
