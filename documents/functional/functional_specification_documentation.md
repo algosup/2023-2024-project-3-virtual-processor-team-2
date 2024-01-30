@@ -48,7 +48,7 @@
 </details>
 
 # **1. Introduction**
-The goal of the project is to create a [virtual processor](#Virtual-Processor-id) and an [interpreter](#Interpreter-id) for running assembly code on that processor. We need to create our [assembly language](#Assembly-Language-id),<!-- more detailled parts about the project --> create a [C](#C-id) program using [C Standard Libraries](#C-Standard-Libraries-id) that can read text files, detect semantic and syntactical errors. We also need to implement a virtual system displaying text in a [Virtual Terminal](#Virtual-Terminal-id), that can be accessed from the assembly code.
+The goal of the project is to create a [virtual processor](#Virtual-Processor-id) and an [interpreter](#Interpreter-id) for running assembly code on that processor. We need to create our [assembly language](#Assembly-Language-id), create a [C](#C-id) program using [C Standard Libraries](#C-Standard-Libraries-id) that can read text files, detect semantic and syntactical errors. We also need to implement a virtual system displaying text in a [Virtual Terminal](#Virtual-Terminal-id), that can be accessed from the assembly code.
 
 ## **1.1 Purpose of the document**
 The Functional Specification Document is a document that provides detailed information. This document is created based on the high-level requirements identified in the Call For Tender and provides traceability on the functional specifications. Included in this document will be the detailed functional requirements including use cases, system inputs and outputs, process flows, diagrams, and mock-ups.
@@ -480,7 +480,7 @@ State any terms and their definitions that are described in the functional speci
 
 [MIT LICENSE](../../LICENSE)
 ## **11.1 ASSEMBLY LANGUAGE**
-[AT2 Documentation](./AT2-Language-Documentation.pdf) 
+[AT2 Documentation](./at2_language_documentation.pdf) 
 
 January 30, 2024
 
