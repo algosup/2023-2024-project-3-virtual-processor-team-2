@@ -81,14 +81,19 @@ We have outlined certain out-of-scope features designed to assist developers and
 ### Risks
 - **Technical challenges:**
   - Unforeseen technical challenges about [virtual processor](#Virtual-Processor-id)'s functions.
+   > **Solution**: To have proper and precise technical directives. 
   - Achieving the project in time without delays, developing the desired functionalities.
+   > **Solution**: To ensure the schedule matches with real time needs.
+
 
 - **Resource constraints:**
    - Unexpected shortages or constraints in resources, including human resources or software tools, may impact the project's ability to meet deadlines or maintain quality standards.
+   > **Solution**: To be able to catch up on time effectivly, regarding unforseen events.
    - The documentation of [AT2](#AT2-id) should be complete enough.
-  
+   > **Solution**: To ensure a maintenance for each new version of the product.
 - **Unpredictable technical issues:**
    - Unpredictable technical issues, such as compatibility problems on different systems or devices, may arise during the testing phase.
+   > **Solution**: Be able to adapt, manage time and tasks for each member in the team.
 
 ### Assumptions
 - **Technical expertise:**
