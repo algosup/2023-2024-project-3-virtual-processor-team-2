@@ -6,6 +6,7 @@ enum varKind{
     VAR_STRING,
     VAR_REG,
     VAR_TARGET,
+    VAR_CMP,
     VAR_NONE
 };
 

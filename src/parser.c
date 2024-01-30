@@ -485,10 +485,9 @@ void setArgs(instNode_t *node, char **args) {
             node->arg0.target = args[0];
             node->arg0Type = VAR_TARGET;
         }
-        else{
+        else{            
             node->arg0.s_value = NULL;
             node->arg0Type = VAR_NONE;
-            return;
             return;
         }
     }
