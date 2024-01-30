@@ -82,21 +82,22 @@ Testing will focus on both memory allocating and basic instructions in assembly 
 
 #### 3.1.1. In-scope for Testing
 
-- 
-- 
-<!-- functional requirements -->
+- Test if users can be able to enter, modify, and delete text within the text file using keyboard input or other input methods.
+- Test if the interpreter can be capable of executing the parsed code instructions according to the semantics and rules defined by the programming language.
+- Test if the interface can display text output from the system and accept text input from the user. <br><br>
+For further details, refer to the [functional specifications](../functional/"functional".md) document.
 
 #### 3.1.2. Out-of-scope for Testing
 
-- 
-- 
-<!-- non-functional requirements -->
+- Test the implementation of a debugger.
+- Test an assembler system. <br><br>
+For further details, refer to the [functional specifications](../functional/"functional".md) document.
 
 ---
 
 ### 3.2. Unit Tests
 
-Unit testing is an important part of the process. These tests will be written by the Software Engineers throughout the project, in parallel with game development. <br> Then, the Quality Assurance will run these tests during tests cases. 
+Unit testing is an important part of the process. These tests will be written by the Software Engineers throughout the project, in parallel with game development. Then, the Quality Assurance will run these tests during tests cases. <br>Regarding this project, most of the tests will be unit tests.
 
 
 These unit tests serve three crucial objectives:
@@ -142,7 +143,7 @@ During each smoke testing session, the following steps will be executed:
 ---
 
 #### 3.3.3. Collaborative Testing Sessions
-To obtain a better overview of the project, a collaboration with other teams' Quality Assurance was set up. This collaboration enables the teams to have an external view of the product and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
+To obtain a better overview of the project, a collaboration with other teams' Quality Assurance was set up. This collaboration enables the teams to have an external view of the product and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. All the meetings' content will be written back in the [meetings reports](./meetings_reports.md) file.<br>
 A meeting with the Software Engineers of the team 2 will be planned the day after each collaborative testing session.
 
 ##### 3.3.3.1. Session Scope
@@ -196,7 +197,7 @@ If any of the steps fail, the workflow will be marked as failed and the developm
 
 #### 3.4.1.2.3. Configuration
 
-Actions, such as interpreting and executing unit tests, will be performed on quality assurance's computer. These actions are enabled and synchronized with GitHub. Once the runner has been activated on the computer, it can be selected to execute the various workflow actions.
+Actions, such as interpreting and executing unit tests, will be performed on Quality Assurance's computer. These actions are enabled and synchronized with GitHub. Once the runner has been activated on the computer, it can be selected to execute the various workflow actions.
 
 This allows us to have a runner available all time and to have a better overview of the errors that may occur.
 
@@ -280,7 +281,7 @@ For further details, refer to the [test report](./test_report.md) document.
 ### 3.5. Documentation
 
 #### 3.5.1. GitHub Wiki
-To enhance transparency, collaboration, and knowledge sharing within our development process, we are adopting a centralized documentation approach using GitHub Wiki. This platform will serve as a comprehensive repository for all documentation related to our codebase. 
+To enhance transparency, collaboration, and knowledge sharing within our development process, we are considering about a centralized documentation approach using GitHub Wiki. This platform will serve as a comprehensive repository for all documentation related to our codebase. 
 
 - The GitHub Wiki will function as a centralized knowledge hub for our project, housing detailed documentation on code structure, functions, and project-related information.
 
@@ -288,11 +289,14 @@ To enhance transparency, collaboration, and knowledge sharing within our develop
 Each complex function will have dedicated pages for in-depth information.
 Flowcharts or diagrams will be integrated to enhance the understanding of complex processes.
 
-- To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include. The template will be available on the project GitHub in the folder documents/qa, the file name is "code_documentation_template". Developers have to use it as a reference when documenting their code. 
+- To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include. The template will be available on the project GitHub [here](./code_documentation_template.md). Developers have to use it as a reference when documenting their code. 
 
 - Centralized documentation simplifies onboarding for new team members by providing a single, accessible source of truth. Emphasize the importance of keeping documentation up-to-date, especially during onboarding periods, to ensure the documentation remains accurate and relevant.
 
 - Implement a feedback mechanism or suggestion process within the Wiki to encourage continuous improvement and collaboration among team members.
+
+#### The GitHub Wiki will be documented only if major requirements do not need to be implemented. 
+
 ---
 
 
