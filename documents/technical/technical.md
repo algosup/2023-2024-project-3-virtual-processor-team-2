@@ -5,108 +5,283 @@
 - Complete the error system part 
 - Go check the functional 
 - Talking about CMake -->
-<div align="center">
-
-# Technical specifications document
-
----
-**Title:** Virtual processor project - Team 2
-
-**Author:** Guillaume Deramchi
-
-**Team:** Team 2
-
-**Reviewer:** Enzo Guillouche
-
-**Created on:** January 22<sup>nd</sup>, 2024
-
-**Last updated:** January 29<sup>nd</sup>, 2024
-
----
-
-### Approvals
-
-| Reviewer           | Role              | Approved | Date |
-| ------------------ | ----------------- | -------- | ---- |
-| Enzo Guillouche    | Quality Assurance |          |      |
-| Mathias Gagnepain  | Project Manager   |          |      |
-| Guillaume Desapux  | Program Manager   |          |      |
-| Guillaume Deramchi | Technical Lead    |          |      |
-| Maxime Caron       | Software Engineer |          |      |
-| Paul Nowak         | Software Engineer |          |      |
-
-</div>
-
----
-
 <br><details>
-<summary>Table of contents <i>(click to expand)</i></summary>
+<summary><h3 id="toc"> Table of Contents <i>(Click to expand)</i></h3></summary>
+
+- 📄 [Technical Specification](#technical-specification-document)
+    - ✅ [Approvals](#approvals)
+- 🌐 [1 - Overview](#1---overview)
+  - 🎯 [1.1 - Purpose](#11---purpose)
+    - 🏆 [1.1.1 - Goals](#111---goals)
+    - 🎯 [1.1.2 - Objectives](#112---objectives)
+    - 🏁 [1.1.3 - Success Criteria](#113---success-criteria)
+  - 👥 [1.2 - Stakeholders](#12---stakeholders)
+    - 🧑‍🤝‍🧑 [1.2.1 - Project Team](#121---project-team)
+    - 🤝 [1.2.2 - Client](#122---client)
+  - 🖥️ [1.3 - Usage](#13---usage)
+    - 📋 [1.3.1 - Requirements](#131---requirements)
+    - ⚙️ [1.3.2 - Installation](#132---installation)
+      - 💻 [1.3.2.1 - Installation with Bash](#1321---installation-with-bash)
+      - 🖥️ [1.3.2.2 - Installation with GitHub Desktop](#1322---installation-with-github-desktop)
+    - ▶️ [1.3.3 - Running](#133---running)
+  - 📏 [1.4 - Scope](#14---scope)
+    - 🟢 [1.4.1 - In Scope](#141---in-scope)
+    - 🔴 [1.4.2 - Out of Scope](#142---out-of-scope)
+- 🗒️ [2 - Overall Description](#2---overall-description)
+  - 💻 [2.1 System Environment](#21-system-environment)
+    - 🖥️ [2.1.1 - Hardware](#211---hardware)
+    - 🛠️ [2.1.2 - Software](#212---software)
+  - 📁 [2.2 - Project Folder Structure](#22---project-folder-structure)
+ <!-- - 📚 [2.3 - Conventions](#23---conventions)
+    - 🖊️ [2.3.1 - Naming Conventions](#231---naming-conventions)
+      - 📂 [2.3.1.1 Folders](#2311-folders)
+      - 📄 [2.3.1.2 Files](#2312-files)
+      - 🔤 [2.3.1.3 Variables](#2313-variables)
+      - 🔠 [2.3.1.4 Constants](#2314-constants)
+      - 🔄 [2.3.1.5 Functions](#2315-functions)
+    - 🖋️ [2.3.2 - Formatting Conventions](#232---formatting-conventions)
+      - ↩️ [2.3.2.1 - Indentation](#2321---indentation)
+      - 📏 [2.3.2.2 - Line Length](#2322---line-length)
+      - 📐 [2.3.2.3 - Line Breaks](#2323---line-breaks)
+      - 💬 [2.3.2.4 - Comments](#2324---comments)
+  - 🖥️ [2.4 - Assembly Syntax](#24---assembly-syntax)
+    - 📝 [2.4.1 - Registers](#241---registers)
+      - 🔢 [2.4.1.1 - Storing an immediate value into a register](#2411---storing-an-immediate-value-into-a-register)
+      - 🔀 [2.4.1.2 Copying the value of a register into another register](#2412-copying-the-value-of-a-register-into-another-register)
+      - 📖 [2.4.1.3 Reading the value from the memory to a register](#2413-reading-the-value-from-the-memory-to-a-register)
+      - 📝 [2.4.1.4 Writing the value from a register to the memory](#2414-writing-the-value-from-a-register-to-the-memory)
+    - ↗️ [2.4.2 - Jumping to a label](#242---jumping-to-a-label)
+      - 🏃‍♂️ [2.4.2.1 - Jumping unconditionally](#2421---jumping-unconditionally)
+      - ↪️ [2.4.2.2 - Jumping conditionally (where "cc" is a condition code)](#2422---jumping-conditionally-where-cc-is-a-condition-code)
+    - 🔍 [2.4.3 - Comparing registers](#243---comparing-registers)
+    - 📞 [2.4.4 - Calling a subroutine](#244---calling-a-subroutine)
+    - 🏁 [2.4.5 - Returning from a subroutine](#245---returning-from-a-subroutine)
+    - ➕ [2.4.6 - Arithmetic operations](#246---arithmetic-operations)
+      - ➕ [2.4.6.1 - Addition](#2461---addition)
+      - ➖ [2.4.6.2 - Subtraction](#2462---subtraction)
+      - ✖️ [2.4.6.3 - Multiplication](#2463---multiplication)
+      - ➗ [2.4.6.4 - Division](#2464---division)
+    - 🧠 [2.4.7 - Logical operations](#247---logical-operations)
+      - 🤝 [2.4.7.1 - Logical AND](#2471---logical-and)
+      - 🤲 [2.4.7.2 - Logical OR](#2472---logical-or)
+      - 💥 [2.4.7.3 - Logical XOR](#2473---logical-xor)
+      - ⛔ [2.4.7.3 - Logical NOT](#2473---logical-not)
+    - 💭 [2.4.8 - Comments](#248---comments)
+- 📐 [3 - Software Architecture](#3---software-architecture)
+  - 🖥️ [3.1 - Scraping](#31---scraping)
+    - 🗂️ [3.1.1 - `scraper.c`](#311---scraperc)
+    - 📄 [3.1.2 - `scraper.h`](#312---scraperh)
+    - ✅ [3.1.3 - `scraper_test.c`](#313---scraper_testc)
+    - 📝 [3.1.4 - `scraper_test.h`](#314---scraper_testh)
+  - 🖥️ [3.2 Parsing](#32-parsing)
+    - 🗂️ [3.2.1 `parser.c`](#321-parserc)
+    - 📄 [3.2.2 `parser.h`](#322-parserh)
+    - ✅ [3.2.3 `parser_test.c`](#323-parser_testc)
+    - 📝 [3.2.4 `parser_test.h`](#324-parser_testh)
+  - 🖥️ [3.3 Interpreting](#33-interpreting)
+    - 🗂️ [3.3.1 `interpreter.c`](#331-interpreterc)
+    - 📄 [3.3.2 `interpreter.h`](#332-interpreterh)
+    - ✅ [3.3.3 `interpreter_test.c`](#333-interpreter_testc)
+    - 📝 [3.3.4 `interpreter_test.h`](#334-interpreter_testh)
+  - 🖥️ [3.4 Main](#34-main)
+    - 🗂️ [3.4.1 `main.c`](#341-mainc)
+    - 📄 [3.4.2 `main.h`](#342-mainh)
+    - ✅ [3.4.3 `main_test.c`](#343-main_testc)
+    - 📝 [3.4.4 `main_test.h`](#344-main_testh)
+- 📚 [4 - End Matter](#4---end-matter)
+  - 👥 [4.1 - Contributors](#41---contributors)
+  - 📃 [4.2 - Related Documents](#42---related-documents)
+  - ©️ [4.3 - License](#43---license)
+  - 🔗 [4.4 - References](#44---references)
+    - 🛠️ [4.4.1 - Tools](#441---tools)
+    - 🔍 [4.4.2 - References](#442---references)
+  - 📚 [4.5 - Glossary](#45---glossary)
+  - 🔢 [4.6 - Footnotes](#46---footnotes)-->
 
 
-- [I. Introduction](#i-introduction)  
-   - [1.1 - Project goal](#11---project-goal)  
-   - [1.2 - Document purpose](#12---document-purpose)  
-      - [1.2.1 - Target audience](#121---target-audience)  
-   - [1.3 - File architecture](#13---file-architecture)   
-   - [1.4 - Development environment](#14---development-environment)  
-   - [1.5 - Functional and technical requirements](#15---functional-and-technical-requirements)  
-   - [1.6 - Project constraints](#16---project-constraints)  
-   - [1.7 - Out of scope](#17---out-of-scope)   
-- [II. Project overview](#ii-project-overview)  
-- [III. Virtual processor specifications](#iii-virtual-processor-specifications)  
-   - [3.1 - Virtual processor](#31---virtual-processor)  
-   - [3.2 - Interpreter](#32---interpreter) 
-   - [3.3 - Data structures](#33---data-structures)
-- [IV. AT2 language specifications](#iv-at2-language-specifications)  
-   - [4.1 - Instruction set](#41---instruction-set)  
-   - [4.2 - Syntax and conventions](#42---syntax-and-conventions)  
-- [V. Development tools](#v-development-tools)  
-   - [5.1 - Debugger](#51---debugger)    
-   - [5.2 - Code organization](#52---code-organization)  
-   - [5.3 - Error system](#53---error-system)
-- [VI. Testing and validation](#vi-testing-and-validation)   
-- [VII. Risks and challenges](#vii-risks-and-challenges)  
-   - [7.1 - Risks](#71---risks)  
-   - [7.2 - Challenges](#72---challenges)  
-- [VIII. Documentation](#viii-documentation)  
-- [IX. Appendices](#ix-appendices)  
-   - [9.1 - References](#91---references)  
-   - [9.2 - Glossary](#92---glossary)  
 </details>
 
 ---
 
-## I. Introduction
+# 1 - Overview
 
-### 1.1 - Project goal
+## 1.1 - Purpose
 
-The goal of this project is to create an interpreter to run a new Assembly language on its virtual processor that we created on our own, whether from scratch or by inspiring of already existing Assembly. We chose to focus the development of the project on small and limited 16 bits processor. 
+[*(Back to top)*](#toc)
 
-### 1.2 - Document purpose
+### 1.1.1 - Goals
 
-The methodology outlined in the document will provide valuable insights to other stakeholders and project owners, benefiting them greatly. Additionally, it can serve as a reliable point of reference for future maintenance purposes.
+The objective of this project is to create a virtual processor and an interpreter for a customized assembly language. By utilizing C standard libraries for broad compatibility, the main aim is to develop a concise assembly language and construct a C program interpreter that can execute and validate assembly code. This solution is specifically designed for educational purposes and software developers who are keen on delving into low-level programming and processor emulation. The project seamlessly blends technical innovation with practical application, with a strong emphasis on creating a user-friendly and educational tool in the realm of computer architecture.
 
-#### 1.2.1 - Target audience
+### 1.1.2 - Objectives
 
-**This document is meant mainly for:**
+The project aims to achieve the following objectives:
 
-- Software engineers - to help them understand the technical as well as the client requirements and to provide direction for planning and decision-making. Assist them in understanding the risk and difficulties, customer demands, extra technical specifications, and decisions taken.
+1. Create a concise assembly language with an ample range of instructions.
+2. Construct an interpreter that can effectively execute assembly code.
+3. Construct an interpreter that can thoroughly validate assembly code for errors.
+4. Design the interpreter to be user-friendly and easily accessible.
+5. Ensure compatibility of the interpreter with various operating systems.
 
-- Program manager - to verify against client expectations and the functional specification.
+### 1.1.3 - Success criteria
 
-- Quality assurance - to help with test plan preparation and to validate issues with it.
+The project's success will be determined by meeting the following conditions:
 
-- Project manager - to assist in determining dependencies and hazards.
+1. The interpreter must have the ability to execute assembly code effectively.
+2. The interpreter should be compatible with the widely used operating systems.
+3. All the instructions in the set must be implemented completely.
 
-### 1.3 - File architecture
+## 1.2 - Stakeholders
+
+This project is solely intended for educational purposes and is not meant for any commercial use. The project team will assume full responsibility for the project's development, while the client will play a crucial role in providing feedback and guidance throughout the entire development process.
+
+### 1.2.1 - Project team
+
+| Name               | Role              | GitHub \| Linkedin                                                            |
+| ------------------ | ----------------- | -------------------------------------------------------------------------- |
+| Mathias Gagnepain  | Project Manager   | [GitHub](https://github.com/MathiasGagnepain) \| [Linkedin](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/)            |
+| Guillaume Despaux  | Program Manager   | [GitHub](https://github.com/GuillaumeDespaux) \| [Linkedin](https://www.linkedin.com/in/guillaume-despaux-084b10206/)            |
+| Guillaume Deramchi | Technical Lead    | [GitHub](https://github.com/Guillaume18100)   \| [Linkedin](https://www.linkedin.com/in/guillaume-deramchi-a45116293/)           |
+| Paul Nowak         | Software Engineer | [GitHub](https://github.com/PaulNowak36)      \| [Linkedin](https://www.linkedin.com/in/paul-nowak-0757a61a7/)                   |
+| Maxime Caron       | Software Engineer | [GitHub](https://github.com/MaximeAlgosup)    \| [Linkedin](https://www.linkedin.com/in/maxime-caron-dev/)                       |
+| Enzo Guillouche    | Quality Assurance | [GitHub](https://github.com/EnzoGuillouche)   \| [Linkedin](https://www.linkedin.com/in/enzo-g-b62114293/)                       |
+
+
+### 1.2.2 - Client
+
+| Name             | Role                 | Contact                                                         |
+| ---------------- | -------------------- | --------------------------------------------------------------- |
+| ALGOSUP          | Client               | [Website](https://www.algosup.com/)                             |
+| Franck JEANNIN   | ALGOSUP's Co-Founder | [LinkedIn](https://www.linkedin.com/in/franck-jeannin/)         |
+| Eric LARCHEVEQUE | ALGOSUP's Co-Founder | [LinkedIn](https://www.linkedin.com/in/ericlarch/)              |
+| Natacha BOEZ     | ALGOSUP's Co-Founder | [LinkedIn](https://www.linkedin.com/in/natacha-boez-913a33167/) |
+
+## 1.3 - Usage
+
+The interpreter is designed to provide a user-friendly and easy-to-use experience. It is developed to integrate with popular operating systems and can execute assembly code while also checking for errors. Additionally, the interpreter can display the output of the assembly code. Below are the instructions for installing and running the interpreter.
+
+### 1.3.1 - Requirements
+
+To run your custom assembly code, you will need to install the following dependencies:
+
+- [VS Code](https://code.visualstudio.com/download) - Visual Studio Code is a free source-code editor made by Microsoft for Windows, Linux and macOS.
+- [C/C++ for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) - C/C++ for Visual Studio Code is an extension for VS Code that provides IntelliSense, debugging, and code browsing support for C and C++ code.
+- [GCC](https://gcc.gnu.org/install/) - GCC, the GNU Compiler Collection, is a free collection of compilers for C, C++, Objective-C, Fortran, Ada, Go, and D programming languages.
+- [CMake](https://earthly.dev/blog/installandrun-cmake-on-windows/) - CMake is an open-source, cross-platform family of tools designed to build, test, and package software by managing the compilation process across different systems.
+
+The software is developed using the C99 version of the C language.
+
+### 1.3.2 - Installation
+
+To install the interpreter, you will need to follow these steps:
+
+1. Clone the repository on your local machine.
+
+#### 1.3.2.1 - Installation with Bash
+
+Open a terminal and run the following commands:
+
+If you are on macOS:
+
+```bash
+git clone https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2.git
+cd 2023-2024-project-3-virtual-processor-team-2
+```
+
+#### 1.3.2.2 - Installation with GitHub Desktop
+
+Download and open GitHub Desktop and click on `File > Clone Repository`. Select the URL tab and enter the following URL:
+
+```bash
+https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2.git
+```
+
+Then click on `Clone`.
+
+### 1.3.3 - Running
+
+To run the interpreter, you will need to follow these steps:
+
+1. Create a bin folder.
+2. Compile it with CMake (using the CMakeLists.txt file).
+3. Add the interpreter to your computer path.
+
+## 1.4 - Scope
+
+[*(Back to top)*](#toc)
+
+### 1.4.1 - In scope
+
+The project encompasses the following functionalities:
+
+1. Fundamental assembly language with a concise set of instructions.
+2. An interpreter that can execute assembly code.
+3. An interpreter that can check errors in the assembly.
+4. A user-friendly usage.
+5. Compatibility with prevalent operating systems.
+
+### 1.4.2 - Out of scope
+
+The following features will be excluded from the project:
+
+1. Sophisticated assembly language with a intricate array of instructions.
+2. Graphical user interface.
+3. Debugging tools.
+4. Compatibility with specific hardware configurations.
+5. Compatibility with other programming languages.
+6. Real-time performance analysis.
+7. Advanced memory management.
+
+---
+
+# 2 - Overall description
+
+## 2.1 System environment
+
+
+### 2.1.1 - Hardware
+
+The interpreter is designed to be compatible with the most prevalent hardware configurations and will undergo testing on the hardware listed below:
+
+| Specification    | Lenovo ThinkBook 14  | Lenovo ThinkBook 14  | Lenovo ThinkPad 2023 | Apple MacBook Air M1 2020 | Apple MacBook Air M1 2020 |
+| ---------------- | -------------------- | -------------------- | -------------------- | ------------------------- | ------------------------- |
+| Processor        | Intel Core I7-1065G7 | Intel Core i7-1165G7 | Intel Core i7-1355U  | Apple Silicon M1          | Apple Silicon M1          |
+| RAM         | 16GB                 | 16 GB                | 16GB                 | 8 GB                      | 8 GB                      |
+| Operating System | Windows 11 Pro       | Windows 11 Pro       | Windows 11 Pro       | macOS Ventura             | macOS Sonoma              |
+
+### 2.1.2 - Software
+
+The interpreter will undergo compatibility testing on the most widely used operating systems, including:
+
+| Operating System | Windows 11 Pro | macOS Ventura | macOS Sonoma |
+| ---------------- | -------------- | ------------- | ------------ |
+| Version          | 22H2           | 13.0          | 14.3         |
+
+## 2.2 - Project folder structure
+
+The folder structure for the project will be as follows:
+
 
 ``` folder
 ├── 2023-2024-project-3-virtual-processor-team-2 (root)
 |   ├── documents
+|   |   ├── communications
+|   |   |   ├── minutes_of_meeting_01_16_2024.pdf
 |   |   ├── functional
-|   |   |   ├── 2023-2024 Project 3 Virtual Processor.pdf
-|   |   |   ├── AT2-Assembly-Language-Documentation.md
-|   |   |   ├── Functional Specification Document Template.md
+|   |   |   ├── 2023_2024_project_3_virtual_processor.pdf
+|   |   |   ├── at2_assembly_language_documentation.md
+|   |   |   ├── functional_specification_document_template.md
+|   |   ├── images
+|   |   |   ├── functional_images
+|   |   |   |   ├── interpreter_mockup.png
+|   |   |   |   ├── virtual_terminal.png
+|   |   |   ├── qa_images
+|   |   |   |   ├── test_case_pattern.png
+|   |   |   |   ├── test_report_pattern.png
+|   |   |   ├── technical_images
+|   |   |   |   ├── state_diagram_parser_c.jpg
+|   |   |   |   ├── archi_interpreter_diagram.jpg
+|   |   |   |   ├── data_structure_diagram.jpg
 |   |   ├── management
 |   |   |   ├── weekly_reports
 |   |   |   |   ├── cumulative.md
@@ -120,59 +295,22 @@ The methodology outlined in the document will provide valuable insights to other
 |   |   |   |   ├── week_8.md
 |   |   |   ├── management_artifact.md
 |   |   ├── qa
+|   |   |   ├── code_documentation_template.md
+|   |   |   ├── meetings_reports.md
+|   |   |   ├── qa_collaboration.md
+|   |   |   ├── test_cases.md
 |   |   |   ├── test_plan.md
+|   |   |   ├── test_reports.md
 |   |   ├── technical
 |   |   |   ├── roadmap.md
 |   |   |   ├── technical.md
+|   ├── .gitignore
 |   ├── CODE_OF_CONDUCT.md
-|   ├── README.md
+|   ├── CONTRIBUTING.md
 |   ├── LICENSE
+|   ├── README.md
+|   ├── SECURITY.md
 ```
-
-### 1.4 - Development environment
-
-Our team uses 6 Windows PC operating on Windows 11.
-
-As for the IDE, we all use Visual Studio Code, and the same extensions to run and debug C. All of these extensions are packed into one called C/C++ Extension Pack.
-
-To be able to run C we all installed the compiler GCC.
-
-<!-- to complete-->
-We use CMake to help us on the project
-
-### 1.5 - Functional and technical requirements
-
-#### Functional requirements
-
-The complete functional specifications document here: [functional specification](../functional/Functional%20Specification%20Document%20Template.md)
-
-#### Technical requirements
-
-- **Architecture**: Emulates a 16-bit processor environment, including registers, memory, and basic I/O.
-- **Development**: Written in C, using standard libraries for compatibility and efficiency.
-- **Documentation**: Comprehensive and exhaustive guides for both users and developers.
-- **Testing**: Comprehensive unit and integration testing for ensuring system integrity.
-
-### 1.6 - Project constraints
-
-- We can only use C standard libraries for the project
-- It has to be plain and portable C
-
-### 1.7 - Out of scope
-
-- The product does not require to have an advanced UI.
-- The product has no purpose to be an assembler to return binary files. 
-
----
-
-## II. Project overview
-
-The project's scope includes the creation of a small and limited 16 bits virtual processor and its interpreter with new specifications. We inspired from old devices with small and limited processor for typical features and functionalities.
-
-
-We chose the C99 version of C language to develop our virtual processor. We chose it for its modern features that enhance code readability and maintainability, its support for performance optimization through inline functions, and its widespread platform compatibility, ensuring our virtual processor and interpreter development is efficient and broadly applicable.
-
----
 
 ## III. Virtual processor specifications 
 
