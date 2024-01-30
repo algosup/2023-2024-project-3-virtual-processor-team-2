@@ -72,6 +72,15 @@ void parseFile(instList_t *nodeList, char *filename){
     // Check the file extension 
     checkAOPFile(filename);
 
+    // Check if one of the file's line doesn't exceed 64 characters
+    if (charNumbcheck(fileName)) {
+        continue;
+    }
+    else {
+        fprintf(stderr,"Lines shouldn't be above 64 in a file. Please enter a valid file.\n");
+        exit(EXIT_FAILURE); //Exit the program when the condition isn't met.
+    }
+
     char line[LINE_MAX_SIZE];
     instNode_t *lastNode = NULL;
     long nodeId = 0;
@@ -421,7 +430,7 @@ char **getInstArgs(char *line) {
 
 void checkAOPFile(char* fileName) {
     size_t size = strlen(fileName);
-
+    //Check if the filename ends by ".aop" and contains at least 5 characters
     if (size < 5 || fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') {
         // trow error
         fprintf(stderr, "The filename is invalid. Please enter a valid .aop filename.\n");
@@ -429,13 +438,38 @@ void checkAOPFile(char* fileName) {
     }
 }
 
-// void checkCharNumb(FILE* fileName){
-//     int count = 0;
-//     for (c = getc(line); c != '\n'; c = getc(line)) 
-  
-//         // Increment count for this character 
-//         printf("%c", c);
-//         count = count + 1; 
-//     printf("Count = %d", count);
-//     return count;    
-// }
+bool charNumbcheck(char* filename){
+    FILE *fp;
+    char ch;
+    bool conditionChecked;
+    fp = fopen(filename, "r"); //We open and read the file
+    if (fp == NULL)
+    {//Check if the file isn't empty
+        printf("Couldn't open file\n");
+        exit(0);
+    }
+    int count = 0;
+
+    while (ch != EOF)
+    {
+        do// Count each character of each line until linebreak or end of file
+        {
+            ch = fgetc(fp);
+            count++; 
+        } while (ch != '\n' && ch != EOF);
+        if (count <= 64)
+        {
+            conditionChecked = true;
+            count = 0;
+        }
+        else
+        {//One of the line has more than 64 characters
+            conditionChecked = false;
+            break;
+        }
+        
+    }    
+    // Closing the file
+    fclose(fp);
+    return conditionChecked;
+}

@@ -2,43 +2,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define true 1
-#define false 0
-
-int charNumbcheck(char* filename);
+bool charNumbcheck(char* filename);
 
 int main(){
-    // FILE *fp;
-    // char ch;
-    // int lineCount = 0;
-    
-    // fp = fopen("test2.aop", "r");
-    // if (fp == NULL)
-    // {
-    //     printf("Couldn't open file\n");
-    //     return 1;
-    // }
 
-    // int count = 0;
-
-    // while (ch != EOF)
-    // {
-    //     do
-    //     {
-    //         ch = fgetc(fp);
-    //         count++;
-    //     } while (ch != '\n' && ch != EOF);
-    //     printf("Line %d has %d characters.\n", lineCount, count);
-    //     lineCount = lineCount + 1;
-    //     count = 0;
-    // }    
- 
-    // // Closing the file
-    // fclose(fp);
-    // printf("LineCount = %d\n", lineCount);
-
-    char* fileName = "test3.aop";
-
+    char* fileName = "test2.aop";
 
     if (charNumbcheck(fileName)) {
         printf("\nYour file is ready to be parsed.\n");
@@ -47,11 +15,10 @@ int main(){
         printf("The number of characters per line shouldn't above 64 in a file.\n");
         printf("Please respect that condition.");
     }
-
     return 0;
 }
 
-int charNumbcheck(char* filename){
+bool charNumbcheck(char* filename){
     FILE *fp;
     char ch;
     int lineCount = 0;
@@ -69,8 +36,7 @@ int charNumbcheck(char* filename){
         do
         {
             ch = fgetc(fp);
-            count++;
-            
+            count++; 
         } while (ch != '\n' && ch != EOF);
         printf("Line %d has %d characters.\n", lineCount, count);
         if (count <= 64)
