@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define true 1
+#define false 0
+
+int charNumbcheck(char* filename);
+
 int main(){
     // FILE *fp;
     // char ch;
@@ -32,14 +37,21 @@ int main(){
     // fclose(fp);
     // printf("LineCount = %d\n", lineCount);
 
-    char* fileName = "test2.aop";
+    char* fileName = "test3.aop";
 
-    charNumbcheck(fileName);
+
+    if (charNumbcheck(fileName)) {
+        printf("\nYour file is ready to be parsed.\n");
+    }
+    else {
+        printf("The number of characters per line shouldn't above 64 in a file.\n");
+        printf("Please respect that condition.");
+    }
 
     return 0;
 }
 
-bool charNumbcheck(char* filename){
+int charNumbcheck(char* filename){
     FILE *fp;
     char ch;
     int lineCount = 0;
@@ -67,7 +79,11 @@ bool charNumbcheck(char* filename){
             lineCount = lineCount + 1;
             count = 0;
         }
-        conditionChecked = false;
+        else
+        {
+            conditionChecked = false;
+            break;
+        }
         
     }    
     printf("LineCount = %d\n", lineCount);
