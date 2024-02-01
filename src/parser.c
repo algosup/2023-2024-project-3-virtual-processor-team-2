@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
@@ -72,15 +71,6 @@ void parseFile(instList_t *nodeList, char *filename){
     // Check the file extension 
     checkAOPFile(filename);
 
-    // Check if one of the file's line doesn't exceed 64 characters
-    if (checkLineSizes(fileName)) {
-        continue;
-    }
-    else {
-        fprintf(stderr,"Lines shouldn't be above 64 in a file. Please enter a valid file.\n");
-        exit(EXIT_FAILURE); //Exit the program when the condition isn't met.
-    }
-
     char line[LINE_MAX_SIZE];
     instNode_t *lastNode = NULL;
     long nodeId = 0;
@@ -88,6 +78,12 @@ void parseFile(instList_t *nodeList, char *filename){
 
     // read the file line by line
     while(fgets(line, LINE_MAX_SIZE, file)){
+            // Check if one of the file's line doesn't exceed 64 characters
+        if (!checkLineSize(line, file)){
+            fprintf(stderr,"Lines shouldn't be above 64 in a file. Please enter a valid file.\n");
+            exit(EXIT_FAILURE); //Exit the program when the condition isn't met.
+        }
+
         // parse the line
         instNode_t *node = parseLine(line, nodeId, lineNb);
 
@@ -456,4 +452,19 @@ bool checkLineSizes(char* fileName){
         }
     }
     return conditionChecked;
+}
+
+bool checkLineSize(char* line, FILE *fp){
+    if (strchr(line, '\n') != NULL){
+            // the line contains an '\n'
+            return true;
+        }
+        else if (fgets(line, LINE_MAX_SIZE, fp) == NULL){
+            // It's the last line at the end of the file
+            return true;
+        }
+        else{
+            // Throws an error when the characters limit isn't respected
+            return false;
+        }
 }
