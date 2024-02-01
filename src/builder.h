@@ -1,5 +1,8 @@
 #include "ast.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Lifo to build if/ else statements
 typedef struct lifoCmpNode{
@@ -79,3 +82,7 @@ void pushCmpLifo(lifoCmpNode_t *lifo, cmpNode_t *node);
         cmpNode_t: pointer to the node
 */
 cmpNode_t *popCmpLifo(lifoCmpNode_t *lifo);
+
+#ifdef __cplusplus
+}
+#endif

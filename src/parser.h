@@ -1,6 +1,10 @@
 #include <stdbool.h>
 #include "ast.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Program flags struct
 typedef struct {
     bool verbose;
@@ -226,3 +230,7 @@ enum regKind strToReg(char *arg);
         filename: name of the file to check
 */
 void checkAOPFile(char* fileName);
+
+#ifdef __cplusplus
+}
+#endif

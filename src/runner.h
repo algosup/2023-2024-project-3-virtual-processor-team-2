@@ -1,5 +1,9 @@
 #include "ast.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
     Run the instructions
     params:
@@ -51,3 +55,6 @@ void runLabelNode(instNode_t *node, labelList_t *labelList);
 */
 void opAdd(instNode_t *node, varList_t *varList);
 
+#ifdef __cplusplus
+}
+#endif
