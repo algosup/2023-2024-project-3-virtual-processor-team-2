@@ -1,5 +1,5 @@
 #include <stdbool.h>
-#include "builder.h" // To get data structures from the builder
+#include "ast.h"
 
 // Program flags struct
 typedef struct {

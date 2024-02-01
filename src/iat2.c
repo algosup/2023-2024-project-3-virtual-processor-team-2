@@ -2,10 +2,13 @@
     This file aims to be the main file of the project
     It will call the parser, builder and runner
 */
-
+#include <stdio.h>
 #include <stdlib.h>
+#include "parser.h"
+#include "builder.h"
 #include "runner.h"
 #include "iat2.h"
+#include "debug.h"
 
 #define VERSION "0.0.2"
 

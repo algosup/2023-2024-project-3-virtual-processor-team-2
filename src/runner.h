@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "ast.h"
 
 /*
     Run the instructions

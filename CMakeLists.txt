@@ -25,6 +25,7 @@ add_executable(tests
   src/parser.c
   src/builder.c
   src/runner.c
+  src/debug.c
   test/test.cc
   googletest/googletest/src/gtest-all.cc
 )
@@ -59,6 +60,7 @@ add_executable(iat2
     src/parser.c
     src/builder.c
     src/runner.c
+    src/debug.c
     src/iat2.c
 )
 
