@@ -11,6 +11,15 @@
 #include "builder.h"
 
 void build(instList_t *nodeList, labelList_t *labelList){
+    // init lifo for if/else statements
+    lifoCmpNode_t *lifoCmpNode = (lifoCmpNode_t *)malloc(sizeof(lifoCmpNode_t));
+    if(lifoCmpNode == NULL){
+        fprintf(stderr, "Error allocating memory\n");
+        exit(EXIT_FAILURE);
+    }
+    lifoCmpNode->list = NULL;
+    lifoCmpNode->size = 0;
+
     // read the list of instructions
     instNode_t *currNode = nodeList->head;
     while (currNode != NULL)
@@ -20,7 +29,7 @@ void build(instList_t *nodeList, labelList_t *labelList){
 
         // Check if node is an action
          if(currNode->inst == INST_ACT){
-            buildActNode(currNode);
+            buildActNode(currNode, lifoCmpNode);
         }
 
         // Check if node is a label
@@ -30,36 +39,46 @@ void build(instList_t *nodeList, labelList_t *labelList){
 
         currNode = currNode->next;
     }
+
+    // Check if lifo is empty
+    if(lifoCmpNode->size != 0){
+        fprintf(stderr, "Error: Comparison Lifo is not empty\n");
+        exit(EXIT_FAILURE);
+    }
     
 }
 
-void buildOpNode(instNode_t *node){
-}
-
-void buildActNode(instNode_t *node){
+void buildActNode(instNode_t *node, lifoCmpNode_t *lifo){
     // Check if it's a comparison
     if(node->nodeType.act->act == ACT_CMP){
-        // set comparison goto
+        buildCmpNode(node, lifo);
     }
 
 }
 
-void buildCmpNode(instNode_t *node){
-    // copy the current node
-    instNode_t *currNode = node;
-
-    // Search for the next else or end
-    while(currNode != NULL){
-        if(currNode->inst == INST_ACT){
-            if(currNode->nodeType.act->act == ACT_CMP){
-                if(currNode->nodeType.act->cmp->statem == CMP_ELSE || currNode->nodeType.act->cmp->statem == CMP_END){
-                    break;
-                }
-            }
-        }
-        currNode = currNode->next;
+void buildCmpNode(instNode_t *node, lifoCmpNode_t *lifo){
+    // Check kind of statement
+    switch (node->nodeType.act->cmp->statem)
+    {
+    case CMP_IF:
+        // add to lifo
+        pushCmpLifo(lifo, node->nodeType.act->cmp);
+        break;
+    case CMP_ELSE:
+        // set else goto
+        lifo->list[0]->elseId = node->id;
+        break;
+    case CMP_END:
+        // set end goto
+        lifo->list[0]->endId = node->id;
+        // remove from lifo
+        popCmpLifo(lifo);
+        break;
+    default:
+        fprintf(stderr, "Error: Unknown comparison statement\n");
+        exit(EXIT_FAILURE);
+        break;
     }
-
 }
 
 void buildLabelNode(instNode_t *node, labelList_t *labelList){
@@ -115,4 +134,46 @@ void incLabelList(labelList_t *list){
     for(size_t i = list->size / 2; i < list->size; i++){
         list->list[i].name = NULL;
     }
+}
+
+void pushCmpLifo(lifoCmpNode_t *lifo, cmpNode_t *node){
+    // resize lifo to add new node
+    lifo->size++;
+    // realloc lifo with node as new head
+    cmpNode_t **newLifo = (cmpNode_t **)malloc(sizeof(cmpNode_t *) * lifo->size);
+    if(newLifo == NULL){
+        fprintf(stderr, "Error allocating memory\n");
+        exit(EXIT_FAILURE);
+    }
+    newLifo[0] = node;
+    for(size_t i = 1; i < lifo->size; i++){
+        newLifo[i] = lifo->list[i - 1];
+    }
+    free(lifo->list);
+    lifo->list = newLifo;
+}
+
+cmpNode_t *popCmpLifo(lifoCmpNode_t *lifo){
+    // Check if lifo is empty
+    if(lifo->size == 0){
+        fprintf(stderr, "Error: Lifo is empty\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // resize lifo to remove node
+    lifo->size--;
+    // realloc lifo without node as new head
+    cmpNode_t **newLifo = (cmpNode_t **)malloc(sizeof(cmpNode_t *) * lifo->size);
+    if(newLifo == NULL){
+        fprintf(stderr, "Error allocating memory\n");
+        exit(EXIT_FAILURE);
+    }
+    cmpNode_t *node = lifo->list[0];
+    for(size_t i = 0; i < lifo->size; i++){
+        newLifo[i] = lifo->list[i + 1];
+    }
+    free(lifo->list);
+    lifo->list = newLifo;
+
+    return node;
 }

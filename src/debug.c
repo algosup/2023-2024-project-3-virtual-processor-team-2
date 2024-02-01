@@ -27,8 +27,15 @@ void printInstList(instList_t *list, char *dest){
                     break;
                 }
                 else{
-                    fprintf(file, "%ld(ACT): %s %s\n", node->id, printCMP(node), printArgs(node));
-                    break;
+                    if(node->nodeType.act->cmp->statem == CMP_IF){
+                        fprintf(file, "%ld(ACT): %s %s\n\t\t(ELSE)%ld\n\t\t(END)%ld\n", node->id, printCMP(node), printArgs(node), node->nodeType.act->cmp->elseId, node->nodeType.act->cmp->endId);
+                        break;
+                    }
+                    else{
+                        fprintf(file, "%ld(ACT): %s\n", node->id, printCMP(node));
+                        break;
+                    }
+                    
                 }
             case INST_LABEL:
                 fprintf(file, "%ld(LAB): %s\n", node->id, node->arg0.target);
