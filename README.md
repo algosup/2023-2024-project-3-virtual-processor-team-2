@@ -36,7 +36,7 @@ AT2 stands for **A**ssembly **T**eam **2**, representing our proprietary assembl
 
 ## 💻 What is IAT2 ?
 
-IAT2 stands for **I**nterpreter **A**ssembly **T**eam **2**, serving as the sole interpreter capable of reading and executing `.aop` files written in our AT2 language.
+IAT2 stands for **I**nterpreter **A**ssembly **T**eam **2**, serving as the exclusive interpreter capable of reading and executing `.aop` files written in our AT2 language.
 
 ## 💾 Why we choose .aop as extension ?
 
