@@ -104,6 +104,6 @@ void checkAOPFile(char* fileName);
 /*
     Checks if a file has at least 1 line above 64 characters or not
     params:
-        line: name of the line to check
+        fileName: name of the fileName to check
 */
-bool charNumbcheck(char* filename);
+bool checkLineSizes(char* fileName);

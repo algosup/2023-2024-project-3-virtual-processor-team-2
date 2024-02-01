@@ -73,7 +73,7 @@ void parseFile(instList_t *nodeList, char *filename){
     checkAOPFile(filename);
 
     // Check if one of the file's line doesn't exceed 64 characters
-    if (charNumbcheck(fileName)) {
+    if (checkLineSizes(fileName)) {
         continue;
     }
     else {
@@ -117,9 +117,6 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
     if(line[0] == '\n' || strncmp(line, "//", 2) == 0){
         return NULL;
     }
-    //Check if line >64 characters
-    checkCharNumb(line);
-
     // Get the instruction
     char *inst = getInst(line);
     // Get the arguments
@@ -438,38 +435,25 @@ void checkAOPFile(char* fileName) {
     }
 }
 
-bool charNumbcheck(char* filename){
+bool checkLineSizes(char* fileName){
     FILE *fp;
-    char ch;
+    fp=fopen(fileName,"r");// reads the selected file
     bool conditionChecked;
-    fp = fopen(filename, "r"); //We open and read the file
-    if (fp == NULL)
-    {//Check if the file isn't empty
-        printf("Couldn't open file\n");
-        exit(0);
-    }
-    int count = 0;
-
-    while (ch != EOF)
-    {
-        do// Count each character of each line until linebreak or end of file
-        {
-            ch = fgetc(fp);
-            count++; 
-        } while (ch != '\n' && ch != EOF);
-        if (count <= 64)
-        {
+    char string[64];// The maximum length a line should have
+    while(fgets(string, 64, fp) != NULL) {    //Reading the file, line by line
+        if (strchr(string, '\n') != NULL)
+        {// the line contains an '\n'
+            continue;
+        }
+        else if (fgets(string, 64, fp) == NULL)
+        {// It's the last line at the end of the file
             conditionChecked = true;
-            count = 0;
         }
         else
-        {//One of the line has more than 64 characters
+        { // Throws an error when the characters limit isn't respected
             conditionChecked = false;
             break;
         }
-        
-    }    
-    // Closing the file
-    fclose(fp);
+    }
     return conditionChecked;
 }
