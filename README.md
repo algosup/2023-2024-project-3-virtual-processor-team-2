@@ -43,4 +43,4 @@ IAT2 stands for **I**nterpreter **A**ssembly **T**eam **2**, serving as the sole
 We selected the `.aop` extension to signify **A**op **O**riginal **P**rogram, embodying an infinite recursive loop inspired by [GNU](https://en.wikipedia.org/wiki/GNU#Name).
 
 
-<a href="https://algosup.com/"> ![ALGOSUP](documents\images\management\algosup.png)</a>
+<a href="https://algosup.com/"> ![ALGOSUP](.\documents\images\management\algosup.png)</a>
