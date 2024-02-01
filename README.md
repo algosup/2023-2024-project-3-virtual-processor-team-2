@@ -40,7 +40,7 @@ IAT2 stands for **I**nterpreter **A**ssembly **T**eam **2**, serving as the excl
 
 ## 💾 Why we choose .aop as extension ?
 
-We selected the `.aop` extension to signify **A**op **O**riginal **P**rogram, embodying an infinite recursive loop inspired by [GNU](https://en.wikipedia.org/wiki/GNU#Name).
+We selected the `.aop` extension to signify **A**op **O**riginal **P**rogram, embodying an infinite recursive loop inspired by [GNU](https://en.wikipedia.org/wiki/GNU#Name)'s name.
 
 
 <a href="https://algosup.com/"><img src="documents\images\management\algosup.png" alt="ALGOSUP LOGO"></a>
