@@ -13,6 +13,7 @@ jobs:
       - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "The workflow is now ready to test your code on the runner."
       - name: List files in the repository
+      - run: echo "${{github.repository}}"
         run: |
           ls ${{ github.workspace }}
       - run: echo "Status is ${{ job.status }}."
