@@ -87,12 +87,12 @@ char *cleanString(char *str) {
     size_t end = size - 1;
 
     // Find the index of the first non-space, non-newline character
-    while (start < size && (str[start] == ' ' || str[start] == '\n')) {
+    while (start < size && (str[start] == ' ' || str[start] == '(' || str[start] == '\n')) {
         start++;
     }
 
     // Find the index of the last non-space, non-newline character
-    while (end > 0 && (str[end] == ' ' || str[end] == '\n')) {
+    while (end > 0 && (str[end] == ' ' || str[end] == '\n' || str[end] == ')')) {
         end--;
     }
 

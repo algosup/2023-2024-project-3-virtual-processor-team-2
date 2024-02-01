@@ -110,12 +110,24 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
     if(line[0] == '\n' || strncmp(line, "//", 2) == 0){
         return NULL;
     }
+
+    // copy the line to tokenize it
+    char* lineCopy = malloc((strlen(line) + 1) * sizeof(char));
+    if (!lineCopy) {
+        fprintf(stderr, "Memory allocation error\n");
+        exit(EXIT_FAILURE);
+    }
+    strcpy(lineCopy, line);
+
     // Get the instruction
-    char *inst = getInst(line);
+    char *inst = getInst(lineCopy);
     inst = cleanString(inst);
 
     // Get the arguments
-    char **args = getInstArgs(line);
+    char **args = getInstArgs(lineCopy);
+
+    free(lineCopy);
+
     instNode_t *newNode = malloc(sizeof(instNode_t));
     newNode->id = nodeId;
     newNode->lineNb = lineNb;
@@ -139,7 +151,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb){
     }
 
     // Check if the instruction is a comparison
-    isThatKind = isCmp(inst, newNode);
+    isThatKind = isCmp(inst, newNode, line);
     if(isThatKind){
         return newNode;
     }
@@ -342,12 +354,18 @@ bool isAct(char *inst, instNode_t *newNode){
     return false;
 }
 
-bool isCmp(char *inst, instNode_t *newNode){
+bool isCmp(char *inst, instNode_t *newNode, char* line){
     if(strcmp(inst, "if") == 0){
         newNode->inst = INST_ACT;
         newNode->nodeType.act = malloc(sizeof(actNode_t));
         // Set type of action
         newNode->nodeType.act->act = ACT_CMP;
+        newNode->nodeType.act->cmp = malloc(sizeof(cmpNode_t));
+        // Set type of comparison
+        newNode->nodeType.act->cmp->statem = CMP_IF;
+        char **args = getIfArgs(line);
+        setCmpKind(newNode, args[0]);
+        setArgs(newNode, args + 1);
         return true;
     }
     else if(strcmp(inst, "else") == 0){
@@ -355,6 +373,9 @@ bool isCmp(char *inst, instNode_t *newNode){
         newNode->nodeType.act = malloc(sizeof(actNode_t));
         // Set type of action
         newNode->nodeType.act->act = ACT_CMP;
+        newNode->nodeType.act->cmp = malloc(sizeof(cmpNode_t));
+        // Set type of comparison
+        newNode->nodeType.act->cmp->statem = CMP_ELSE;
         return true;
     }
 
@@ -363,10 +384,48 @@ bool isCmp(char *inst, instNode_t *newNode){
         newNode->nodeType.act = malloc(sizeof(actNode_t));
         // Set type of action
         newNode->nodeType.act->act = ACT_CMP;
+        newNode->nodeType.act->cmp = malloc(sizeof(cmpNode_t));
+        // Set type of comparison
+        newNode->nodeType.act->cmp->statem = CMP_END;
         return true;
     }
 
     return false;
+}
+
+void setCmpKind(instNode_t *newNode, char *cmp){
+    if(strcmp(cmp, "eq") == 0 || strcmp(cmp, "==") == 0){
+        newNode->nodeType.act->cmp->cmp = CMP_EQ;
+    }
+    else if(strcmp(cmp, "neq") == 0 || strcmp(cmp, "!=") == 0){
+        newNode->nodeType.act->cmp->cmp = CMP_NEQ;
+    }
+    else if(strcmp(cmp, "lt") == 0 || strcmp(cmp, "<") == 0){
+        newNode->nodeType.act->cmp->cmp = CMP_LT;
+    }
+    else if(strcmp(cmp, "lte") == 0 || strcmp(cmp, "<=") == 0){
+        newNode->nodeType.act->cmp->cmp = CMP_LTE;
+    }
+    else if(strcmp(cmp, "gt") == 0 || strcmp(cmp, ">") == 0){
+        newNode->nodeType.act->cmp->cmp = CMP_GT;
+    }
+    else if(strcmp(cmp, "gte") == 0 || strcmp(cmp, ">=") == 0){
+        newNode->nodeType.act->cmp->cmp = CMP_GTE;
+    }
+    else if(strcmp(cmp, "and") == 0 || strcmp(cmp, "&&") == 0){
+        newNode->nodeType.act->cmp->cmp = CMP_AND;
+    }
+    else if(strcmp(cmp, "or") == 0 || strcmp(cmp, "||") == 0){
+        newNode->nodeType.act->cmp->cmp = CMP_OR;
+    }
+    else if(strcmp(cmp, "xor") == 0 || strcmp(cmp, "^^") == 0){
+        newNode->nodeType.act->cmp->cmp = CMP_XOR;
+    }
+  \
+    else{
+        fprintf(stderr, "Invalid comparison\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 bool isDecla(char *inst, instNode_t *newNode){
@@ -434,6 +493,41 @@ char **getInstArgs(char *line) {
     }
 
     return args;
+}
+
+char** getIfArgs(char* line){
+    char **args = (char **)malloc(2 * sizeof(char *));
+    if (!args) {
+        fprintf(stderr, "Memory allocation error\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Remove the instruction name
+    char *token = strtok((char *)line, " ");
+    if (!token) {
+        fprintf(stderr, "Invalid input format\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Get the arguments
+    for (int i = 0; i < 3; i++) {
+        token = strtok(NULL, ",");
+        if (!token) {
+            args[i] = NULL;
+        } else {
+            // Allocate memory for the argument and copy it
+            args[i] = (char *)malloc((strlen(token) + 1) * sizeof(char));
+            if (!args[i]) {
+                fprintf(stderr, "Memory allocation error\n");
+                exit(EXIT_FAILURE);
+            }
+            // Remove spaces
+            strcpy(args[i], token);
+            args[i] = cleanString(args[i]);
+        }
+    }
+    return args;
+
 }
 
 void setArgs(instNode_t *node, char **args) {

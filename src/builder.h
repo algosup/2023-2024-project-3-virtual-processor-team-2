@@ -218,6 +218,14 @@ char *printOPKind(enum opKind op);
 */
 char *printACTKind(enum actKind act);
 
+/*
+    Print details of comparison node
+    params:
+        node: pointer to the instruction node
+    returns:
+        char*: string with the comparison details
+*/
+char* printCMP(instNode_t *node);
 
 /*
     Print the kind of a comparison

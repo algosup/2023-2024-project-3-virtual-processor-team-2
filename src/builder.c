@@ -28,6 +28,7 @@ void printInstList(instList_t *list, char *dest){
                     break;
                 }
                 else{
+                    fprintf(file, "%ld(ACT): %s %s\n", node->id, printCMP(node), printArgs(node));
                     break;
                 }
             case INST_LABEL:
@@ -167,6 +168,25 @@ char *printACTKind(enum actKind act){
             fprintf(stderr, "Invalid action\n");
             exit(EXIT_FAILURE);
     }
+}
+
+char* printCMP(instNode_t *node){
+    char *cmp = malloc(sizeof(char) * 128);
+    if(node->nodeType.act->cmp->statem == CMP_IF){
+        sprintf(cmp, "IF");
+    }
+    else if(node->nodeType.act->cmp->statem == CMP_ELSE){
+        sprintf(cmp, "ELSE");
+    }
+    else if(node->nodeType.act->cmp->statem == CMP_END){
+        sprintf(cmp, "END");
+    }
+    else{
+        fprintf(stderr, "Invalid comparison\n");
+        exit(EXIT_FAILURE);
+    }
+    sprintf(cmp, "%s %s", cmp, printCMPKind(node->nodeType.act->cmp->cmp));
+    return cmp;
 }
 
 char *printCMPKind(enum cmpKind cmp){

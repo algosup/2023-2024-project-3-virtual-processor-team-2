@@ -70,11 +70,20 @@ bool isAct(char *inst, instNode_t *newNode);
     params:
         char*: instruction to be checked
         instNode_t*: pointer to the instruction node
+        char*: line to be parsed
     returns:
         bool: true if it is a comparison
 
 */
-bool isCmp(char *inst, instNode_t *newNode);
+bool isCmp(char *inst, instNode_t *newNode, char *line);
+
+/*
+    Set the comparison kind
+    params:
+        instNode_t*: pointer to the instruction node
+        char*: comparison string
+*/
+void setCmpKind(instNode_t *newNode, char *cmp);
 
 /*
     Read the line and check if it is a declaration for a label or a variable
@@ -103,6 +112,15 @@ char* getInst(char *line);
         char**: array of strings (no more than 2)
 */
 char** getInstArgs(char *line);
+
+/*
+    Get arguments from a if instruction line 
+    params:
+        line: line to be parsed
+    returns:
+        char**: array of strings (no more than 2)
+*/
+char **getIfArgs(char *line);
 
 /*
     Set the arguments of an instruction node
