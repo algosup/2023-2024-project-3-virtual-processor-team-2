@@ -14,6 +14,6 @@ jobs:
       - run: echo "The workflow is now ready to test your code on the runner."
       - name: List files in the repository
       - run: echo "${{github.repository}}"
-        run: |
+      - run: |
           ls ${{ github.workspace }}
       - run: echo "Status is ${{ job.status }}."
