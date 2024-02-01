@@ -440,12 +440,12 @@ bool checkLineSizes(char* fileName){
     fp=fopen(fileName,"r");// reads the selected file
     bool conditionChecked;
     char string[64];// The maximum length a line should have
-    while(fgets(string, 64, fp) != NULL) {    //Reading the file, line by line
+    while(fgets(string, LINE_MAX_SIZE, fp) != NULL) {    //Reading the file, line by line
         if (strchr(string, '\n') != NULL)
         {// the line contains an '\n'
             continue;
         }
-        else if (fgets(string, 64, fp) == NULL)
+        else if (fgets(string, LINE_MAX_SIZE, fp) == NULL)
         {// It's the last line at the end of the file
             conditionChecked = true;
         }

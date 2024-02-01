@@ -8,7 +8,7 @@ bool checkLineSizes(char* filename);
 
 int main(){
 
-    char* fileName = "test3.aop";
+    char* fileName = "test2.aop";
     if(checkLineSizes(fileName)) {
         printf("File have valid lines\n");
     }
