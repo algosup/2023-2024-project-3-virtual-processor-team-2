@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
@@ -79,6 +78,12 @@ void parseFile(instList_t *nodeList, char *filename){
 
     // read the file line by line
     while(fgets(line, LINE_MAX_SIZE, file)){
+            // Check if one of the file's line doesn't exceed 64 characters
+        if (!checkLineSize(line, file)){
+            fprintf(stderr,"Lines shouldn't be above 64 in a file. Please enter a valid file.\n");
+            exit(EXIT_FAILURE); //Exit the program when the condition isn't met.
+        }
+
         // parse the line
         instNode_t *node = parseLine(line, nodeId, lineNb);
 
@@ -418,10 +423,25 @@ char **getInstArgs(char *line) {
 
 void checkAOPFile(char* fileName) {
     size_t size = strlen(fileName);
-
+    //Check if the filename ends by ".aop" and contains at least 5 characters
     if (size < 5 || fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') {
         // trow error
         fprintf(stderr, "The filename is invalid. Please enter a valid .aop filename.\n");
         exit(EXIT_FAILURE);
     }
+}
+
+bool checkLineSize(char* line, FILE *fp){
+    if (strchr(line, '\n') != NULL){
+            // the line contains an '\n'
+            return true;
+        }
+        else if (fgets(line, LINE_MAX_SIZE, fp) == NULL){
+            // It's the last line at the end of the file
+            return true;
+        }
+        else{
+            // Throws an error when the characters limit isn't respected
+            return false;
+        }
 }

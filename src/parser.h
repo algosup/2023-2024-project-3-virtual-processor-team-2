@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdbool.h>
 #include "builder.h" // To get data structures from the builder
 
@@ -100,3 +101,11 @@ char** getInstArgs(char *line);
         filename: name of the file to check
 */
 void checkAOPFile(char* fileName);
+
+/*
+    Checks if a line has more than 64 characters or not
+    params:
+        line: line to check
+        fp: file pointer
+*/
+bool checkLineSize(char* line, FILE *fp);
