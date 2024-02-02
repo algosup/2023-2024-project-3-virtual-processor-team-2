@@ -1,11 +1,7 @@
 <!-- TODO:
-- Link the functional specifications document in my part "before reading"
-- Make sure the image is properly linked in my part "parser"
-- Make sure the image is properly linked in my part "architecture"
-- Tailor the table of contents to the parts I added in the architecture part
-- Complete the parts I added in the architecture part
+- Complete the parts I added
 - Need to have the parts I already written in the archi part checked by Maxime Caron to make sure everything's in order.
-- Make the diagrams when needed
+- Make the diagrams
 - Complete the Appendices chapter
 -->
 
@@ -86,15 +82,15 @@
     - [6.7.1 - `ast.h`](#671---asth)
     - [6.7.2 - `stringPlus.c`](#672---stringplusc)
     - [6.7.3 - `stringPlus.h`](#673---stringplush)
-
-
-- [7 - Appendices]
-  - Glossary
-  - Contributors
-  - acknowledgments
-  - related documents
-  - License
-  - References
+  - [6.8 - Code organization](#68---code-organization)
+  - [6.9 - Error system](#69---error-system)
+- [7 - Appendices](#7---appendices)
+  - [7.1 - Glossary](#71---glossary)
+  - [7.2 - Contributors](#72---contibutors)
+  - [7.3 - Acknowledgments](#73---acknowledgments)
+  - [7.4 - Related documents](#74---related-documents)
+  - [7.5 - License](#75---license)
+  - [7.6 - References](#76---references)
 
 
 </details>
@@ -103,7 +99,7 @@
 
 # Before reading
 
-Make sure to read the [functional specifications]<!--TOLINK--> before reading this document, it will provide you useful information about what we aim to do for this project, as the functional is more focused on the "What" and the technical is more focused on the "How".
+Make sure to read the [functional specifications](/documents/functional/functional_specification_documentation.md) before reading this document, it will provide you useful information about what we aim to do for this project, as the functional is more focused on the "What" and the technical is more focused on the "How".
 
 ---
 # 1 - Overview
@@ -346,7 +342,7 @@ The processor emulated will be a 16 bits processor, with 8 registers of 16 bits 
 
 The interpreter will work as follows: 
 
-<!--LINK THE ARCHITECTURE DIAGRAM HERE-->
+![](../images/technical_images/archi_interpreter_diagram.jpg)
 
 **Diagram explanantion**:
 
@@ -551,10 +547,10 @@ The error system will work as follows:
 
 
 
+# 7 - Appendices
 
-
-# Glossary
-
+## 7.1 - Glossary
+<!--TOCOMPLETE-->
 | Term | Definition |
 | ---- | ---------- |
 | Assembly Language | A low-level programming language used to communicate with a computer's hardware, using symbolic code rather than binary. |
@@ -567,3 +563,18 @@ The error system will work as follows:
 | Bash | A Unix shell and command language, often used for scripting in various operating systems. |
 | `.aop` Extension | A custom file extension, used for files containing AT2 code. |
 | Debugging | The process of identifying and resolving bugs or errors in computer software. |
+
+## 7.2 - Contibutors
+<!--TODO-->
+
+## 7.3 - Acknowledgments
+<!--TODO-->
+
+## 7.4 - Related documents
+<!--TODO-->
+
+## 7.5 - License
+<!--TODO-->
+
+## 7.6 - References
+<!--TODO-->
