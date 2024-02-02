@@ -12,11 +12,18 @@
 #include "builder.h"
 #include "runner.h"
 
-TEST(parseArgs, help) {
-  char *argv[] = {"test", "-h"};
-  int argc = 2;
-  flags_t flags = parseArgs(argc, argv);
+TEST(ParseArgs, SetsHelpFlagWhenHelpOptionIsProvided) {
+    // Arrange
+    char *argv[] = {"test", "-h"};
+    int argc = sizeof(argv) / sizeof(argv[0]);
+
+    // Act
+    flags_t flags = parseArgs(argc, argv);
+
+    // Assert
+    ASSERT_TRUE(flags.help);
 }
+
 
 int main(int argc, char *argv[]) {
   ::testing::InitGoogleTest(&argc, argv);
