@@ -19,6 +19,10 @@ Quick Access:
     - [Plans for next week](#plans-for-next-week)
     - [Conclusion](#conclusion-2)
   - [Weekly Report - Week 4](#weekly-report---week-4)
+    - [Accomplishments](#accomplishments-3)
+    - [Challenges](#challenges-3)
+    - [Plans for next week](#plans-for-next-week-1)
+    - [Conclusion](#conclusion-3)
   - [Weekly Report - Week 5](#weekly-report---week-5)
   - [Weekly Report - Week 6](#weekly-report---week-6)
   - [Weekly Report - Week 7](#weekly-report---week-7)
@@ -145,7 +149,33 @@ The project is progressing forward; we've managed to catch up on our delay for t
 
 ## Weekly Report - Week 4
 [Detailed File (WIP)](week_4.md)
-(WIP)
+
+### Accomplishments
+
+1. Completed Functional Specifications.
+2. Completed Tasks & Schedule.
+3. Successfully finalized the parser's code.
+4. Fully documented Risks & Assumptions.
+5. Completed builder's code.
+6. Initiated runner's code.
+   - Completed structure reading.
+7. Configured Git server.
+
+### Challenges
+
+1. Adhering to the deadline for the functional specifications.
+2. Maintaining a positive team atmosphere while ensuring focus and hard work.
+3. Identifying potential risks and formulating solutions for the project.
+
+### Plans for next week
+
+1. Finalize the Technical Specifications.
+2. Complete the test plan.
+3. Focus on improving team satisfaction.
+
+### Conclusion
+
+It was a challenging but productive management week. We made significant progresses, and if we maintain this momentum, we will be able to meet our expectations. To achieve this, our focus should be on improving team satisfaction.
 
 ## Weekly Report - Week 5
 [Detailed File (WIP)](week_5.md)

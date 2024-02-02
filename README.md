@@ -9,7 +9,7 @@
     </a>
     <div>
     <!-- ![Logo]() -->
-    <div>
+    </div>
 </div>
 
 
@@ -17,12 +17,12 @@
 ## 🫂 Who are we ?
 | **Picture**                                                                                           | **Name**           | **Role**          | **GitHub**                                                                                                                                                         | **LinkedIn**                                                                                                                                                                                  |
 | ----------------------------------------------------------------------------------------------------- | ------------------ | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06AS9UQZ6Z-g7986289d5c2-512 width="200" height="200"> | Mathias GAGNEPAIN  | Project Manager   | [<img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" alt="GitHub" style="width: 50px">](https://github.com/MathiasGagnepain) | [<img src="https://static-00.iconduck.com/assets.00/linkedin-color-icon-256x256-ia566k6a.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/)  |              
-| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06BJ1BQE00-g3ffdd245b21-512 width="200" height="200"> | Guillaume DESPAUX  | Program Manager   | [<img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" alt="GitHub" style="width: 50px">](https://github.com/GuillaumeDespaux) | [<img src="https://static-00.iconduck.com/assets.00/linkedin-color-icon-256x256-ia566k6a.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/guillaume-despaux-084b10206/)  |              
-| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06ATEC5AG5-g70bf9de2131-512 width="200" height="200"> | Guillaume DERAMCHI | Technical Leader  | [<img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" alt="GitHub" style="width: 50px">](https://github.com/Guillaume18100)   | [<img src="https://static-00.iconduck.com/assets.00/linkedin-color-icon-256x256-ia566k6a.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/guillaume-deramchi-a45116293/) |              
-| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06AXL3CDGC-gf21fde06b1f-512 width="200" height="200"> | Maxime CARON       | Software Engineer | [<img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" alt="GitHub" style="width: 50px">](https://github.com/MaximeAlgosup)    | [<img src="https://static-00.iconduck.com/assets.00/linkedin-color-icon-256x256-ia566k6a.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/maxime-caron-dev/)             |              
-| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06CFLBV3MZ-g3621cbd420c-512 width="200" height="200"> | Paul NOWAK         | Software Engineer | [<img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" alt="GitHub" style="width: 50px">](https://github.com/PaulNowak36)      | [<img src="https://static-00.iconduck.com/assets.00/linkedin-color-icon-256x256-ia566k6a.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/paul-nowak-0757a61a7/)         |              
-| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06ANSN526S-g20f42d2a13d-512 width="200" height="200"> | Enzo GUILLOUCHE    | Quality Assurance | [<img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" alt="GitHub" style="width: 50px">](https://github.com/EnzoGuillouche)   | [<img src="https://static-00.iconduck.com/assets.00/linkedin-color-icon-256x256-ia566k6a.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/enzo-g-b62114293/)             |              
+| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06AS9UQZ6Z-g7986289d5c2-512 width="200" height="200"> | **Mathias GAGNEPAIN**  | Project Manager   | [<img src="documents/images/management/github_logo.png" alt="GitHub" style="width: 75px">](https://github.com/MathiasGagnepain) | [<img src="documents/images/management/linkedin_logo.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/)  |              
+| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06BJ1BQE00-g3ffdd245b21-512 width="200" height="200"> | **Guillaume DESPAUX**  | Program Manager   | [<img src="documents/images/management/github_logo.png" alt="GitHub" style="width: 75px">](https://github.com/GuillaumeDespaux) | [<img src="documents/images/management/linkedin_logo.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/guillaume-despaux-084b10206/)  |              
+| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06ATEC5AG5-g70bf9de2131-512 width="200" height="200"> | **Guillaume DERAMCHI** | Technical Leader  | [<img src="documents/images/management/github_logo.png" alt="GitHub" style="width: 75px">](https://github.com/Guillaume18100)   | [<img src="documents/images/management/linkedin_logo.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/guillaume-deramchi-a45116293/) |              
+| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06AXL3CDGC-gf21fde06b1f-512 width="200" height="200"> | **Maxime CARON**      | Software Engineer | [<img src="documents/images/management/github_logo.png" alt="GitHub" style="width: 75px">](https://github.com/MaximeAlgosup)    | [<img src="documents/images/management/linkedin_logo.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/maxime-caron-dev/)             |              
+| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06CFLBV3MZ-g3621cbd420c-512 width="200" height="200"> | **Paul NOWAK**         | Software Engineer | [<img src="documents/images/management/github_logo.png" alt="GitHub" style="width: 75px">](https://github.com/PaulNowak36)      | [<img src="documents/images/management/linkedin_logo.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/paul-nowak-0757a61a7/)         |              
+| <img src=https://ca.slack-edge.com/T06AELBCZSB-U06ANSN526S-g20f42d2a13d-512 width="200" height="200"> | **Enzo GUILLOUCHE**    | Quality Assurance | [<img src="documents/images/management/github_logo.png" alt="GitHub" style="width: 75px">](https://github.com/EnzoGuillouche)   | [<img src="documents/images/management/linkedin_logo.png" alt="LinkedIn" style="width: 50px">](https://www.linkedin.com/in/enzo-g-b62114293/)             |              
 
 <hr>
 
@@ -36,11 +36,11 @@ AT2 stands for **A**ssembly **T**eam **2**, representing our proprietary assembl
 
 ## 💻 What is IAT2 ?
 
-IAT2 stands for **I**nterpreter **A**ssembly **T**eam **2**, serving as the sole interpreter capable of reading and executing `.aop` files written in our AT2 language.
+IAT2 stands for **I**nterpreter **A**ssembly **T**eam **2**, serving as the exclusive interpreter capable of reading and executing `.aop` files written in our AT2 language.
 
 ## 💾 Why we choose .aop as extension ?
 
-We selected the `.aop` extension to signify **A**op **O**riginal **P**rogram, embodying an infinite recursive loop inspired by [GNU](https://en.wikipedia.org/wiki/GNU#Name).
+We selected the `.aop` extension to signify **A**op **O**riginal **P**rogram, embodying an infinite recursive loop inspired by [GNU](https://en.wikipedia.org/wiki/GNU#Name)'s name.
 
 
-<a href="https://algosup.com/"> ![ALGOSUP](documents\images\management\algosup.png)</a>
+<a href="https://algosup.com/"><img src="documents\images\management\algosup.png" alt="ALGOSUP LOGO"></a>

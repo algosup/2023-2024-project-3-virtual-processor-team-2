@@ -34,4 +34,4 @@ The current status of the test case (Passed, Failed, In Progress, Not Implemente
 **Comment**<br>
 Add any other context about the problem here (recommended for 'Failed' and 'In Progress' status).
 
-## You can go the [spreadsheet](https://docs.google.com/spreadsheets/d/1d-gDcUtc-J6af9MfQXIPr_xVtwP7XKyHaRIFd1-BpWI/edit?usp=sharing) where the test reports will be first documented.
+## You can go the [spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?usp=sharing) where the test reports will be first documented.
