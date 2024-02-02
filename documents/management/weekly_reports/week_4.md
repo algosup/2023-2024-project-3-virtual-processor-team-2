@@ -8,30 +8,38 @@
 ## Topics
 
 - Discussion on how to measure tests.
-- Project advancement overview.
+- Overview of project advancement.
 
 ## Achievements
 
 1. Completed Functional Specifications.
 2. Completed Tasks & Schedule.
-3. Completed the code of the parser.
+3. Successfully finalized the parser's code.
 4. Fully documented Risks & Assumptions.
+5. Completed builder coding.
+6. Initiated runner coding.
+   - Completed structure reading.
+7. Configured Git server.
 
 ## Challenges
 
-- Adhering to the deadline for the function specifications.
+- Adhering to the deadline for the functional specifications.
 - Maintaining a positive team atmosphere while ensuring focus and hard work.
 - Identifying potential risks and formulating solutions for the project.
 
 ## Plans for next week
 
 - Finalize the Technical Specifications.
-- Complete the test plan
+- Complete the test plan.
+- Focus on improving team satisfaction.
 
 ## Team mood
 
-Average team mood rating: /10
+Average team mood rating: 6.8/10
+
+As the Project Manager,  I'm quite fatigued at the end of this week. The team is generally content with the work accomplished so far, and they are motivated to achieve our goals and complete the project. 
+Unfortunately, we haven't yet reached our team satisfaction expectations.
 
 ## Conclusion
 
-It was a challenging management week but a productive one. We made significant progress, and if we maintain this momentum, we will be able to meet our expectations.
+It was a challenging yet productive management week. We made significant progress, and if we maintain this momentum, we will be able to meet our expectations. To achieve this, our focus should be on improving team satisfaction.
