@@ -16,8 +16,8 @@
 2. Completed Tasks & Schedule.
 3. Successfully finalized the parser's code.
 4. Fully documented Risks & Assumptions.
-5. Completed builder coding.
-6. Initiated runner coding.
+5. Completed builder's code.
+6. Initiated runner's code.
    - Completed structure reading.
 7. Configured Git server.
 
@@ -37,9 +37,9 @@
 
 Average team mood rating: 6.8/10
 
-As the Project Manager,  I'm quite fatigued at the end of this week. The team is generally content with the work accomplished so far, and they are motivated to achieve our goals and complete the project. 
-Unfortunately, we haven't yet reached our team satisfaction expectations.
+As the Project Manager, I'm quite tired at the end of this week. The team is generally pleased with the work accomplished so far, and they are motivated to achieve our goals and complete the project. 
+Unfortunately, we haven't reached our team satisfaction expectations yet.
 
 ## Conclusion
 
-It was a challenging yet productive management week. We made significant progress, and if we maintain this momentum, we will be able to meet our expectations. To achieve this, our focus should be on improving team satisfaction.
+It was a challenging but productive management week. We made significant progresses, and if we maintain this momentum, we will be able to meet our expectations. To achieve this, our focus should be on improving team satisfaction.
