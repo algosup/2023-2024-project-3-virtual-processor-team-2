@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdbool.h>
 #include "ast.h"
 
@@ -230,6 +231,14 @@ enum regKind strToReg(char *arg);
         filename: name of the file to check
 */
 void checkAOPFile(char* fileName);
+  
+/*
+    Checks if a line has more than 64 characters or not
+    params:
+        line: line to check
+        fp: file pointer
+*/
+bool checkLineSize(char* line, FILE *fp);
 
 #ifdef __cplusplus
 }
