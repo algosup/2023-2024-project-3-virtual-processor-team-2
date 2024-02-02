@@ -3,7 +3,8 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   Explore-GitHub-Actions:
-    runs-on: self-hosted QA-Team-2
+    runs-on: [self-hosted, windows, x64, QA-Team-2]
+
     steps:
       - run: echo "Triggered by a ${{ github.event_name }} event."
       - run: echo "Running on a ${{ runner.os }} server hosted by GitHub."
