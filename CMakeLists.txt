@@ -21,9 +21,11 @@ project(
 find_package(Threads REQUIRED)
 
 add_executable(tests
+  src/stringPlus.c
   src/parser.c
   src/builder.c
   src/runner.c
+  src/debug.c
   test/test.cc
   googletest/googletest/src/gtest-all.cc
 )
@@ -54,9 +56,11 @@ set_target_properties(tests
 )
 
 add_executable(iat2
+    src/stringPlus.c
     src/parser.c
     src/builder.c
     src/runner.c
+    src/debug.c
     src/iat2.c
 )
 
