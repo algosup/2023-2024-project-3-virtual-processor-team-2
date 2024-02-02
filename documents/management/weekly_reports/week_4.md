@@ -23,15 +23,15 @@
 
 ## Challenges
 
-- Adhering to the deadline for the functional specifications.
-- Maintaining a positive team atmosphere while ensuring focus and hard work.
-- Identifying potential risks and formulating solutions for the project.
+1. Adhering to the deadline for the functional specifications.
+2. Maintaining a positive team atmosphere while ensuring focus and hard work.
+3. Identifying potential risks and formulating solutions for the project.
 
 ## Plans for next week
 
-- Finalize the Technical Specifications.
-- Complete the test plan.
-- Focus on improving team satisfaction.
+1. Finalize the Technical Specifications.
+2. Complete the test plan.
+3. Focus on improving team satisfaction.
 
 ## Team mood
 
