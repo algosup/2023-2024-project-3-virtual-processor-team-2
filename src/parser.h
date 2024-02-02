@@ -103,13 +103,6 @@ char** getInstArgs(char *line);
 void checkAOPFile(char* fileName);
 
 /*
-    Checks if a file has at least 1 line above 64 characters or not
-    params:
-        fileName: name of the fileName to check
-*/
-bool checkLineSizes(char* fileName);
-
-/*
     Checks if a line has more than 64 characters or not
     params:
         line: line to check
