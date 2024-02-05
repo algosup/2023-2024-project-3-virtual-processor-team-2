@@ -1,16 +1,18 @@
 # ALGOSUP | 2024 | project 3 | Virtual Processor | Team 2
 
 <div style="text-align:center">
-    <a href="https://en.wikipedia.org/wiki/Vierzon">
+    <a target="_blank" href="https://en.wikipedia.org/wiki/Vierzon">
         <img src="https://img.shields.io/badge/Made%20in-Vierzon-success.svg" alt="Made in Vierzon">
     </a>
-    <a href="https://algosup.com/">
+    <a target="_blank" href="https://algosup.com/">
         <img src="https://img.shields.io/badge/Made%20at-ALGOSUP-blue.svg" alt="Made at ALGOSUP">
     </a>
     <div>
-    <!-- ![Logo]() -->
+        <img style="width:200px" src="./documents/images/management/at2_logo.png" alt="Assembly Team 2">
     </div>
 </div>
+
+
 
 
 
@@ -43,4 +45,4 @@ IAT2 stands for **I**nterpreter **A**ssembly **T**eam **2**, serving as the excl
 We selected the `.aop` extension to signify **A**op **O**riginal **P**rogram, embodying an infinite recursive loop inspired by [GNU](https://en.wikipedia.org/wiki/GNU#Name)'s name.
 
 
-<a href="https://algosup.com/"><picture><source media="(prefers-color-scheme: dark)" srcset="documents/images/management/algosup_orange.svg"><source media="(prefers-color-scheme: light)" srcset="documents/images/management/algosup_light_blue.svg"><img alt="ALGOSUP Logo" style="max-width:1440px" >
+<a target="_blank" href="https://algosup.com/"><picture><source media="(prefers-color-scheme: dark)" srcset="documents/images/management/algosup_orange.svg"><source media="(prefers-color-scheme: light)" srcset="documents/images/management/algosup_light_blue.svg"><img alt="ALGOSUP Logo" style="max-width:1440px" >
