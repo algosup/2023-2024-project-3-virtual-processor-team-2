@@ -148,7 +148,7 @@ The third week was focused on sharing all the information within the team, gathe
 The project is progressing forward; we've managed to catch up on our delay for the first two weeks, despite the absence of dedicated project time. Even though, the project has just started, and the satisfaction of our team is already below our expectations. We need to work on improving satisfaction and fostering a positive mood within the team.
 
 ## Weekly Report - Week 4
-[Detailed File (WIP)](week_4.md)
+[Detailed File](week_4.md)
 
 ### Accomplishments
 
