@@ -10,7 +10,6 @@
 #include "gtest/gtest.h"
 #include "parser.h"
 #include "builder.h"
-#include "runner.h"
 
 TEST(ParseArgs, SetsHelpFlagWhenHelpOptionIsProvided) {
     // Arrange

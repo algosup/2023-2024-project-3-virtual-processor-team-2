@@ -10,7 +10,7 @@
 
 #include "builder.h"
 
-void build(instList_t *nodeList, labelList_t *labelList){
+void build(instList_t *nodeList, labelList_t *labelList, varList_t *varList){
     // init lifo for if/else statements
     lifoCmpNode_t *lifoCmpNode = (lifoCmpNode_t *)malloc(sizeof(lifoCmpNode_t));
     if(lifoCmpNode == NULL){
@@ -22,11 +22,9 @@ void build(instList_t *nodeList, labelList_t *labelList){
 
     // read the list of instructions
     instNode_t *currNode = nodeList->head;
+    instNode_t *prevNode = NULL;
     while (currNode != NULL)
     {
-        // Check if node is an operation
-        // Build operation
-
         // Check if node is an action
          if(currNode->inst == INST_ACT){
             buildActNode(currNode, lifoCmpNode);
@@ -37,6 +35,19 @@ void build(instList_t *nodeList, labelList_t *labelList){
             buildLabelNode(currNode, labelList);
         }
 
+        // Check if node is a variable declaration
+        if(currNode->inst == INST_VAR){
+            addVar(varList, currNode);
+            // remove var declaration from list
+            if(prevNode == NULL){
+                nodeList->head = currNode->next;
+            }
+            else{
+                prevNode->next = currNode->next;
+            }
+        }
+
+        prevNode = currNode;
         currNode = currNode->next;
     }
 
@@ -176,4 +187,66 @@ cmpNode_t *popCmpLifo(lifoCmpNode_t *lifo){
     lifo->list = newLifo;
 
     return node;
+}
+
+void addVar(varList_t *list, instNode_t *node){
+    // Check if list is full
+    bool full = true;
+    for(size_t i = 0; i < list->size; i++){
+        if(list->list[i].name == NULL){
+            full = false;
+            break;
+        }
+    }
+    if(full){
+        // Increase list size
+        incVarList(list);
+    }
+
+    // Add var to the list
+    for(size_t i = 0; i < list->size; i++){
+        if(list->list[i].name == NULL){
+            list->list[i].name = node->arg0.target;
+            list->list[i].type = node->arg1Type;
+            switch (node->arg1Type)
+            {
+            case VAR_INT:
+                list->list[i].value.i_value = node->arg1.i_value;
+                break;
+            case VAR_FLOAT:
+                list->list[i].value.f_value = node->arg1.f_value;
+                break;
+            case VAR_CHAR:
+                list->list[i].value.c_value = node->arg1.c_value;
+                break;
+            case VAR_STRING:
+                list->list[i].value.s_value = node->arg1.s_value;
+                break;
+            default:
+                fprintf(stderr, "Error: Unknown variable type\n");
+                exit(EXIT_FAILURE);
+                break;
+            }
+            break;
+        }
+        else if(strcmp(list->list[i].name, node->arg0.target) == 0){
+            fprintf(stderr, "Variable %s already declared\n", node->arg0.target);
+            exit(EXIT_FAILURE);
+        }
+    }
+}
+
+void incVarList(varList_t *list){
+    // Increase list size
+    list->size *= 2;
+    list->list = (var_t *)realloc(list->list, sizeof(var_t) * list->size);
+    if(list->list == NULL){
+        fprintf(stderr, "Error reallocating memory\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Init new memory
+    for(size_t i = list->size / 2; i < list->size; i++){
+        list->list[i].name = NULL;
+    }
 }
