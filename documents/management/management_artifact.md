@@ -4,6 +4,8 @@ This document contains the main management artifacts:
 - [RACI matrix](#raci-matrix)
 - [Risks and Assumptions](#risks-and-assumptions)
 - [Key Performance Indicators](#key-performance-indicators)
+- [Appendix](#appendix)
+    - [1. Product Logo](#1-product-logo)
 
 You can also take a look at [cumulative weekly reports](weekly_reports/cumulative.md) file.
 
@@ -67,3 +69,12 @@ RACI colored spreadsheet easily readable can be found here: [Link](https://docs.
 # Key Performance Indicators
 
 The spreadsheet for the KPI's data and graphs can be found here: [Link](https://docs.google.com/spreadsheets/d/13n8fdWMEYFlJKhJ_OWILYcpX_c6CvLBpt4ebboLiU18/edit?usp=sharing)
+
+# Appendix
+
+### 1. Product Logo
+
+&emsp; For our product logo, we chose to give the team the opportunity to vote for their favorite design.
+<br>&emsp; You can see the results  [HERE](https://docs.google.com/spreadsheets/d/13H7NKF3Axvht02Pguh0YWgaVgjaN4GnWWcN4PkJFUns/edit?usp=sharing).
+<br>&emsp; *(Feel free to change these logo to fit to your company/projects)*
+
