@@ -16,8 +16,9 @@ typedef struct lifoCmpNode{
     params:
         nodeList: pointer to the instruction list
         labelList: pointer to the label list    
+        varList: pointer to the variable list
 */
-void build(instList_t *nodeList, labelList_t *labelList);
+void build(instList_t *nodeList, labelList_t *labelList, varList_t *varList);
 
 /*
     Build an operation node
@@ -82,6 +83,21 @@ void pushCmpLifo(lifoCmpNode_t *lifo, cmpNode_t *node);
         cmpNode_t: pointer to the node
 */
 cmpNode_t *popCmpLifo(lifoCmpNode_t *lifo);
+
+/*
+    Add variable to the variable list
+    params:
+        list: pointer to the variable list
+        nide: instNode_t pointer
+*/
+void addVar(varList_t *list, instNode_t *node);
+
+/*
+    Upgrades the size of the variable list
+    params:
+        list: pointer to the variable list
+*/
+void incVarList(varList_t *list);
 
 #ifdef __cplusplus
 }

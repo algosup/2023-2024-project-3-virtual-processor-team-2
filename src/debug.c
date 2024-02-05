@@ -230,6 +230,7 @@ void printVarList(varList_t *list, char *dest){
         fprintf(stderr, "Error opening file\n");
         exit(EXIT_FAILURE);
     }
+    fprintf(file, "\n\nVARS:\n");
     for(size_t i = 0; i < list->size; i++){
         if(list->list[i].name == NULL){
             continue;
