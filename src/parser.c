@@ -781,8 +781,12 @@ void checkAOPFile(char* fileName) {
     size_t size = strlen(fileName);
 
     if (size < 5 || fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') {
-        // trow error
-        fprintf(stderr, "The filename is invalid. Please enter a valid .aop filename.\n");
+        // throw error
+        fprintf(stderr, "The file extension is invalid. Please enter a valid .aop file extension.\n");
         exit(EXIT_FAILURE);
+    }
+    else{
+        printf(".aop file recognized.\n");
+        exit(EXIT_SUCCESS);
     }
 }
