@@ -6,11 +6,11 @@
 #include <stdlib.h>
 #include "parser.h"
 #include "builder.h"
-#include "runner.h"
-#include "iat2.h"
+#include "binExporter.h"
+#include "2at2.h"
 #include "debug.h"
 
-#define VERSION "0.0.2"
+#define VERSION "0.0.4"
 
 int main(int argc, char *argv[]) {
     // Parse program arguments and get flags
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
 
     
     // run builder
-    build(instList, labelList);
+    build(instList, labelList, varList);
 
     if(flags.debug) {
         printInstList(instList, "../others/building.log");
@@ -62,8 +62,10 @@ int main(int argc, char *argv[]) {
         printLabelList(labelList, "../others/building.log");
     }
 
-    // run runner
-    // TODO: make the function run
+    // run exporter
+    exportAST(instList, varList, labelList, "../others/ast.json");
+    exportAST(instList, varList, labelList, "../others/ast.bin");
+
 
     // Free memory
     free(varList);
