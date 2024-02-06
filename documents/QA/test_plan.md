@@ -332,22 +332,16 @@ Before the product can be considered ready for distribution, certain benchmarks 
 | Create and give templates | January 29, 2024 | January 29, 2024 |
 | First meeting with other teams' QA | January 29, 2024 | January 29, 2024 |
 | Second meeting with Dev team | January 30, 2024 | January 30, 2024 |
-| Unit tests | February 1, 2023 | February 23, 2024 |
-| GitHub Actions | February 1, 2024 | February 23, 2024 |
-<!-- | Second meeting with other teams' QA  | February 5, 2024 | February 5, 2024 |
-| Third meeting with Dev team | February 5, 2024 | February 5, 2024 |
-| Third meeting with other teams' QA  | February 12, 2024 | February 12, 2024 |
-| Fourth meeting with Dev team | February 13, 2024 | February 13, 2024 |
-| Fourth meeting with other teams' QA | February 19, 2024 | February 19, 2024 |
-| Fifth meeting with Dev team | February 20, 2024 | February 20, 2024 | -->
+| GitHub Actions | February 02, 2024 | February 23, 2024 |
+| Unit tests | February 05, 2023 | February 23, 2024 |
+| Functional tests | February 19, 2024 | February 23, 2024 |
 
 ### 5.2. People
 
-For this project, the people involved to perform tests are the Quality Assurance of team 2, but also Quality Assurances of other teams during the team test sessions:
+For this project, the people involved to perform tests are Quality Assurances of several teams during the team test sessions:
 - Enzo GUILLOUCHE - Team 2
 - Séréna BAVAROIS - Team 1
 - Maxime THIZEAU - Team 4
 - Arthur LEMOINE - Team 3
-- Atifa AMIRI - Team 5
 
 Thank you for sharing your time, to improve the quality of our work and our skills.
