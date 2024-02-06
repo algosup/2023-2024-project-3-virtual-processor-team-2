@@ -1,4 +1,4 @@
-# ALGOSUP | 2024 | project 3 | Virtual Processor | Team 2
+# [2024] - IAT2️⃣
 
 <div style="text-align:center">
     <a target="_blank" href="https://en.wikipedia.org/wiki/Vierzon">
@@ -8,12 +8,9 @@
         <img src="https://img.shields.io/badge/Made%20at-ALGOSUP-blue.svg" alt="Made at ALGOSUP">
     </a>
     <div>
-        <img style="width:200px" src=".\documents\images\AT2\png\AT2_logo_256px.png" alt="Assembly Team 2">
+        <img style="width:200px" src=".\documents\images\IAT2\png\IAT2_logo_256px.png" alt="Assembly Team 2">
     </div>
 </div>
-
-
-
 
 
 ## 🫂 Who are we ?
@@ -36,13 +33,22 @@ This project involves the creation of a new assembly language for enhanced under
 
 AT2 stands for **A**ssembly **T**eam **2**, representing our proprietary assembly language.
 
-## 💻 What is IAT2 ?
+## 💻 What is 2AT2 ?
 
-IAT2 stands for **I**nterpreter **A**ssembly **T**eam **2**, serving as the exclusive interpreter capable of reading and executing `.aop` files written in our AT2 language.
+2AT2 stands for **A**Assembler for **A**ssembly **T**eam **2**, serving as the exclusive assembler capable of reading and convert `.aop` files written in our AT2 language into machine code (Binary).
 
 ## 💾 Why we choose .aop as extension ?
 
-We selected the `.aop` extension to signify **A**op **O**riginal **P**rogram, embodying an infinite recursive loop inspired by [GNU](https://en.wikipedia.org/wiki/GNU#Name)'s name.
+We selected the `.aop` extension to signify **A**op **O**riginal **P**rogram, embodying an infinite recursive loop inspired by [ZWEI](https://en.wikipedia.org/wiki/EINE_and_ZWEI#Naming)'s name.
+
+## 🔎 How does it work ?
+
+To assemble your code in `.aop`, here is some commands related to **2AT2** usage.
+
+1. Compile you AT2's code: `2at2`
+2. Display the commands list: `2at2 -help` or `2at2 -h`
+3. Compile + run your AT2's code with VAT2: `2at2 -run`
+
 
 
 <a target="_blank" href="https://algosup.com/"><picture><source media="(prefers-color-scheme: dark)" srcset="documents/images/management/algosup_orange.svg"><source media="(prefers-color-scheme: light)" srcset="documents/images/management/algosup_light_blue.svg"><img alt="ALGOSUP Logo" style="max-width:1440px" >
