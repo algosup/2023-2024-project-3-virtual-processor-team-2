@@ -56,11 +56,6 @@ TEST(parseArgs, invalidFlag) {
  *  checkAOPFile
  */
 
-// TEST(checkAOPFile, validFileName) {
-//   char* validFileName = "test.aop"; // Replace fileName with an invalid file name
-//   checkAOPFile(validFileName);
-//   ASSERT_TRUE(EXIT_SUCCESS);
-}
 // this test won't display a message because the test just above already deals with the same function.
 TEST(checkAOPFile, invalidFileName) {
   char* invalidFileName = "test.txt"; // Replace fileName with an invalid file name
