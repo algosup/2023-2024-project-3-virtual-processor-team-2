@@ -147,6 +147,18 @@ void incLabelList(labelList_t *list){
     }
 }
 
+labelList_t* initLabelList(){
+    labelList_t *labelList = malloc(sizeof(labelList_t));
+    labelList->size = 10;
+    labelList->list = malloc(sizeof(label_t) * labelList->size);
+    for(size_t i = 0; i < labelList->size; i++){
+        labelList->list[i].name = NULL;
+        labelList->list[i].nodeId = -1;
+        labelList->list[i].id = -1;
+    }
+    return labelList;
+}
+
 void pushCmpLifo(lifoCmpNode_t *lifo, cmpNode_t *node){
     // resize lifo to add new node
     lifo->size++;
@@ -249,4 +261,15 @@ void incVarList(varList_t *list){
     for(size_t i = list->size / 2; i < list->size; i++){
         list->list[i].name = NULL;
     }
+}
+
+varList_t *initVarList(){
+    varList_t* varList = malloc(sizeof(varList_t));
+    varList->size = 10;
+    varList->list = malloc(sizeof(var_t) * varList->size);
+    // Init variables list
+    for(size_t i = 0; i < varList->size; i++){
+        varList->list[i].name = NULL;
+    }
+    return varList;
 }

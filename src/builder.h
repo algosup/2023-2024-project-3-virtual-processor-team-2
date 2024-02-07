@@ -68,6 +68,13 @@ void addLabel(labelList_t *list, char *name, long nodeId);
 void incLabelList(labelList_t *list);
 
 /*
+    Init the label list
+    return:
+        labelList_t: pointer to the label list
+*/
+labelList_t* initLabelList();
+
+/*
     Add cmp node to the lifo (as new head)
     params:
         lifo: pointer to the lifo
@@ -98,6 +105,13 @@ void addVar(varList_t *list, instNode_t *node);
         list: pointer to the variable list
 */
 void incVarList(varList_t *list);
+
+/*
+    Init the variable list
+    return:
+        varList_t: pointer to the variable list
+*/
+varList_t* initVarList();
 
 #ifdef __cplusplus
 }

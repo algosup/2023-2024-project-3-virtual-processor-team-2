@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include "ast.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
     Export the AST to a binary file
     params:
@@ -41,3 +45,34 @@ void writeLabelList(labelList_t *labelList, FILE *file);
         FILE *file: the file to write to
 */
 void writeAST(instList_t *ast, FILE *file);
+
+/*
+    Get the string representation of an operation kind
+    params:
+        enum opKind kind: the kind of operation
+    return:
+        char *: the string representation
+*/
+char *getOpkindStr(enum opKind kind);
+
+/*
+    Get the string representation of an action kind
+    params:
+        enum actKind kind: the kind of action
+    return:
+        char *: the string representation
+*/
+char *getActkindStr(enum actKind kind);
+
+/*
+    Get the string representation of a comparison kind
+    params:
+        enum cmpKind kind: the kind of comparison
+    return:
+        char *: the string representation
+*/
+char *getCmpKindStr(enum cmpKind kind);
+
+#ifdef __cplusplus
+}
+#endif
