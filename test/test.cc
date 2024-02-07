@@ -56,13 +56,17 @@ TEST(parseArgs, invalidFlag) {
  *  checkAOPFile
  */
 
+// TEST(checkAOPFile, validFileName) {
+//   char* validFileName = "test.aop"; // Replace fileName with an invalid file name
+//   checkAOPFile(validFileName);
+//   ASSERT_TRUE(EXIT_SUCCESS);
+}
 // this test won't display a message because the test just above already deals with the same function.
 TEST(checkAOPFile, invalidFileName) {
   char* invalidFileName = "test.txt"; // Replace fileName with an invalid file name
   checkAOPFile(invalidFileName);
   ASSERT_TRUE(EXIT_FAILURE);
 }
-
 /*
  *  isInt
  */
@@ -233,6 +237,41 @@ TEST(isString, isChar){
   char *tmp = "'a'";
   ASSERT_FALSE(isString(tmp));
 }
+
+/*
+ *  isReg
+ */
+
+TEST(isReg, rg0){
+  char *tmp = "rg0";
+  ASSERT_TRUE(isReg(tmp));
+}
+TEST(isReg, RG0){
+  char *tmp = "RG0";
+  ASSERT_FALSE(isReg(tmp));
+}
+TEST(isReg, rg8){
+  char *tmp = "rg8";
+  ASSERT_FALSE(isReg(tmp));
+}
+
+/*
+ *  isTarget
+ */
+
+TEST(isTarget, allCharacters){
+  char *tmp = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890_\0";  // Is it ok to start or finish by _ ?
+  ASSERT_TRUE(isTarget(tmp));
+}
+TEST(isTarget, SpecialCharacters){
+  char *tmp = "&";
+  ASSERT_FALSE(isTarget(tmp));
+}
+TEST(isTarget, rtn){
+  char *tmp = "\n";
+  ASSERT_FALSE(isTarget(tmp));
+}
+
 
 int main(int argc, char *argv[]) {
   ::testing::InitGoogleTest(&argc, argv);
