@@ -14,6 +14,9 @@ In the fifth week, we decided to change our working approach to enhance VCPU rea
 
 ## Achievements
 
+1. Release the pre-release of the v0.0.3
+2. 
+
 ## Challenges
 
 1. Continuing in our way by creating a binary converter during the week.
