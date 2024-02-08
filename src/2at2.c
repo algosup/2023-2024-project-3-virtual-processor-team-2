@@ -1,8 +1,15 @@
+/*
+    This file aims to be the main file of the project
+    It will call the parser, builder and runner
+*/
+#include <stdio.h>
 #include <stdlib.h>
-#include "runner.h"
-#include "iat2.h"
+#include "parser.h"
+#include "builder.h"
+#include "2at2.h"
+#include "debug.h"
 
-#define VERSION "0.0.1"
+#define VERSION "0.0.3"
 
 int main(int argc, char *argv[]) {
     // Parse program arguments and get flags
@@ -17,12 +24,20 @@ int main(int argc, char *argv[]) {
 
     // Init variables list struct
     varList_t *varList = malloc(sizeof(varList_t));
-    varList->list = NULL;
+    varList->size = 10;
+    varList->list = malloc(sizeof(var_t) * varList->size);
+    // Init variables list
+    for(size_t i = 0; i < varList->size; i++){
+        varList->list[i].name = NULL;
+    }
 
     // Init labels list struct
     labelList_t *labelList = malloc(sizeof(labelList_t));
-    labelList->list = NULL;
-
+    labelList->size = 10;
+    labelList->list = malloc(sizeof(label_t) * labelList->size);
+    for(size_t i = 0; i < labelList->size; i++){
+        labelList->list[i].name = NULL;
+    }
     // Init instructions list struct
     instList_t *instList = malloc(sizeof(instList_t));
     instList->head = NULL;
@@ -30,13 +45,24 @@ int main(int argc, char *argv[]) {
     // run parser
     parseFile(instList, argv[1]);
 
-    printInstList(instList, "../bin/out.txt");
+    if(flags.debug) {
+        printInstList(instList, "../others/parsing.log");
+        printVarList(varList, "../others/parsing.log");
+        printLabelList(labelList, "../others/parsing.log");
+    }
 
+    
     // run builder
-    // TODO: make the function build
+    build(instList, labelList, varList);
 
-    // run runner
-    // TODO: make the function run
+    if(flags.debug) {
+        printInstList(instList, "../others/building.log");
+        printVarList(varList, "../others/building.log");
+        printLabelList(labelList, "../others/building.log");
+    }
+
+    // run exporter
+    // TODO: make the function export to binary
 
     // Free memory
     free(varList);
