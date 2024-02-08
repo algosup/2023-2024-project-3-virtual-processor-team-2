@@ -4,6 +4,7 @@
 - Make the diagrams
 - Complete the Appendices chapter
 -->
+# Front matter
 
 | | |
 | ----- | ----- |
@@ -12,6 +13,7 @@
 | Team | 2 |
 | Created on | 01/22/2024 |
 | Last updated | 02/02/2024 |  
+| Task tracker | [Task & Schedule](https://docs.google.com/spreadsheets/d/1nawLT6dMtwPcFpHMa4k32Nxjinokl4ZmX4GMZl1Fatc/edit#gid=0) |
 
 ---
 
@@ -102,81 +104,137 @@
 Make sure to read the [functional specifications](/documents/functional/functional_specification_documentation.md) before reading this document, it will provide you useful information about what we aim to do for this project, as the functional is more focused on the "What" and the technical is more focused on the "How".
 
 ---
-# 1 - Overview
+# 1 - Introduction
 
-## 1.1 - Goals
+## 1.1 - Overview
 
-The objective of this project is to create a virtual processor and an interpreter for a customized assembly language. By using C standard libraries, the main aim is to develop a concise assembly language and construct a C program interpreter that can execute and validate assembly code. This solution is specifically designed for educational purposes and software developers who are keen on delving into low-level programming and processor emulation.
+The objective of this project is to create a virtual processor and an interpreter for a customized assembly language. By using C standard libraries, the main aim is to develop a concise assembly language and construct a C program interpreter that can execute and validate assembly code. This solution is specifically designed for educational purposes and software developers who are keen on delving into low-level programming and processor emulation. The stakeholders of this project are on one side ALGOSUP, a international software development school, which gave us this project and 8 weeks to bring it to fruition, and on the other the Team 2 of ALGOSUP.
 
-## 1.2 - Objectives
+## 1.2 - Glossary
 
-The project aims to achieve the following objectives:
+| Term | Definition |
+| ---- | ---------- |
+| Assembly Language | A low-level programming language used to communicate with a computer's hardware, using symbolic code rather than binary. |
+| Interpreter | A program that directly executes instructions written in a programming or scripting language, without requiring them to be compiled into a machine language program. |
+| Parser | A component that interprets text data to convert it into a format understandable by the computer. |
+| Builder | In the context of programming, a builder constructs a final product or executable from source code. |
+| Virtual Processor | A simulated version of a computer processor, used to emulate the functionality of a physical processor. |
+| LIFO (Last-In-First-Out) | A method of processing data where the most recently added item is the first to be removed. |
+| GitHub Desktop | A graphical user interface for managing GitHub repositories on a personal computer. |
+| Bash | A Unix shell and command language, often used for scripting in various operating systems. |
+| `.aop` Extension | A custom file extension, used for files containing AT2 code. |
+| Debugging | The process of identifying and resolving bugs or errors in computer software. |
+
+<!-- The project aims to achieve the following objectives:
 
 1. Create a concise assembly language with an ample range of instructions.
 2. Construct an interpreter that can effectively execute assembly code.
 3. Construct an interpreter that can validate assembly code for errors.
 4. Design the interpreter to be user-friendly and easily accessible.
-5. Ensure compatibility of the interpreter with various operating systems.
+5. Ensure compatibility of the interpreter with various operating systems.-->
 
-## 1.3 - Success criteria
+## 1.3 - Context
 
-The project's success will be determined by meeting the following conditions:
+As it's written above, the context of this project is an educational purpose. After asking for the reason why we are doing this project, the stakeholder answered that it was for educational purpose only. So there is no money involved, there is no real company goal as it's just for us to gain experience by working on it, as well as there is no real problem to solve here, apart of knowing how do create a virtual processor and an interpreter from scratch. Nevertheless, our solution will fit into the overall product roadmap as well as the technical strategy, and as it will be on a public GitHub rpository, there may be chances of people using it for real problem solving. But we will dive into that later.
+
+<!--The project's success will be determined by meeting the following conditions:
 
 1. The interpreter must have the ability to execute assembly code effectively.
 2. The interpreter should be compatible with the widely used operating systems.
-3. All the instructions in the set must be implemented completely.
+3. All the instructions in the set must be implemented completely.-->
 
-# 2 - Usage
+# 2 - Goals
 
-The interpreter is designed to provide a user-friendly and easy-to-use experience. It is developed to integrate with popular operating systems and can execute assembly code while also checking for errors. Additionally, the interpreter can display the output of the assembly code. Below are the instructions for installing and running the interpreter.
+- As a user, the virtual processor I'm coding on should be able to effectively execute the code I run and with no bugs.
+- As a user, I'd like to work on a virtual processor that can run and debug my code.
+- As a user, I'd like to code on a user-friendly and easily accessible virtual processor, with complete documentation.
+- As a user, I'd like to have a access to enough instructions in order to optimize my code.
+- As a user, I'd like to be able to change devices and still being able to code on a different.
 
-## 2.1 - Requirements
+<!--The interpreter is designed to provide a user-friendly and easy-to-use experience. It is developed to integrate with popular operating systems and can execute assembly code while also checking for errors. Additionally, the interpreter can display the output of the assembly code. Below are the instructions for installing and running the interpreter.-->
 
-To run your custom assembly code, you will need to install the following dependencies:
+## 2.1 - Non-goals
+
+1. A very complete assembly language, with a very large set of instructions
+2. A graphical user interface.
+4. Compatibility with specific hardware configurations.
+5. Compatibility with other programming languages.
+6. Real-time performance analysis.
+7. An advanced memory management.
+
+
+
+<!--To run your custom assembly code, you will need to install the following dependencies:
 
 - [VS Code](https://code.visualstudio.com/download) - Visual Studio Code is a free source-code editor made by Microsoft for Windows, Linux and macOS.
 - [C/C++ for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) - C/C++ for Visual Studio Code is an extension for VS Code that provides IntelliSense, debugging, and code browsing support for C and C++ code.
 - [GCC](https://gcc.gnu.org/install/) - GCC, the GNU Compiler Collection, is a free collection of compilers for C, C++, Objective-C, Fortran, Ada, Go, and D programming languages.
 - [CMake](https://earthly.dev/blog/installandrun-cmake-on-windows/) - CMake is an open-source, cross-platform family of tools designed to build, test, and package software by managing the compilation process across different systems.
 
-Our software is developed using the C99 version of the C language.
+Our software is developed using the C99 version of the C language.-->
 
-## 2.2 - Installation
 
-To install the interpreter, you will need clone the repository on your local machine.
 
-### 2.2.1 - Installation with Bash
+## 2.3 - Future goals
 
-Open a terminal and run the following commands:
+- Create a more complete and user-friendly user interface.
+- Optimize the instructions according to the users' experience.
 
-If you are on macOS:
+# 3 - Assumptions
 
-```bash
-git clone https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2.git
-cd 2023-2024-project-3-virtual-processor-team-2
-```
+To complete this project, we absolutely need:
+- Access to C standard libraries
+- g++
+- gcc
+- CMake
+- Visual Studio Code
 
-### 2.2.2 - Installation with GitHub Desktop
+# Current solution
 
-Download and open GitHub Desktop and click on `File > Clone Repository`. Select the URL tab and enter the following URL:
+There's no current solution as this project is for an educational purpose, so we don't take over from another team.
 
-```bash
-https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2.git
-```
+# Proposed solution
 
-Then click on `Clone`.
+Our suggested solution will be available on our GitHub repository. The solution will use Cmake to automate the software compilation process across different platforms and environments, C standard libraries for basic operations, gcc and g++ to compile the code into executable, and VSC will be our IDE.
 
-## 2.3 - Running
+## Pros & cons of the solution
 
-To run the interpreter, you will need to follow these steps:
+**Pros**:
 
-1. Create a bin folder.
-2. Compile it with CMake (using the CMakeLists.txt file).
-3. Add the interpreter to your computer path.
+- Educational value: it's a good learning opportunity in low-level programming and processor emulation.
+- Customization: the ability to tailor an assembly language to specific needs offers a focused approach to learning and software development.
+- Portability and accessibility: using C standard libraries enhances the interpreter's compatibility with various operating systems, making it more accessible.
 
-# 3 - Scope
+**Cons**:
+- Complexity and time consumption: the design and implementation of a virtual processor and custom assembly language can be complex and require time and effort.
+- Limited practical scope: a custom assembly language may not encompass all features of real-world processors, potentially limiting its practical application.
+- Maintenance and documentation: ongoind maintenance and the need for thorough documentation can be challenging and resource-intensive.
 
-## 3.1 - In scope
+
+# Data model
+
+![!\[alt text\](image.png)
+](../images/technical_images/data_model.png)
+
+**Diagram explanation**:
+- In a first time, the .aop file content will be read by the parser, then it will convert the lines into an algorithmic structure, as well as arranging the data for subsequent processing.
+- Then the builder will processe parsed instruction nodes, constructing a structured executable program suitable for assembling.
+- After that, the structure will be executed by the assembler that will convert it in a binary file.
+- Finally the binary file will be ran by the virtual processor, on virtual memory.
+
+## Code organization
+
+**Assembler:**
+
+![!\[alt text\](image.png)](../images/technical_images/assembler.png)
+
+**Virtual memory:**
+
+![!\[alt text\](image.png)](../images/technical_images/v-mmu.png)
+
+
+
+<!--## 3.1 - In scope
 
 The project encompasses the following functionalities:
 
@@ -196,7 +254,7 @@ The following features will be excluded from the project:
 4. Compatibility with specific hardware configurations.
 5. Compatibility with other programming languages.
 6. Real-time performance analysis.
-7. Advanced memory management.
+7. Advanced memory management.-->
 
 ---
 
