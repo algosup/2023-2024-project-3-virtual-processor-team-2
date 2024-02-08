@@ -15,7 +15,6 @@
  *  checkAOPFile
  */
 
-// this test won't display a message because the test just above already deals with the same function.
 TEST(checkAOPFile, invalidFileName) {
   // Test invalid file name
   char* invalidFileName = const_cast<char *>("test.txt"); // Replace fileName with an invalid file name
@@ -24,9 +23,80 @@ TEST(checkAOPFile, invalidFileName) {
 }
 
 /*
- *  isBinary
+ *  checkLineSize
  */
 
+/*
+ *  flagsSet
+ */
+
+/*
+ *  getIfArgs
+ */
+
+/*
+ *  getInst
+ */
+
+/*
+ *  getInstArgs
+ */
+
+/*
+ *  isAct
+ */
+
+TEST(isAct, addSymbols){
+    // Test invalid action symbol
+    char *tmp = "+";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isAct(tmp, newNode);
+    ASSERT_FALSE(test);
+}
+
+TEST(isAct, GOTO){
+    // Test valid action name
+    char *tmp = "goto";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isAct(tmp, newNode);
+    ASSERT_TRUE(test);
+}
+
+TEST(isAct, incSymbols){
+    // Test invalid action symbol
+    char *tmp = "++";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isAct(tmp, newNode);
+    ASSERT_FALSE(test);
+}
+
+TEST(isAct, moduloSymbol){
+    // Test invalid action symbol
+    char *tmp = "%";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isAct(tmp, newNode);
+    ASSERT_FALSE(test);
+}
+
+TEST(isAct, ob1){
+    // Test valid action name
+    char *tmp = "ob1";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isAct(tmp, newNode);
+    ASSERT_TRUE(test);
+}
+
+TEST(isAct, ob12){
+    // Test invalid action name
+    char *tmp = "ob12";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isAct(tmp, newNode);
+    ASSERT_FALSE(test);
+}
+
+/*
+  isBinary
+*/
 TEST(isBinary, is0b1010){
   // Test binary number with prefix "0b"
   char *tmp = const_cast<char *>("0b1010");
@@ -59,6 +129,38 @@ TEST(isBinary, is1010){
 }
 
 /*
+ *  isCmp
+ */
+
+/*
+ *  isDecla
+ */
+
+TEST(isDecla, lab){
+    // Test valid declaration keyword
+    char *tmp = "lab";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isDecla(tmp, newNode);
+    ASSERT_TRUE(test);
+}
+
+TEST(isDecla, labWithSymbol){
+    // Test invalid declaration with symbol
+    char *tmp = "lab:";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isDecla(tmp, newNode);
+    ASSERT_FALSE(test);
+}
+
+TEST(isDecla, var){
+    // Test valid declaration keyword
+    char *tmp = "var";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isDecla(tmp, newNode);
+    ASSERT_TRUE(test);
+}
+
+/*
  *  isChar
  */
 
@@ -72,6 +174,7 @@ TEST(isChar, isChar){
   char *tmp = const_cast<char *>("'a'");
   ASSERT_TRUE(isChar(tmp));
 }
+
 TEST(isChar, isNotChar){
   // Test string enclosed in double quotes
   char *tmp = const_cast<char *>("'abcdef'"); // Doubt for this one (should concider a as char and ignore the rest)
@@ -208,6 +311,50 @@ TEST(isOctal, is7070){
 }
 
 /*
+ *  isOp
+ */
+
+TEST(isOp, add){
+    // Test valid operator name
+    char *tmp = "add";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isOp(tmp, newNode);
+    ASSERT_TRUE(test);
+}
+
+TEST(isOp, addSymbols){
+    // Test valid operator symbol
+    char *tmp = "+";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isOp(tmp, newNode);
+    ASSERT_TRUE(test);
+}
+
+TEST(isOp, GOTO){
+    // Test invalid operator name
+    char *tmp = "goto";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isOp(tmp, newNode);
+    ASSERT_FALSE(test);
+}
+
+TEST(isOp, incSymbols){
+    // Test invalid operator symbol
+    char *tmp = "++";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isOp(tmp, newNode);
+    ASSERT_FALSE(test);
+}
+
+TEST(isOp, moduloSymbol){
+    // Test valid operator symbol
+    char *tmp = "%";
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    bool test = isOp(tmp, newNode);
+    ASSERT_TRUE(test);
+}
+
+/*
  *  isReg
  */
 
@@ -221,6 +368,7 @@ TEST(isReg, RG0){
   char *tmp = const_cast<char *>("RG0");
   ASSERT_FALSE(isReg(tmp));
 }
+
 TEST(isReg, rg8){
   // Test invalid register name with invalid number
   char *tmp = const_cast<char *>("rg8");
@@ -256,6 +404,7 @@ TEST(isTarget, SpecialCharacters){
   char *tmp = const_cast<char *>("&");
   ASSERT_FALSE(isTarget(tmp));
 }
+
 TEST(isTarget, rtn){
   // Test invalid target name with newline character
   char *tmp = const_cast<char *>("\n");
