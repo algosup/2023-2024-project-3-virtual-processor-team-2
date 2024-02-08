@@ -645,9 +645,21 @@ void setArgs(instNode_t *node, char **args) {
 bool isInt(char *arg) {
     // Check if the argument is a number
     size_t size = strlen(arg);
-    for (size_t i = 0; i < size; i++) {
-        if (arg[i] < '0' || arg[i] > '9') {
-            return false;
+
+    // Handle the case where the first character is '-' (for negative integers)
+    if (size > 0 && arg[0] == '-') {
+        // Skip the '-' sign and continue checking the remaining characters
+        for (size_t i = 1; i < size; i++) {
+            if (arg[i] < '0' || arg[i] > '9') {
+                return false;
+            }
+        }
+    } else {
+        // No '-' sign present, check all characters for digits
+        for (size_t i = 0; i < size; i++) {
+            if (arg[i] < '0' || arg[i] > '9') {
+                return false;
+            }
         }
     }
 
