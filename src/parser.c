@@ -59,7 +59,8 @@ void flagsSet(char *flag, flags_t *flags){
     }
     else{
         fprintf(stderr, "Invalid flag\n Try 'iat2 --help' for more information\n");
-        exit(EXIT_FAILURE);
+        EXIT_FAILURE; // Original exit(EXIT_FAILURE);
+
     }
 }
 
@@ -787,9 +788,13 @@ void checkAOPFile(char* fileName) {
     size_t size = strlen(fileName);
     //Check if the filename ends by ".aop" and contains at least 5 characters
     if (size < 5 || fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') {
-        // trow error
-        fprintf(stderr, "The filename is invalid. Please enter a valid .aop filename.\n");
-        exit(EXIT_FAILURE);
+        // throw error
+        fprintf(stderr, "The file extension is invalid. Please enter a valid .aop file extension.\n");
+        EXIT_FAILURE; // Original exit(EXIT_FAILURE);
+    }
+    else{
+        printf(".aop file recognized.\n");
+        exit(EXIT_SUCCESS);
     }
 }
 
