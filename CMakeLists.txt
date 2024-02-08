@@ -14,7 +14,7 @@ set(CMAKE_C_COMPILER "gcc")
 
 project(
   Interpreter-AT2
-  VERSION 0.0.3
+  VERSION 0.0.4
   LANGUAGES CXX C
 )
 
@@ -25,6 +25,7 @@ add_executable(tests
   src/parser.c
   src/builder.c
   src/debug.c
+  src/binExporter.c
   test/test.cc
   googletest/googletest/src/gtest-all.cc
 )
@@ -59,6 +60,7 @@ add_executable(2at2
     src/parser.c
     src/builder.c
     src/debug.c
+    src/binExporter.c
     src/2at2.c
 )
 
