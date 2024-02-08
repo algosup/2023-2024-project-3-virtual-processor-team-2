@@ -10,7 +10,6 @@
 #include "gtest/gtest.h"
 #include "parser.h"
 #include "builder.h"
-#include "runner.h"
 
 /*
  *  parseArgs
@@ -266,6 +265,7 @@ TEST(isTarget, rtn){
   char *tmp = "\n";
   ASSERT_FALSE(isTarget(tmp));
 }
+
 
 
 int main(int argc, char *argv[]) {

@@ -82,6 +82,12 @@ void parseFile(instList_t *nodeList, char *filename){
 
     // read the file line by line
     while(fgets(line, LINE_MAX_SIZE, file)){
+            // Check if one of the file's line doesn't exceed 64 characters
+        if (!checkLineSize(line, file)){
+            fprintf(stderr,"Lines shouldn't be above 64 in a file. Please enter a valid file.\n");
+            exit(EXIT_FAILURE); //Exit the program when the condition isn't met.
+        }
+
         // parse the line
         instNode_t *node = parseLine(line, nodeId, lineNb);
 
@@ -639,9 +645,21 @@ void setArgs(instNode_t *node, char **args) {
 bool isInt(char *arg) {
     // Check if the argument is a number
     size_t size = strlen(arg);
-    for (size_t i = 0; i < size; i++) {
-        if (arg[i] < '0' || arg[i] > '9') {
-            return false;
+
+    // Handle the case where the first character is '-' (for negative integers)
+    if (size > 0 && arg[0] == '-') {
+        // Skip the '-' sign and continue checking the remaining characters
+        for (size_t i = 1; i < size; i++) {
+            if (arg[i] < '0' || arg[i] > '9') {
+                return false;
+            }
+        }
+    } else {
+        // No '-' sign present, check all characters for digits
+        for (size_t i = 0; i < size; i++) {
+            if (arg[i] < '0' || arg[i] > '9') {
+                return false;
+            }
         }
     }
 
@@ -780,7 +798,7 @@ enum regKind strToReg(char *arg) {
 
 void checkAOPFile(char* fileName) {
     size_t size = strlen(fileName);
-
+    //Check if the filename ends by ".aop" and contains at least 5 characters
     if (size < 5 || fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') {
         // throw error
         fprintf(stderr, "The file extension is invalid. Please enter a valid .aop file extension.\n");
@@ -790,4 +808,19 @@ void checkAOPFile(char* fileName) {
         printf(".aop file recognized.\n");
         exit(EXIT_SUCCESS);
     }
+}
+
+bool checkLineSize(char* line, FILE *fp){
+    if (strchr(line, '\n') != NULL){
+            // the line contains an '\n'
+            return true;
+        }
+        else if (fgets(line, LINE_MAX_SIZE, fp) == NULL){
+            // It's the last line at the end of the file
+            return true;
+        }
+        else{
+            // Throws an error when the characters limit isn't respected
+            return false;
+        }
 }
