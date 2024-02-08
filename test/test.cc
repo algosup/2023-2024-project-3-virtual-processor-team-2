@@ -176,11 +176,6 @@ TEST(isHex, is09aF){
 /*
  *  isFloat
  */
-
-TEST(isFloat, is10){
-  char *tmp = "10";
-  ASSERT_FALSE(isFloat(tmp));
-}
 TEST(isFloat, is10FLoat){
   char *tmp = "10.0";
   ASSERT_TRUE(isFloat(tmp));

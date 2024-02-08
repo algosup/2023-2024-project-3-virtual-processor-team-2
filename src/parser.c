@@ -718,13 +718,21 @@ bool isFloat(char *arg) {
     // Check if the argument is a float
     size_t size = strlen(arg);
     bool dot = false;
-    for (size_t i = 0; i < size; i++) {
-        if (arg[i] < '0' || arg[i] > '9') {
-            if (arg[i] == '.' && !dot) {
-                dot = true;
-            } else {
-                return false;
+
+    // Handle the case where the first character is '+' or '-'
+    size_t start = (arg[0] == '+' || arg[0] == '-') ? 1 : 0;
+
+    for (size_t i = start; i < size; i++) {
+        // Allow only digits or a single decimal point
+        if ((arg[i] < '0' || arg[i] > '9') && arg[i] != '.') {
+            return false;
+        }
+        // Ensure only one decimal point is present
+        if (arg[i] == '.') {
+            if (dot) {
+                return false; // More than one decimal point
             }
+            dot = true;
         }
     }
 
