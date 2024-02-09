@@ -8,7 +8,7 @@
         <img src="https://img.shields.io/badge/Made%20at-ALGOSUP-blue.svg" alt="Made at ALGOSUP">
     </a>
     <div>
-        <img style="width:200px" src=".\documents\images\IAT2\png\IAT2_logo_256px.png" alt="Assembly Team 2">
+        <img style="width:200px" src="documents\images\IAT2\png\iat2_logo_256px.png" alt="Assembly Team 2">
     </div>
 </div>
 
