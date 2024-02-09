@@ -186,10 +186,10 @@ It was a challenging but productive management week. We made significant progres
 
 ### Accomplishments
 
-1. Release the pre-release v0.0.3
-2. Release the pre-release v0.0.4
-3. Update KPIs to align with our new goals
-4. Completed the first unit-test
+1. Release the pre-release v0.0.3.
+2. Release the pre-release v0.0.4.
+3. Update KPIs to align with our new goals.
+4. Completed the first unit-test.
 
 ### Challenges
 
@@ -200,8 +200,8 @@ It was a challenging but productive management week. We made significant progres
 
 1. Finalize the test plan.
 2. Deploy unit tests.
-3. Complete the assembler
-4. Begin working on the Virtual Processor
+3. Complete the assembler.
+4. Begin working on the Virtual Processor.
 
 ### Conclusion
 

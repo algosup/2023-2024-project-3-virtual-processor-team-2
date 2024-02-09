@@ -10,14 +10,14 @@ In the fifth week, we decided to change our working approach to enhance VCPU rea
 ## Topics
 
 1. Discussion about the assembler, checking feasibility without a significant allocation of project time.
-2. Documents modifications to fit with our new goals
+2. Documents modifications to fit with our new goals.
 
 ## Achievements
 
-1. Release the pre-release v0.0.3
-2. Release the pre-release v0.0.4
-3. Update KPIs to align with our new goals
-4. Completed the first unit-test
+1. Release the pre-release v0.0.3.
+2. Release the pre-release v0.0.4.
+3. Update KPIs to align with our new goals.
+4. Completed the first unit-test.
 
 ## Challenges
 
@@ -28,8 +28,8 @@ In the fifth week, we decided to change our working approach to enhance VCPU rea
 
 1. Finalize the test plan.
 2. Deploy unit tests.
-3. Complete the assembler
-4. Begin working on the Virtual Processor
+3. Complete the assembler.
+4. Begin working on the Virtual Processor.
 
 ## Team mood
 
