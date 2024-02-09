@@ -35,7 +35,9 @@ In the fifth week, we decided to change our working approach to enhance VCPU rea
 
 Average team mood rating: /10
 
+The team seems tired due to a short project session. Many team members worked overtime to align with expectations, creating a lack of free time and increasing the workload.
+
 ## Conclusion
 
-not much project time but a satisfying amount of work done, but too much overtime, deadlines were met.
-The team is .... 
+Not much project time but a satisfying amount of work done, but too much overtime, deadlines were met.
+The team is tired due to the overcharge of work, it can be good to add more project session mainly the friday to debrief about the week with the entire team.
