@@ -1,101 +1,84 @@
-<!-- TODO:
-- Complete the parts I added
-- Need to have the parts I already written in the archi part checked by Maxime Caron to make sure everything's in order.
-- Make the diagrams
-- Complete the Appendices chapter
--->
 # Front matter
 
 | | |
 | ----- | ----- |
-| Title | Technical specifications for ALGOSUP's virtual processor project |
+| Title | Virtual processor for customized assembly language |
 | Author | Guillaume Deramchi |
 | Team | 2 |
+| Reviewer | Enzo Guillouche |
 | Created on | 01/22/2024 |
-| Last updated | 02/02/2024 |  
-| Task tracker | [Task & Schedule](https://docs.google.com/spreadsheets/d/1nawLT6dMtwPcFpHMa4k32Nxjinokl4ZmX4GMZl1Fatc/edit#gid=0) |
+| Last updated | 02/09/2024 |
+| Task tracker | [Tasks & Schedule](https://docs.google.com/spreadsheets/d/1nawLT6dMtwPcFpHMa4k32Nxjinokl4ZmX4GMZl1Fatc/edit?usp=sharing) |
 
 ---
 
-# Approvals
-
-| Reviewer           | Role              | Approved | Date |
-| ------------------ | ----------------- | -------- | ---- |
-| Enzo Guillouche    | Quality Assurance |          |      |
-| Mathias Gagnepain  | Project Manager   |          |      |
-| Guillaume Despaux  | Program Manager   |          |      |
-| Guillaume Deramchi | Technical Leader  |          |      |
-| Maxime Caron       | Software Engineer |          |      |
-| Paul Nowak         | Software Engineer |          |      |
-
----
 
 <details>
 <summary>Table of contents</summary>
 
+- [Front matter](#front-matter)
 - [Before reading](#before-reading)
-- [1 - Overview](#1---overview)
-  - [1.1 - Goals](#11---goals)
-  - [1.2 - Objectives](#12---objectives)
-  - [1.3 - Success criteria](#13---success-criteria)
-- [2 - Usage](#2---usage)
-  - [2.1 - Requirements](#21---requirements)
-  - [2.2 - Installation](#22---installation)
-    - [2.2.1 - Installation with Bash](#221---installation-with-bash)
-    - [2.2.2 - Installation with GitHub Desktop](#222---installation-with-github-desktop)
-  - [2.3 - Running](#23---running)
-- [3 - Scope](#3---scope)
-  - [3.1 - In Scope](#31---in-scope)
-  - [3.2 - Out of Scope](#32---out-of-scope)
-- [4 - Overall Description](#4---overall-description)
-  - [4.1 - Hardware & software](#41---hardware--software)
-  - [4.2 - Project Folder Structure](#42---project-folder-structure)
-  - [4.3 - Conventions](#43---conventions)
-    - [4.3.1 - Naming Conventions](#431---naming-conventions)
-      - [4.3.1.1 - Folders & files](#4311---folders--files)
-      - [4.3.1.2 - Variables](#4312---variables)
-      - [4.3.1.3 - Constants](#4313---constants)
-    - [4.3.2 - Formatting Conventions](#432---formatting-conventions)
-      - [4.3.2.1 - Indentation](#4321---indentation)
-      - [4.3.2.2 - Line Length](#4322---line-length)
-      - [4.3.2.3 - Line Breaks](#4323---line-breaks)
-      - [4.3.2.4 - Comments](#4324---comments)
-      - [4.3.2.5 - Whitespace](#4325---whitespace)
-- [5 - About AT2](#5---about-at2)
-- [6 - Software Architecture](#6---software-architecture)
-  - [6.1 - Parsing](#61---parsing)
-    - [6.1.1 - `parser.c`](#611---parserc)
-    - [6.1.2 - `parser.h`](#612---parserh)
-  - [6.2 - Building](#62---building)
-    - [6.2.1 - `builder.c`](#621---builderc)
-    - [6.2.2 - `builder.h`](#622---builderh)
-  - [6.3 - Interpreting](#63---interpreting)
-    - [6.3.1 - `iat2.c`](#631---iat2c)
-    - [6.3.2 - `iat2.h`](#632---iat2h)
-  - [6.4 - Running](#64---running)
-    - [6.4.1 - `runner.c`](#641---runnerc)
-    - [6.4.2 - `runner.h`](#642---runnerh)
-  - [6.5 - Debugging](#65---debugging)
-    - [6.5.1 - `debug.c`](#651---debugc)
-    - [6.5.2 - `debug.h`](#652---debugh)
-  - [6.6 - Testing](#66---testing)
-    - [6.6.1 - `test.cc`](#661---testcc)
-  - [6.7 - Other files](#67---other-files)
-    - [6.7.1 - `ast.h`](#671---asth)
-    - [6.7.2 - `stringPlus.c`](#672---stringplusc)
-    - [6.7.3 - `stringPlus.h`](#673---stringplush)
-  - [6.8 - Code organization](#68---code-organization)
-  - [6.9 - Error system](#69---error-system)
-- [7 - Appendices](#7---appendices)
-  - [7.1 - Glossary](#71---glossary)
-  - [7.2 - Contributors](#72---contibutors)
-  - [7.3 - Acknowledgments](#73---acknowledgments)
-  - [7.4 - Related documents](#74---related-documents)
-  - [7.5 - License](#75---license)
-  - [7.6 - References](#76---references)
-
+- [Introduction](#introduction)
+  - [Overview](#overview)
+  - [Glossary](#glossary)
+  - [Context](#context)
+- [Goals](#goals)
+  - [Non-goals](#non-goals)
+  - [Future goals](#future-goals)
+  - [Assumptions](#assumptions)
+- [Project folder structure](#project-folder-structure)
+- [Conventions](#conventions)
+  - [Naming conventions](#naming-conventions)
+    - [Folders & files](#folders--files)
+    - [Variables](#variables)
+    - [Constants](#constants)
+  - [Formatting conventions](#formatting-conventions)
+    - [Indentation](#indentation)
+    - [Line length](#line-length)
+    - [Line breaks](#line-breaks)
+    - [Comments](#comments)
+    - [Whitespace](#whitespace)
+- [About AT2](#about-at2)
+- [Solution](#solution)
+  - [Current solution](#current-solution)
+  - [Proposed solution](#proposed-solution)
+  - [Pros & cons of the solution](#pros--cons-of-the-solution)
+- [Data model](#data-model)
+  - [Parser](#parser)
+  - [Builder](#builder)
+  - [Converter](#converter)
+  - [2at2.h](#2at2h)
+  - [ast.h](#asth)
+  - [builder.c](#builderc)
+  - [builder.h](#builderh)
+  - [debug.c](#debugc)
+  - [debug.h](#debugh)
+  - [parser.c](#parserc)
+  - [parser.h](#parserh)
+  - [stringPlus.c](#stringplusc)
+  - [stringPlus.h](#stringplush)
+  - [binExporter.c](#binexporterc)
+  - [binExporter.h](#binexporterh)
+- [Code organization](#code-organization)
+- [Error system](#error-system)
+- [Risks](#risks)
+- [Business Logic](#business-logic)
+  - [API Changes](#api-changes)
+  - [Pseudocode](#pseudocode)
+  - [Error States](#error-states)
+  - [Failure Scenarios](#failure-scenarios)
+  - [Conditions that Lead to Errors and Failures](#conditions-that-lead-to-errors-and-failures)
+  - [Limitations](#limitations)
+  - [Other Questions to Answer](#other-questions-to-answer)
+- [Appendices](#appendices)
+  - [Contributors](#contributors)
+  - [Acknowledgments](#acknowledgments)
+  - [Related documents](#related-documents)
+  - [License](#license)
+  - [References](#references)
 
 </details>
+
 
 ---
 
@@ -104,13 +87,14 @@
 Make sure to read the [functional specifications](/documents/functional/functional_specification_documentation.md) before reading this document, it will provide you useful information about what we aim to do for this project, as the functional is more focused on the "What" and the technical is more focused on the "How".
 
 ---
-# 1 - Introduction
 
-## 1.1 - Overview
+# Introduction
 
-The objective of this project is to create a virtual processor and an interpreter for a customized assembly language. By using C standard libraries, the main aim is to develop a concise assembly language and construct a C program interpreter that can execute and validate assembly code. This solution is specifically designed for educational purposes and software developers who are keen on delving into low-level programming and processor emulation. The stakeholders of this project are on one side ALGOSUP, a international software development school, which gave us this project and 8 weeks to bring it to fruition, and on the other the Team 2 of ALGOSUP.
+## Overview
 
-## 1.2 - Glossary
+The objective of this project is to create a virtual processor that runs customized assembly language. By using C standard libraries, the main aim is to develop a concise assembly language and construct a C program interpreter that can execute and validate assembly code. This solution is specifically designed for educational purposes and software developers who are keen on delving into low-level programming and processor emulation. The stakeholders of this project are on one side ALGOSUP, a international software development school, which gave us this project and 8 weeks to bring it to fruition, and on the other the Team 2 of ALGOSUP.
+
+## Glossary
 
 | Term | Definition |
 | ---- | ---------- |
@@ -125,25 +109,11 @@ The objective of this project is to create a virtual processor and an interprete
 | `.aop` Extension | A custom file extension, used for files containing AT2 code. |
 | Debugging | The process of identifying and resolving bugs or errors in computer software. |
 
-<!-- The project aims to achieve the following objectives:
-
-1. Create a concise assembly language with an ample range of instructions.
-2. Construct an interpreter that can effectively execute assembly code.
-3. Construct an interpreter that can validate assembly code for errors.
-4. Design the interpreter to be user-friendly and easily accessible.
-5. Ensure compatibility of the interpreter with various operating systems.-->
-
-## 1.3 - Context
+## Context
 
 As it's written above, the context of this project is an educational purpose. After asking for the reason why we are doing this project, the stakeholder answered that it was for educational purpose only. So there is no money involved, there is no real company goal as it's just for us to gain experience by working on it, as well as there is no real problem to solve here, apart of knowing how do create a virtual processor and an interpreter from scratch. Nevertheless, our solution will fit into the overall product roadmap as well as the technical strategy, and as it will be on a public GitHub rpository, there may be chances of people using it for real problem solving. But we will dive into that later.
 
-<!--The project's success will be determined by meeting the following conditions:
-
-1. The interpreter must have the ability to execute assembly code effectively.
-2. The interpreter should be compatible with the widely used operating systems.
-3. All the instructions in the set must be implemented completely.-->
-
-# 2 - Goals
+# Goals
 
 - As a user, the virtual processor I'm coding on should be able to effectively execute the code I run and with no bugs.
 - As a user, I'd like to work on a virtual processor that can run and debug my code.
@@ -151,9 +121,7 @@ As it's written above, the context of this project is an educational purpose. Af
 - As a user, I'd like to have a access to enough instructions in order to optimize my code.
 - As a user, I'd like to be able to change devices and still being able to code on a different.
 
-<!--The interpreter is designed to provide a user-friendly and easy-to-use experience. It is developed to integrate with popular operating systems and can execute assembly code while also checking for errors. Additionally, the interpreter can display the output of the assembly code. Below are the instructions for installing and running the interpreter.-->
-
-## 2.1 - Non-goals
+## Non-goals
 
 1. A very complete assembly language, with a very large set of instructions
 2. A graphical user interface.
@@ -162,123 +130,24 @@ As it's written above, the context of this project is an educational purpose. Af
 6. Real-time performance analysis.
 7. An advanced memory management.
 
+## Future goals
 
+- Integration with more advanced debugging tools.
+- Support for additional, more complex assembly instructions.
+- Expansion to real hardware implementation.
 
-<!--To run your custom assembly code, you will need to install the following dependencies:
+## Assumptions
 
-- [VS Code](https://code.visualstudio.com/download) - Visual Studio Code is a free source-code editor made by Microsoft for Windows, Linux and macOS.
-- [C/C++ for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) - C/C++ for Visual Studio Code is an extension for VS Code that provides IntelliSense, debugging, and code browsing support for C and C++ code.
-- [GCC](https://gcc.gnu.org/install/) - GCC, the GNU Compiler Collection, is a free collection of compilers for C, C++, Objective-C, Fortran, Ada, Go, and D programming languages.
-- [CMake](https://earthly.dev/blog/installandrun-cmake-on-windows/) - CMake is an open-source, cross-platform family of tools designed to build, test, and package software by managing the compilation process across different systems.
+- Availability of standard development tools like GCC, CMake, and Visual Studio Code.
+- Access to modern computing hardware for development and testing.
+- Basic user knowledge in assembly language and processor operations.
 
-Our software is developed using the C99 version of the C language.-->
-
-
-
-## 2.3 - Future goals
-
-- Create a more complete and user-friendly user interface.
-- Optimize the instructions according to the users' experience.
-
-# 3 - Assumptions
-
-To complete this project, we absolutely need:
-- Access to C standard libraries
-- g++
-- gcc
-- CMake
-- Visual Studio Code
-
-# Current solution
-
-There's no current solution as this project is for an educational purpose, so we don't take over from another team.
-
-# Proposed solution
-
-Our suggested solution will be available on our GitHub repository. The solution will use Cmake to automate the software compilation process across different platforms and environments, C standard libraries for basic operations, gcc and g++ to compile the code into executable, and VSC will be our IDE.
-
-## Pros & cons of the solution
-
-**Pros**:
-
-- Educational value: it's a good learning opportunity in low-level programming and processor emulation.
-- Customization: the ability to tailor an assembly language to specific needs offers a focused approach to learning and software development.
-- Portability and accessibility: using C standard libraries enhances the interpreter's compatibility with various operating systems, making it more accessible.
-
-**Cons**:
-- Complexity and time consumption: the design and implementation of a virtual processor and custom assembly language can be complex and require time and effort.
-- Limited practical scope: a custom assembly language may not encompass all features of real-world processors, potentially limiting its practical application.
-- Maintenance and documentation: ongoind maintenance and the need for thorough documentation can be challenging and resource-intensive.
-
-
-# Data model
-
-![!\[alt text\](image.png)
-](../images/technical_images/data_model.png)
-
-**Diagram explanation**:
-- In a first time, the .aop file content will be read by the parser, then it will convert the lines into an algorithmic structure, as well as arranging the data for subsequent processing.
-- Then the builder will processe parsed instruction nodes, constructing a structured executable program suitable for assembling.
-- After that, the structure will be executed by the assembler that will convert it in a binary file.
-- Finally the binary file will be ran by the virtual processor, on virtual memory.
-
-## Code organization
-
-**Assembler:**
-
-![!\[alt text\](image.png)](../images/technical_images/assembler.png)
-
-**Virtual memory:**
-
-![!\[alt text\](image.png)](../images/technical_images/v-mmu.png)
-
-
-
-<!--## 3.1 - In scope
-
-The project encompasses the following functionalities:
-
-1. Fundamental assembly language with a concise set of instructions.
-2. An interpreter that can execute assembly code.
-3. An interpreter that can check errors in the assembly.
-4. A user-friendly usage.
-5. Compatibility with prevalent operating systems.
-
-## 3.2 - Out of scope
-
-The following features will be excluded from the project:
-
-1. Sophisticated assembly language with a intricate array of instructions.
-2. Graphical user interface.
-3. Debugging tools.
-4. Compatibility with specific hardware configurations.
-5. Compatibility with other programming languages.
-6. Real-time performance analysis.
-7. Advanced memory management.-->
-
----
-
-# 4 - Overall description
-
-## 4.1 - Hardware & software
-
-The interpreter is designed to be compatible with the most prevalent hardware configurations and will undergo testing on the hardware listed below:
-
-| Specification    | Lenovo ThinkBook 14  | Lenovo ThinkBook 14  | Lenovo ThinkPad 2023 |
-| ---------------- | -------------------- | -------------------- | -------------------- |
-| Processor        | Intel Core I7-1065G7 | Intel Core i7-1255U  | Intel Core i7-1355U  |
-| RAM              | 16GB                 | 16 GB                | 16GB                 |
-| Operating System | Windows 11 Pro       | Windows 11 Pro       | Windows 11 Pro       |
-
-The interpreter will undergo compatibility testing on Windows 11 pro, version 22H2.
-
-## 4.2 - Project folder structure
+## Project folder structure
 
 The folder structure for the project will be as follows:
 
-
-``` folder
-├── 2023-2024-project-3-virtual-processor-team-2 (root)
+```folder
+├── 2023-2024-project-3-virtual-processor-team-2
 |   ├── documents
 |   |   ├── communications
 |   |   |   ├── minutes_of_meeting_01_16_2024.pdf
@@ -327,13 +196,13 @@ The folder structure for the project will be as follows:
 |   ├── SECURITY.md
 ```
 
-## 4.3 - Conventions
+## Conventions
 
-### 4.3.1 - Naming Conventions
+### Naming conventions
 
 It is crucial to adhere to naming conventions in order to maintain a well-organized directory structure. Our project will adopt the subsequent naming conventions.
 
-#### 4.3.1.1 - Folders & files
+#### Folders & files
 
 All the folders and files will be written in `snake_case`. 
 Apart the following files that will be written in `UPPER_SNAKE_CASE`:
@@ -344,30 +213,48 @@ Apart the following files that will be written in `UPPER_SNAKE_CASE`:
 - `SECURITY.md`
 And the `.gitignore` will be written this way.
 
-#### 4.3.1.2 - Variables
+#### Variables
 
 Variable and functions names will be written in `camelCase`.
 
-#### 4.3.1.3 - Constants
+#### Constants
 
 - Constant names will be written in `UPPER_SNAKE_CASE`.
-- All #define will be written at the same place.
+- All `#define` statements will be written at the same place.
 
-### 4.3.2 - Formatting Conventions
+#### Error system
 
-Formatting conventions are important to keep a clear, concise and readable code, Our project will adhere to the subsequent formatting conventions.
+**The error system will work as follows:**
 
-#### 4.3.2.1 - Indentation
+```
+Error Type: [Kind of Error]
+Details: [Provide detailed information about the error, varying the level of detail as needed]  
+Line Number: [Line number where the error occurred]  
+File Name: [Name of the file in which the error occurred]
+```
+
+For instance, in a realistic situation it would look like that:
+
+```
+Error Type: [Syntax Error]  
+Details: [Missing semicolon at the end of the instruction. Ensure that each instruction is properly terminated.]  
+Line Number: [23]  
+File Name: [main.aop]  
+```
+
+### Formatting conventions
+
+Formatting conventions are important to keep a clear, concise and readable code. Our project will adhere to the subsequent formatting conventions.
+
+#### Indentation
 
 Indentation will be done with 1 tab.
 
-<!--TOCHECK-->
-#### 4.3.2.2 - Line Length 
+#### Line length 
 
 Lines will be limited to 64 characters, whether it's a line of code or a comment.
 
-<!--TOCHECK-->
-#### 4.3.2.3 - Line Breaks
+#### Line breaks
 
 - Break the line:
   - Two spaces before a function call or declaration.
@@ -377,262 +264,328 @@ Lines will be limited to 64 characters, whether it's a line of code or a comment
   - In an `if` or a `switch` statement.
   - In a `for` or a `while` loop.
 
-#### 4.3.2.4 - Comments
+#### Comments
 
 Comments will be written in English, on the line above the code they refer to and in `Sentence case`.
 
-#### 4.3.2.5 - Whitespace
+#### Whitespace
 
 Whitespace is used to separate the elements of an instruction but is otherwise not significant.
+## About AT2
 
-# 5 - About AT2
-
-We decided to rename our custom assembly language to "AT2"(Assembly Team 2). Its extension will be `.aop` (Assembly Operation Processor).  
+We decided to rename our custom assembly language to "AT2" (Assembly Team 2). Its extension will be `.aop` (Assembly Operation Processor).  
 
 For the complete reference manual, which includes the entire set of instructions with concrete examples, please refer to the **[AT2 language documentation](../functional/at2_language_documentation.pdf)**.
 
 **Please make sure to read and understand it completely before going further in this document**.
 
+## Solution
 
-# 6 - Software Architecture
+### Current solution
 
-The processor emulated will be a 16 bits processor, with 8 registers of 16 bits each, with one dedicated for the clock only, so 7 usable registers.
+There's no current solution as this project is for an educational purpose, so we don't take over from another team.
 
-The interpreter will work as follows: 
+### Proposed solution
 
-![](../images/technical_images/archi_interpreter_diagram.jpg)
+Our suggested solution will be available on our GitHub repository. The solution will use Cmake to automate the software compilation process across different platforms and environments, C standard libraries for basic operations, gcc and g++ to compile the code into executable, and VSC will be our IDE.
 
-**Diagram explanantion**:
+### Dependecies 
 
-- **Parser**<br>The parser is the first part of the interpreter: 
-   - Reads input files.
-   - Analyses the instructions.
-   - Put the instructions in an algorithmic structure.
 
-- **Builder**<br>The builder is the second part of the interpreter:
-   - Reads the algorithmic structure.
-   - Replaces some parts to make them readable for the Virtual processor.
+The following table outlines the key dependencies of our solution:
 
-- **Virtual processor**<br>The last part of the interpreter:
-   - Executes the program regarding the algorithmic structure.
+| Component      | Dependency                       | Purpose                                           |
+|----------------|----------------------------------|---------------------------------------------------|
+| Parser         | C Standard Libraries             | To parse `.aop` files and generate instruction lists |
+| Builder        | C Standard Libraries, Parser     | To construct executable programs from instruction lists |
+| Converter      | C Standard Libraries, Builder    | To convert structured programs into binary format |
+| Virtual Processor | C Standard Libraries, Converter | To execute binary files in a simulated processor environment |
+| Debugging Tools | C Standard Libraries            | For error detection and resolution in development |
+| CMake          | -                                | To automate the software compilation process across platforms |
+| GCC            | CMake, C Standard Libraries     | To compile code into executable format |
+| G++            | CMake, C Standard Libraries     | To compile C++ code, if used |
+| Visual Studio Code | -                            | As an Integrated Development Environment (IDE) for coding and version control |
+| GitHub Desktop | -                                | For managing GitHub repositories and version control |
 
 
-## 6.1 - Parsing
+### Pros & cons of the solution
 
-### 6.1.1 - `parser.c`
+**Pros**:
 
-This component is accountable for the retrieval and analysis of AT2 code from a file. Its main tasks encompass reading lines from the file, analyzing the instructions, converting them into an algorithmic structure, and arranging the data for subsequent processing. It employs a range of functions to manage file operations, manipulate strings, and structure the data.
+- Educational value: it's a good learning opportunity in low-level programming and processor emulation.
+- Customization: the ability to tailor an assembly language to specific needs offers a focused approach to learning and software development.
 
-**The `parser.c` file will have these key features**:
+- Portability and accessibility: using C standard libraries enhances the interpreter's compatibility with various operating systems, making it more accessible.
 
-- `parseArgs`: This function is designed to parse command-line arguments. It checks the number of arguments and sets flags based on the arguments provided. It handles cases like too many arguments, invalid flags, and help/version/debug/verbose flags.
+**Cons**:
 
-- `flagsSet`: This function is responsible for setting specific flags based on the command-line argument provided. It compares the argument with known flags like `-h/--help`, `-v/--version`, `-d/--debug`, and `-V/--verbose` and sets the corresponding flag in the `flags_t` structure.
+- Complexity and time consumption: the design and implementation of a virtual processor and custom assembly language can be complex and require time and effort.
+- Limited practical scope: a custom assembly language may not encompass all features of real-world processors, potentially limiting its practical application.
 
-- `parseFile`: This function opens and reads an assembly file line by line. It checks if the file exists and validates its extension. For each line in the file, it creates an instruction node by parsing the line and then adds the node to an instruction list.
+- Maintenance and documentation: ongoing maintenance and the need for thorough documentation can be challenging and resource-intensive.
 
-- `parseLine`: This function checks if a line from the input file is empty or a comment. If not, it parses the line to extract an instruction and its arguments, and creates an instruction node `(instNode_t)`. It also determines the type of instruction (operation, action, or declaration) and sets the corresponding fields in the node.
+## Data model
 
-- `isOp`: This function checks if a given string represents an operation instruction. It compares the string with known operation mnemonics like `add`, `sub`, `mul`, etc., and sets the appropriate operation type in the node.
+![Data Model Diagram](../images/technical_images/data_model.png)
 
-- `isAct`: Similar to `isOp`, this function checks if a string represents an action instruction. It handles action instructions like `goto`, `mov`, `call`, etc., and sets the corresponding action type in the node.
+**Diagram explanation**:
 
-- `isDecla`: This function identifies declaration instructions like `lab` and `var` and sets the instruction type in the node accordingly.
+- In a first time, the `.aop` file content will be read by the parser, then it will convert the lines into an algorithmic structure, as well as arranging the data for subsequent processing.
+- Then the builder will process parsed instruction nodes, constructing a structured executable program suitable for assembling.
+- After that, the structure will be executed by the assembler that will convert it in a binary file.
 
-- `getInst`: Extracts the instruction (first word) from a given line. It tokenizes the line to get the instruction name.
+- Finally, the binary file will be ran by the virtual processor, on virtual memory.
 
-- `getInstArgs`: Splits a given line into arguments using a comma as a delimiter. It tokenizes the line to extract two possible arguments and returns them in an array.
+### Parser
 
-- `checkAOPFile`: This function checks if the provided filename has the correct `.aop` extension, ensuring that the file is of the expected type for parsing.
+![Parser State Diagram](../images/technical_images/State-Diagram-parserC.jpg)
 
-**Utilization**: This file enables the parsing of an assembly file into a structured format, setting up the groundwork for further processing by the interpreter.
+**Diagram explanation**:
 
-**Diagram**:  
+- File reading: The parser begins by opening and reading the `.aop` file. It reads the file line by line, ensuring it only processes valid and readable content.
+- Syntax checking: As it reads each line, the parser performs a syntax check. This step involves verifying that each line adheres to the expected format of the assembly language, including correct instruction syntax and operand usage.
+- Tokenization: Each line is then tokenized. This process involves breaking down the line into individual components, such as operation codes (opcodes), registers, and values. Tokenization is essential for understanding the structure and meaning of each instruction.
+- Instruction identification: The parser identifies the type of instruction on each line – whether it's an operation, a directive, a label declaration, or something else. This step is crucial for understanding how each line contributes to the overall program.
+- Argument parsing: For lines with instructions, the parser extracts and parses the arguments or operands. This could include identifying register names, constants, or memory addresses, depending on the instruction.
+- Semantic analysis: Beyond just understanding the syntax, the parser also performs a basic level of semantic analysis. This step checks the correctness of the instructions in the broader context of the program. For example, it ensures that labels are defined before they are used.
+- Error handling: If the parser encounters any syntax or semantic errors, it generates appropriate error messages. These errors must be resolved before the code can proceed to the building phase.
+- Building an intermediate representation: Once a line is successfully parsed, the parser constructs an intermediate representation of the instruction. This form is more suitable for the next stages of the interpreter, namely the builder and converter.
+- Storing instructions: The parsed instructions, now in an intermediate form, are stored in a data structure for further processing by the builder.
 
-![Parser.c](../images/technical_images/State-Diagram-parserC.jpg)
+- End of file: When the end of the file is reached, the parser concludes its operation, having converted the entire `.aop` file into a structured and interpretable format.
 
-### 6.1.2 - `parser.h`
+### Builder
 
-The `parser.h` file defines the interface for the parsing component of the interpreter.
+![!\[Builder Diagram\](../images/technical_images/Diagramming 101 (Community) (Copy) (2).png)](<../images/technical_images/Diagramming 101 (Community) (Copy) (2).png>)
 
-**The `parser.h` file will have these key features**:
+- Translating Parsed Instructions: After the parser reads and structures the assembly code into a series of instruction nodes (instNode_t), the builder takes these nodes and interprets them to prepare for execution. This involves translating assembly language constructs into a format that the virtual processor can understand and execute.
 
-- `flags_t` Structure: Used to store flags indicating how the program should run, based on command-line arguments.
+- Managing Control Flow: The builder handles control flow constructs like if/else statements and loops. It uses a Last-In-First-Out (LIFO) structure (lifoCmpNode_t) to manage nested if/else statements, ensuring that each block of code is executed in the correct order and context.
+- Handling Labels and Variables: The builder processes labels and variable declarations within the assembly code. It adds labels to a label list (labelList_t), ensuring they can be referenced correctly during execution for operations like goto. Similarly, it manages variable declarations, adding them to a variable list (varList_t), which is essential for storing and retrieving variable values during program execution.
+- Dynamic Memory Management: Throughout its operation, the builder dynamically allocates and deallocates memory as needed. This is particularly important for handling variable-sized lists of labels, variables, and comparison nodes, allowing the program to scale based on the complexity of the input assembly code.
+- Error Handling: The builder also plays a role in error handling. If it encounters issues like duplicate label declarations or syntax errors in the assembly code, it raises errors and terminates the execution to prevent undefined or incorrect behavior.
+- Preparing for Execution: Once the builder has successfully processed the instruction nodes, it leaves the system with a structured representation of the program, ready for the virtual processor to execute. This structured format includes the necessary information about operations, actions, comparisons, labels, and variables.
 
-- `parseArgs`: Takes command-line arguments and sets flags in the `flags_t` structure accordingly.
+### Converter
 
-- `flagsSet`: Sets specific flags in the `flags_t` structure based on the given flag string.
+**Process illustration:**
 
-- `parseFile`: Reads the file, line by line, and converts each line into structured instruction nodes.
+- **Start**
+  - Begin Conversion
+    → **Reading Intermediate Code**
 
-- `parseLine`: Converts a single line from the file into an instruction node with the relevant details like instruction type, arguments, etc.
+- **Reading Intermediate Code**
+  - Instruction Read
+    → **Converting Instruction**
+  - No More Instructions
+    → **End**
 
-- `isOp`: Checks if a line represents an operation and updates the instruction node if it does.
+- **Converting Instruction**
+  - Conversion Successful
+    → **Writing Binary Code**
+  - Conversion Error
+    → **Error Handling**
 
-- `isAct`: Determines if a line is an action instruction and updates the instruction node accordingly.
+- **Error Handling**
+  - Error Resolved
+    → **Reading Intermediate Code**
 
-- `isDecla`: Identifies if a line is a label or variable declaration and updates the instruction node.
+- **Writing Binary Code**
+  - Write Successful
+    → **Reading Intermediate Code**
+  - All Instructions Written
+    → **End**
 
-- `getInst`: Extracts the instruction from a line.
+- **End**
+  - Conversion Process Completed
 
-- `getInstArgs`: Splits a line into its arguments (if any) and returns them.
+## `2at2.h`
 
-- `checkAOPFile`: Ensures that the file being parsed has the correct `.aop` extension.
+- `printHelp()`: Displays a help message for the program usage.
+- `printVersion()`: Shows the version information of the interpreter.
 
-Each function and the structure in `parser.h` provide the necessary tools for breaking down and interpreting assembly code into a format that the interpreter can understand and work with.
+## `ast.h`
 
+- Enumerations and structures defining variable types, instruction types, operations, actions, comparisons, and registers.
+- Structures for operations, comparisons, actions, instruction nodes, instruction lists, registers, variables, variable lists, labels, and label lists.
 
-## 6.2 - Building
+## `builder.c`
 
-### 6.2.1 - `builder.c`
+- `build()`: Constructs the program from the instruction list, label list, and variable list.
+- Functions for building action nodes, comparison nodes, label nodes, and managing variable and label lists.
+- LIFO stack management for comparison nodes.
 
-The `builder.c` file processes parsed instruction nodes, constructing a structured executable program suitable for interpretation by the virtual processor.
+## `builder.h`
 
-**The `builder.c` file will have these key features**:
+- Declarations of functions and structures used in `builder.c`.
+- Includes `ast.h` for necessary data structures.
 
-1. **Build Function (`build`)**:
-   - Initializes a Last-In-First-Out (LIFO) structure for handling if/else statements.
-   - Iterates through the list of parsed instructions (`nodeList`).
-   - Builds appropriate structures based on the type of node (operation, action, label).
+## `debug.c`
 
-2. **Action Node Building (`buildActNode`)**:
-   - Checks if the current instruction node (`instNode_t`) is an action.
-   - If so, it delegates the building process to specific functions based on the action type.
+- Functions to print instruction lists, variable lists, and label lists to a file.
+- Helper functions to format and print different kinds of instructions and their components.
 
-3. **Comparison Node Building (`buildCmpNode`)**:
-   - Handles comparison statements (if, else, end) within the instruction node.
-   - Manages the flow of conditional statements using the LIFO stack for tracking nested comparisons.
-   - Sets goto labels for else and end statements in conditional blocks.
+## `debug.h`
 
-4. **Label Node Building (`buildLabelNode`)**:
-   - Checks for and handles label declarations in the instruction list.
-   - Adds new labels to the label list (`labelList_t`), ensuring no duplicate labels.
+- Declarations of debugging functions used in `debug.c`.
 
-5. **Label List Management (`addLabel`, `incLabelList`)**:
-   - `addLabel`: Adds a new label to the label list.
-   - `incLabelList`: Increases the size of the label list if it's full, reallocating memory accordingly.
+## `parser.c`
 
-6. **LIFO Stack Management (`pushCmpLifo`, `popCmpLifo`)**:
-   - Manages a LIFO stack for comparison nodes.
-   - `pushCmpLifo`: Adds a new comparison node to the stack.
-   - `popCmpLifo`: Removes the top comparison node from the stack and returns it.
+- `parseArgs()`: Parses command-line arguments and sets flags.
+- `parseFile()`: Reads a file and parses it into an instruction list.
+- Functions to parse individual lines into instruction nodes.
+- Helpers for checking instruction types, converting strings to different data types, and cleaning strings.
 
-### 6.2.2 - `builder.h`
+## `parser.h`
 
-The `builder.h` file defines functions and data structures for building the executable structure of the virtual processor's program from the parsed instruction nodes.
+- Declarations of parsing functions and flag structures used in `parser.c`.
 
-**The `builder.h` file will have these key features**:
+## `stringPlus.c`
 
-- `lifoCmpNode_t` Structure: Defines a LIFO (Last In, First Out) data structure to manage if/else statement construction during the build process.
+- Functions to convert strings to different data types (binary, octal, hexadecimal, char, string) and clean strings.
 
-- `build`: Reads nodes from the instruction list and constructs the program, integrating actions, comparisons, and labels.
+## `stringPlus.h`
 
-- `buildActNode`: Constructs an action node from an instruction node, interpreting it in the context of the program flow.
+- Declarations of string manipulation functions used in `stringPlus.c`.
 
-- `buildCmpNode`: Builds a comparison node, essential for if/else and similar conditional constructs in the program.
+## `binExporter.c`
 
-- `buildLabelNode`: Creates a label node to manage goto statements and label definitions in the program.
+- `exportAST()`: Exports the AST to a binary file in JSON format.
+- Functions to write variable lists, label lists, and AST to a file.
+- Helpers to get string representations of operation, action, and comparison kinds.
 
-- `addLabel`: Adds a new label to the label list, which is crucial for referencing different parts of the program.
+## `binExporter.h`
 
-- `incLabelList`: Expands the label list size to accommodate more labels, ensuring dynamic scalability.
+- Declarations of functions used in `binExporter.c` for exporting the AST and related data to a binary file.
 
-- `pushCmpLifo`: Adds a comparison node to the lifo, aiding in the construction of nested and complex conditional statements.
+## Code organization
 
-- `popCmpLifo`: Removes the top comparison node from the lifo, assisting in resolving conditional structures.
+**Assembler:**
 
-These functions enable the virtual processor to interpret and execute the code by providing a clear organizational framework and handling the complexity of conditional logic and program flow control.
+![Assembler Diagram](../images/technical_images/assembler.png)
 
-## 6.3 - Interpreting
+**Virtual memory:**
 
-### 6.3.1 - `iat2.c`
+![Virtual Memory Diagram](../images/technical_images/v-mmu.png)
 
-We chose to name the interpreter files of the project "iat2"(Interpreter of the Assembly Team 2). We thought it could be a sort of subtile differenciation with other's projects.
+---
 
-**The `iat2.c` file will have these key features**:
-<!--TODO-->
+# Business Logic
 
-### 6.3.2 - `iat2.h`
-<!--TODO-->
+The business logic of the virtual processor project is centered on interpreting and executing custom assembly language. Key components include the parser, builder, converter, and the virtual processor itself. The logic involves converting `.aop` files into executable binary format and running them in a simulated processor environment.
 
-## 6.4 - Running
+## API Changes
 
-### 6.4.1 - `runner.c`
-<!--TODO-->
+- `parseFile()`: Enhanced to support additional assembly instructions.
+- `build()`: Modified for improved error handling and support for complex control flow structures.
+- New APIs introduced for better memory management and debugging support.
 
-### 6.4.2 - `runner.h`
-<!--TODO-->
+## Pseudocode
 
-## 6.5 - Debugging
+### Parsing Process
 
-### 6.5.1 - `debug.c`
-<!--TODO-->
+```
+function parseFile(file):
+open file
+for each line in file:
+parseLine(line)
+return instruction list
+```
 
-### 6.5.2 - `debug.h`
-<!--TODO-->
+### Building Process
 
-## 6.6 - Testing
+```
+function build(instructionList):
+for each instruction in instructionList:
+processInstruction(instruction)
+return executable structure
+```
 
-### 6.6.1 - `test.cc`
-<!--TODO-->
+## Error States
 
-## 6.7 - Other files
+- `SyntaxError`: Occurs when `.aop` file contains syntax errors.
+- `MemoryAllocationError`: Triggered when memory allocation fails.
+- `InvalidInstructionError`: Raised for unrecognized assembly instructions.
 
-### 6.7.1 - `ast.h`
-<!--TODO-->
+## Failure Scenarios
 
-### 6.7.2 - `stringPlus.c`
-<!--TODO-->
+- **File Read Failure**: Inability to open or read the `.aop` file.
+- **Parsing Failure**: Syntax errors in the assembly code preventing successful parsing.
+- **Building Failure**: Failure in constructing the executable due to incorrect logic or data structure issues.
 
-### 6.7.3 - `stringPlus.h`
-<!--TODO-->
+## Conditions that Lead to Errors and Failures
 
-## 6.8 - Code organization
+- Incorrect file format or corrupted `.aop` files.
+- Inadequate system memory for handling large instruction sets.
+- Logical errors in assembly code, such as undefined labels or invalid operations.
 
-- **Header files (`.h`)**: The prototype and comments of the functions are in the header files. All enumerations and structures/typedefs are also defined in these files. This approach providES a clear interface for each module.
+## Limitations
 
-- **Implementation files (`.c`)**: The function definitions (implementations) are in the `.c` files. Comments explaining the implementation details should also be included in these files. This separation of interface and implementation facilitates maintainability and readability of the code.
+- Limited set of assembly instructions supported.
+- No real-time performance analysis or optimization features.
+- Lack of a graphical user interface for easier interaction.
+- Dependence on specific C standard libraries which might limit cross-platform compatibility.
 
-## 6.9 - Error system
 
-The error system will work as follows:
+## Other Questions to Answer
 
+### How Will the Solution Scale?
 
+Our solution scales primarily through the modular design of its components. Each part of the system – the parser, builder, converter, and the virtual processor – is designed to operate independently and efficiently. By managing resources judiciously and optimizing each module, the solution can handle increasing complexity and size of assembly programs. Additionally, the use of C standard libraries and cross-platform tools like GCC and CMake ensures that the solution can be scaled across different operating systems and hardware configurations.
 
+### What Are the Limitations of the Solution?
 
+The primary limitations of the solution include:
 
+- **Limited Instruction Set**: The custom assembly language supports a finite set of instructions, which may not cover all scenarios encountered in more comprehensive assembly languages.
+- **Lack of GUI**: The solution currently operates through command-line interfaces, lacking a graphical user interface which could make it more user-friendly.
+- **Platform Dependency**: The reliance on specific C libraries and development tools might restrict the solution’s compatibility with some platforms or newer versions of tools.
+- **No Real-time Analysis**: The solution does not provide real-time performance analysis or debugging, which can be crucial for optimizing and troubleshooting complex programs.
 
+### How Will it Recover in the Event of a Failure?
 
+In the event of a failure, the solution is designed to:
 
+- **Log Detailed Errors**: Automatically log detailed error messages that describe the nature and location of the failure, aiding in quick diagnostics.
+- **Graceful Shutdown**: Safely shut down operations to prevent data corruption or loss, especially in the case of memory allocation failures or unexpected interruptions.
+- **Recovery Mechanisms**: Implement recovery mechanisms such as try-catch blocks for handling exceptions, ensuring that the system can resume operation or safely exit after encountering an error.
 
-# 7 - Appendices
+### How Will it Cope with Future Requirements?
 
-## 7.1 - Glossary
-<!--TOCOMPLETE-->
-| Term | Definition |
-| ---- | ---------- |
-| Assembly Language | A low-level programming language used to communicate with a computer's hardware, using symbolic code rather than binary. |
-| Interpreter | A program that directly executes instructions written in a programming or scripting language, without requiring them to be compiled into a machine language program. |
-| Parser | A component that interprets text data to convert it into a format understandable by the computer. |
-| Builder | In the context of programming, a builder constructs a final product or executable from source code. |
-| Virtual Processor | A simulated version of a computer processor, used to emulate the functionality of a physical processor. |
-| LIFO (Last-In-First-Out) | A method of processing data where the most recently added item is the first to be removed. |
-| GitHub Desktop | A graphical user interface for managing GitHub repositories on a personal computer. |
-| Bash | A Unix shell and command language, often used for scripting in various operating systems. |
-| `.aop` Extension | A custom file extension, used for files containing AT2 code. |
-| Debugging | The process of identifying and resolving bugs or errors in computer software. |
+To cope with future requirements, the solution incorporates the following strategies:
 
-## 7.2 - Contibutors
-<!--TODO-->
+- **Modular Architecture**: The modular design allows for easy updates and additions to individual components without disrupting the entire system.
+- **Documentation and Comments**: Comprehensive documentation and well-commented code facilitate future modifications and enhancements by other developers.
+- **Adherence to Standards**: Following coding standards and best practices ensures that the code remains maintainable and adaptable for future enhancements.
+- **Open-source Collaboration**: Hosting the project on GitHub encourages collaboration and contributions from the community, allowing the solution to evolve and incorporate new features over time.
 
-## 7.3 - Acknowledgments
-<!--TODO-->
 
-## 7.4 - Related documents
-<!--TODO-->
+# Risks
 
-## 7.5 - License
-<!--TODO-->
+- **Technical Complexity**: Developing a virtual processor and interpreter from scratch involves dealing with complex concepts and low-level programming. There is a risk of encountering technical challenges that could delay the project or affect its success.
+- **Time Constraints**: The project has a tight deadline of 8 weeks, which leaves little room for delays or setbacks. There is a risk of not being able to complete all the planned features within the given time frame.
+- **Resource Limitations**: The project relies on the availability of resources such as hardware, software, and human expertise. There is a risk of not having access to the necessary resources or facing limitations that could impact the project's progress.
+- **Quality Assurance**: Ensuring the quality and reliability of the virtual processor and interpreter is essential for the success of the project. There is a risk of not being able to thoroughly test the system or identify and fix all potential issues before release.
 
-## 7.6 - References
-<!--TODO-->
+- **User Adoption**: The success of the project depends on the adoption and usage of the virtual processor and interpreter by the target audience. There is a risk of not being able to effectively promote or market the system to users, resulting in low adoption rates.
+
+
+# Appendices
+
+## Contributors
+
+Guillaume Deramchi, author and technical lead; Mathias Gagnepain, project manager; Guillaume Despaux, program manager; Maxime Caron and Paul Nowak, softawre engineers; Enzo Guillouche, quality assurance.
+
+## Related documents
+
+- [Functional Specifications Document](/documents/functional/functional_specification_documentation.md): Provides essential information about the project goals and requirements.
+- [AT2 Language Documentation](../functional/at2_language_documentation.pdf): Reference manual for the AT2 assembly language used in the project.
+- [GitHub Repository](https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2): Link to the project's GitHub repository for access to source code and documentation.
+
+## License
+
+This project is under the MIT license.
+
+## References
+
+https://stackoverflow.blog/2020/04/06/a-practical-guide-to-writing-technical-specs/
