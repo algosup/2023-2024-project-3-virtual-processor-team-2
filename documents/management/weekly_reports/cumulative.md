@@ -24,6 +24,10 @@ Quick Access:
     - [Plans for next week](#plans-for-next-week-1)
     - [Conclusion](#conclusion-3)
   - [Weekly Report - Week 5](#weekly-report---week-5)
+    - [Accomplishments](#accomplishments-4)
+    - [Challenges](#challenges-4)
+    - [Plans for next week](#plans-for-next-week-2)
+    - [Conclusion](#conclusion-4)
   - [Weekly Report - Week 6](#weekly-report---week-6)
   - [Weekly Report - Week 7](#weekly-report---week-7)
   - [Weekly Report - Week 8](#weekly-report---week-8)
@@ -148,7 +152,7 @@ The third week was focused on sharing all the information within the team, gathe
 The project is progressing forward; we've managed to catch up on our delay for the first two weeks, despite the absence of dedicated project time. Even though, the project has just started, and the satisfaction of our team is already below our expectations. We need to work on improving satisfaction and fostering a positive mood within the team.
 
 ## Weekly Report - Week 4
-[Detailed File (WIP)](week_4.md)
+[Detailed File](week_4.md)
 
 ### Accomplishments
 
@@ -178,8 +182,31 @@ The project is progressing forward; we've managed to catch up on our delay for t
 It was a challenging but productive management week. We made significant progresses, and if we maintain this momentum, we will be able to meet our expectations. To achieve this, our focus should be on improving team satisfaction.
 
 ## Weekly Report - Week 5
-[Detailed File (WIP)](week_5.md)
-(WIP)
+[Detailed File](week_5.md)
+
+### Accomplishments
+
+1. Release the pre-release v0.0.3.
+2. Release the pre-release v0.0.4.
+3. Update KPIs to align with our new goals.
+4. Completed the first unit-test.
+
+### Challenges
+
+1. Continued in our path by developing a binary converter throughout the week.
+2. Adhered to our deadline with only one project session at the beginning of the week.
+
+### Plans for next week
+
+1. Finalize the test plan.
+2. Deploy unit tests.
+3. Complete the assembler.
+4. Begin working on the Virtual Processor.
+
+### Conclusion
+
+Not much project time but a satisfying amount of work done, but too much overtime, deadlines were met.
+The team is tired due to the overcharge of work, it can be good to add more project session mainly the friday to debrief about the week with the entire team.
 
 ## Weekly Report - Week 6
 [Detailed File (WIP)](week_6.md)

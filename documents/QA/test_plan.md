@@ -142,7 +142,7 @@ During each smoke testing session, the following steps will be executed:
 To obtain a better overview of the project, a collaboration with other teams' Quality Assurance was set up. This collaboration enables the teams to have an external view of their product and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. All the meetings' content will be written back in the [meetings reports](./meetings_reports.md) file.<br>
 A meeting with the Software Engineers of the team 2 will be planned the day after each collaborative testing session.
 
-##### 3.3.3.1. Session Scope
+#### 3.3.3.1. Session Scope
 
 Sessions are designed primarily to:
 
@@ -271,22 +271,15 @@ For further details, refer to the [test report](./test_report.md) document.
      - Provides a visual snapshot of the overall testing status. <br><br>
      ![Progression Pattern](../images/qa_images/progression_graph.png)
 
+You can see all this stuff on the [test spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?hl=fr#gid=168757114).
+
 ### 3.5. Documentation
 
 #### 3.5.1. GitHub Wiki
 To enhance transparency, collaboration, and knowledge sharing within our development process, we are considering about a centralized documentation approach using GitHub Wiki. This platform would serve as a comprehensive repository for all documentation related to our codebase. 
 
-- The GitHub Wiki will function as a centralized knowledge hub for our project, housing detailed documentation on code structure, functions, and project-related information.
+We will provide a template that guides them on the essential information to include. The template will be available on the project GitHub [here](./code_documentation_template.md). Developers have to use it as a reference when documenting their code. 
 
-- Documentation will be organized in a structured manner, with a table of contents for easy navigation.
-Each complex function will have dedicated pages for in-depth information.
-Flowcharts or diagrams will be integrated to enhance the understanding of complex processes.
-
-- To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include. The template will be available on the project GitHub [here](./code_documentation_template.md). Developers have to use it as a reference when documenting their code. 
-
-- Centralized documentation simplifies onboarding for new team members by providing a single, accessible source of truth. Emphasize the importance of keeping documentation up-to-date, especially during onboarding periods, to ensure the documentation remains accurate and relevant.
-
-- Implement a feedback mechanism or suggestion process within the Wiki to encourage continuous improvement and collaboration among team members.
 
 #### The GitHub Wiki will be documented only if major requirements do not need to be implemented. 
 
@@ -337,22 +330,16 @@ Before the product can be considered ready for distribution, certain benchmarks 
 | Create and give templates | January 29, 2024 | January 29, 2024 |
 | First meeting with other teams' QA | January 29, 2024 | January 29, 2024 |
 | Second meeting with Dev team | January 30, 2024 | January 30, 2024 |
-| Unit tests | February 1, 2023 | February 23, 2024 |
-| GitHub Actions | February 1, 2024 | February 23, 2024 |
-<!-- | Second meeting with other teams' QA  | February 5, 2024 | February 5, 2024 |
-| Third meeting with Dev team | February 5, 2024 | February 5, 2024 |
-| Third meeting with other teams' QA  | February 12, 2024 | February 12, 2024 |
-| Fourth meeting with Dev team | February 13, 2024 | February 13, 2024 |
-| Fourth meeting with other teams' QA | February 19, 2024 | February 19, 2024 |
-| Fifth meeting with Dev team | February 20, 2024 | February 20, 2024 | -->
+| GitHub Actions | February 02, 2024 | February 23, 2024 |
+| Unit tests | February 05, 2023 | February 23, 2024 |
+| Functional tests | February 19, 2024 | February 23, 2024 |
 
 ### 5.2. People
 
-For this project, the people involved to perform tests are the Quality Assurance of team 2, but also Quality Assurances of other teams during the team test sessions:
+For this project, the people involved to perform tests are Quality Assurances of several teams during the team test sessions:
 - Enzo GUILLOUCHE - Team 2
 - Séréna BAVAROIS - Team 1
 - Maxime THIZEAU - Team 4
 - Arthur LEMOINE - Team 3
-- Atifa AMIRI - Team 5
 
 Thank you for sharing your time, to improve the quality of our work and our skills.
