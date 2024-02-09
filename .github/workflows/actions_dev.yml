@@ -15,6 +15,7 @@ jobs:
       - name: Update gcc/g++
         run: |
           echo Updating gcc/g++
+          touch test.txt
           sudo apt-get update
           sudo apt-get install -y gcc-10 g++-10
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 90
