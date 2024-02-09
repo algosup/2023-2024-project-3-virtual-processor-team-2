@@ -278,8 +278,6 @@ You can see all this stuff on the [test spreadsheet](https://docs.google.com/spr
 #### 3.5.1. GitHub Wiki
 To enhance transparency, collaboration, and knowledge sharing within our development process, we are considering about a centralized documentation approach using GitHub Wiki. This platform would serve as a comprehensive repository for all documentation related to our codebase. 
 
-Each complex function would have dedicated pages for in-depth information.
-Flowcharts or diagrams would be integrated to enhance the understanding of complex processes.
 We will provide a template that guides them on the essential information to include. The template will be available on the project GitHub [here](./code_documentation_template.md). Developers have to use it as a reference when documenting their code. 
 
 
