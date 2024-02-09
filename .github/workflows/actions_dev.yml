@@ -24,8 +24,10 @@ jobs:
       - name: Build
         run: |
           echo Building
-          ls -ls
+          ls -la
           pwd
+          cd ..
+          ls -la
           cmake -S . -B Build
           cd Build
           make
