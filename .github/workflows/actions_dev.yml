@@ -9,7 +9,7 @@ on:
 jobs:
 
   build:
-    runs-on: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Update gcc/g++
@@ -30,7 +30,7 @@ jobs:
 
   test:
     needs: build    
-    runs-on: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: Run tests
         run: |
