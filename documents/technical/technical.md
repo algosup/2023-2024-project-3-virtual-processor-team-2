@@ -108,6 +108,7 @@ The objective of this project is to create a virtual processor that runs customi
 | Bash | A Unix shell and command language, often used for scripting in various operating systems. |
 | `.aop` Extension | A custom file extension, used for files containing AT2 code. |
 | Debugging | The process of identifying and resolving bugs or errors in computer software. |
+| IDE (Integrated Development Environment) | A software tool that combines code editing, debugging, and project management features to streamline software development |
 
 ## Context
 
@@ -463,6 +464,8 @@ The following table outlines the key dependencies of our solution:
 **Assembler:**
 
 ![Assembler Diagram](../images/technical_images/assembler.png)
+
+---
 
 **Virtual memory:**
 
