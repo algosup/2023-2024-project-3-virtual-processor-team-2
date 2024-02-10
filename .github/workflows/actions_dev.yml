@@ -8,8 +8,13 @@ on:
 
 jobs:
 
-  build:
+  system_update:
     runs-on: ubuntu-latest
+    steps:
+      - name: Update system
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake
 
     steps:
       - name: Update gcc/g++
@@ -20,11 +25,15 @@ jobs:
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 90
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 90
 
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-
+    steps:
       - name: Build
         run: |
           echo Building
