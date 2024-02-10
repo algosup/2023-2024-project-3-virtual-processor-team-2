@@ -27,7 +27,7 @@ jobs:
 
 
   build:
-  `needs: system_update`
+    needs: system_update
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
