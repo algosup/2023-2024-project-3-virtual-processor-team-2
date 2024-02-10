@@ -15,12 +15,7 @@ jobs:
         run: |
           echo Updating system
           sudo apt-get update
-
-    steps:
-      - name: Update gcc/g++
-        run: |
           sudo apt-get install -y cmake
-          echo Updating gcc/g++
           sudo apt-get install -y gcc-10 g++-10
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 90
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 90
@@ -34,7 +29,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-    steps:
       - name: Build
         run: |
           echo Building
@@ -52,5 +46,3 @@ jobs:
           echo Running tests
           cd bin
           ./tests
-
-          
