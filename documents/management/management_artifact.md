@@ -3,6 +3,7 @@ This document contains the main management artifacts:
 - [Tasks \& schedules](#tasks--schedules)
 - [RACI matrix](#raci-matrix)
 - [Risks and Assumptions](#risks-and-assumptions)
+- [MoSCoW](#moscow)
 - [Key Performance Indicators](#key-performance-indicators)
 - [Appendix](#appendix)
     - [1. Product Logo](#1-product-logo)
@@ -17,8 +18,7 @@ For this project, the meeting we had with the client on 01/16/2024 served as the
 
 # Tasks & schedules
 
-The breakdown of the tasks, their assignment, as well as the planned and actual schedule of those tasks can be found here:
-[Link](https://docs.google.com/spreadsheets/d/1nawLT6dMtwPcFpHMa4k32Nxjinokl4ZmX4GMZl1Fatc/edit?usp=sharing).
+The breakdown of the tasks, their assignment, as well as the planned and actual schedule of those tasks can be found [HERE](https://docs.google.com/spreadsheets/d/1nawLT6dMtwPcFpHMa4k32Nxjinokl4ZmX4GMZl1Fatc/edit?usp=sharing).
 
 # RACI matrix
 
@@ -28,14 +28,14 @@ The RACI matrix is as follows:
 | ------------------------- | --------------- | --------------- | ---------------- | ----------------- | ----------------- | ------ | ------------ |
 | Project brief             | I               | I               | I                | I                 | I                 | R / A  | C            |
 | Project charter           | R / A           | C / I           | C / I            | C / I             | C / I             | C      | C / I        |
-| Schedule / Gantt chart    | R / A           | C / I           | C / I            | C / I             | C / I             |        | I            |
-| Functional specifications | C               | R / A           | C                |                   | C / I             | C      | I            |
+| Schedule / Gantt chart    | R / A           | C / I           | C / I            | C / I             | C / I             | -      | I            |
+| Functional specifications | C               | R / A           | C                | -                 | C / I             | C      | I            |
 | Technical specifications  | C               | C               | R / A            | C                 | C / I             | C      | I            |
-| Code                      |                 |                 | R                | R / A             | I                 |        |              |
-| Code review               | I               |                 | R / A            | R                 | R                 |        |              |
-| Code documentation        |                 | I               | C                | R / A             | C / I             | I      |              |
-| Usage instructions        |                 | I               | C                | R / A             | C / I             | I      |              |
-| Testing plan              | I               | C               | C                | C                 | R / A             | I      |              |
+| Code                      | -               | -               | R                | R / A             | I                 | -      | -            |
+| Code review               | I               | -               | R / A            | R                 | R                 | -      | -            |
+| Code documentation        | -               | I               | C                | R / A             | C / I             | I      | -            |
+| Usage instructions        | -               | I               | C                | R / A             | C / I             | I      | -            |
+| Testing plan              | I               | C               | C                | C                 | R / A             | I      | -            |
 
 Key:
 | Letter | Name        | Description                                                                                                                                       |
@@ -46,11 +46,11 @@ Key:
 | I      | Informed    | Those who are kept up-to-date on progress, often only on completion of the task or deliverable, and with whom there is just one-way communication |
 |        | -           | Not involved                                                                                                                                      |
 
-RACI colored spreadsheet easily readable can be found here: [Link](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing)
+RACI colored spreadsheet easily readable can be found [HERE](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing).
 
 # Risks and Assumptions
 
-| ID  | Description                                                                                         | Impact                                                                                                               | Impact | Likelihood | Solution                                                                                                                                      |
+| ID  | Description                                                                                         | Risks                                                                                                                | Impact | Likelihood | Solution                                                                                                                                      |
 | --- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | Create our own assembly language and its Interpreter is an exhausting work.                         | We may not finish on time, miss understood the client requirements.                                                  | High   | Medium     | Start with the most simple and fundamental tasks and go to more detailed ones.                                                                |
 | 2   | The new team highlights the possible issue of having different conventions within the team members. | The communication may suffer from  having different coding of documentation styles.                                  | Medium | Medium     | We will define precise specifications to ensure this does not happen.                                                                         |
@@ -66,15 +66,21 @@ RACI colored spreadsheet easily readable can be found here: [Link](https://docs.
 | 12  | Network and Infrastructure Issues                                                                   | Unforeseen issues with the network or infrastructure may disrupt project activities and communication.               | Medium | Medium     | Implement redundancy in critical systems, regularly monitor network performance, and have contingency plans for infrastructure failures.      |
 | 13  | Team Member Burnout                                                                                 | Excessive workload and stress may lead to team member burnout, impacting productivity and morale.                    | High   | Medium     | Monitor team workload, encourage work-life balance, and provide support mechanisms to prevent and address burnout.                            |
 
+# MoSCoW
+
+| Must Have                                                                                                                       | Should Have                                            | Could Have | Won't Have                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | ---------- | ------------------------------------------------------------- |
+| - Create custom assembly language (AT2)<br>- Create an assembler (2AT2)<br>- Implement a fully functional virtual processor<br> | - Optimized AT2 Code<br>- Handle Error in AT2 code<br> | - Debugger | - Real hardware compatibility<br>- More than 16bits registers |
+
 # Key Performance Indicators
 
-The spreadsheet for the KPI's data and graphs can be found here: [Link](https://docs.google.com/spreadsheets/d/13n8fdWMEYFlJKhJ_OWILYcpX_c6CvLBpt4ebboLiU18/edit?usp=sharing)
+The spreadsheet for the KPI's data and graphs can be found [HERE](https://docs.google.com/spreadsheets/d/13n8fdWMEYFlJKhJ_OWILYcpX_c6CvLBpt4ebboLiU18/edit?usp=sharing).
 
 # Appendix
 
 ### 1. Product Logo
 
 &emsp; For our product logo, we chose to give the team the opportunity to vote for their favorite design.
-<br>&emsp; You can see the results  [HERE](https://docs.google.com/spreadsheets/d/13H7NKF3Axvht02Pguh0YWgaVgjaN4GnWWcN4PkJFUns/edit?usp=sharing).
+<br>&emsp; You can see the results [HERE](https://docs.google.com/spreadsheets/d/13H7NKF3Axvht02Pguh0YWgaVgjaN4GnWWcN4PkJFUns/edit?usp=sharing).
 <br>&emsp; *(Feel free to change these logo to fit to your company/projects)*
 
