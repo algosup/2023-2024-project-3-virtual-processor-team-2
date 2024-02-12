@@ -7,7 +7,7 @@
 | Team | 2 |
 | Reviewer | Enzo Guillouche |
 | Created on | 01/22/2024 |
-| Last updated | 02/09/2024 |
+| Last updated | 02/12/2024 |
 | Task tracker | [Tasks & Schedule](https://docs.google.com/spreadsheets/d/1nawLT6dMtwPcFpHMa4k32Nxjinokl4ZmX4GMZl1Fatc/edit?usp=sharing) |
 
 ---
