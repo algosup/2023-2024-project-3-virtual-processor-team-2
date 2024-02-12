@@ -10,6 +10,22 @@
 
 #include "error.h"
 
+error_t *initErrorFile(const char* out, char *inputFile){
+    error_t *errData = malloc(sizeof(error_t));
+    errData->errors = 0;
+    errData->inputFile = inputFile;
+    if(out != NULL){
+        FILE *file = fopen(out, "wb");
+        if(file == NULL){
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        fclose(file);
+    }
+    errData->errors = 0;
+    return errData;
+}
+
 void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData){
     ++ errData->errors;
     fprintf(stderr, "Error: syntax error\n");
@@ -65,6 +81,11 @@ void errorLineSize(long lineNb, const char* out, error_t *errData){
 
 }
 
+void printErrorSummary(error_t *errData){
+    fprintf(stderr, "Error summary:\n");
+    fprintf(stderr, "Total errors: %ld\n", errData->errors);
+}
+
 void errorfnf(char* filename, const char* out, error_t *errData){
     ++ errData->errors;
     fprintf(stderr, "Error: file not found\n");
@@ -88,7 +109,7 @@ void errorfnf(char* filename, const char* out, error_t *errData){
         fprintf(file, "%s |\tDetails: file %s not found\n", date_str, filename);
         fclose(file);
     }
-
+    printErrorSummary(errData);
     exit(EXIT_FAILURE);
 }
 
@@ -115,6 +136,6 @@ void errorInvalidExt(char* filename, const char* out, error_t *errData){
         fprintf(file, "%s |\tDetails: file %s has an invalid extension\n", date_str, filename);
         fclose(file);
     }
-
+    printErrorSummary(errData);
     exit(EXIT_FAILURE);
 }

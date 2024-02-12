@@ -11,6 +11,16 @@ typedef struct errorData{
     char *inputFile;
 } error_t;
 
+/*
+    Init error file
+    params:
+        out: Target file
+        inputFile: Input file
+    returns:
+        error_t: Error history
+*/
+error_t *initErrorFile(const char* out, char *inputFile);
+
 // ---------- Parsing/ Assembling errors ----------
 
 /*
@@ -31,6 +41,14 @@ void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *er
         errData: Error history
 */
 void errorLineSize(long lineNb, const char* out, error_t *errData);
+
+/*
+    Print error summary
+    params:
+        errData: Error history
+        out: Target file (can be NULL)
+*/
+void printErrorSummary(error_t *errData);
 
 // ---------- Fatal errors ----------
 

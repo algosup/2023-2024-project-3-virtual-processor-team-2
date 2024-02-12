@@ -15,6 +15,8 @@
 #define VERSION "0.0.5"
 
 int main(int argc, char *argv[]) {
+    // ---------- Parse arguments ----------
+
     // Parse program arguments and get flags
     flags_t flags = parseArgs(argc, argv);
 
@@ -24,6 +26,10 @@ int main(int argc, char *argv[]) {
     else if (flags.version) {
         printVersion();
     }
+
+    fprintf(stderr, "[\t5%%\t] Parsing arguments successfully\n");
+
+    // ---------- Init data ----------
 
     // Init variables list struct
     varList_t *varList = malloc(sizeof(varList_t));
@@ -46,10 +52,11 @@ int main(int argc, char *argv[]) {
     instList->head = NULL;
 
     // Init error data history
-    error_t *errData = malloc(sizeof(error_t));
-    errData->errors = 0;
-    errData->inputFile = malloc(sizeof(argv[1])+1);
-    strcpy(errData->inputFile, argv[1]);
+    error_t *errData = initErrorFile("error.log", argv[1]);
+
+    fprintf(stderr, "[\t10%%\t] Data initialized successfully\n");
+
+    // ---------- Parse ----------
 
     // run parser
     parseFile(instList, argv[1], errData);
@@ -57,19 +64,37 @@ int main(int argc, char *argv[]) {
     if(flags.debug){
         printAst(instList);
     }
-    
+
+    fprintf(stderr, "[\t45%%\t] File parsed successfully\n");
+
+    // ---------- Build ----------
     
     // run builder
     // TODO: Do Builder
 
+    fprintf(stderr, "[\t70%%\t] File built successfully\n");
+
+    // ---------- Assemble ----------
+
     // run exporter
     // TODO: make the function export to binary
+
+    fprintf(stderr, "[\t95%%\t] File assembled successfully\n");
+
+    // ---------- Print error summary ----------
 
     // Free memory
     free(varList);
     free(labelList);
     free(instList);
-    
+
+    fprintf(stderr, "[\t100%%\t] Work success\n");
+
+    printErrorSummary(errData);
+
+    // Free error data
+    free(errData);
+
     exit(EXIT_SUCCESS);
 }
 
