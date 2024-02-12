@@ -17,7 +17,7 @@ The priority level of the test case (High, Medium, Low).
 The description of the scenario during testing. 
 
 **Test case Description** <br>
-A clear and concise description of what the purpose of the test case is. If the Priority is 'High', the tester needs to precise what the piece of code he tests is.
+A clear and concise description of what the purpose of the test case is. The tester will need to precise if he tests an Unit test.
 
 **Pre-conditions**<br>
 The requirements the tester could need to perform the test.
