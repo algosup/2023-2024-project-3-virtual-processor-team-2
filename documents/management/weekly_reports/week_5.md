@@ -33,7 +33,7 @@ In the fifth week, we decided to change our working approach to enhance VCPU rea
 
 ## Team mood
 
-Average team mood rating: /10
+Average team mood rating: 7.6/10
 
 The team seems tired due to a short project session. Many team members worked overtime to align with expectations, creating a lack of free time and increasing the workload.
 
