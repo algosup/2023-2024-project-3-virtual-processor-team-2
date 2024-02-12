@@ -92,7 +92,7 @@ Make sure to read the [functional specifications](/documents/functional/function
 
 ## Overview
 
-The objective of this project is to create a virtual processor that runs customized assembly language. By using C standard libraries, the main aim is to develop a concise assembly language and construct a C program interpreter that can execute and validate assembly code. This solution is specifically designed for educational purposes and software developers who are keen on delving into low-level programming and processor emulation. The stakeholders of this project are on one side ALGOSUP, a international software development school, which gave us this project and 8 weeks to bring it to fruition, and on the other the Team 2 of ALGOSUP.
+The objective of this project is to create a virtual processor that runs customized assembly language. By using C standard libraries, the main aim is to develop a concise assembly language and construct a C program interpreter that can execute and validate assembly code. This solution is specifically designed for educational purposes and software developers who are keen on delving into low-level programming and processor emulation. The stakeholders of this project are on one side ALGOSUP, an international software development school, which gave us this project as well as 8 weeks to bring it to fruition, and on the other side, the Team 2 of ALGOSUP.
 
 ## Glossary
 
@@ -399,6 +399,8 @@ The following table outlines the key dependencies of our solution:
 
 - **End**
   - Conversion Process Completed
+
+# Files usage
 
 ## `2at2.h`
 
