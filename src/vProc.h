@@ -28,6 +28,11 @@ void parseBinaryFile(char *filename);
 instNode_t parseBinaryLine(char *line, long nodeId, long lineNb);
 
 
+typedef struct {
+    bool writable;
+    signed char value[16];
+} register_t;
+
 #ifdef __cplusplus
 }
 #endif

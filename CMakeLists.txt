@@ -79,3 +79,28 @@ set_target_properties(2at2
     C_STANDARD 99
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
 )
+
+add_executable(vat2
+    src/stringPlus.c
+    src/parser.c
+    src/builder.c
+    src/debug.c
+    src/binExporter.c
+    src/vProc.c
+)
+
+target_include_directories(vat2
+  PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+target_compile_options(vat2
+  PRIVATE
+    -Wall -Wextra -pedantic -g -O2
+)
+
+set_target_properties(vat2
+  PROPERTIES
+    C_STANDARD 99
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+)
