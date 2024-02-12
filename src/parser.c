@@ -73,7 +73,7 @@ void parseFile(instList_t *nodeList, char *filename, error_t *errData){
     }
 
     // Check the file extension 
-    checkAOPFile(filename);
+    checkAOPFile(filename, errData);
 
     char line[LINE_MAX_SIZE];
     instNode_t *lastNode = NULL;
@@ -142,8 +142,6 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData){
         return newNode;
     }
 
-    // TODO: Check if the instruction is a declaration
-
     // Trow error if the line is not an instruction
     errorInstruction(inst, newNode, errorFile, errData);
     return newNode;
@@ -198,6 +196,21 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData){
     }
     else if(strcmp(inst, "not") == 0 || strcmp(inst, "!") == 0){
         newNode->op = OP_B_NOT;
+    }
+    else if(strcmp(inst, "inc") == 0 || strcmp(inst, "++") == 0){
+        newNode->op = OP_INC;
+    }
+    else if(strcmp(inst, "dec") == 0 || strcmp(inst, "--") == 0){
+        newNode->op = OP_DEC;
+    }
+    else if(strcmp(inst, "lab") == 0){
+        newNode->op = OP_LAB;
+    }
+    else if(strcmp(inst, "var") == 0){
+        newNode->op = OP_VAR;
+    }
+    else if(strcmp(inst, "mod") == 0 || strcmp(inst, "%") == 0){
+        newNode->op = OP_MOD;
     }
     else{
         errorInstruction(inst, newNode, errorFile, errData);
@@ -422,13 +435,12 @@ enum regKind strToReg(char *arg) {
     }
 }
 
-void checkAOPFile(char* fileName) {
+void checkAOPFile(char* fileName, error_t *errData) {
     size_t size = strlen(fileName);
     //Check if the filename ends by ".aop" and contains at least 5 characters
     if (size < 5 || fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') {
-        // trow error
-        fprintf(stderr, "The filename is invalid. Please enter a valid .aop filename.\n");
-        exit(EXIT_FAILURE);
+        // throw error
+       errorInvalidExt(fileName, errorFile, errData);
     }
 }
 

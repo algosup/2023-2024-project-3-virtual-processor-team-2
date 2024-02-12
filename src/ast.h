@@ -24,6 +24,12 @@ enum opKind{
     OP_B_AND,
     OP_B_OR,
     OP_B_NOT,
+    OP_INC,
+    OP_DEC,
+    OP_LAB,
+    OP_VAR,
+    OP_MOD,
+    OP_RET,
 };
 
 // interrupt types
@@ -82,6 +88,8 @@ typedef struct var{
 
 // Structs for variable list
 typedef struct varList{
+    char* name;
+    long id;
     size_t size;
     var_t *list;
 } varList_t;

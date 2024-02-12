@@ -53,6 +53,11 @@ int main(int argc, char *argv[]) {
 
     // run parser
     parseFile(instList, argv[1], errData);
+
+    if(flags.debug){
+        printAst(instList);
+    }
+    
     
     // run builder
     // TODO: Do Builder

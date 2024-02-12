@@ -201,8 +201,9 @@ enum regKind strToReg(char *arg);
     Checks if the filename ends by .aop or trows an error
     params:
         filename: name of the file to check
+        errData: error history
 */
-void checkAOPFile(char* fileName);
+void checkAOPFile(char* fileName, error_t *errData);
   
 /*
     Checks if a line has more than 64 characters or not

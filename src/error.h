@@ -44,6 +44,15 @@ void errorLineSize(long lineNb, const char* out, error_t *errData);
 */
 void errorfnf(char* filename, const char* out, error_t *errData);
 
+/*
+    Throw an error when the file extension is invalid
+    params:
+        filename: File name
+        out: Target file (can be NULL)
+        errData: Error history
+*/
+void errorInvalidExt(char* filename, const char* out, error_t *errData);
+
 #ifdef __cplusplus
 }
 #endif
