@@ -4,11 +4,11 @@
 extern "C" {
 #endif
 
-// Lifo to build if/ else statements
-typedef struct lifoCmpNode{
-    cmpNode_t **list;
-    size_t size;
-} lifoCmpNode_t;
+// // Lifo to build if/ else statements
+// typedef struct lifoCmpNode{
+//     cmpNode_t **list;
+//     size_t size;
+// } lifoCmpNode_t;
 
 
 /*
@@ -27,19 +27,19 @@ void build(instList_t *nodeList, labelList_t *labelList, varList_t *varList);
 */
 // void buildOpNode(instNode_t *node);
 
-/*
-    Build an action node
-    params:
-        node: pointer to the instruction node
-*/
-void buildActNode(instNode_t *node, lifoCmpNode_t *lifo);
+// /*
+//     Build an action node
+//     params:
+//         node: pointer to the instruction node
+// */
+// void buildActNode(instNode_t *node, lifoCmpNode_t *lifo);
 
-/*
-    Build a comparison node
-    params:
-        node: pointer to the instruction node
-*/
-void buildCmpNode(instNode_t *node, lifoCmpNode_t *lifo);
+// /*
+//     Build a comparison node
+//     params:
+//         node: pointer to the instruction node
+// */
+// void buildCmpNode(instNode_t *node, lifoCmpNode_t *lifo);
 
 
 
@@ -74,22 +74,22 @@ void incLabelList(labelList_t *list);
 */
 labelList_t* initLabelList();
 
-/*
-    Add cmp node to the lifo (as new head)
-    params:
-        lifo: pointer to the lifo
-        node: pointer to the node
-*/
-void pushCmpLifo(lifoCmpNode_t *lifo, cmpNode_t *node);
+// /*
+//     Add cmp node to the lifo (as new head)
+//     params:
+//         lifo: pointer to the lifo
+//         node: pointer to the node
+// */
+// void pushCmpLifo(lifoCmpNode_t *lifo, cmpNode_t *node);
 
-/*
-    Remove cmp node from the lifo (as head)
-    params:
-        lifo: pointer to the lifo
-    return:
-        cmpNode_t: pointer to the node
-*/
-cmpNode_t *popCmpLifo(lifoCmpNode_t *lifo);
+// /*
+//     Remove cmp node from the lifo (as head)
+//     params:
+//         lifo: pointer to the lifo
+//     return:
+//         cmpNode_t: pointer to the node
+// */
+// cmpNode_t *popCmpLifo(lifoCmpNode_t *lifo);
 
 /*
     Add variable to the variable list

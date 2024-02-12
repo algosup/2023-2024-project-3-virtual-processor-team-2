@@ -25,6 +25,7 @@ add_executable(tests
   src/parser.c
   src/builder.c
   src/debug.c
+  src/error.c
   src/binExporter.c
   test/test.cc
   googletest/googletest/src/gtest-all.cc
@@ -60,6 +61,7 @@ add_executable(2at2
     src/parser.c
     src/builder.c
     src/debug.c
+    src/error.c
     src/binExporter.c
     src/2at2.c
 )

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
+
 #include "ast.h"
+#include "error.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,7 +40,7 @@ void flagsSet(char *flag, flags_t *flags);
         nodeList: pointer to the instruction list
         filename: name of the file to be parsed
 */
-void parseFile(instList_t *nodeList, char *filename);
+void parseFile(instList_t *nodeList, char *filename, error_t *errData);
 
 /*
     Parse a line and return an instruction node
@@ -47,7 +49,7 @@ void parseFile(instList_t *nodeList, char *filename);
     returns:
         instNode_t: instruction node
 */
-instNode_t *parseLine(char *line, long nodeId, long lineNb);
+instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData);
 
 /*
     Read the line and check if it is an operation
@@ -57,38 +59,8 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb);
     returns:
         bool: true if it is an operation
 */
-bool isOp(char *inst, instNode_t *newNode);
+bool isOp(char *inst, instNode_t *newNode, error_t *errData);
 
-/*
-    Read the line and check if it is an action
-    params:
-        char*: instruction to be checked
-        instNode_t*: pointer to the instruction node
-    returns:
-        bool: true if it is an action
-*/
-bool isAct(char *inst, instNode_t *newNode);
-
-
-/*
-    Read the line and check if it is a comparison
-    params:
-        char*: instruction to be checked
-        instNode_t*: pointer to the instruction node
-        char*: line to be parsed
-    returns:
-        bool: true if it is a comparison
-
-*/
-bool isCmp(char *inst, instNode_t *newNode, char *line);
-
-/*
-    Set the comparison kind
-    params:
-        instNode_t*: pointer to the instruction node
-        char*: comparison string
-*/
-void setCmpKind(instNode_t *newNode, char *cmp);
 
 /*
     Read the line and check if it is a declaration for a label or a variable

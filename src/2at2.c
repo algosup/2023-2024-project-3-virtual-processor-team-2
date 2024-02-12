@@ -4,12 +4,15 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "parser.h"
 #include "builder.h"
 #include "2at2.h"
 #include "debug.h"
+#include "error.h"
 
-#define VERSION "0.0.3"
+#define VERSION "0.0.5"
 
 int main(int argc, char *argv[]) {
     // Parse program arguments and get flags
@@ -42,24 +45,17 @@ int main(int argc, char *argv[]) {
     instList_t *instList = malloc(sizeof(instList_t));
     instList->head = NULL;
 
+    // Init error data history
+    error_t *errData = malloc(sizeof(error_t));
+    errData->errors = 0;
+    errData->inputFile = malloc(sizeof(argv[1])+1);
+    strcpy(errData->inputFile, argv[1]);
+
     // run parser
-    parseFile(instList, argv[1]);
-
-    if(flags.debug) {
-        printInstList(instList, "../others/parsing.log");
-        printVarList(varList, "../others/parsing.log");
-        printLabelList(labelList, "../others/parsing.log");
-    }
-
+    parseFile(instList, argv[1], errData);
     
     // run builder
-    build(instList, labelList, varList);
-
-    if(flags.debug) {
-        printInstList(instList, "../others/building.log");
-        printVarList(varList, "../others/building.log");
-        printLabelList(labelList, "../others/building.log");
-    }
+    // TODO: Do Builder
 
     // run exporter
     // TODO: make the function export to binary
