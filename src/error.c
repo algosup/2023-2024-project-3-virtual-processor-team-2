@@ -139,3 +139,33 @@ void errorInvalidExt(char* filename, const char* out, error_t *errData){
     printErrorSummary(errData);
     exit(EXIT_FAILURE);
 }
+
+void errorIssues(char* filename, const char* out, error_t *errData){
+    ++ errData->errors;
+    fprintf(stderr, "Error: invalid file\n");
+    fprintf(stderr, "Details: file %s contains too much errors to be used\n", filename);
+    if(out != NULL){
+        FILE *file = fopen(out, "ab");
+        if(file == NULL){
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        // Get current time
+        time_t rawtime;
+        struct tm *timeinfo;
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+
+        // Format date
+        char date_str[20]; // Sufficiently large buffer to hold formatted date
+        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
+        fprintf(file, "%s |\tError: invalid file\n", date_str);
+        fprintf(file, "%s |\tDetails: file %s contains too much errors to be used\n", date_str, filename);
+        fclose(file);
+    }
+    printErrorSummary(errData);
+    exit(EXIT_FAILURE);
+
+}
+
+// void displayFileError(char* filename, const char* out, error_t *errData, int errorNumber);
