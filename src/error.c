@@ -139,3 +139,61 @@ void errorInvalidExt(char* filename, const char* out, error_t *errData){
     printErrorSummary(errData);
     exit(EXIT_FAILURE);
 }
+
+
+void errorTooManyArg(const char* out, error_t *errData){
+    ++ errData->errors;
+    fprintf(stderr, "Error: syntax error\n");
+    fprintf(stderr, "Details: too many arguments\n Try 'iat2 --help' for more information\n");
+    fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile);
+    if(out != NULL){
+        FILE *file = fopen(out, "ab");
+        if(file == NULL){
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        // Get current time
+        time_t rawtime;
+        struct tm *timeinfo;
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+
+        // Format date
+        char date_str[20]; // Sufficiently large buffer to hold formatted date
+        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
+        fprintf(file, "%s |\tError: syntax error\n", date_str);
+        fprintf(file, "%s |\tDetails: too many arguments\n Try 'iat2 --help' for more information\n", date_str);
+        fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile);
+        fclose(file);
+    }
+    exit(EXIT_FAILURE);
+}
+
+void errorNoArg(const char* out, error_t *errData){
+    ++ errData->errors;
+    fprintf(stderr, "Error: syntax error\n");
+    fprintf(stderr, "Details: no argument found\n Try 'iat2 --help' for more information\n");
+    fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile);
+    if(out != NULL){
+        FILE *file = fopen(out, "ab");
+        if(file == NULL){
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        // Get current time
+        time_t rawtime;
+        struct tm *timeinfo;
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+
+        // Format date
+        char date_str[20]; // Sufficiently large buffer to hold formatted date
+        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
+        fprintf(file, "%s |\tError: syntax error\n", date_str);
+        fprintf(file, "%s |\tDetails: too many arguments\n Try 'iat2 --help' for more information\n", date_str);
+        fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile);
+        fclose(file);
+    }
+    exit(EXIT_FAILURE);
+}
+

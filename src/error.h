@@ -24,7 +24,7 @@ error_t *initErrorFile(const char* out, char *inputFile);
 // ---------- Parsing/ Assembling errors ----------
 
 /*
-    Throw an error whrn the given instruction doesn't exist
+    Throw an error when the given instruction doesn't exist
     params:
         inst: Instruction
         node: Instruction node to get additionnal information
@@ -70,6 +70,40 @@ void errorfnf(char* filename, const char* out, error_t *errData);
         errData: Error history
 */
 void errorInvalidExt(char* filename, const char* out, error_t *errData);
+
+
+
+
+
+/*
+    Throw an error when there is too many arguments
+    params:
+        out: Target file (can be NULL)
+        errData: Error history
+*/
+void errorTooManyArg(const char* out, error_t *errData);
+
+/*
+    Throw an error when there is no argument
+    params:
+        out: Target file (can be NULL)
+        errData: Error history
+*/
+void errorNoArg(const char* out, error_t *errData);
+
+/*
+    Throw an error when there is a special character missing
+    params:
+        lineNb: line number
+        filename: File name
+        out: Target file (can be NULL)
+        errData: Error history
+*/
+void errorSpeCharMiss(long lineNb, const char* out, error_t *errData, char* filename)
+
+/*
+
+*/
 
 #ifdef __cplusplus
 }
