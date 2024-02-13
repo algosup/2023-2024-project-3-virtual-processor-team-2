@@ -63,16 +63,6 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData);
 
 
 /*
-    Read the line and check if it is a declaration for a label or a variable
-    params:
-        char*: instruction to be checked
-        instNode_t*: pointer to the instruction node
-    returns:
-        bool: true if it is a label
-*/
-bool isDecla(char *inst, instNode_t *newNode);
-
-/*
     Get instruction from line
     params:
         line: line to be parsed
@@ -91,84 +81,12 @@ char* getInst(char *line);
 char** getInstArgs(char *line);
 
 /*
-    Get arguments from a if instruction line 
-    params:
-        line: line to be parsed
-    returns:
-        char**: array of strings (no more than 2)
-*/
-char **getIfArgs(char *line);
-
-/*
     Set the arguments of an instruction node
     params:
         node: pointer to the instruction node
         args: array of strings (no more than 2)
 */
 void setArgs(instNode_t *node, char **args);
-
-/*
-    Check if the argument is a number
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a number
-*/
-bool isInt(char *arg);
-
-/*
-    Check if the argument is a binary number
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a binary number
-*/
-bool isBinary(char *arg);
-
-/*
-    Check if the argument is a octal number
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a octal number
-*/
-bool isOctal(char *arg);
-
-/*
-    Check if the argument is a hexadecimal number
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a hexadecimal number
-*/
-bool isHex(char *arg);
-
-/*
-    Check if the argument is a float
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a float
-*/
-bool isFloat(char *arg);
-
-/*
-    Check if the argument is a char
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a char
-*/
-bool isChar(char *arg);
-
-/*
-    Check if the argument is a string
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a string
-*/
-bool isString(char *arg);
 
 /*
     Check if the argument is a register
