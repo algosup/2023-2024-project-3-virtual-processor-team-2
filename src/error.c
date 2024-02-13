@@ -140,12 +140,10 @@ void errorInvalidExt(char* filename, const char* out, error_t *errData){
     exit(EXIT_FAILURE);
 }
 
-
-void errorTooManyArg(const char* out, error_t *errData){
+void errorIssues(char* filename, const char* out, error_t *errData){
     ++ errData->errors;
-    fprintf(stderr, "Error: syntax error\n");
-    fprintf(stderr, "Details: too many arguments\n Try 'iat2 --help' for more information\n");
-    fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile);
+    fprintf(stderr, "Error: invalid file\n");
+    fprintf(stderr, "Details: file %s contains too much errors to be used\n", filename);
     if(out != NULL){
         FILE *file = fopen(out, "ab");
         if(file == NULL){
