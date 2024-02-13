@@ -198,10 +198,12 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData){
         newNode->op = OP_B_NOT;
     }
     else if(strcmp(inst, "inc") == 0 || strcmp(inst, "++") == 0){
-        newNode->op = OP_INC;
+        newNode->op = OP_ADD;
+        newNode->arg = "1";
     }
     else if(strcmp(inst, "dec") == 0 || strcmp(inst, "--") == 0){
-        newNode->op = OP_DEC;
+        newNode->op = OP_SUB;
+        newNode->arg = "1";
     }
     else if(strcmp(inst, "lab") == 0){
         newNode->op = OP_LAB;
@@ -211,6 +213,79 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData){
     }
     else if(strcmp(inst, "mod") == 0 || strcmp(inst, "%") == 0){
         newNode->op = OP_MOD;
+    }
+    else if(strcmp(inst, "ret") == 0){
+        newNode->op = OP_RET;
+    }
+    else if(strcmp(inst, "ngr") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "0";
+    }
+    else if(strcmp(inst, "draw") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "1";
+    }
+    else if(strcmp(inst, "ob1") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "2";
+    }
+    else if(strcmp(inst, "or") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "3";
+    }
+    else if(strcmp(inst, "if_and") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "4";
+    }
+    else if(strcmp(inst, "if_xor") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "5";
+    }
+    else if(strcmp(inst, "if_lt") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "6";
+    }
+    else if(strcmp(inst, "if_lte") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "7";
+    }
+    else if(strcmp(inst, "if_gt") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "8";
+    }
+    else if(strcmp(inst, "if_gte") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "9";
+    }
+    else if(strcmp(inst, "if_eq") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "10";
+    }
+    else if(strcmp(inst, "if_neq") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "11";
+    }
+    else if(strcmp(inst, "pusha") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "12";
+    }
+    else if(strcmp(inst, "popa") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg = "13";
     }
     else{
         errorInstruction(inst, newNode, errorFile, errData);
