@@ -86,6 +86,7 @@ add_executable(vat2
     src/builder.c
     src/debug.c
     src/binExporter.c
+    src/2at2.c
     src/vProc.c
 )
 
