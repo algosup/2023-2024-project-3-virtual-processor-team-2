@@ -15,6 +15,9 @@
 #define VERSION "0.0.5"
 
 int main(int argc, char *argv[]) {
+    // Init error data history
+    error_t *errData = initErrorFile("errors.log", argv[1]);
+
     // ---------- Parse arguments ----------
 
     // Parse program arguments and get flags
@@ -50,9 +53,6 @@ int main(int argc, char *argv[]) {
     // Init instructions list struct
     instList_t *instList = malloc(sizeof(instList_t));
     instList->head = NULL;
-
-    // Init error data history
-    error_t *errData = initErrorFile("error.log", argv[1]);
 
     fprintf(stderr, "[\t10%%\t] Data initialized successfully\n");
 
