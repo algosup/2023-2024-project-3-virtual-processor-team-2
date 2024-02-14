@@ -41,7 +41,7 @@ void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *er
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorInst(char * inst, instNode *node, const char* out, error_t errData);
+void errorInst(char * inst, instNode_t *node, const char* out, error_t *errData);
 
 /*
     Throw an error when the line size is too big
@@ -82,14 +82,6 @@ void errorIssues(char* filename, const char* out, error_t *errData);
 */
 void errorfnf(char* filename, const char* out, error_t *errData);
 
-/*
-    Throw an error when the file is not found
-    params:
-        filename: File name
-        out: Target file (can be NULL)
-        errData: Error history
-*/
-void errorNewFnf(char* filename, error_t *errData);
 
 /*
     Throw an error when the file extension is invalid
@@ -137,7 +129,7 @@ void errorSpeCharMiss(long lineNb, const char* out, error_t *errData, char* file
         out: Target file (can be NULL)
         errData: Error history
 */
-void displayError(char *errType, char *errDetails, char *errLocation, const char *out, error_t errData);
+void displayError(const char *errType, const char *errDetails, char *errLocation, const char *out, error_t* errData);
 
 
 
