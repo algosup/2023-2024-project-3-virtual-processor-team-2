@@ -25,10 +25,9 @@ jobs:
           
       - name: Check out repository code
         run: |
-          echo "Start repo clone"
-          checkout self 
+          echo "Start repo checkout"
+          uses: actions/checkout@v3
           echo "The ${{ github.repository }} repository has been cloned to the runner."
-          git reset --hard commitid
 
 
   build:
