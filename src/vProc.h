@@ -11,6 +11,13 @@ typedef struct {
     int maxSize;
 } MMU_t;
 
+// Struct of cache's values
+typedef struct {
+    uint8_t callId;
+    uint16_t line;
+    uint8_t labelId;
+} cache_t;
+
 // Define the structure of virtual processor
 typedef struct {
    MMU_t mmu;
@@ -23,14 +30,6 @@ typedef struct {
     bool writable;
     uint16_t value;
 } register_t;
-
-
-// Struct of cache's values
-typedef struct {
-    uint8_t callId;
-    uint16_t line;
-    uint8_t labelId;
-} cache_t;
 
 // need to raed the binary file
 // look each line (limit of bits == 16 so if more than 16 error)

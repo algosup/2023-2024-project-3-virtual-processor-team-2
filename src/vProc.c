@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
     char line[LINE_MAX_BITS];
     char operand[6];
     char reg[4];
-    char value[9];
+    char data[9];
     uint16_t currentLine = 1;
 
 
@@ -75,15 +75,19 @@ int main(int argc, char *argv[]) {
             printf("%s\n", line);
             memcpy(operand, line, 5);
             memcpy(reg, line + 5, 3);
-            memcpy(value, line + 8, 8);
+            memcpy(data, line + 8, 8);
             operand[5] = '\0';
             reg[3] = '\0';
-            value[8] = '\0';
+            data[8] = '\0';
 
             // Add your code here
+            int binOperand = (int)strtol(operand, NULL, 2);
+            int binReg = (int)strtol(reg, NULL, 2);
+            int binData = (int)strtol(data, NULL, 2);
 
+            int *lineRead[] = {binOperand, binReg, binData};
 
-            printf("%s | %s | %s\n", operand, reg, value);
+            printf("%d | %d | %d\n", binOperand, binReg, binData);
         } else {
             fprintf(stderr, "ERROR: Invalid line size, line: %u\n", currentLine);
             exit(EXIT_FAILURE);
@@ -114,159 +118,161 @@ void printBinary(uint16_t value) {
 }
 
 
-void readBinaryInstruction(cache_t *cache) {
-    switch (!strlengt(cache->line)){
-    // Define the opCode read in binary
+// void readBinaryInstruction(char myChar, cache_t *cache) {
+//     switch (!strlen(cache->line)){
+//     // Define the opCode read in binary
     
-    // parserBinaryLine();
-
-    case 5:
-        switch (/*The result of function parserBinaryLine()*/){
-        case 0b00000:
-            // Code for 0b00000
-            break;
-        case 0b00001:
-            // Code for 0b00001
-            break;
-        case 0b00010:
-            // Code for 0b00010
-            break;
-        case 0b00011:
-            // Code for 0b00011
-            break;
-        case 0b00100:
-            // Code for 0b00100
-            break;
-        case 0b00101:
-            // Code for 0b00101
-            break;
-        case 0b00110:
-            // Code for 0b00110
-            break;
-        case 0b00111:
-            // Code for 0b00111
-            break;
-        case 0b01000:
-            // Code for 0b01000
-            break;
-        case 0b01001:
-            // Code for 0b00000
-            break;
-        case 0b01010:
-            // Code for 0b00001
-            break;
-        case 0b01011:
-            // Code for 0b00010
-            break;
-        case 0b01100:
-            // Code for 0b00011
-            break;
-        case 0b01101:
-            // Code for 0b00100
-            break;
-        case 0b01110:
-            // Code for 0b00101
-            break;
-        case 0b01111:
-            // Code for 0b00110
-            break;
-        case 0b10000:
-            // Code for 0b00111
-            break;
-        case 0b10001:
-            // Code for 0b01000
-            break;
-        case 0b10010:
-            // Code for 0b00000
-            break;
-        case 0b10011:
-            // Code for 0b00001
-            break;
-        case 0b10100:
-            // Code for 0b00010
-            break;
-        case 0b10101:
-            // Code for 0b00011
-            break;
-        case 0b10110:
-            // Code for 0b00100
-            break;
-        case 0b10111:
-            // Code for 0b00101
-            break;
-        case 0b11000:
-            // Code for 0b00110
-            break;
-        case 0b11001:
-            // Code for 0b00111
-            break;
-        case 0b11010:
-            // Code for 0b01000
-            break;
-        case 0b11011:
-            // Code for 0b00000
-            break;
-        case 0b11100:
-            // Code for 0b00001
-            break;
-        case 0b11101:
-            // Code for 0b00010
-            break;
-        case 0b11110:
-            // Code for 0b00011
-            break;
-        case 0b11111:
-            // Code for 0b00100
-            break;
-        default:
-            // default value
-            break;
-        }
-
-    // Define the register read in binary
-    case 3:
-        switch (/*The result of function parserBinaryLine()*/){
-        case 0b00000:
-            // Code for 0b00000
-            break;
-        case 0b00001:
-            // Code for 0b00001
-            break;
-        case 0b00010:
-            // Code for 0b00010
-            break;
-        case 0b00011:
-            // Code for 0b00011
-            break;
-        case 0b00100:
-            // Code for 0b00100
-            break;
-        case 0b00101:
-            // Code for 0b00101
-            break;
-        case 0b00110:
-            // Code for 0b00110
-            break;
-        case 0b00111:
-            // Code for 0b00111
-            break;
-        default:
-            // default code
-            break;
-        }
-        break;
     
-    // Get the immediate value from binary
-    case 8:
-        switch (/*The result of function parserBinaryLine()*/){
+
+//     // parserBinaryLine();
+
+//     case 5:
+//         switch (myChar){
+//         case 0b00000:
+//             // Code for 0b00000
+//             break;
+//         case 0b00001:
+//             // Code for 0b00001
+//             break;
+//         case 0b00010:
+//             // Code for 0b00010
+//             break;
+//         case 0b00011:
+//             // Code for 0b00011
+//             break;
+//         case 0b00100:
+//             // Code for 0b00100
+//             break;
+//         case 0b00101:
+//             // Code for 0b00101
+//             break;
+//         case 0b00110:
+//             // Code for 0b00110
+//             break;
+//         case 0b00111:
+//             // Code for 0b00111
+//             break;
+//         case 0b01000:
+//             // Code for 0b01000
+//             break;
+//         case 0b01001:
+//             // Code for 0b00000
+//             break;
+//         case 0b01010:
+//             // Code for 0b00001
+//             break;
+//         case 0b01011:
+//             // Code for 0b00010
+//             break;
+//         case 0b01100:
+//             // Code for 0b00011
+//             break;
+//         case 0b01101:
+//             // Code for 0b00100
+//             break;
+//         case 0b01110:
+//             // Code for 0b00101
+//             break;
+//         case 0b01111:
+//             // Code for 0b00110
+//             break;
+//         case 0b10000:
+//             // Code for 0b00111
+//             break;
+//         case 0b10001:
+//             // Code for 0b01000
+//             break;
+//         case 0b10010:
+//             // Code for 0b00000
+//             break;
+//         case 0b10011:
+//             // Code for 0b00001
+//             break;
+//         case 0b10100:
+//             // Code for 0b00010
+//             break;
+//         case 0b10101:
+//             // Code for 0b00011
+//             break;
+//         case 0b10110:
+//             // Code for 0b00100
+//             break;
+//         case 0b10111:
+//             // Code for 0b00101
+//             break;
+//         case 0b11000:
+//             // Code for 0b00110
+//             break;
+//         case 0b11001:
+//             // Code for 0b00111
+//             break;
+//         case 0b11010:
+//             // Code for 0b01000
+//             break;
+//         case 0b11011:
+//             // Code for 0b00000
+//             break;
+//         case 0b11100:
+//             // Code for 0b00001
+//             break;
+//         case 0b11101:
+//             // Code for 0b00010
+//             break;
+//         case 0b11110:
+//             // Code for 0b00011
+//             break;
+//         case 0b11111:
+//             // Code for 0b00100
+//             break;
+//         default:
+//             // default value
+//             break;
+//         }
+
+//     // Define the register read in binary
+//     // case 3:
+//     //     switch (/*The result of function parserBinaryLine()*/){
+//     //     case 0b00000:
+//     //         // Code for 0b00000
+//     //         break;
+//     //     case 0b00001:
+//     //         // Code for 0b00001
+//     //         break;
+//     //     case 0b00010:
+//     //         // Code for 0b00010
+//     //         break;
+//     //     case 0b00011:
+//     //         // Code for 0b00011
+//     //         break;
+//     //     case 0b00100:
+//     //         // Code for 0b00100
+//     //         break;
+//     //     case 0b00101:
+//     //         // Code for 0b00101
+//     //         break;
+//     //     case 0b00110:
+//     //         // Code for 0b00110
+//     //         break;
+//     //     case 0b00111:
+//     //         // Code for 0b00111
+//     //         break;
+//     //     default:
+//     //         // default code
+//     //         break;
+//     //     }
+//     //     break;
+    
+//     // // Get the immediate value from binary
+//     // case 8:
+//     //     switch (/*The result of function parserBinaryLine()*/){
         
-        }
-        break;
-        default:
-            // default code
-            break;
-    }
-}
+//     //     }
+//     //     break;
+//     //     default:
+//     //         // default code
+//     //         break;
+//     }
+// }
 
 // start:                         ins   reg   value
 //     mov rg0, 5              -> 00000 000 0000 0101 00000 000 0000 0101 
