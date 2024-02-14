@@ -48,31 +48,21 @@ int main(int argc, char *argv[]) {
     cache_t cache;
     virtualProcessor_t virtualProcessor;
 
-    stack.maxSize = MAX_STACK_SIZE / 8;             // Max size of block of stack region
-    processing.maxSize = MAX_PROCESSING_SIZE / 8;   // Max size of block of progessing region
-    memory.maxSize = MAX_MEMORY_SIZE / 8;           // Max size of block of memory region
-    graphic.maxSize = MAX_GRAPHIC_MEMORY_SIZE / 8;  // Max size of block of graphic region
+    stack.maxSize = MAX_STACK_SIZE;             // Max size of block of stack region
+    processing.maxSize = MAX_PROCESSING_SIZE;   // Max size of block of progessing region
+    memory.maxSize = MAX_MEMORY_SIZE;           // Max size of block of memory region
+    graphic.maxSize = MAX_GRAPHIC_MEMORY_SIZE;  // Max size of block of graphic region
     virtualProcessor.maxSize = (stack.maxSize + processing.maxSize + memory.maxSize + graphic.maxSize);
     virtualProcessor.cache = cache;
 
-    printf("%d", virtualProcessor.maxSize); // Just to avoid useless warning
+    printf("%d kb Available\n", virtualProcessor.maxSize); // Just to avoid useless warning
 
     int time = 0;
     int lastTime = 0;
     int latentTicks = 0;
-    while (fgets(line, sizeof(line)+1, file)) {
-        Sleep(1000/20); // syntax of sleep depend of the system
-        ++latentTicks;
-        if(latentTicks >= 20) {
-            latentTicks = latentTicks - 20;
-            time += 1;
-        }
-
-        rg3.value += 1;
-        if(lastTime != time) {
-            lastTime = time;
-            printf("Time: %ds\n", time);
-        }
+    while(fgets(line, sizeof(line) + 1, file)) {
+        
+        setClock(time, lastTime, latentTicks);
 
         readBinaryInstruction(&cache, line, operand, reg, data, currentLine);
            
@@ -93,6 +83,21 @@ FILE* readBinaryFile(char *filename) {
     return file;
 }
 
+void setClock(int time, int lastTime, int latentTicks){
+    Sleep(1000/20); // syntax of sleep depend of the system
+        ++latentTicks;
+        if(latentTicks >= 20) {
+            latentTicks = latentTicks - 20;
+            time += 1;
+        }
+
+        rg3.value += 1;
+        if(lastTime != time) {
+            lastTime = time;
+            printf("Time: %ds\n", time);
+        }
+}
+
 void printBinary(uint16_t value) {
     for (int i = 15; i >= 0; --i) {
         putchar((value & (1 << i)) ? '1' : '0');
@@ -101,193 +106,186 @@ void printBinary(uint16_t value) {
 }
 
 int* parserBinaryFile(char *line, char *operand, char *reg, char *data, uint8_t currentLine){
+    
     if(strlen(line) >= LINE_MAX_BITS-2) {
-            printf("%s\n", line);
-            memcpy(operand, line, 5);
-            memcpy(reg, line + 5, 3);
-            memcpy(data, line + 8, 8);
-            operand[5] = '\0';
-            reg[3] = '\0';
-            data[8] = '\0';
+        // Copy the characters 0 or 1 depending the lenght
+        memcpy(operand, line, 5);
+        memcpy(reg, line + 5, 3);
+        memcpy(data, line + 8, 8);
+        operand[5] = '\0';
+        reg[3] = '\0';
+        data[8] = '\0';
 
-            // Add your code here
-            int binOperand = (int)strtol(operand, NULL, 2);
-            int binReg = (int)strtol(reg, NULL, 2);
-            int binData = (int)strtol(data, NULL, 2);
+        // Store the values copied in int 
+        int binOperand = (int)strtol(operand, NULL, 2);
+        int binReg = (int)strtol(reg, NULL, 2);
+        int binData = (int)strtol(data, NULL, 2);
 
-           static int lineRead[3];
-           lineRead[0] = binOperand;
-           lineRead[1] = binReg;
-           lineRead[2] = binData;
+        //
+        static int lineRead[3];
+        lineRead[0] = binOperand;
+        lineRead[1] = binReg;
+        lineRead[2] = binData;
 
-            printf("%d | %d | %d\n", binOperand, binReg, binData);
-            return lineRead;
-        } else {
-            fprintf(stderr, "ERROR: Invalid line size, line: %u\n", currentLine);
-            exit(EXIT_FAILURE);
-        }
-        ++currentLine;
-        
-        
+        ++currentLine; 
+        // Return array with 3 values
+        return lineRead;
+    } 
+    else {
+        fprintf(stderr, "ERROR: Invalid line size, line: %u\n", currentLine);
+        exit(EXIT_FAILURE);
+    }
+     
 }
 
-void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine) {
-    int *lineRead = parserBinaryFile(line, operand, reg, data, currentLine);
 
+void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine){
+    
+    int *lineRead = parserBinaryFile(line, operand, reg, data, currentLine);
     printf("%d\n", lineRead[0]);
     printf("%d\n", lineRead[1]);
     printf("%d\n", lineRead[2]);
-    // switch (lineRead[0]){
-    // // Define the opCode read in binary
 
-    // case 5:
-    //     switch (lineRead[1]){
-    //     case 0b00000:
-    //         // Code for 0b00000
-    //         break;
-    //     case 0b00001:
-    //         // Code for 0b00001
-    //         break;
-    //     case 0b00010:
-    //         // Code for 0b00010
-    //         break;
-    //     case 0b00011:
-    //         // Code for 0b00011
-    //         break;
-    //     case 0b00100:
-    //         // Code for 0b00100
-    //         break;
-    //     case 0b00101:
-    //         // Code for 0b00101
-    //         break;
-    //     case 0b00110:
-    //         // Code for 0b00110
-    //         break;
-    //     case 0b00111:
-    //         // Code for 0b00111
-    //         break;
-    //     case 0b01000:
-    //         // Code for 0b01000
-    //         break;
-    //     case 0b01001:
-    //         // Code for 0b00000
-    //         break;
-    //     case 0b01010:
-    //         // Code for 0b00001
-    //         break;
-    //     case 0b01011:
-    //         // Code for 0b00010
-    //         break;
-    //     case 0b01100:
-    //         // Code for 0b00011
-    //         break;
-    //     case 0b01101:
-    //         // Code for 0b00100
-    //         break;
-    //     case 0b01110:
-    //         // Code for 0b00101
-    //         break;
-    //     case 0b01111:
-    //         // Code for 0b00110
-    //         break;
-    //     case 0b10000:
-    //         // Code for 0b00111
-    //         break;
-    //     case 0b10001:
-    //         // Code for 0b01000
-    //         break;
-    //     case 0b10010:
-    //         // Code for 0b00000
-    //         break;
-    //     case 0b10011:
-    //         // Code for 0b00001
-    //         break;
-    //     case 0b10100:
-    //         // Code for 0b00010
-    //         break;
-    //     case 0b10101:
-    //         // Code for 0b00011
-    //         break;
-    //     case 0b10110:
-    //         // Code for 0b00100
-    //         break;
-    //     case 0b10111:
-    //         // Code for 0b00101
-    //         break;
-    //     case 0b11000:
-    //         // Code for 0b00110
-    //         break;
-    //     case 0b11001:
-    //         // Code for 0b00111
-    //         break;
-    //     case 0b11010:
-    //         // Code for 0b01000
-    //         break;
-    //     case 0b11011:
-    //         // Code for 0b00000
-    //         break;
-    //     case 0b11100:
-    //         // Code for 0b00001
-    //         break;
-    //     case 0b11101:
-    //         // Code for 0b00010
-    //         break;
-    //     case 0b11110:
-    //         // Code for 0b00011
-    //         break;
-    //     case 0b11111:
-    //         // Code for 0b00100
-    //         break;
-    //     default:
-    //         // default value
-    //         break;
-    //     }
-
-    // Define the register read in binary
-    // case 3:
-    //     switch (/*The result of function parserBinaryLine()*/){
-    //     case 0b00000:
-    //         // Code for 0b00000
-    //         break;
-    //     case 0b00001:
-    //         // Code for 0b00001
-    //         break;
-    //     case 0b00010:
-    //         // Code for 0b00010
-    //         break;
-    //     case 0b00011:
-    //         // Code for 0b00011
-    //         break;
-    //     case 0b00100:
-    //         // Code for 0b00100
-    //         break;
-    //     case 0b00101:
-    //         // Code for 0b00101
-    //         break;
-    //     case 0b00110:
-    //         // Code for 0b00110
-    //         break;
-    //     case 0b00111:
-    //         // Code for 0b00111
-    //         break;
-    //     default:
-    //         // default code
-    //         break;
-    //     }
-    //     break;
-    
-    // // Get the immediate value from binary
-    // case 8:
-    //     switch (/*The result of function parserBinaryLine()*/){
-        
-    //     }
-    //     break;
-    //     default:
-    //         // default code
-    //         break;
-    // }
+    attributeOperand(*lineRead);
+    attributeRegister(*lineRead);
 }
 
+void attributeOperand(int *arg){
+    
+    switch (arg[0]){
+    // Define the opCode read in binary
+        case 00000:
+            // Code for 00000
+            break;
+        case 00001:
+            // Code for 00001
+            break;
+        case 00010:
+            // Code for 00010
+            break;
+        case 00011:
+            // Code for 00011
+            break;
+        case 00100:
+            // Code for 00100
+            break;
+        case 00101:
+            // Code for 00101
+            break;
+        case 00110:
+            // Code for 00110
+            break;
+        case 00111:
+            // Code for 00111
+            break;
+        case 01000:
+            // Code for 01000
+            break;
+        case 01001:
+            // Code for 00000
+            break;
+        case 01010:
+            // Code for 00001
+            break;
+        case 01011:
+            // Code for 00010
+            break;
+        case 01100:
+            // Code for 00011
+            break;
+        case 01101:
+            // Code for 00100
+            break;
+        case 01110:
+            // Code for 00101
+            break;
+        case 01111:
+            // Code for 00110
+            break;
+        case 10000:
+            // Code for 00111
+            break;
+        case 10001:
+            // Code for 01000
+            break;
+        case 10010:
+            // Code for 00000
+            break;
+        case 10011:
+            // Code for 00001
+            break;
+        case 10100:
+            // Code for 00010
+            break;
+        case 10101:
+            // Code for 00011
+            break;
+        case 10110:
+            // Code for 00100
+            break;
+        case 10111:
+            // Code for 00101
+            break;
+        case 11000:
+            // Code for 00110
+            break;
+        case 11001:
+            // Code for 00111
+            break;
+        case 11010:
+            // Code for 01000
+            break;
+        case 11011:
+            // Code for 00000
+            break;
+        case 11100:
+            // Code for 00001
+            break;
+        case 11101:
+            // Code for 00010
+            break;
+        case 11110:
+            // Code for 00011
+            break;
+        case 11111:
+            // Code for 00100
+            break;
+        default:
+            // default value
+            break;
+    }
+}
+
+void attributeRegister(int *arg){
+    
+    switch (arg[1]){
+    // Define the register read in binary
+        case 00000:
+            // Code for 00000
+            break;
+        case 00001:
+            // Code for 00001
+            break;
+        case 00010:
+            // Code for 00010
+            break;
+        case 00011:
+            // Code for 00011
+            break;
+        case 00100:
+            // Code for 00100
+            break;
+        case 00101:
+            // Code for 00101
+            break;
+        case 00110:
+            // Code for 00110
+            break;
+        case 00111:
+            // Code for 00111
+            break;
+    }
+}
 // start:                         ins   reg   value
 //     mov rg0, 5              -> 00000 000 0000 0101 00000 000 0000 0101 
 //     mov rg1, rg0            -> 00000 010 0000 0101

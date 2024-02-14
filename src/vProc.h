@@ -50,6 +50,15 @@ typedef struct {
 FILE* readBinaryFile(char *filename);
 
 /*
+    Set the speed of the clock based on ticks
+    params:
+    int time: Time passed when the application is running
+    int lastTime: The last time that the clock have been updated
+    int latentTicks:
+*/
+void setClock(int time, int lastTime, int latentTicks);
+
+/*
     Test the binary file extension
     params:
     char *filename: the name of the file tested 
@@ -57,10 +66,16 @@ FILE* readBinaryFile(char *filename);
 instNode_t parseBinaryLine(char *line, long nodeId, long lineNb);
 
 /*
-
-
+    Parse the binary file to and transform char in int
+    params:
+    char *line:
+    char *operand:
+    char *reg:
+    char *data:
+    uint8_t currentLine:
 */
 int* parserBinaryFile(char *line, char *operand, char *reg, char *data, uint8_t currentLine);
+
 /*
     Print a decimal value in binary
     params:
@@ -70,7 +85,26 @@ int* parserBinaryFile(char *line, char *operand, char *reg, char *data, uint8_t 
 */
 void printBinary(uint16_t value);
 
+/*
+    Attribute value to operands, registers and immediate values
+    params:
+    cache_t *cache:
+    char *line:
+    char *operand:
+    char *reg:
+    char *data:
+    uint8_t currentLine:
+*/
 void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine);
+
+/*
+    Allocate operand
+*/
+void attributeOperand(int *arg);
+
+void attributeRegister(int *arg);
+
+
 #ifdef __cplusplus
 }
 #endif
