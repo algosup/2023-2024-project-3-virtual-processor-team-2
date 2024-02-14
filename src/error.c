@@ -212,10 +212,10 @@ void errorNoArg(const char* out, error_t *errData){
     exit(EXIT_FAILURE);
 }
 
-void diplayError(char *errType, char *errDetails, char *errLocation, const char *out, error_t errData){
+void displayError(char *errType, char *errDetails, char *errLocation, const char *out, error_t errData){
 	++ errData->errors;
     fprintf(stderr, "Error: %s\n", errType);
-    fprintf(stderr, "Details: %s\n", errDtails);
+    fprintf(stderr, "Details: %s\n", errDetails);
 	if(errLocation != NULL){
 	    fprintf(stderr, "In: %s\n", errLocation);
 	}
@@ -236,7 +236,7 @@ void diplayError(char *errType, char *errDetails, char *errLocation, const char 
         strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
 		
 		fprintf(file, "%s |\tError: %s\n",date_str, errType);
-	    fprintf(file, "%s |\tDetails: %s\n",date_str, errDtails);
+	    fprintf(file, "%s |\tDetails: %s\n",date_str, errDetails);
 		if(errLocation != NULL){
 		    fprintf(file, "%s |\tIn: %s\n",date_str, errLocation);
 		}
