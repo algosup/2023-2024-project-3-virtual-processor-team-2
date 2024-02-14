@@ -80,10 +80,6 @@ char *getOpName(enum opKind kind){
             return "OR";
         case OP_B_NOT:
             return "NOT";
-        case OP_INC:
-            return "INC";
-        case OP_DEC:
-            return "DEC";
         case OP_LAB:
             return "LAB";
         case OP_VAR:
@@ -92,6 +88,14 @@ char *getOpName(enum opKind kind){
             return "MOD";
         case OP_RET:
             return "RET";
+        case OP_MOV_F_VAR:
+            return "MOV_F_VAR";
+        case OP_MOV_T_VAR:
+            return "MOV_T_VAR";
+        case OP_VAR_SIZE:
+            return "VAR_SIZE";
+        case OP_VAR_DATA:
+            return "VAR_DATA";
         default:
             return "UNKNOWN";
     }

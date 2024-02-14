@@ -24,12 +24,16 @@ enum opKind{
     OP_B_AND,
     OP_B_OR,
     OP_B_NOT,
-    OP_INC,
-    OP_DEC,
+    OP_USE_REG,
+    OP_USE_VAR,
     OP_LAB,
     OP_VAR,
     OP_MOD,
     OP_RET,
+    OP_MOV_F_VAR,
+    OP_MOV_T_VAR,
+    OP_VAR_SIZE,
+    OP_VAR_DATA,
 };
 
 // interrupt types
@@ -48,6 +52,9 @@ enum interruptKind{
     INT_NEQ,
     INT_PUSHA,
     INT_POPA,
+    INT_MOV_F_REG,
+    INT_ELSE,
+    INT_END,
 };
 
 // Register names
@@ -73,6 +80,7 @@ typedef struct instNode{
     char * arg0;
     char * arg1;
     enum regKind inputReg;
+    bool isBuilt;
     struct instNode *next;
 } instNode_t;
 
@@ -107,3 +115,10 @@ typedef struct labelList{
     size_t size;
     label_t *list;
 } labelList_t;
+
+/*
+    given a string, return the code of the interrupt
+    params:
+        kind: interrupt type
+*/
+char *getIntCode(enum interruptKind kind);

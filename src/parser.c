@@ -121,6 +121,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData){
     newNode->id = nodeId;
     newNode->lineNb = lineNb;
     newNode->isInter = false;
+    newNode->isBuilt = false;
 
     newNode->next = NULL;
 

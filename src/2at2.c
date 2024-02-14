@@ -70,9 +70,13 @@ int main(int argc, char *argv[]) {
     // ---------- Build ----------
     
     // run builder
-    // TODO: Do Builder
+    buildProgram(instList, errData);
 
     fprintf(stderr, "[\t70%%\t] File built successfully\n");
+
+    if(flags.debug){
+        printAst(instList);
+    }
 
     // ---------- Assemble ----------
 

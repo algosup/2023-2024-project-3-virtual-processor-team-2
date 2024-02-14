@@ -27,6 +27,7 @@ add_executable(tests
   src/debug.c
   src/error.c
   src/binExporter.c
+  src/ast.c
   test/test.cc
   googletest/googletest/src/gtest-all.cc
 )
@@ -64,6 +65,7 @@ add_executable(2at2
     src/error.c
     src/binExporter.c
     src/2at2.c
+    src/ast.c
 )
 
 target_include_directories(2at2
