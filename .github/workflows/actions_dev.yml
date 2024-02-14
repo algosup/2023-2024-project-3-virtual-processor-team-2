@@ -62,4 +62,4 @@ jobs:
       - name: Run tests
         run: |
           echo Running tests
-          ./tests.exe
+          tests.exe
