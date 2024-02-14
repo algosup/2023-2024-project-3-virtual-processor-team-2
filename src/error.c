@@ -26,34 +26,34 @@ error_t *initErrorFile(const char* out, char *inputFile){
     return errData;
 }
 
-// void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData){
-//     ++ errData->errors;
-//     fprintf(stderr, "Error: syntax error\n");
-//     fprintf(stderr, "Details: %s instruction is not recognized\n", inst);
-//     fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile, node->lineNb);
-//     if(out != NULL){
-//         FILE *file = fopen(out, "ab");
-//         if(file == NULL){
-//             fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-//             exit(EXIT_FAILURE);
-//         }
-//         // Get current time
-//         time_t rawtime;
-//         struct tm *timeinfo;
-//         time(&rawtime);
-//         timeinfo = localtime(&rawtime);
+void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData){
+    ++ errData->errors;
+    fprintf(stderr, "Error: syntax error\n");
+    fprintf(stderr, "Details: %s instruction is not recognized\n", inst);
+    fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile, node->lineNb);
+    if(out != NULL){
+        FILE *file = fopen(out, "ab");
+        if(file == NULL){
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        // Get current time
+        time_t rawtime;
+        struct tm *timeinfo;
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
 
-//         // Format date
-//         char date_str[20]; // Sufficiently large buffer to hold formatted date
-//         strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-//         fprintf(file, "%s |\tError: syntax error\n", date_str);
-//         fprintf(file, "%s |\tDetails: %s instruction is not recognized\n", date_str, inst);
-//         fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile, node->lineNb);
-//         fclose(file);
-//     }
-// }
+        // Format date
+        char date_str[20]; // Sufficiently large buffer to hold formatted date
+        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
+        fprintf(file, "%s |\tError: syntax error\n", date_str);
+        fprintf(file, "%s |\tDetails: %s instruction is not recognized\n", date_str, inst);
+        fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile, node->lineNb);
+        fclose(file);
+    }
+}
 
-void errorInst(char *inst, instNode *node, const char *out, error_t errData){
+void errorInst(char *inst, instNode_t *node, const char *out, error_t *errData){
 	char *errType = "Syntax Error";
 	char errDetails[64];
 	char errLocation[64];
@@ -120,14 +120,6 @@ void errorfnf(char* filename, const char* out, error_t *errData){
     }
     printErrorSummary(errData);
     exit(EXIT_FAILURE);
-}
-
-void errorNewFnf(char* filename, error_t *errData){
-    const char* text1 = "Error: file not found\n";
-    const char* text2 = "Details: file %s not found\n";
-
-    displayError(text1, text2, NULL, filename, errData);
-    
 }
 
 void errorInvalidExt(char* filename, const char* out, error_t *errData){
@@ -212,7 +204,7 @@ void errorNoArg(const char* out, error_t *errData){
     exit(EXIT_FAILURE);
 }
 
-void displayError(char *errType, char *errDetails, char *errLocation, const char *out, error_t errData){
+void displayError(const char *errType, const char *errDetails, char *errLocation, const char *out, error_t *errData){
 	++ errData->errors;
     fprintf(stderr, "Error: %s\n", errType);
     fprintf(stderr, "Details: %s\n", errDetails);

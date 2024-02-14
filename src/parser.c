@@ -143,7 +143,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData){
     }
 
     // Trow error if the line is not an instruction
-    errorInstruction(inst, newNode, errorFile, errData);
+    errorInst(inst, newNode, errorFile, errData);
     return newNode;
 }
 
