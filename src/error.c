@@ -65,7 +65,7 @@ void errorInst(char *inst, instNode *node, const char *out, error_t errData){
 void errorLineSize(long lineNb, const char* out, error_t *errData){
     ++ errData->errors;
     fprintf(stderr, "Error: syntax error\n");
-    fprintf(stderr, "Details: line must to be under 64 characters\n");
+    fprintf(stderr, "Details: line must be under 64 characters\n");
     fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile, lineNb);
     if(out != NULL){
         FILE *file = fopen(out, "ab");
@@ -244,3 +244,25 @@ void displayError(char *errType, char *errDetails, char *errLocation, const char
     }
 }
 
+void errorNoArg(char *errType, char *errDetails, const char* out, error_t *errData){
+	char *errType = "syntax error";
+	char errDetails[64];
+	sprintf(errDetails, "No argument found");
+	displayError(errType, errDetails, out, errData);
+}
+
+void errorTooManyArg(char *errType, char *errDetails, const char* out, error_t *errData){
+	char *errType = "syntax error";
+	char errDetails[64];
+	sprintf(errDetails, "Too many arguments");
+	displayError(errType, errDetails, out, errData);
+}
+
+void errorLineSize(char *errType, char *errDetails, const char* out, error_t *errData){
+	char *errType = "syntax error";
+	char errDetails[64];
+    char errLocation[64];
+	sprintf(errDetails, "line must be under 64 characters");
+    sprintf(errLocation, "file %s, line %ld\n\n", errData->inputFile, node->lineNb);
+	displayError(errType, errDetails, out, , errLocation, errData);
+}
