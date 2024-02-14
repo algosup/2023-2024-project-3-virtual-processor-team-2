@@ -29,6 +29,15 @@ void printNodeData(instNode_t *node);
 */
 char *getOpName(enum opKind kind);
 
+/*
+    Return text corresponding to interrupt kind
+    params:
+        kind: interrupt kind
+    returns:
+        char*: text corresponding to interrupt kind
+*/
+char *getInterName(enum interruptKind kind);
+
 #ifdef __cplusplus
 }
 #endif

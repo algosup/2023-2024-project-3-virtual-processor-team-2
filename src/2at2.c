@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
     // ---------- Build ----------
     
     // run builder
-    buildProgram(instList, errData);
+    buildProgram(instList, varList, labelList, errData);
 
     fprintf(stderr, "[\t70%%\t] File built successfully\n");
 

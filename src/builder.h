@@ -9,34 +9,39 @@ extern "C" {
     Build the program
     params:
         nodeList: pointer to the instruction list
+        varList: pointer to the variable list
+        labeList: pointer to the label list
         errData: pointer to the error struct
 */
-void buildProgram(instList_t *nodeList, error_t *errData);
+void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeList, error_t *errData);
 
 /*
     Build a node
     params:
         node: pointer to the instruction node
+        varList: pointer to the variable list
+        labeList: pointer to the label list
         errData: pointer to the error struct
 */
-void buildNode(instNode_t *node, error_t *errData);
+void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, error_t *errData);
+
+/*
+    Build a variable
+    params:
+        node: pointer to the instruction node
+        varList: pointer to the variable list
+        errData: pointer to the error struct
+*/
+void buildVar(instNode_t *node, varList_t *varList, error_t *errData);
 
 /*
     Build a mov instruction
     params:
         node: pointer to the instruction node
+        varList: pointer to the variable list
         errData: pointer to the error struct
 */
-void buildMov(instNode_t *node, error_t *errData);
-
-/*
-    Copy an instruction node
-    params:
-        node: pointer to the instruction node
-    returns:
-        instNode_t: copy of the instruction node
-*/
-instNode_t *copyInstNode(instNode_t *node);
+void buildMov(instNode_t *node, varList_t *varList, error_t *errData);
 
 /*
     Check if the string is an unsigned int

@@ -11,10 +11,10 @@
 
 #include "builder.h"
 
-void buildProgram(instList_t *nodeList, error_t *errData) {
+void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeList, error_t *errData) {
     instNode_t *node = nodeList->head;
     while(node != NULL){
-        buildNode(node, errData);
+        buildNode(node, varList, labeList, errData);
         node = node->next;
         while(node != NULL && node->isBuilt){
             node = node->next;
@@ -22,10 +22,13 @@ void buildProgram(instList_t *nodeList, error_t *errData) {
     }
 }
 
-void buildNode(instNode_t *node, error_t *errData) {
+void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, error_t *errData) {
     switch(node->op){
         case OP_MOV:
-            buildMov(node, errData);
+            buildMov(node, varList, errData);
+            break;
+        case OP_VAR:
+            buildVar(node, varList, errData);
             break;
         default:
             // TODO: transform to build error
@@ -35,7 +38,13 @@ void buildNode(instNode_t *node, error_t *errData) {
     }
 }
 
-void buildMov(instNode_t *node, error_t *errData){
+void buildVar(instNode_t *node, varList_t *varList, error_t *errData){
+    // try to add the variable to the list
+    addVar(varList, node->arg0, node->arg1);
+    node->isBuilt = true;
+}
+
+void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
     // check if it's mov to reg
     if(node->arg0 == NULL){
         // check if it's val -> reg
@@ -47,32 +56,65 @@ void buildMov(instNode_t *node, error_t *errData){
             // Create a new node
             instNode_t *newNode = copyInstNode(node);
             
+            // set the node
+            node->op = OP_INT;
+            node->isInter = true;
+            node->inter = INT_MOV_F_REG;
+            node->inputReg = getRegKind(node->arg1);
+            node->arg0 = NULL;
+            node->arg1 = NULL;
+            node->isBuilt = true;
+            node->next = newNode;
+
+            // set the new node
+            newNode->arg0 = NULL;
+            newNode->arg1 = NULL;
+            newNode->isBuilt = true;
+
             return;
         }
-        // check if it's var -> reg
-    }
-    // check if it's reg -> var
-    // check if it's value -> var
-    // check if it's var -> var
-    return;
-}
+        // if it's var -> reg
+        else{
+            // check if the variable is in the list
+            int varId = isVarExist(varList, node->arg1);
+            if(varId == -1){
+                // TODO: throw error
+            }
 
-instNode_t *copyInstNode(instNode_t *node){
-    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
-    if(newNode == NULL){
-        // TODO: thorw memory alloc error
-        exit(EXIT_FAILURE);
+            // Create a new node
+            instNode_t *newNode = copyInstNode(node);
+            
+            // set the node
+            node->op = OP_MOV_F_VAR;
+            node->isInter = false;
+            node->inputReg = RG_0;
+            char buffer[5];
+            sprintf(buffer, "%d", varId);
+            node->arg0 = (char *)malloc(sizeof(char) * 5);
+            // check if the memory is allocated
+            if(node->arg0 == NULL){
+                // TODO: throw memory alloc error
+                exit(EXIT_FAILURE);
+            }
+            strcpy(node->arg0, buffer);
+            node->arg1 = NULL;
+            node->isBuilt = true;
+            node->next = newNode;
+
+            // set the new node
+            newNode->arg0 = NULL;
+            newNode->arg1 = NULL;
+            newNode->isBuilt = true;
+
+            return;
+        }
     }
-    newNode->id = node->id;
-    newNode->lineNb = node->lineNb;
-    newNode->op = node->op;
-    newNode->isInter = node->isInter;
-    newNode->inter = node->inter;
-    newNode->arg0 = node->arg0;
-    newNode->arg1 = node->arg1;
-    newNode->inputReg = node->inputReg;
-    newNode->next = node->next;
-    return newNode;
+    else{
+        // check if it's reg -> var
+        // check if it's value -> var
+        // check if it's var -> var
+    }
+    return;
 }
 
 bool isUnsignedInt(char *str){

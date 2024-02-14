@@ -91,14 +91,14 @@ typedef struct instList{
 
 // Structs for variable storage
 typedef struct var{
+    int id;
+    int size;
     char *name;
     char * value;
 } var_t;
 
 // Structs for variable list
 typedef struct varList{
-    char* name;
-    long id;
     size_t size;
     var_t *list;
 } varList_t;
@@ -122,3 +122,33 @@ typedef struct labelList{
         kind: interrupt type
 */
 char *getIntCode(enum interruptKind kind);
+
+/*
+    Add a variable to the list
+    params:
+        varList: pointer to the variable list
+        name: name of the variable
+        value: value of the variable
+    returns:
+        bool: true if the variable was added
+*/
+bool addVar(varList_t *varList, char *name, char *value);
+
+/*
+    Check if a variable exists in the list
+    params:
+        varList: pointer to the variable list
+        name: name of the variable
+    returns:
+        int: id of the variable or -1 if it does not exist
+*/
+int isVarExist(varList_t *varList, char *name);
+
+/*
+    Copy an instruction node
+    params:
+        node: pointer to the instruction node
+    returns:
+        instNode_t: copy of the instruction node
+*/
+instNode_t *copyInstNode(instNode_t *node);
