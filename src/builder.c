@@ -30,11 +30,17 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, erro
         case OP_GOTO:
             buildGoto(node, labeList, errData);
             break;
+        case OP_CALL:
+            buildCall(node, labeList, errData);
+            break;
         case OP_VAR:
             buildVar(node, varList, errData);
             break;
         case OP_LAB:
             buildLabel(node, labeList, errData);
+            break;
+        case OP_B_XOR...OP_MOD:
+            buildOperation(node, varList, errData);
             break;
         default:
             // TODO: transform to build error
@@ -279,7 +285,73 @@ void buildCall(instNode_t *node, labelList_t *labelList, error_t *errData){
     strcpy(node->arg0, buffer);
     node->arg1 = NULL;
     node->isBuilt = true;
-    
+
+    return;
+}
+
+void buildOperation(instNode_t *node, varList_t *varList, error_t *errData){
+    // check if the second argument is an unsigned int
+    if(node->arg1 != NULL && isUnsignedInt(node->arg1)){
+        // pass argument 1 to arg0
+        node->arg0 = node->arg1;
+        node->arg1 = NULL;
+        return;
+    }
+    // check if the second argument is a register
+    else if(node->arg1 != NULL && isFromReg(node->arg1)){
+        // Create a new node
+        instNode_t *newNode = copyInstNode(node);
+        
+        // set the node
+        node->op = OP_INT;
+        node->isInter = true;
+        node->inter = INT_MOV_F_REG;
+        node->inputReg = getRegKind(node->arg1);
+        node->arg0 = NULL;
+        node->arg1 = NULL;
+        node->isBuilt = true;
+        node->next = newNode;
+
+        // set the new node
+        newNode->arg0 = NULL;
+        newNode->arg1 = NULL;
+        newNode->isBuilt = true;
+
+        return;
+
+    }
+    // check if the second argument is a variable
+    else if(node->arg1 != NULL){
+        // check if the variable is in the list
+        int varId = isVarExist(varList, node->arg1);
+        if(varId == -1){
+            // TODO: throw error
+        }
+
+        // Create a new node
+        instNode_t *newNode = copyInstNode(node);
+
+        // set the node
+        node->op = OP_MOV_F_VAR;
+        node->isInter = false;
+        node->inputReg = RG_0;
+        char buffer[8];
+        sprintf(buffer, "%d", varId);
+        node->arg0 = (char *)malloc(sizeof(char) * 8);
+        strcpy(node->arg0, buffer);
+        node->arg1 = NULL;
+        node->isBuilt = true;
+        node->next = newNode;
+
+        // set the new node
+        newNode->arg0 = NULL;
+        newNode->arg1 = NULL;
+        newNode->isBuilt = true;
+
+        return;
+    }
+
+    // TODO: throw error
     return;
 }
 

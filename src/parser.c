@@ -166,44 +166,93 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData){
     }
     else if(strcmp(inst, "xor") == 0 || strcmp(inst, "^") == 0){
         newNode->op = OP_B_XOR;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
+
     }
     else if(strcmp(inst, "pop") == 0){
         newNode->op = OP_POP;
     }
     else if(strcmp(inst, "div") == 0 || strcmp(inst, "/") == 0){
         newNode->op = OP_DIV;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "add") == 0 || strcmp(inst, "+") == 0){
         newNode->op = OP_ADD;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "sub") == 0 || strcmp(inst, "-") == 0){
         newNode->op = OP_SUB;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "mul") == 0 || strcmp(inst, "*") == 0){
         newNode->op = OP_MUL;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "shr") == 0 || strcmp(inst, ">>") == 0){
         newNode->op = OP_R_SHIFT;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "shl") == 0 || strcmp(inst, "<<") == 0){
         newNode->op = OP_L_SHIFT;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "and") == 0 || strcmp(inst, "&") == 0){
         newNode->op = OP_B_AND;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "or") == 0 || strcmp(inst, "|") == 0){
         newNode->op = OP_B_OR;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "not") == 0 || strcmp(inst, "!") == 0){
         newNode->op = OP_B_NOT;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "inc") == 0 || strcmp(inst, "++") == 0){
         newNode->op = OP_ADD;
-        newNode->arg0 = "1";
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
+        newNode->arg1 = "1";
     }
     else if(strcmp(inst, "dec") == 0 || strcmp(inst, "--") == 0){
         newNode->op = OP_SUB;
-        newNode->arg0 = "1";
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
+        newNode->arg1 = "1";
     }
     else if(strcmp(inst, "lab") == 0){
         newNode->op = OP_LAB;
@@ -213,6 +262,10 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData){
     }
     else if(strcmp(inst, "mod") == 0 || strcmp(inst, "%") == 0){
         newNode->op = OP_MOD;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "ret") == 0){
         newNode->op = OP_RET;
