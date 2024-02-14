@@ -25,8 +25,10 @@ jobs:
           
       - name: Checkout repository code  
         uses: actions/checkout@v3
-      - name: Cloning the Repository
-        run: git clone https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2
+      - name: Custom shell commands  
+        run: |
+          echo "Start repo checkout"
+          echo "The ${{ github.repository }} repository has been cloned to the runner."
 
   build:
     needs: system_update
@@ -39,11 +41,14 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y cmake g++ make
     
+      - name: Checkout Google Test
+        run: git clone https://github.com/google/googletest.git
+    
       - name: Build Action
         run: |
-          cd googletest
           cmake -S . -B Build
           echo Building
+          mkdir bin
           cd Build
           make
           cd ..
@@ -57,6 +62,5 @@ jobs:
       - name: Running tests
         run: |
           cd bin
-          dir
           .\tests.exe
         shell: cmd
