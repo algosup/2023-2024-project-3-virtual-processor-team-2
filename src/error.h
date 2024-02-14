@@ -34,6 +34,16 @@ error_t *initErrorFile(const char* out, char *inputFile);
 void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData);
 
 /*
+    Throw an error when the given instruction doesn't exist NEW VERSION
+    params:
+        inst: Instruction
+        node: Instruction node to get additionnal information
+        out: Target file (can be NULL)
+        errData: Error history
+*/
+void errorInst(char * inst, instNode *node, const char* out, error_t errData);
+
+/*
     Throw an error when the line size is too big
     params:
         lineNb: Line number
@@ -73,6 +83,15 @@ void errorIssues(char* filename, const char* out, error_t *errData);
 void errorfnf(char* filename, const char* out, error_t *errData);
 
 /*
+    Throw an error when the file is not found
+    params:
+        filename: File name
+        out: Target file (can be NULL)
+        errData: Error history
+*/
+void errorNewFnf(char* filename, error_t *errData);
+
+/*
     Throw an error when the file extension is invalid
     params:
         filename: File's name
@@ -110,27 +129,17 @@ void errorNoArg(const char* out, error_t *errData);
 void errorSpeCharMiss(long lineNb, const char* out, error_t *errData, char* filename);
 
 /*
-        Display a file error with error messages depending on the issue
+        Display error messages depending on the issue
     params:
-        filename: File name
+        errType: Type of error
+        errDetails: Details about the error
+        errLocation: Location of the error
         out: Target file (can be NULL)
         errData: Error history
-        errorNumber: Type of error
 */
-void displayFileError(char* filename, const char* out, error_t *errData, int errorNumber);
+void diplayError(char *errType, char *errDetails, char *errLocation, const char *out, error_t errData);
 
-/*
-        Display a line error with error messages depending on the issue
-    params:
-        inst: instruction
-        node: instruction node
-        lineNb: line number
-        filename: File name
-        out: Target file (can be NULL)
-        errData: Error history
-        errorNumber: Type of error
-*/
-void displaySyntaxError(const char* inst, instNode_t *node, char* filename, long lineNb, const char* out, error_t *errData, int errorNumber);
+
 
 #ifdef __cplusplus
 }

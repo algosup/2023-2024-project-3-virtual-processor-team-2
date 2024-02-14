@@ -26,31 +26,40 @@ error_t *initErrorFile(const char* out, char *inputFile){
     return errData;
 }
 
-void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData){
-    ++ errData->errors;
-    fprintf(stderr, "Error: syntax error\n");
-    fprintf(stderr, "Details: %s instruction is not recognized\n", inst);
-    fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile, node->lineNb);
-    if(out != NULL){
-        FILE *file = fopen(out, "ab");
-        if(file == NULL){
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-            exit(EXIT_FAILURE);
-        }
-        // Get current time
-        time_t rawtime;
-        struct tm *timeinfo;
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
+// void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData){
+//     ++ errData->errors;
+//     fprintf(stderr, "Error: syntax error\n");
+//     fprintf(stderr, "Details: %s instruction is not recognized\n", inst);
+//     fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile, node->lineNb);
+//     if(out != NULL){
+//         FILE *file = fopen(out, "ab");
+//         if(file == NULL){
+//             fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+//             exit(EXIT_FAILURE);
+//         }
+//         // Get current time
+//         time_t rawtime;
+//         struct tm *timeinfo;
+//         time(&rawtime);
+//         timeinfo = localtime(&rawtime);
 
-        // Format date
-        char date_str[20]; // Sufficiently large buffer to hold formatted date
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-        fprintf(file, "%s |\tError: syntax error\n", date_str);
-        fprintf(file, "%s |\tDetails: %s instruction is not recognized\n", date_str, inst);
-        fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile, node->lineNb);
-        fclose(file);
-    }
+//         // Format date
+//         char date_str[20]; // Sufficiently large buffer to hold formatted date
+//         strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
+//         fprintf(file, "%s |\tError: syntax error\n", date_str);
+//         fprintf(file, "%s |\tDetails: %s instruction is not recognized\n", date_str, inst);
+//         fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile, node->lineNb);
+//         fclose(file);
+//     }
+// }
+
+void errorInst(char *inst, instNode *node, const char *out, error_t errData){
+	char *errType = "Syntax Error";
+	char errDetails[64];
+	char errLocation[64];
+	sprintf(errDetails, "Instruction \"%s\" not found", inst);
+	sprintf(errLocation, "File %s, Line %ld\n\n", errData->inputFile, node->lineNb);
+	displayError(errType, errDetails, errLocation, out, errData);
 }
 
 void errorLineSize(long lineNb, const char* out, error_t *errData){
@@ -111,6 +120,14 @@ void errorfnf(char* filename, const char* out, error_t *errData){
     }
     printErrorSummary(errData);
     exit(EXIT_FAILURE);
+}
+
+void errorNewFnf(char* filename, error_t *errData){
+    const char* text1 = "Error: file not found\n";
+    const char* text2 = "Details: file %s not found\n";
+
+    displayError(text1, text2, NULL, filename, errData);
+    
 }
 
 void errorInvalidExt(char* filename, const char* out, error_t *errData){
@@ -195,30 +212,13 @@ void errorNoArg(const char* out, error_t *errData){
     exit(EXIT_FAILURE);
 }
 
-void displayFileError(char* filename, const char* out, error_t *errData, int errorNumber){
-    ++ errData->errors;
-    const char* text1;
-    const char* text2;
-
-    // Determine error message based on errorNumber
-    switch (errorNumber) {
-        case 0:
-            text1 = "Error: file not found\n";
-            text2 = "Details: file %s not found\n";
-            break;
-        case 1:
-            text1 = "Error: invalid file extension\n";
-            text2 = "Details: file %s has an invalid extension\n";
-            break;
-        default:
-            fprintf(stderr, "Invalid error number\n");
-            return;
-    }
-    
-    // Print error message to stderr
-    fprintf(stderr, "%s", text1);
-    fprintf(stderr, text2, filename);
-
+void diplayError(char *errType, char *errDetails, char *errLocation, const char *out, error_t errData){
+	++ errData->errors;
+    fprintf(stderr, "Error: %s\n", errType);
+    fprintf(stderr, "Details: %s\n", errDtails);
+	if(errLocation != NULL){
+	    fprintf(stderr, "In: %s\n", errLocation);
+	}
     if(out != NULL){
         FILE *file = fopen(out, "ab");
         if(file == NULL){
@@ -234,66 +234,13 @@ void displayFileError(char* filename, const char* out, error_t *errData, int err
         // Format date
         char date_str[20]; // Sufficiently large buffer to hold formatted date
         strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-        fprintf(file, "%s | %s", date_str, text1);
-        fprintf(file, text2, filename);
+		
+		fprintf(file, "%s |\tError: %s\n",date_str, errType);
+	    fprintf(file, "%s |\tDetails: %s\n",date_str, errDtails);
+		if(errLocation != NULL){
+		    fprintf(file, "%s |\tIn: %s\n",date_str, errLocation);
+		}
         fclose(file);
     }
-    printErrorSummary(errData);
-    exit(EXIT_FAILURE);
 }
 
-void displaySyntaxError(const char* inst, instNode_t *node, char* filename, long lineNb, const char* out, error_t *errData, int errorNumber){
-    ++ errData->errors;
-    const char* text1;
-    const char* text2;
-
-    // Determine error message based on errorNumber
-    switch (errorNumber) {
-        case 0:
-            text1 = "Error: syntax error\n";
-            text2 = "Details: %s instruction is not recognized\n";
-            break;
-        case 1:
-            text1 = "Error: syntax error\n";
-            text2 = "Details: line must to be under 64 characters\n";
-            break;
-        default:
-            fprintf(stderr, "Invalid error number\n");
-            return;
-    }
-    
-    // Print error message to stderr
-    fprintf(stderr, "%s", text1);
-    if (errorNumber == 0)
-        fprintf(stderr, text2, inst);
-    else
-        fprintf(stderr, "%s", text2);
-    fprintf(stderr, "In: file %s, line %ld\n\n", inputFile, lineNb);
-
-    if(out != NULL){
-        FILE *file = fopen(out, "ab");
-        if(file == NULL){
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-            exit(EXIT_FAILURE);
-        }
-        // Get current time
-        time_t rawtime;
-        struct tm *timeinfo;
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
-
-        // Format date
-        char date_str[20]; // Sufficiently large buffer to hold formatted date
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-        // Write error message to file
-        fprintf(file, "%s | %s", date_str, text1);
-        if (errorNumber == 0)
-            fprintf(file, text2, inst);
-        else
-            fprintf(file, "%s", text2);
-        fprintf(file, "In: file %s, line %ld\n\n", inputFile, lineNb);
-        fclose(file);
-    }
-    printErrorSummary(errData);
-    exit(EXIT_FAILURE);
-}
