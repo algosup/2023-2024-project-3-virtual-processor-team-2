@@ -200,16 +200,19 @@ void displayFileError(char* filename, const char* out, error_t *errData, int err
     const char* text1;
     const char* text2;
 
-     // Determine error message based on errorNumber
-    if (errorNumber == 0) {
-        text1 = "Error: file not found\n";
-        text2 = "Details: file %s not found\n";
-    } else if (errorNumber == 1) {
-        text1 = "Error: invalid file extension\n";
-        text2 = "Details: file %s has an invalid extension\n";
-    } else {
-        fprintf(stderr, "Invalid error number\n");
-        return;
+    // Determine error message based on errorNumber
+    switch (errorNumber) {
+        case 0:
+            text1 = "Error: file not found\n";
+            text2 = "Details: file %s not found\n";
+            break;
+        case 1:
+            text1 = "Error: invalid file extension\n";
+            text2 = "Details: file %s has an invalid extension\n";
+            break;
+        default:
+            fprintf(stderr, "Invalid error number\n");
+            return;
     }
     
     // Print error message to stderr
@@ -238,3 +241,4 @@ void displayFileError(char* filename, const char* out, error_t *errData, int err
     printErrorSummary(errData);
     exit(EXIT_FAILURE);
 }
+
