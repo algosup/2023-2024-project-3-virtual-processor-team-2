@@ -89,7 +89,6 @@ void parseFile(instList_t *nodeList, char *filename, error_t *errData){
 
         // parse the line
         instNode_t *node = parseLine(line, nodeId, lineNb, errData);
-
         // continue if the line is empty
         if(node == NULL){
             ++ lineNb;
@@ -217,6 +216,8 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData){
     }
     else if(strcmp(inst, "ret") == 0){
         newNode->op = OP_RET;
+        newNode->arg0 = "0";
+        newNode->arg1 = "0";
     }
     else if(strcmp(inst, "ngr") == 0){
         newNode->op = OP_INT;
@@ -355,7 +356,7 @@ char **getInstArgs(char *line) {
 }
 
 void setArgs(instNode_t *node, char **args){
-    if(isReg(args[0])){
+    if(args[0] != NULL && isReg(args[0])){
         node->inputReg = strToReg(args[0]);
         if(args[1] != NULL){
             node->arg1 = malloc(sizeof(args[1])+1);

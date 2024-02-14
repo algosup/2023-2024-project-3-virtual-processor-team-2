@@ -28,7 +28,8 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, erro
             buildMov(node, varList, errData);
             break;
         case OP_GOTO:
-
+            buildGoto(node, labeList, errData);
+            break;
         case OP_VAR:
             buildVar(node, varList, errData);
             break;
@@ -260,6 +261,25 @@ void buildGoto(instNode_t *node, labelList_t *labelList, error_t *errData){
     strcpy(node->arg0, buffer);
     node->arg1 = NULL;
     node->isBuilt = true;
+    return;
+}
+
+void buildCall(instNode_t *node, labelList_t *labelList, error_t *errData){
+    // check if the label is in the list
+    int labId = isLabelExist(labelList, node->arg0);
+    if(labId == -1){
+        // TODO: throw error
+        return;
+    }
+
+    // change arg0 to id
+    char buffer[8];
+    sprintf(buffer, "%d", labId);
+    node->arg0 = (char *)malloc(sizeof(char) * 8);
+    strcpy(node->arg0, buffer);
+    node->arg1 = NULL;
+    node->isBuilt = true;
+    
     return;
 }
 

@@ -62,6 +62,15 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData);
 void buildGoto(instNode_t *node, labelList_t *labelList, error_t *errData);
 
 /*
+    Build a call instruction
+    params:
+        node: pointer to the instruction node
+        labelList: pointer to the label list
+        errData: pointer to the error struct
+*/
+void buildCall(instNode_t *node, labelList_t *labelList, error_t *errData);
+
+/*
     Check if the string is an unsigned int
     params:
         str: string to be checked
