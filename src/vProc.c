@@ -53,7 +53,10 @@ int main(int argc, char *argv[]) {
     memory.maxSize = MAX_MEMORY_SIZE / 8;           // Max size of block of memory region
     graphic.maxSize = MAX_GRAPHIC_MEMORY_SIZE / 8;  // Max size of block of graphic region
     virtualProcessor.maxSize = (stack.maxSize + processing.maxSize + memory.maxSize + graphic.maxSize);
-    
+    virtualProcessor.cache = cache;
+
+    printf("%d", virtualProcessor.maxSize); // Just to avoid useless warning
+
     int time = 0;
     int lastTime = 0;
     int latentTicks = 0;
@@ -85,9 +88,9 @@ int main(int argc, char *argv[]) {
             int binReg = (int)strtol(reg, NULL, 2);
             int binData = (int)strtol(data, NULL, 2);
 
-            int *lineRead[] = {binOperand, binReg, binData};
+            int lineRead[] = {binOperand, binReg, binData};
 
-            printf("%d | %d | %d\n", binOperand, binReg, binData);
+            printf("%d | %d | %d\n", lineRead[0], lineRead[1], lineRead[2]);
         } else {
             fprintf(stderr, "ERROR: Invalid line size, line: %u\n", currentLine);
             exit(EXIT_FAILURE);
