@@ -110,8 +110,15 @@ void errorNoArg(const char* out, error_t *errData);
 void errorSpeCharMiss(long lineNb, const char* out, error_t *errData, char* filename);
 
 /*
-
+        Display a file error with error messages depending on the issue
+    params:
+        lineNb: line number
+        filename: File name
+        out: Target file (can be NULL)
+        errData: Error history
+        errorNumber: Type of error
 */
+void displayFileError(char* filename, const char* out, error_t *errData, int errorNumber);
 
 #ifdef __cplusplus
 }
