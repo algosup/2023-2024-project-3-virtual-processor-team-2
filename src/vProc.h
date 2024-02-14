@@ -44,7 +44,7 @@ typedef struct {
     char *filename: the name of the file to import
 
 */
-void parseBinaryFile(char *filename);
+FILE* readBinaryFile(char *filename);
 
 /*
     Test the binary file extension

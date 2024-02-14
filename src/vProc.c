@@ -22,11 +22,23 @@ register_t rg5 = {true, 0};
 register_t rg6 = {true, 0};
 register_t rg7 = {true, 0};
 
-int main() {
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "ERROR: Invalid parameter, Usage: %s <binary file>\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+    FILE* file = readBinaryFile(argv[1]);
+
+    char line[LINE_MAX_BITS];
+    char operand[6];
+    char reg[4];
+    char value[9];
+    uint16_t currentLine = 1;
+
     int time = 0;
     int lastTime = 0;
     int latentTicks = 0;
-    while (true) {
+    while (fgets(line, sizeof(line)+1, file)) {
         Sleep(1000/20); // syntax of sleep depend of the system
         ++latentTicks;
         if(latentTicks >= 20) {
@@ -35,27 +47,44 @@ int main() {
         }
 
         rg3.value += 1;
-        printBinary(rg3.value);
         if(lastTime != time) {
             lastTime = time;
             printf("Time: %ds\n", time);
         }
 
-        // Add your code here
+        if(strlen(line) >= LINE_MAX_BITS-2) {
+            printf("%s\n", line);
+            memcpy(operand, line, 5);
+            memcpy(reg, line + 5, 3);
+            memcpy(value, line + 8, 8);
+            operand[5] = '\0';
+            reg[3] = '\0';
+            value[8] = '\0';
+
+            // Add your code here
 
 
+            printf("%s | %s | %s\n", operand, reg, value);
+        } else {
+            fprintf(stderr, "ERROR: Invalid line size, line: %u\n", currentLine);
+            exit(EXIT_FAILURE);
+        }
+        ++currentLine;
+        
     }
-
+    fclose(file);
     exit(EXIT_SUCCESS);
 }
 
-void parseBinaryFile(char *filename) {
+FILE* readBinaryFile(char *filename) {
     FILE *file = fopen(filename, "rb");
     if (file == NULL){
         fprintf(stderr, "Error reading file\n");
         exit(EXIT_FAILURE);
+    } else {
+        printf("file %s found\n", filename);
     }
-    // checkBinaryFile(filename);
+    return file;
 }
 
 void printBinary(uint16_t value) {
