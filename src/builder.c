@@ -49,6 +49,8 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
     if(node->arg0 == NULL){
         // check if it's val -> reg
         if(isUnsignedInt(node->arg1)){
+            node->arg0 = node->arg1;
+            node->arg1 = NULL;
             return;
         }
         // check if it's reg -> reg
@@ -88,14 +90,9 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
             node->op = OP_MOV_F_VAR;
             node->isInter = false;
             node->inputReg = RG_0;
-            char buffer[5];
+            char buffer[8];
             sprintf(buffer, "%d", varId);
-            node->arg0 = (char *)malloc(sizeof(char) * 5);
-            // check if the memory is allocated
-            if(node->arg0 == NULL){
-                // TODO: throw memory alloc error
-                exit(EXIT_FAILURE);
-            }
+            node->arg0 = (char *)malloc(sizeof(char) * 8);
             strcpy(node->arg0, buffer);
             node->arg1 = NULL;
             node->isBuilt = true;
@@ -111,9 +108,119 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
     }
     else{
         // check if it's reg -> var
+        if(node->arg1 != NULL && isFromReg(node->arg1)){
+            // check if the variable is in the list
+            int varId = isVarExist(varList, node->arg0);
+            if(varId == -1){
+                // TODO: throw error
+            }
+            // Create a new node
+            instNode_t *newNode = copyInstNode(node);
+            
+            // set the node
+            node->op = OP_INT;
+            node->isInter = true;
+            node->inter = INT_MOV_F_REG;
+            node->inputReg = getRegKind(node->arg1);
+            node->arg0 = NULL;
+            node->arg1 = NULL;
+            node->isBuilt = true;
+            node->next = newNode;
+
+            // set the new node
+            newNode->op = OP_MOV_T_VAR;
+            newNode->isInter = false;
+            newNode->inputReg = RG_0;
+
+            char buffer[8];
+            sprintf(buffer, "%d", varId);
+            newNode->arg0 = (char *)malloc(sizeof(char) * 8);
+            strcpy(newNode->arg0, buffer);
+
+            newNode->arg1 = NULL;
+            newNode->isBuilt = true;
+
+            return;
+        }
         // check if it's value -> var
+        else if(isUnsignedInt(node->arg1)){
+            // check if the variable is in the list
+            int varId = isVarExist(varList, node->arg0);
+            if(varId == -1){
+                // TODO: throw error
+            }
+
+            // Create a new node
+            instNode_t *newNode = copyInstNode(node);
+            
+            // set the node
+            node->op = OP_MOV_T_VAR;
+            node->isInter = false;
+            node->inputReg = RG_0;
+
+            char buffer[8];
+            sprintf(buffer, "%d", varId);
+            node->arg0 = (char *)malloc(sizeof(char) * 8);
+            strcpy(node->arg0, buffer);
+
+            node->arg1 = NULL;
+            node->isBuilt = true;
+            node->next = newNode;
+
+            // set the new node
+            newNode->op = OP_MOV;
+            newNode->inputReg = RG_0;
+            newNode->arg0 = newNode->arg1;
+            newNode->arg1 = NULL;
+            newNode->isBuilt = true;
+            return;
+        }
         // check if it's var -> var
+        else{
+            // Create a new node
+            instNode_t *newNode = copyInstNode(node);
+
+            // set the new node
+            // check if the variable is in the list
+            int varId = isVarExist(varList, node->arg0);
+            if(varId == -1){
+                // TODO: throw error
+            }
+            newNode->op = OP_MOV_T_VAR;
+            newNode->isInter = false;
+            newNode->inputReg = RG_0;
+
+            char buffer[8];
+            sprintf(buffer, "%d", varId);
+            newNode->arg0 = (char *)malloc(sizeof(char) * 8);
+            strcpy(newNode->arg0, buffer);
+
+            newNode->arg1 = NULL;
+            newNode->isBuilt = true;
+            
+            // set the node
+            // check if the variable is in the list
+            varId = isVarExist(varList, node->arg1);
+            if(varId == -1){
+                // TODO: throw error
+            }
+
+            node->op = OP_MOV_F_VAR;
+            node->isInter = false;
+            node->inputReg = RG_0;
+
+            sprintf(buffer, "%d", varId);
+            node->arg0 = (char *)malloc(sizeof(char) * 8);
+            strcpy(node->arg0, buffer);
+
+            node->arg1 = NULL;
+            node->isBuilt = true;
+            node->next = newNode;
+            return;
+        }
     }
+    // TODO: throw error
+
     return;
 }
 
