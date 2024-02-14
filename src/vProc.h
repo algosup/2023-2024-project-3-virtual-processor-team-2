@@ -4,17 +4,18 @@
 extern "C" {
 #endif
 
-#define MAX_PROCESSING_SIZE 4032
-#define MAX_MEMORY_SIZE 8320
-#define MAX_GRAPHIC_MEMORY_SIZE 4032
-
-// Define a structure for representing a virtual processor
+// Define the structure of mmu
 typedef struct {
-    struct {
-        int address;
-        bool data[8];  
-    } mmu;
-} VirtualProcessor;
+    int address;
+    bool data[8];
+    int maxSize;
+} MMU_t;
+
+// Define the structure of virtual processor
+typedef struct {
+   MMU_t mmu;
+   int maxSize;
+} virtualProcessor_t;
     
 // Struct of register's values
 typedef struct {
@@ -37,7 +38,9 @@ typedef struct {
         // depending the opcode do action
     // part 2 = 3 bits for the register name (rg0 -> rg7)
     // part 3 = 8 bits for the immediate value (max size in int is 256)
-        
+
+
+
 /*
     Read the binary file
     params:

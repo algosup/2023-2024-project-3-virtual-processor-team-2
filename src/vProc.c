@@ -12,6 +12,10 @@
 #include "vProc.h"
 
 #define LINE_MAX_BITS 16
+#define MAX_STACK_SIZE 2016 // LIFO Storage
+#define MAX_PROCESSING_SIZE 2016 
+#define MAX_MEMORY_SIZE 8320
+#define MAX_GRAPHIC_MEMORY_SIZE 4032
 
 register_t rg0 = {true, 0};
 register_t rg1 = {true, 0};
@@ -22,7 +26,21 @@ register_t rg5 = {true, 0};
 register_t rg6 = {true, 0};
 register_t rg7 = {true, 0};
 
+
 int main() {
+
+    MMU_t stack;
+    MMU_t processing;
+    MMU_t memory;
+    MMU_t graphic;
+    virtualProcessor_t virtualProcessor;
+
+    stack.maxSize = MAX_STACK_SIZE / 8; 
+    processing.maxSize = MAX_PROCESSING_SIZE / 8; 
+    memory.maxSize = MAX_MEMORY_SIZE / 8; 
+    graphic.maxSize = MAX_GRAPHIC_MEMORY_SIZE / 8;
+    virtualProcessor.maxSize = (stack.maxSize + processing.maxSize + memory.maxSize + graphic.maxSize);
+    
     int time = 0;
     int lastTime = 0;
     int latentTicks = 0;
@@ -64,6 +82,7 @@ void printBinary(uint16_t value) {
     }
     putchar('\n');
 }
+
 
 // start:                         ins   reg   value
 //     mov rg0, 5              -> 00000 000 0000 0101 
