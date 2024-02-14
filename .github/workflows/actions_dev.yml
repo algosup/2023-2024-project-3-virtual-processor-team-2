@@ -60,6 +60,7 @@ jobs:
     steps:
       - name: Running tests
         run: |
+          cd C:\2023-2024-project-3-virtual-processor-team-2
           dir
           .\bin\tests.exe
         shell: cmd
