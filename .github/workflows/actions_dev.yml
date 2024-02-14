@@ -61,6 +61,5 @@ jobs:
       - name: Running tests
         run: |
           dir
-          cd .\bin
-          .\tests.exe
+          .\bin\tests.exe
         shell: cmd
