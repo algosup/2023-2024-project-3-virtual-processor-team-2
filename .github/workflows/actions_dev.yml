@@ -56,8 +56,10 @@ jobs:
 
   test:
     needs: build    
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
-      - name: Run tests
-        run: ./bin/tests.exe
-          echo Running tests
+      - name: Running tests
+        run: |
+          cd ..\bin  
+          .\tests.exe
+        shell: cmd
