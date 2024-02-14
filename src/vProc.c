@@ -105,6 +105,7 @@ void printBinary(uint16_t value) {
     putchar('\n');
 }
 
+
 int* parserBinaryFile(char *line, char *operand, char *reg, char *data, uint8_t currentLine){
     
     if(strlen(line) >= LINE_MAX_BITS-2) {
@@ -146,8 +147,8 @@ void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg,
     printf("%d\n", lineRead[1]);
     printf("%d\n", lineRead[2]);
 
-    attributeOperand(*lineRead);
-    attributeRegister(*lineRead);
+    attributeOperand(lineRead);
+    attributeRegister(lineRead);
 }
 
 void attributeOperand(int *arg){
