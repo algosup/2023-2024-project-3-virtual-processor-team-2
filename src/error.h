@@ -137,7 +137,7 @@ void errorSpeCharMiss(long lineNb, const char* out, error_t *errData, char* file
         out: Target file (can be NULL)
         errData: Error history
 */
-void diplayError(char *errType, char *errDetails, char *errLocation, const char *out, error_t errData);
+void displayError(char *errType, char *errDetails, char *errLocation, const char *out, error_t errData);
 
 
 
