@@ -60,6 +60,9 @@ jobs:
     steps:
       - name: Running tests
         run: |
-          cd ..\bin  
+          cd ..  
+          dir  
+          cd bin  
+          dir  
           .\tests.exe
         shell: cmd
