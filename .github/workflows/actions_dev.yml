@@ -26,7 +26,7 @@ jobs:
       - name: Check out repository code
         run: |
           echo "Start repo checkout"
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
           echo "The ${{ github.repository }} repository has been cloned to the runner."
 
 
