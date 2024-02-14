@@ -92,14 +92,14 @@ void errorTooManyArg(const char* out, error_t *errData);
 void errorNoArg(const char* out, error_t *errData);
 
 /*
-    Throw an error when there is a special character missing
+    Throw an error when there is a special character is missing
     params:
         lineNb: line number
         filename: File name
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorSpeCharMiss(long lineNb, const char* out, error_t *errData, char* filename)
+void errorSpeCharMiss(long lineNb, const char* out, error_t *errData, char* filename);
 
 /*
 
