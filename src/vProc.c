@@ -74,8 +74,7 @@ int main(int argc, char *argv[]) {
             printf("Time: %ds\n", time);
         }
 
-
-        readBinaryInstruction(&cache, line, operand, reg, data, &currentLine);
+        readBinaryInstruction(&cache, line, operand, reg, data, currentLine);
            
         
     }
@@ -101,7 +100,7 @@ void printBinary(uint16_t value) {
     putchar('\n');
 }
 
-int parserBinaryFile(char line, char *operand, char *reg, char *data, uint8_t *currentLine){
+int* parserBinaryFile(char *line, char *operand, char *reg, char *data, uint8_t currentLine){
     if(strlen(line) >= LINE_MAX_BITS-2) {
             printf("%s\n", line);
             memcpy(operand, line, 5);
@@ -116,24 +115,28 @@ int parserBinaryFile(char line, char *operand, char *reg, char *data, uint8_t *c
             int binReg = (int)strtol(reg, NULL, 2);
             int binData = (int)strtol(data, NULL, 2);
 
-            int lineRead[] = {binOperand, binReg, binData};
+           static int lineRead[3];
+           lineRead[0] = binOperand;
+           lineRead[1] = binReg;
+           lineRead[2] = binData;
 
             printf("%d | %d | %d\n", binOperand, binReg, binData);
             return lineRead;
         } else {
-            fprintf(stderr, "ERROR: Invalid line size, line: %u\n", *currentLine);
+            fprintf(stderr, "ERROR: Invalid line size, line: %u\n", currentLine);
             exit(EXIT_FAILURE);
         }
-        ++*currentLine;
+        ++currentLine;
         
         
 }
 
-void readBinaryInstruction(cache_t *cache, char line, char *operand, char *reg, char *data, uint8_t *currentLine) {
-    
-    int lineRead = parserBinaryFile(line, operand, reg, data, &currentLine);
-    
+void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine) {
+    int *lineRead = parserBinaryFile(line, operand, reg, data, currentLine);
+
     printf("%d\n", lineRead[0]);
+    printf("%d\n", lineRead[1]);
+    printf("%d\n", lineRead[2]);
     // switch (lineRead[0]){
     // // Define the opCode read in binary
 
