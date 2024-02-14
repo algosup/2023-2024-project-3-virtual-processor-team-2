@@ -4,6 +4,25 @@
 extern "C" {
 #endif
 
+#define MAX_PROCESSING_SIZE 4032
+#define MAX_MEMORY_SIZE 8320
+#define MAX_GRAPHIC_MEMORY_SIZE 4032
+
+// Define a structure for representing a virtual processor
+typedef struct {
+    struct {
+        int address;
+        bool data[8];  
+    } mmu;
+} VirtualProcessor;
+    
+    // Struct of register's values
+typedef struct {
+    bool writable;
+    uint16_t value;
+} register_t;
+
+
 // need to raed the binary file
 // look each line (limit of bits == 16 so if more than 16 error)
 // cut each line in 3 parts
@@ -27,11 +46,6 @@ void parseBinaryFile(char *filename);
 */
 instNode_t parseBinaryLine(char *line, long nodeId, long lineNb);
 
-
-typedef struct {
-    bool writable;
-    uint16_t value;
-} register_t;
 
 /*
     Print a decimal value in binary

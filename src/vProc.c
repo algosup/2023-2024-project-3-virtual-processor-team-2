@@ -8,10 +8,15 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdint.h>
-
 #include "vProc.h"
 
 #define LINE_MAX_BITS 16
+
+int main(void){
+    char *filename = "youmomo";
+    parseBinaryFile(filename);
+    return 0;
+}
 
 void parseBinaryFile(char *filename) {
     FILE *file = fopen(filename, "rb");
@@ -19,7 +24,7 @@ void parseBinaryFile(char *filename) {
         fprintf(stderr, "Error reading file\n");
         exit(EXIT_FAILURE);
     }
-    
+    // checkBinaryFile(filename);
 }
 
 
@@ -94,3 +99,4 @@ void printBinary(uint16_t value) {
 // exit_program:
 //     mov ax, 0x4C00  ; Exit code
 //     int 0x21        ; DOS syscall for exit
+
