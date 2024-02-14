@@ -48,6 +48,7 @@ jobs:
         run: |
           cmake -S . -B Build
           echo Building
+          ls -la
           mkdir bin
           cd Build
           make
