@@ -23,12 +23,12 @@ jobs:
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 90
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 90
           
-      - name: Check out repository code
+      - name: Checkout repository code  # This step uses the 'actions/checkout@v3' action to clone the repository
+        uses: actions/checkout@v3
+      - name: Custom shell commands  # This step runs any shell commands you want after cloning the repository
         run: |
           echo "Start repo checkout"
-          uses: actions/checkout@v4
           echo "The ${{ github.repository }} repository has been cloned to the runner."
-
 
   build:
     needs: system_update
