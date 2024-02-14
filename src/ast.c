@@ -51,3 +51,74 @@ char *getIntCode(enum interruptKind kind){
             exit(EXIT_FAILURE);
     }
 }
+
+bool addVar(varList_t *varList, char *name, char *value){
+    // check if the variable already exists
+    for(size_t i = 0; i < varList->size; i++){
+        if (varList->list[i].name == NULL){
+            continue;
+        }
+        if(strcmp(varList->list[i].name, name) == 0){
+            // TODO: add error variable already exists
+            return false;
+        }
+    }
+    // check if the list is full
+    bool isFull = true;
+    for(size_t i = 0; i < varList->size; i++){
+        if(varList->list[i].name == NULL){
+            isFull = false;
+            break;
+        }
+    }
+    if(isFull){
+        // double the size of the list
+        varList->size *= 2;
+        varList->list = realloc(varList->list, sizeof(var_t) * varList->size);
+        for(size_t i = varList->size / 2; i < varList->size; i++){
+            varList->list[i].name = NULL;
+        }
+    }
+    // add the variable
+    for(size_t i = 0; i < varList->size; i++){
+        if(varList->list[i].name == NULL){
+            // create id
+            varList->list[i].id = i;
+            varList->list[i].name = name;
+            varList->list[i].value = value;
+            return true;
+        }
+    }
+    // TODO: throw error
+    exit(EXIT_FAILURE);
+}
+
+int isVarExist(varList_t *varList, char *name){
+    for(size_t i = 0; i < varList->size; i++){
+        if(varList->list[i].name == NULL){
+            continue;
+        }
+        if(strcmp(varList->list[i].name, name) == 0){
+            return i;
+        }
+    }
+    return -1;
+}
+
+instNode_t *copyInstNode(instNode_t *node){
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    if(newNode == NULL){
+        // TODO: thorw memory alloc error
+        exit(EXIT_FAILURE);
+    }
+    newNode->id = node->id;
+    newNode->lineNb = node->lineNb;
+    newNode->op = node->op;
+    newNode->isInter = node->isInter;
+    newNode->inter = node->inter;
+    newNode->arg0 = node->arg0;
+    newNode->arg1 = node->arg1;
+    newNode->inputReg = node->inputReg;
+    newNode->next = node->next;
+    return newNode;
+}
