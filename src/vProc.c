@@ -75,6 +75,7 @@ int main(int argc, char *argv[]) {
         }
 
 
+        readBinaryInstruction(&cache, line, operand, reg, data, &currentLine);
            
         
     }
@@ -100,7 +101,7 @@ void printBinary(uint16_t value) {
     putchar('\n');
 }
 
-int parserBinaryFile(char line, char *operand, char *reg, char *data, uint8_t currentLine){
+int parserBinaryFile(char line, char *operand, char *reg, char *data, uint8_t *currentLine){
     if(strlen(line) >= LINE_MAX_BITS-2) {
             printf("%s\n", line);
             memcpy(operand, line, 5);
@@ -115,128 +116,129 @@ int parserBinaryFile(char line, char *operand, char *reg, char *data, uint8_t cu
             int binReg = (int)strtol(reg, NULL, 2);
             int binData = (int)strtol(data, NULL, 2);
 
-            int *lineRead[] = {binOperand, binReg, binData};
+            int lineRead[] = {binOperand, binReg, binData};
 
             printf("%d | %d | %d\n", binOperand, binReg, binData);
-            return **lineRead;
+            return lineRead;
         } else {
-            fprintf(stderr, "ERROR: Invalid line size, line: %u\n", currentLine);
+            fprintf(stderr, "ERROR: Invalid line size, line: %u\n", *currentLine);
             exit(EXIT_FAILURE);
         }
-        ++currentLine;
+        ++*currentLine;
         
         
 }
 
-void readBinaryInstruction(char myChar, cache_t *cache, char line, char *operand, char *reg, char *data, uint8_t currentLine) {
+void readBinaryInstruction(cache_t *cache, char line, char *operand, char *reg, char *data, uint8_t *currentLine) {
     
-    // char *lineRead[] = parseBinaryLine(line, operand, reg, data, currentLine);
+    int lineRead = parserBinaryFile(line, operand, reg, data, &currentLine);
     
-    switch (*lineRead[0]){
-    // Define the opCode read in binary
+    printf("%d\n", lineRead[0]);
+    // switch (lineRead[0]){
+    // // Define the opCode read in binary
 
-    case 5:
-        switch (myChar){
-        case 0b00000:
-            // Code for 0b00000
-            break;
-        case 0b00001:
-            // Code for 0b00001
-            break;
-        case 0b00010:
-            // Code for 0b00010
-            break;
-        case 0b00011:
-            // Code for 0b00011
-            break;
-        case 0b00100:
-            // Code for 0b00100
-            break;
-        case 0b00101:
-            // Code for 0b00101
-            break;
-        case 0b00110:
-            // Code for 0b00110
-            break;
-        case 0b00111:
-            // Code for 0b00111
-            break;
-        case 0b01000:
-            // Code for 0b01000
-            break;
-        case 0b01001:
-            // Code for 0b00000
-            break;
-        case 0b01010:
-            // Code for 0b00001
-            break;
-        case 0b01011:
-            // Code for 0b00010
-            break;
-        case 0b01100:
-            // Code for 0b00011
-            break;
-        case 0b01101:
-            // Code for 0b00100
-            break;
-        case 0b01110:
-            // Code for 0b00101
-            break;
-        case 0b01111:
-            // Code for 0b00110
-            break;
-        case 0b10000:
-            // Code for 0b00111
-            break;
-        case 0b10001:
-            // Code for 0b01000
-            break;
-        case 0b10010:
-            // Code for 0b00000
-            break;
-        case 0b10011:
-            // Code for 0b00001
-            break;
-        case 0b10100:
-            // Code for 0b00010
-            break;
-        case 0b10101:
-            // Code for 0b00011
-            break;
-        case 0b10110:
-            // Code for 0b00100
-            break;
-        case 0b10111:
-            // Code for 0b00101
-            break;
-        case 0b11000:
-            // Code for 0b00110
-            break;
-        case 0b11001:
-            // Code for 0b00111
-            break;
-        case 0b11010:
-            // Code for 0b01000
-            break;
-        case 0b11011:
-            // Code for 0b00000
-            break;
-        case 0b11100:
-            // Code for 0b00001
-            break;
-        case 0b11101:
-            // Code for 0b00010
-            break;
-        case 0b11110:
-            // Code for 0b00011
-            break;
-        case 0b11111:
-            // Code for 0b00100
-            break;
-        default:
-            // default value
-            break;
-        }
+    // case 5:
+    //     switch (lineRead[1]){
+    //     case 0b00000:
+    //         // Code for 0b00000
+    //         break;
+    //     case 0b00001:
+    //         // Code for 0b00001
+    //         break;
+    //     case 0b00010:
+    //         // Code for 0b00010
+    //         break;
+    //     case 0b00011:
+    //         // Code for 0b00011
+    //         break;
+    //     case 0b00100:
+    //         // Code for 0b00100
+    //         break;
+    //     case 0b00101:
+    //         // Code for 0b00101
+    //         break;
+    //     case 0b00110:
+    //         // Code for 0b00110
+    //         break;
+    //     case 0b00111:
+    //         // Code for 0b00111
+    //         break;
+    //     case 0b01000:
+    //         // Code for 0b01000
+    //         break;
+    //     case 0b01001:
+    //         // Code for 0b00000
+    //         break;
+    //     case 0b01010:
+    //         // Code for 0b00001
+    //         break;
+    //     case 0b01011:
+    //         // Code for 0b00010
+    //         break;
+    //     case 0b01100:
+    //         // Code for 0b00011
+    //         break;
+    //     case 0b01101:
+    //         // Code for 0b00100
+    //         break;
+    //     case 0b01110:
+    //         // Code for 0b00101
+    //         break;
+    //     case 0b01111:
+    //         // Code for 0b00110
+    //         break;
+    //     case 0b10000:
+    //         // Code for 0b00111
+    //         break;
+    //     case 0b10001:
+    //         // Code for 0b01000
+    //         break;
+    //     case 0b10010:
+    //         // Code for 0b00000
+    //         break;
+    //     case 0b10011:
+    //         // Code for 0b00001
+    //         break;
+    //     case 0b10100:
+    //         // Code for 0b00010
+    //         break;
+    //     case 0b10101:
+    //         // Code for 0b00011
+    //         break;
+    //     case 0b10110:
+    //         // Code for 0b00100
+    //         break;
+    //     case 0b10111:
+    //         // Code for 0b00101
+    //         break;
+    //     case 0b11000:
+    //         // Code for 0b00110
+    //         break;
+    //     case 0b11001:
+    //         // Code for 0b00111
+    //         break;
+    //     case 0b11010:
+    //         // Code for 0b01000
+    //         break;
+    //     case 0b11011:
+    //         // Code for 0b00000
+    //         break;
+    //     case 0b11100:
+    //         // Code for 0b00001
+    //         break;
+    //     case 0b11101:
+    //         // Code for 0b00010
+    //         break;
+    //     case 0b11110:
+    //         // Code for 0b00011
+    //         break;
+    //     case 0b11111:
+    //         // Code for 0b00100
+    //         break;
+    //     default:
+    //         // default value
+    //         break;
+    //     }
 
     // Define the register read in binary
     // case 3:
@@ -280,7 +282,7 @@ void readBinaryInstruction(char myChar, cache_t *cache, char line, char *operand
     //     default:
     //         // default code
     //         break;
-    }
+    // }
 }
 
 // start:                         ins   reg   value

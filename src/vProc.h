@@ -60,7 +60,7 @@ instNode_t parseBinaryLine(char *line, long nodeId, long lineNb);
 
 
 */
-int parserBinaryFile(char line, char operand[], char reg[], char data[], uint8_t currentLine);
+int parserBinaryFile(char line, char *operand, char *reg, char *data, uint8_t *currentLine);
 /*
     Print a decimal value in binary
     params:
@@ -70,7 +70,7 @@ int parserBinaryFile(char line, char operand[], char reg[], char data[], uint8_t
 */
 void printBinary(uint16_t value);
 
-void readBinaryInsctuction(char myChar, cache_t *cache);
+void readBinaryInsctuction(cache_t *cache, char line, char *operand, char *reg, char *data, uint8_t *currentLine);
 #ifdef __cplusplus
 }
 #endif
