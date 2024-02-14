@@ -242,3 +242,58 @@ void displayFileError(char* filename, const char* out, error_t *errData, int err
     exit(EXIT_FAILURE);
 }
 
+void displaySyntaxError(const char* inst, instNode_t *node, char* filename, long lineNb, const char* out, error_t *errData, int errorNumber){
+    ++ errData->errors;
+    const char* text1;
+    const char* text2;
+
+    // Determine error message based on errorNumber
+    switch (errorNumber) {
+        case 0:
+            text1 = "Error: syntax error\n";
+            text2 = "Details: %s instruction is not recognized\n";
+            break;
+        case 1:
+            text1 = "Error: syntax error\n";
+            text2 = "Details: line must to be under 64 characters\n";
+            break;
+        default:
+            fprintf(stderr, "Invalid error number\n");
+            return;
+    }
+    
+    // Print error message to stderr
+    fprintf(stderr, "%s", text1);
+    if (errorNumber == 0)
+        fprintf(stderr, text2, inst);
+    else
+        fprintf(stderr, "%s", text2);
+    fprintf(stderr, "In: file %s, line %ld\n\n", inputFile, lineNb);
+
+    if(out != NULL){
+        FILE *file = fopen(out, "ab");
+        if(file == NULL){
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        // Get current time
+        time_t rawtime;
+        struct tm *timeinfo;
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+
+        // Format date
+        char date_str[20]; // Sufficiently large buffer to hold formatted date
+        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
+        // Write error message to file
+        fprintf(file, "%s | %s", date_str, text1);
+        if (errorNumber == 0)
+            fprintf(file, text2, inst);
+        else
+            fprintf(file, "%s", text2);
+        fprintf(file, "In: file %s, line %ld\n\n", inputFile, lineNb);
+        fclose(file);
+    }
+    printErrorSummary(errData);
+    exit(EXIT_FAILURE);
+}

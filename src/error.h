@@ -112,13 +112,25 @@ void errorSpeCharMiss(long lineNb, const char* out, error_t *errData, char* file
 /*
         Display a file error with error messages depending on the issue
     params:
-        lineNb: line number
         filename: File name
         out: Target file (can be NULL)
         errData: Error history
         errorNumber: Type of error
 */
 void displayFileError(char* filename, const char* out, error_t *errData, int errorNumber);
+
+/*
+        Display a line error with error messages depending on the issue
+    params:
+        inst: instruction
+        node: instruction node
+        lineNb: line number
+        filename: File name
+        out: Target file (can be NULL)
+        errData: Error history
+        errorNumber: Type of error
+*/
+void displaySyntaxError(const char* inst, instNode_t *node, char* filename, long lineNb, const char* out, error_t *errData, int errorNumber);
 
 #ifdef __cplusplus
 }
