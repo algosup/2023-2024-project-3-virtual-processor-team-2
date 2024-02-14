@@ -61,9 +61,6 @@ jobs:
       - name: Running tests
         run: |
           dir
-          cd ..  
-          echo Outside folder
-          dir  
           cd bin  
           echo In bin folder
           dir  
