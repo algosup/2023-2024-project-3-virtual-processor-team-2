@@ -25,10 +25,8 @@ jobs:
           
       - name: Checkout repository code  
         uses: actions/checkout@v3
-      - name: Custom shell commands  
-        run: |
-          echo "Start repo checkout"
-          run: git clone https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2
+      - name: Cloning the Repository
+        run: git clone https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2
           echo "The ${{ github.repository }} repository has been cloned to the runner."
 
   build:
