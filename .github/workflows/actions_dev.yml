@@ -23,11 +23,12 @@ jobs:
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 90
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 90
           
-      - name: Checkout repository code  # This step uses the 'actions/checkout@v3' action to clone the repository
+      - name: Checkout repository code  
         uses: actions/checkout@v3
-      - name: Custom shell commands  # This step runs any shell commands you want after cloning the repository
+      - name: Custom shell commands  
         run: |
           echo "Start repo checkout"
+          run: git clone https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2
           echo "The ${{ github.repository }} repository has been cloned to the runner."
 
   build:
@@ -60,7 +61,6 @@ jobs:
     steps:
       - name: Running tests
         run: |
-          cd 2023-2024-project-3-virtual-processor-team-2
           cd bin
           dir
           .\tests.exe
