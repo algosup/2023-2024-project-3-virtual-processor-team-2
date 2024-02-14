@@ -195,3 +195,46 @@ void errorNoArg(const char* out, error_t *errData){
     exit(EXIT_FAILURE);
 }
 
+void displayFileError(char* filename, const char* out, error_t *errData, int errorNumber){
+    ++ errData->errors;
+    const char* text1;
+    const char* text2;
+
+     // Determine error message based on errorNumber
+    if (errorNumber == 0) {
+        text1 = "Error: file not found\n";
+        text2 = "Details: file %s not found\n";
+    } else if (errorNumber == 1) {
+        text1 = "Error: invalid file extension\n";
+        text2 = "Details: file %s has an invalid extension\n";
+    } else {
+        fprintf(stderr, "Invalid error number\n");
+        return;
+    }
+    
+    // Print error message to stderr
+    fprintf(stderr, "%s", text1);
+    fprintf(stderr, text2, filename);
+
+    if(out != NULL){
+        FILE *file = fopen(out, "ab");
+        if(file == NULL){
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        // Get current time
+        time_t rawtime;
+        struct tm *timeinfo;
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+
+        // Format date
+        char date_str[20]; // Sufficiently large buffer to hold formatted date
+        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
+        fprintf(file, "%s | %s", date_str, text1);
+        fprintf(file, text2, filename);
+        fclose(file);
+    }
+    printErrorSummary(errData);
+    exit(EXIT_FAILURE);
+}
