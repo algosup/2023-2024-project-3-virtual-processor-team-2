@@ -24,7 +24,7 @@ error_t *initErrorFile(const char* out, char *inputFile);
 // ---------- Parsing/ Assembling errors ----------
 
 /*
-    Throw an error when the given instruction doesn't exist
+    Throw an error whrn the given instruction doesn't exist
     params:
         inst: Instruction
         node: Instruction node to get additionnal information
@@ -50,8 +50,18 @@ void errorLineSize(long lineNb, const char* out, error_t *errData);
 */
 void printErrorSummary(error_t *errData);
 
+// ---------- Bin converting errors ----------
+
 // ---------- Fatal errors ----------
 
+/*
+    Throw an error when the file contains errors 
+    params:
+        filename: File name
+        out: Target file (can be NULL)
+        errData: Error history
+*/
+void errorIssues(char* filename, const char* out, error_t *errData);
 
 /*
     Throw an error when the file is not found
@@ -65,18 +75,15 @@ void errorfnf(char* filename, const char* out, error_t *errData);
 /*
     Throw an error when the file extension is invalid
     params:
-        filename: File name
+        filename: File's name
         out: Target file (can be NULL)
         errData: Error history
 */
 void errorInvalidExt(char* filename, const char* out, error_t *errData);
 
 
-
-
-
 /*
-    Throw an error when there is too many arguments
+    Display a file error with error messages depending on the issue
     params:
         out: Target file (can be NULL)
         errData: Error history
@@ -98,6 +105,7 @@ void errorNoArg(const char* out, error_t *errData);
         filename: File name
         out: Target file (can be NULL)
         errData: Error history
+        errorNumber: Type of error
 */
 void errorSpeCharMiss(long lineNb, const char* out, error_t *errData, char* filename);
 
