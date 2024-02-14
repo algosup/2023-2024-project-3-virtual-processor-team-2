@@ -113,7 +113,7 @@ void parseFile(instList_t *nodeList, char *filename, error_t *errData){
 
 instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData){
     // check if the line is empty or a comment
-    if(line[0] == '\n' || strncmp(line, "//", 2) == 0){
+    if(line[0] == '\n' || strncmp(cleanString(line), "//", 2) == 0){
         return NULL;
     }
 

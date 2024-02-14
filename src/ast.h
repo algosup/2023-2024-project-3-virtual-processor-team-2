@@ -152,3 +152,24 @@ int isVarExist(varList_t *varList, char *name);
         instNode_t: copy of the instruction node
 */
 instNode_t *copyInstNode(instNode_t *node);
+
+/*
+    Add a label to the list
+    params:
+        labelList: pointer to the label list
+        name: name of the label
+        nodeId: id of the node
+    returns:
+        int: id of the label or -1 if it does not exist
+*/
+int addLabel(labelList_t *labelList, char *name, long nodeId);
+
+/*
+    Check if a label exists in the list
+    params:
+        labelList: pointer to the label list
+        name: name of the label
+    returns:
+        int: id of the label or -1 if it does not exist
+*/
+int isLabelExist(labelList_t *labelList, char *name);

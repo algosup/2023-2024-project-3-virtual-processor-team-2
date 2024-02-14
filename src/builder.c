@@ -30,6 +30,9 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, erro
         case OP_VAR:
             buildVar(node, varList, errData);
             break;
+        case OP_LAB:
+            buildLabel(node, labeList, errData);
+            break;
         default:
             // TODO: transform to build error
             // errorInstruction("unknown", node, NULL, errData);
@@ -43,6 +46,23 @@ void buildVar(instNode_t *node, varList_t *varList, error_t *errData){
     addVar(varList, node->arg0, node->arg1);
     node->isBuilt = true;
 }
+
+void buildLabel(instNode_t *node, labelList_t *labelList, error_t *errData){
+    // try to add the label to the list
+    int labId = addLabel(labelList, node->arg0, node->id);
+    if(labId == -1){
+        // TODO: throw error
+    }
+
+    // set arg0 as id
+    char buffer[8];
+    sprintf(buffer, "%d", labId);
+    node->arg0 = (char *)malloc(sizeof(char) * 8);
+    strcpy(node->arg0, buffer);
+
+    node->isBuilt = true;
+}
+
 
 void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
     // check if it's mov to reg

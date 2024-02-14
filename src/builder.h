@@ -35,6 +35,15 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, erro
 void buildVar(instNode_t *node, varList_t *varList, error_t *errData);
 
 /*
+    Build a label
+    params:
+        node: pointer to the instruction node
+        labelList: pointer to the label list
+        errData: pointer to the error struct
+*/
+void buildLabel(instNode_t *node, labelList_t *labelList, error_t *errData);
+
+/*
     Build a mov instruction
     params:
         node: pointer to the instruction node

@@ -122,3 +122,58 @@ instNode_t *copyInstNode(instNode_t *node){
     newNode->next = node->next;
     return newNode;
 }
+
+int addLabel(labelList_t *labelList, char *name, long nodeId){
+    // check if the label already exists
+    for(size_t i = 0; i < labelList->size; i++){
+        if (labelList->list[i].name == NULL){
+            continue;
+        }
+        if(strcmp(labelList->list[i].name, name) == 0){
+            // TODO: add error label already exists
+            return -1;
+        }
+    }
+
+    // check if the list is full
+    bool isFull = true;
+    for(size_t i = 0; i < labelList->size; i++){
+        if(labelList->list[i].name == NULL){
+            isFull = false;
+            break;
+        }
+    }
+    if(isFull){
+        // double the size of the list
+        labelList->size *= 2;
+        labelList->list = realloc(labelList->list, sizeof(label_t) * labelList->size);
+        for(size_t i = labelList->size / 2; i < labelList->size; i++){
+            labelList->list[i].name = NULL;
+        }
+    }
+
+    // add the label
+    for(size_t i = 0; i < labelList->size; i++){
+        if(labelList->list[i].name == NULL){
+            labelList->list[i].name = name;
+            labelList->list[i].nodeId = nodeId;
+            labelList->list[i].id = i;
+            return i;
+        }
+    }
+
+    // TODO: throw error
+    return -1;
+}
+
+int isLabelExist(labelList_t *labelList, char *name){
+    for(size_t i = 0; i < labelList->size; i++){
+        if(labelList->list[i].name == NULL){
+            continue;
+        }
+        if(strcmp(labelList->list[i].name, name) == 0){
+            return labelList->list[i].id;
+        }
+    }
+    return -1;
+}
