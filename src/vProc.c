@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 #include "vProc.h"
 
@@ -19,6 +20,46 @@ void parseBinaryFile(char *filename) {
         exit(EXIT_FAILURE);
     }
     
+}
+
+
+register_t rg0 = {true, 0};
+register_t rg1 = {true, 0};
+register_t rg2 = {true, 0};
+register_t rg3 = {false, 0};
+register_t rg4 = {true, 0};
+register_t rg5 = {true, 0};
+register_t rg6 = {true, 0};
+register_t rg7 = {true, 0};
+
+int main() {
+    int time = 0;
+    int lastTime = 0;
+    int latentTicks = 0;
+    while (true) {
+        _sleep(1000/20);
+        ++latentTicks;
+        if(latentTicks >= 20) {
+            latentTicks = latentTicks - 20;
+            time += 1;
+        }
+
+        rg3.value += 1;
+        printBinary(rg3.value);
+        if(lastTime != time) {
+            lastTime = time;
+            printf("Time: %ds\n", time);
+        }
+    }
+
+    exit(EXIT_SUCCESS);
+}
+ 
+void printBinary(uint16_t value) {
+    for (int i = 15; i >= 0; --i) {
+        putchar((value & (1 << i)) ? '1' : '0');
+    }
+    putchar('\n');
 }
 
 // start:                         ins   reg   value

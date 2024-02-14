@@ -30,8 +30,17 @@ instNode_t parseBinaryLine(char *line, long nodeId, long lineNb);
 
 typedef struct {
     bool writable;
-    signed char value[16];
+    uint16_t value;
 } register_t;
+
+/*
+    Print a decimal value in binary
+    params:
+        value: value to print
+    returns:
+        None
+*/
+void printBinary(uint16_t value);
 
 #ifdef __cplusplus
 }
