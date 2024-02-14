@@ -62,4 +62,3 @@ jobs:
       - name: Run tests
         run: .\path\to\tests.exe
           echo Running tests
-        shell: cmd
