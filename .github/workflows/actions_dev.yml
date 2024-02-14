@@ -41,6 +41,7 @@ jobs:
     
       - name: Build Action
         run: |
+          cd googletest
           cmake -S . -B Build
           echo Building
           cd Build
