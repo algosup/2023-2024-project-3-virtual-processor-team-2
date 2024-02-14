@@ -60,9 +60,12 @@ jobs:
     steps:
       - name: Running tests
         run: |
+          dir
           cd ..  
+          echo Outside folder
           dir  
           cd bin  
+          echo In bin folder
           dir  
           .\tests.exe
         shell: cmd
