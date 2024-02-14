@@ -23,34 +23,12 @@ jobs:
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 90
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 90
           
-      - name: Repository clone
-        run:
-          echo Cloning repository
-          type: git-clone
-          title: Step Title
-          description: Step description
-          working_directory: /path
-          repo: owner/repo
-          git: my-git-provider
-          revision: abcdef12345'
-          use_proxy: false
-          credentials:
-            username: user
-            password: credentials
-          fail_fast: false
-          strict_fail_fast: true
-          when:
-            branch:
-              ignore: [ develop ]
-          on_success:
-            ...
-          on_fail:
-            ...
-          on_finish:
-            ...
-          retry:
-            ...  
-
+      - name: Check out repository code
+        run: |
+          echo "Start repo clone"
+          checkout self 
+          echo "The ${{ github.repository }} repository has been cloned to the runner."
+          git reset --hard commitid
 
 
   build:
