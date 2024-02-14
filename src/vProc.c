@@ -8,25 +8,10 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <Windows.h> // we need to check what system is before implementing 
 #include "vProc.h"
 
 #define LINE_MAX_BITS 16
-
-int main(void){
-    char *filename = "youmomo";
-    parseBinaryFile(filename);
-    return 0;
-}
-
-void parseBinaryFile(char *filename) {
-    FILE *file = fopen(filename, "rb");
-    if (file == NULL){
-        fprintf(stderr, "Error reading file\n");
-        exit(EXIT_FAILURE);
-    }
-    // checkBinaryFile(filename);
-}
-
 
 register_t rg0 = {true, 0};
 register_t rg1 = {true, 0};
@@ -42,7 +27,7 @@ int main() {
     int lastTime = 0;
     int latentTicks = 0;
     while (true) {
-        _sleep(1000/20);
+        Sleep(1000/20); // syntax of sleep depend of the system
         ++latentTicks;
         if(latentTicks >= 20) {
             latentTicks = latentTicks - 20;
@@ -59,7 +44,16 @@ int main() {
 
     exit(EXIT_SUCCESS);
 }
- 
+
+void parseBinaryFile(char *filename) {
+    FILE *file = fopen(filename, "rb");
+    if (file == NULL){
+        fprintf(stderr, "Error reading file\n");
+        exit(EXIT_FAILURE);
+    }
+    // checkBinaryFile(filename);
+}
+
 void printBinary(uint16_t value) {
     for (int i = 15; i >= 0; --i) {
         putchar((value & (1 << i)) ? '1' : '0');
