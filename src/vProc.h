@@ -14,6 +14,7 @@ typedef struct {
 // Define the structure of virtual processor
 typedef struct {
    MMU_t mmu;
+   cache_t cache;
    int maxSize;
 } virtualProcessor_t;
     
@@ -66,6 +67,7 @@ instNode_t parseBinaryLine(char *line, long nodeId, long lineNb);
 */
 void printBinary(uint16_t value);
 
+void readBinaryInsctuction(cache_t *cache);
 #ifdef __cplusplus
 }
 #endif
