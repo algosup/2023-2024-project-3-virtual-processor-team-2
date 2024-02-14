@@ -16,12 +16,19 @@ typedef struct {
     } mmu;
 } VirtualProcessor;
     
-    // Struct of register's values
+// Struct of register's values
 typedef struct {
     bool writable;
     uint16_t value;
 } register_t;
 
+
+// Struct of cache's values
+typedef struct {
+    uint8_t callId;
+    uint16_t line;
+    uint8_t labelId;
+} cache_t;
 
 // need to raed the binary file
 // look each line (limit of bits == 16 so if more than 16 error)

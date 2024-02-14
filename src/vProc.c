@@ -40,6 +40,10 @@ int main() {
             lastTime = time;
             printf("Time: %ds\n", time);
         }
+
+        // Add your code here
+
+
     }
 
     exit(EXIT_SUCCESS);
