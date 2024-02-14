@@ -199,11 +199,11 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData){
     }
     else if(strcmp(inst, "inc") == 0 || strcmp(inst, "++") == 0){
         newNode->op = OP_ADD;
-        newNode->arg = "1";
+        newNode->arg0 = "1";
     }
     else if(strcmp(inst, "dec") == 0 || strcmp(inst, "--") == 0){
         newNode->op = OP_SUB;
-        newNode->arg = "1";
+        newNode->arg0 = "1";
     }
     else if(strcmp(inst, "lab") == 0){
         newNode->op = OP_LAB;
@@ -220,72 +220,72 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData){
     else if(strcmp(inst, "ngr") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "0";
+        newNode->arg0 = "0";
     }
     else if(strcmp(inst, "draw") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "1";
+        newNode->arg0 = "1";
     }
     else if(strcmp(inst, "ob1") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "2";
+        newNode->arg0 = "2";
     }
     else if(strcmp(inst, "or") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "3";
+        newNode->arg0 = "3";
     }
     else if(strcmp(inst, "if_and") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "4";
+        newNode->arg0 = "4";
     }
     else if(strcmp(inst, "if_xor") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "5";
+        newNode->arg0 = "5";
     }
     else if(strcmp(inst, "if_lt") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "6";
+        newNode->arg0 = "6";
     }
     else if(strcmp(inst, "if_lte") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "7";
+        newNode->arg0 = "7";
     }
     else if(strcmp(inst, "if_gt") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "8";
+        newNode->arg0 = "8";
     }
     else if(strcmp(inst, "if_gte") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "9";
+        newNode->arg0 = "9";
     }
     else if(strcmp(inst, "if_eq") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "10";
+        newNode->arg0 = "10";
     }
     else if(strcmp(inst, "if_neq") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "11";
+        newNode->arg0 = "11";
     }
     else if(strcmp(inst, "pusha") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "12";
+        newNode->arg0 = "12";
     }
     else if(strcmp(inst, "popa") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg = "13";
+        newNode->arg0 = "13";
     }
     else{
         errorInstruction(inst, newNode, errorFile, errData);
@@ -357,15 +357,19 @@ void setArgs(instNode_t *node, char **args){
     if(isReg(args[0])){
         node->inputReg = strToReg(args[0]);
         if(args[1] != NULL){
-            node->arg = malloc(sizeof(args[1])+1);
-            strcpy(node->arg, args[1]);
-            return;
+            node->arg1 = malloc(sizeof(args[1])+1);
+            strcpy(node->arg1, args[1]);
         }
     }
     else if(args[0] != NULL){
-        node->arg = malloc(sizeof(args[0])+1);
-        strcpy(node->arg, args[0]);
+        node->arg0 = malloc(sizeof(args[0])+1);
+        strcpy(node->arg0, args[0]);
+        if(args[1] != NULL){
+            node->arg1 = malloc(sizeof(args[1])+1);
+            strcpy(node->arg1, args[1]);
+        }
     }
+    return;
 }
 
 bool isReg(char *arg) {

@@ -98,15 +98,6 @@ void setArgs(instNode_t *node, char **args);
 bool isReg(char *arg);
 
 /*
-    Check if the argument is a variable or a label
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a variable
-*/
-bool isTarget(char *arg);
-
-/*
     Convert a string to a register
     params:
         arg: string to be converted

@@ -70,7 +70,8 @@ typedef struct instNode{
     enum opKind op;
     bool isInter;
     enum interruptKind inter;
-    char * arg;
+    char * arg0;
+    char * arg1;
     enum regKind inputReg;
     struct instNode *next;
 } instNode_t;

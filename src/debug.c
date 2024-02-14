@@ -40,7 +40,8 @@ void printNodeData(instNode_t *node){
     fprintf(file, "%s | Line number: %ld\n", date_str, node->lineNb);
     fprintf(file, "%s | Instruction: %s\n", date_str, getOpName(node->op));
     fprintf(file, "%s | Target reg: %d\n", date_str, node->inputReg);
-    fprintf(file, "%s | Arguments: %s\n", date_str, node->arg);
+    fprintf(file, "%s | Argument 0: %s\n", date_str, node->arg0);
+    fprintf(file, "%s | Argument 1: %s\n", date_str, node->arg1);
     fprintf(file, "\n");
     fclose(file);
 }

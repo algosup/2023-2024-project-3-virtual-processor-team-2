@@ -11,3 +11,21 @@
 
 #include "builder.h"
 
+void buildProgram(instList_t *nodeList, error_t *errData) {
+    instNode_t *node = nodeList->head;
+    while(node != NULL){
+        buildNode(node, errData);
+        node = node->next;
+    }
+}
+
+void buildNode(instNode_t *node, error_t *errData) {
+    switch(node->op){
+        case OP_MOV:
+            break;
+        default:
+            // TODO: transform to build error
+            errorInstruction("unknown", node, NULL, errData);
+            break;
+    }
+}
