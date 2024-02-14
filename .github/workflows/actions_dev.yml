@@ -44,7 +44,7 @@ jobs:
       - name: Checkout Google Test
         run: git clone https://github.com/google/googletest.git
     
-      - name: Build
+      - name: Build Action
         run: |
           cmake -S . -B Build
           echo Building
@@ -60,6 +60,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run tests
-        run: |
+        run: .\path\to\tests.exe
           echo Running tests
-          .\\tests.exe
+        shell: cmd
