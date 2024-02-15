@@ -123,6 +123,23 @@ instNode_t *copyInstNode(instNode_t *node){
     return newNode;
 }
 
+instNode_t *createEmptyInstNode(){
+    instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
+    if(newNode == NULL){
+        // TODO: thorw memory alloc error
+        exit(EXIT_FAILURE);
+    }
+    newNode->id = -1;
+    newNode->lineNb = -1;
+    newNode->isInter = false;
+    newNode->arg0 = NULL;
+    newNode->arg1 = NULL;
+    newNode->isBuilt = false;
+    newNode->next = NULL;
+
+    return newNode;
+}
+
 int addLabel(labelList_t *labelList, char *name, long nodeId){
     // check if the label already exists
     for(size_t i = 0; i < labelList->size; i++){

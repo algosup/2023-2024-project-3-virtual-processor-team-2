@@ -80,20 +80,6 @@ void buildCall(instNode_t *node, labelList_t *labelList, error_t *errData);
 void buildOperation(instNode_t *node, varList_t *varList, error_t *errData);
 
 /*
-    Check if the string is an unsigned int
-    params:
-        str: string to be checked
-*/
-bool isUnsignedInt(char *str);
-
-/*
-    Check if the string is a register
-    params:
-        str: string to be checked
-*/
-bool isFromReg(char *str);
-
-/*
     Get the register kind
     params:
         str: string to be checked
@@ -101,6 +87,15 @@ bool isFromReg(char *str);
         regKind: kind of the register
 */
 enum regKind getRegKind(char *str);
+
+/*
+    Get the data size of a variable in bytes
+    params:
+        str: string to be checked
+    returns:
+        int: data size
+*/
+int getVarDatasize(char *str);
 
 #ifdef __cplusplus
 }

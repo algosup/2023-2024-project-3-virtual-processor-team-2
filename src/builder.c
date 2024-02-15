@@ -10,6 +10,9 @@
 #include <stdbool.h>
 
 #include "builder.h"
+#include "stringPlus.h"
+
+#define IMMEDIATE_VAL_SIZE 8
 
 void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeList, error_t *errData) {
     instNode_t *node = nodeList->head;
@@ -51,9 +54,94 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, erro
 }
 
 void buildVar(instNode_t *node, varList_t *varList, error_t *errData){
+    // copy variable value
+    char *varData = (char *)malloc(sizeof(char) * (strlen(node->arg1) + 1));
+    strcpy(varData, node->arg1);
+
     // try to add the variable to the list
     addVar(varList, node->arg0, node->arg1);
+    int varId = isVarExist(varList, node->arg0);
+    if(varId == -1){
+        // TODO: throw error
+    }
+    // set arg0 as id
+    node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+    sprintf(node->arg0, "%d", varId);
+
+    node->arg1 = NULL;
     node->isBuilt = true;
+
+    // get the datasize of the variable
+    int dataSize = getVarDatasize(varData);
+    if(dataSize > 1){
+        // add the null terminator
+        dataSize++;
+    }
+
+    // create a new node
+    instNode_t *newNode = createEmptyInstNode();
+    newNode->id = node->id;
+    newNode->lineNb = node->lineNb;
+    newNode->op = OP_VAR_SIZE;
+    newNode->inputReg = RG_0;
+
+    newNode->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+    sprintf(newNode->arg0, "%d", dataSize);
+
+    newNode->isBuilt = true;
+    newNode->next = node->next;
+    node->next = newNode;
+
+    if(dataSize == 1){
+        // create a new node
+        instNode_t *dataNode = createEmptyInstNode();
+        dataNode->id = node->id;
+        dataNode->lineNb = node->lineNb;
+        dataNode->op = OP_VAR_DATA;
+        dataNode->inputReg = RG_0;
+
+        dataNode->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+        sprintf(dataNode->arg0, "%s", varData);
+
+        dataNode->isBuilt = true;
+        dataNode->next = newNode->next;
+        newNode->next = dataNode;
+
+        return;
+    }
+    else{
+        // add the null terminator
+        // create a new node
+        instNode_t *nullNode = createEmptyInstNode();
+        nullNode->id = node->id;
+        nullNode->lineNb = node->lineNb;
+        nullNode->op = OP_VAR_DATA;
+        nullNode->inputReg = RG_0;
+
+        nullNode->arg0 = malloc(IMMEDIATE_VAL_SIZE + 1 * sizeof(char));
+        sprintf(nullNode->arg0, "%c", '\0');
+
+        nullNode->isBuilt = true;
+        nullNode->next = newNode->next;
+        newNode->next = nullNode;
+
+        // Reverse iteration over varData to create nodes
+        for (int i = dataSize - 1; i >= 0; i--) {
+            // create a new node
+            instNode_t *dataNode = createEmptyInstNode();
+            dataNode->id = node->id;
+            dataNode->lineNb = node->lineNb;
+            dataNode->op = OP_VAR_DATA;
+            dataNode->inputReg = RG_0;
+
+            dataNode->arg0 = malloc(IMMEDIATE_VAL_SIZE + 1 * sizeof(char));
+            sprintf(dataNode->arg0, "%c", varData[i]);
+
+            dataNode->isBuilt = true;
+            dataNode->next = newNode->next;
+            newNode->next = dataNode;
+        }
+    }
 }
 
 void buildLabel(instNode_t *node, labelList_t *labelList, error_t *errData){
@@ -64,10 +152,8 @@ void buildLabel(instNode_t *node, labelList_t *labelList, error_t *errData){
     }
 
     // set arg0 as id
-    char buffer[8];
-    sprintf(buffer, "%d", labId);
-    node->arg0 = (char *)malloc(sizeof(char) * 8);
-    strcpy(node->arg0, buffer);
+    node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+    sprintf(node->arg0, "%d", labId);
 
     node->isBuilt = true;
 }
@@ -118,10 +204,8 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
             node->op = OP_MOV_F_VAR;
             node->isInter = false;
             node->inputReg = RG_0;
-            char buffer[8];
-            sprintf(buffer, "%d", varId);
-            node->arg0 = (char *)malloc(sizeof(char) * 8);
-            strcpy(node->arg0, buffer);
+            node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+            sprintf(node->arg0, "%d", varId);
             node->arg1 = NULL;
             node->isBuilt = true;
             node->next = newNode;
@@ -160,10 +244,8 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
             newNode->isInter = false;
             newNode->inputReg = RG_0;
 
-            char buffer[8];
-            sprintf(buffer, "%d", varId);
-            newNode->arg0 = (char *)malloc(sizeof(char) * 8);
-            strcpy(newNode->arg0, buffer);
+            newNode->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+            sprintf(newNode->arg0, "%d", varId);
 
             newNode->arg1 = NULL;
             newNode->isBuilt = true;
@@ -186,10 +268,8 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
             node->isInter = false;
             node->inputReg = RG_0;
 
-            char buffer[8];
-            sprintf(buffer, "%d", varId);
-            node->arg0 = (char *)malloc(sizeof(char) * 8);
-            strcpy(node->arg0, buffer);
+            node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+            sprintf(node->arg0, "%d", varId);
 
             node->arg1 = NULL;
             node->isBuilt = true;
@@ -218,10 +298,8 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
             newNode->isInter = false;
             newNode->inputReg = RG_0;
 
-            char buffer[8];
-            sprintf(buffer, "%d", varId);
-            newNode->arg0 = (char *)malloc(sizeof(char) * 8);
-            strcpy(newNode->arg0, buffer);
+            newNode->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+            sprintf(newNode->arg0, "%d", varId);
 
             newNode->arg1 = NULL;
             newNode->isBuilt = true;
@@ -237,9 +315,8 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
             node->isInter = false;
             node->inputReg = RG_0;
 
-            sprintf(buffer, "%d", varId);
-            node->arg0 = (char *)malloc(sizeof(char) * 8);
-            strcpy(node->arg0, buffer);
+            node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+            sprintf(node->arg0, "%d", varId);
 
             node->arg1 = NULL;
             node->isBuilt = true;
@@ -261,10 +338,9 @@ void buildGoto(instNode_t *node, labelList_t *labelList, error_t *errData){
     }
 
     // change arg0 to id
-    char buffer[8];
-    sprintf(buffer, "%d", labId);
-    node->arg0 = (char *)malloc(sizeof(char) * 8);
-    strcpy(node->arg0, buffer);
+    node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+    sprintf(node->arg0, "%d", labId);
+
     node->arg1 = NULL;
     node->isBuilt = true;
     return;
@@ -279,10 +355,9 @@ void buildCall(instNode_t *node, labelList_t *labelList, error_t *errData){
     }
 
     // change arg0 to id
-    char buffer[8];
-    sprintf(buffer, "%d", labId);
-    node->arg0 = (char *)malloc(sizeof(char) * 8);
-    strcpy(node->arg0, buffer);
+    node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+    sprintf(node->arg0, "%d", labId);
+
     node->arg1 = NULL;
     node->isBuilt = true;
 
@@ -335,10 +410,10 @@ void buildOperation(instNode_t *node, varList_t *varList, error_t *errData){
         node->op = OP_MOV_F_VAR;
         node->isInter = false;
         node->inputReg = RG_0;
-        char buffer[8];
-        sprintf(buffer, "%d", varId);
-        node->arg0 = (char *)malloc(sizeof(char) * 8);
-        strcpy(node->arg0, buffer);
+
+        node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+        sprintf(node->arg0, "%d", varId);
+
         node->arg1 = NULL;
         node->isBuilt = true;
         node->next = newNode;
@@ -353,31 +428,6 @@ void buildOperation(instNode_t *node, varList_t *varList, error_t *errData){
 
     // TODO: throw error
     return;
-}
-
-bool isUnsignedInt(char *str){
-    for(size_t i = 0; i < strlen(str); i++){
-        if(str[i] < '0' || str[i] > '9'){
-            return false;
-        }
-    }
-    return true;
-}
-
-bool isFromReg(char *str){
-    if(strlen(str) != 3){
-        return false;
-    }
-    if(str[0] != 'R' && str[0] != 'r'){
-        return false;
-    }
-    if(str[1] < 'G' || str[1] > 'g'){
-        return false;
-    }
-    if(str[2] < '0' || str[2] > '7'){
-        return false;
-    }
-    return true;
 }
 
 enum regKind getRegKind(char *str) {
@@ -406,5 +456,15 @@ enum regKind getRegKind(char *str) {
     default:
         fprintf(stderr, "Error: unknown register\n");
         exit(EXIT_FAILURE);
+    }
+}
+
+int getVarDatasize(char *str){
+    // check if the string is a number
+    if(isUnsignedInt(str)){
+        return 1;
+    }
+    else{
+        return (int)strlen(str);
     }
 }

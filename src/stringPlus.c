@@ -87,12 +87,12 @@ char *cleanString(char *str) {
     size_t end = size - 1;
 
     // Find the index of the first non-space, non-newline character
-    while (start < size && (str[start] == ' ' || str[start] == '(' || str[start] == '\n')) {
+    while (start < size && (str[start] == ' ' || str[start] == '(' || str[start] == '\n' || str[start] == '\"')){
         start++;
     }
 
     // Find the index of the last non-space, non-newline character
-    while (end > 0 && (str[end] == ' ' || str[end] == '\n' || str[end] == ')')) {
+    while (end > 0 && (str[end] == ' ' || str[end] == '\n' || str[end] == ')' || str[end] == '\"')) {
         end--;
     }
 
@@ -111,4 +111,29 @@ char *cleanString(char *str) {
     cleaned[cleanedSize] = '\0';  // Null-terminate the cleaned string
 
     return cleaned;
+}
+
+bool isUnsignedInt(char *str){
+    for(size_t i = 0; i < strlen(str); i++){
+        if(str[i] < '0' || str[i] > '9'){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool isFromReg(char *str){
+    if(strlen(str) != 3){
+        return false;
+    }
+    if(str[0] != 'R' && str[0] != 'r'){
+        return false;
+    }
+    if(str[1] < 'G' || str[1] > 'g'){
+        return false;
+    }
+    if(str[2] < '0' || str[2] > '7'){
+        return false;
+    }
+    return true;
 }

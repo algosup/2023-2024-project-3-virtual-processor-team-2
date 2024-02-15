@@ -154,6 +154,13 @@ int isVarExist(varList_t *varList, char *name);
 instNode_t *copyInstNode(instNode_t *node);
 
 /*
+    Create an empty instruction node
+    returns:
+        instNode_t: pointer to the instruction node
+*/
+instNode_t *createEmptyInstNode();
+
+/*
     Add a label to the list
     params:
         labelList: pointer to the label list

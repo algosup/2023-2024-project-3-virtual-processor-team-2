@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 /*
     Convert a string to binary
     params:
@@ -51,3 +53,17 @@ char *strToString(char *arg);
         char*: cleaned string
 */
 char *cleanString(char *str);
+
+/*
+    Check if the string is an unsigned int
+    params:
+        str: string to be checked
+*/
+bool isUnsignedInt(char *str);
+
+/*
+    Check if the string is a register
+    params:
+        str: string to be checked
+*/
+bool isFromReg(char *str);
