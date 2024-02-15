@@ -27,11 +27,12 @@ Conditions applied during testing, add some steps to reproduce the behavior:
 
 **Expected results**<br>
 A clear and concise description of what you expected to happen.
+For Unit tests, it would be preferable to use "Expected as", and then the result the developers expect.
 
 **Status:**<br> 
 The current status of the test case (Passed, Failed, In Progress, Not Implemented).
 
 **Comment**<br>
-Add any other context about the problem here (recommended for 'Failed' and 'In Progress' status).
+Add any other context about the problem here (recommended, especially for 'Failed' status).
 
-## You can go the [spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?usp=sharing) where the test reports will be first documented.
+## You can go the [spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?usp=sharing) where the test reports will be documented.
