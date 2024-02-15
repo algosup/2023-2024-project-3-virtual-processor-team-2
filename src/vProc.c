@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
         
         setClock(time, lastTime, latentTicks);
 
-        readBinaryInstruction(&cache, line, operand, reg, data, currentLine);
+        readBinaryInstruction(&cache, line, operand, reg, data, currentLine, processing);
            
         
     }
@@ -140,119 +140,118 @@ int* parserBinaryFile(char *line, char *operand, char *reg, char *data, uint8_t 
 }
 
 
-void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine){
+void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine, MMU_t processing){
     
     int *lineRead = parserBinaryFile(line, operand, reg, data, currentLine);
     printf("%d\n", lineRead[0]);
     printf("%d\n", lineRead[1]);
     printf("%d\n", lineRead[2]);
 
-    attributeOperand(lineRead);
+    attributeOperand(lineRead, &processing);
     attributeRegister(lineRead);
 }
 
-void attributeOperand(int *arg){
+void attributeOperand(int *arg, MMU_t *processing){
     
     switch (arg[0]){
     // Define the opCode read in binary
         case 00000:
-            // Code for 00000
+            opCodeMov(&processing, arg);
             break;
         case 00001:
-            // Code for 00001
+            opCodeGoto(arg);
             break;
         case 00010:
-            // Code for 00010
+            opCodeCall(arg);
             break;
         case 00011:
-            // Code for 00011
+            opCodeInt(arg);
             break;
         case 00100:
-            // Code for 00100
+            opCodePush(arg);
             break;
         case 00101:
-            // Code for 00101
+            opCodeXor(arg);
             break;
         case 00110:
-            // Code for 00110
+            opCodePop(arg);
             break;
         case 00111:
-            // Code for 00111
+            opCodeDiv(arg);
             break;
         case 01000:
-            // Code for 01000
+            opCodeAdd(arg);
             break;
         case 01001:
-            // Code for 00000
+            opCodeSub(arg);
             break;
         case 01010:
-            // Code for 00001
+            opCodeMul(arg);
             break;
         case 01011:
-            // Code for 00010
+            opCodeRsh(arg);
             break;
         case 01100:
-            // Code for 00011
+            opCodeLsh(arg);
             break;
         case 01101:
-            // Code for 00100
+            opCodeAnd(arg);
             break;
         case 01110:
-            // Code for 00101
+            opCodeOr(arg);
             break;
         case 01111:
-            // Code for 00110
+            opCodeNot(arg);
             break;
         case 10000:
-            // Code for 00111
+            opCodeUseReg(arg);
             break;
         case 10001:
-            // Code for 01000
+            opCodeUseVar(arg);
             break;
         case 10010:
-            // Code for 00000
+            opCodeLab(arg);
             break;
         case 10011:
-            // Code for 00001
+            opCodeVar(arg);
             break;
         case 10100:
-            // Code for 00010
+            opCodeNeg(arg);
             break;
         case 10101:
-            // Code for 00011
+            opCodeMod(arg);
             break;
         case 10110:
-            // Code for 00100
+            opCodeRet(arg);
             break;
         case 10111:
-            // Code for 00101
+            opCodeMovFromVar(arg);
             break;
         case 11000:
-            // Code for 00110
+            opCodeMovToVar(arg);
             break;
         case 11001:
-            // Code for 00111
+            opCodeVarSize(arg);
             break;
         case 11010:
-            // Code for 01000
+            opCodeVarData(arg);
             break;
-        case 11011:
-            // Code for 00000
-            break;
-        case 11100:
-            // Code for 00001
-            break;
-        case 11101:
-            // Code for 00010
-            break;
-        case 11110:
-            // Code for 00011
-            break;
-        case 11111:
-            // Code for 00100
-            break;
+        // case 11011:
+            
+        //     break;
+        // case 11100:
+            
+        //     break;
+        // case 11101:
+            
+        //     break;
+        // case 11110:
+            
+        //     break;
+        // case 11111:
+            
+        //     break;
         default:
-            // default value
             break;
     }
 }
@@ -261,32 +260,42 @@ void attributeRegister(int *arg){
     
     switch (arg[1]){
     // Define the register read in binary
-        case 00000:
-            // Code for 00000
+        case 000:
+            rg0;
             break;
-        case 00001:
-            // Code for 00001
+        case 001:
+            rg1;
             break;
-        case 00010:
-            // Code for 00010
+        case 010:
+            rg2;
             break;
-        case 00011:
-            // Code for 00011
+        case 011:
+            rg3;
             break;
-        case 00100:
-            // Code for 00100
+        case 100:
+            rg4;
             break;
-        case 00101:
-            // Code for 00101
+        case 101:
+            rg5;
             break;
-        case 00110:
-            // Code for 00110
+        case 110:
+            rg6;
             break;
-        case 00111:
-            // Code for 00111
+        case 111:
+            rg7;
             break;
     }
 }
+
+void opCodeMov(MMU_t *processing, int *arg){
+    if(arg[1] == rgX){
+        rgX.value = arg[2];
+    } else {
+        var.id = arg[2];
+    }
+}
+void opCodeGoto(int *arg){}
+
 // start:                         ins   reg   value
 //     mov rg0, 5              -> 00000 000 0000 0101 00000 000 0000 0101 
 //     mov rg1, rg0            -> 00000 010 0000 0101

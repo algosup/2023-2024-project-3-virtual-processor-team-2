@@ -95,16 +95,44 @@ void printBinary(uint16_t value);
     char *data:
     uint8_t currentLine:
 */
-void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine);
+void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine, MMU_t processing);
 
 /*
     Allocate operand
 */
-void attributeOperand(int *arg);
+void attributeOperand(int *arg, MMU_t *processing);
 
 void attributeRegister(int *arg);
 
-
+//   OpCode Function               5bits    For each time use without instruction after
+void opCodeMov(MMU_t *processing, int *arg);       // 00000                    4/4
+void opCodeGoto(int *arg);      // 00001                    1/1            
+void opCodeCall(int *arg);      // 00010                    1/1
+void opCodeInt(int *arg);       // 00011                    0/13             
+void opCodePush(int *arg);      // 00100                    1/1
+void opCodeXor(int *arg);       // 00101                    3/3
+void opCodePop(int *arg);       // 00110                    1/1
+void opCodeDiv(int *arg);       // 00111                    3/3
+void opCodeAdd(int *arg);       // 01000                    3/3
+void opCodeSub(int *arg);       // 01001                    3/3
+void opCodeMul(int *arg);       // 01010                    3/3
+void opCodeRsh(int *arg);       // 01011                    3/3
+void opCodeLsh(int *arg);       // 01100                    
+void opCodeAnd(int *arg);       // 01101                    3/3
+void opCodeOr(int *arg);        // 01110                    3/3
+void opCodeNot(int *arg);       // 01111                    3/3
+void opCodeUseReg(int *arg);    // 10000                   
+void opCodeUseVar(int *arg);    // 10001                   
+void opCodeLab(int *arg);       // 10010                    1/1
+void opCodeVar(int *arg);       // 10011                    0/2
+void opCodeNeg(int *arg);       // 10100               
+void opCodeMod(int *arg);       // 10101                    3/3
+void opCodeRet(int *arg);       // 10110                    1/1              
+void opCodeMovFromVar(int *arg);// 10111                    0/13                       
+void opCodeMovToVar(int *arg);  // 11000                    2/3                
+void opCodeVarSize(int *arg);   // 11001                    0/2 
+void opCodeVarData(int *arg);   // 11010                    tricky/6
+ 
 #ifdef __cplusplus
 }
 #endif
