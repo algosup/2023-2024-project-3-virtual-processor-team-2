@@ -1,0 +1,62 @@
+name: Run tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+
+  system_update:
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - name: Update system
+        run: |
+          echo Updating system
+          sudo apt-get update
+          sudo apt-get install -y cmake
+          sudo apt-get install -y gcc-10 g++-10
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 90
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 90
+          
+      - name: Checkout repository code  
+        uses: actions/checkout@v3
+      - name: Custom shell commands  
+        run: |
+          echo "Start repo checkout"
+          echo "The ${{ github.repository }} repository has been cloned to the runner."
+
+  build:
+    needs: system_update
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake g++ make
+    
+      - name: Checkout Google Test
+        run: git clone https://github.com/google/googletest.git
+    
+      - name: Build Action
+        run: |
+          cmake -S . -B Build
+          echo Building
+          cd Build
+          make
+          cd ..
+          echo Action built
+          echo Ready to be run
+
+  test:
+    needs: build    
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - name: Running tests
+        run: |
+          cd bin
+          ./tests
+        shell: bash
