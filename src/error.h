@@ -42,7 +42,6 @@ void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *er
         errData: Error history
 */
 void errorLineSize(long lineNb, const char* out, error_t *errData);
-void errorLineSize2(long lineNb, const char* out, error_t *errData);
 
 // ---------- Bin converting errors ----------
 

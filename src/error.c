@@ -35,33 +35,7 @@ void errorInstruction(char *inst, instNode_t *node, const char *out, error_t *er
 	displayError(errType, errDetails, errLocation, out, errData);
 }
 
-void errorLineSize(long lineNb, const char* out, error_t *errData){
-    ++ errData->errors;
-    fprintf(stderr, "Error: syntax error\n");
-    fprintf(stderr, "Details: line must be under 64 characters\n");
-    fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile, lineNb);
-    if(out != NULL){
-        FILE *file = fopen(out, "ab");
-        if(file == NULL){
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-            exit(EXIT_FAILURE);
-        }
-        // Get current time
-        time_t rawtime;
-        struct tm *timeinfo;
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
 
-        // Format date
-        char date_str[20]; // Sufficiently large buffer to hold formatted date
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-        fprintf(file, "%s |\tError: syntax error\n", date_str);
-        fprintf(file, "%s |\tDetails: line must to be under 64 characters\n", date_str);
-        fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile, lineNb);
-        fclose(file);
-    }
-
-}
 
 void printErrorSummary(error_t *errData){
     fprintf(stderr, "Error summary:\n");
@@ -121,28 +95,68 @@ void errorTooManyArg(const char *out, error_t *errData){
 }
 
 
-void errorLineSize2(long lineNb, const char *out, error_t *errData){
+void errorLineSize(long lineNb, const char *out, error_t *errData){
     char *errType = "Syntax Error";
     char errDetails[64];
     char errLocation[64];
 
     sprintf(errDetails, "Line must be under 64 characters");
-    sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
+    sprintf(errLocation, "File %s, line %ld\n\n", errData->inputFile, lineNb);
 
     displayError(errType, errDetails, errLocation, out, errData);
 }
 
+void errorfnf(char* filename, const char* out, error_t *errData){ 
 
-void errorInstruction2(char *inst, instNode_t *node, const char *out, error_t *errData){
-    char *errType = "Syntax Error";
-    char errDetails[64];
-    char errLocation[64];
+    ++ errData->errors; 
 
-    sprintf(errDetails, "Instruction '%s' is not recognized", inst);
-    sprintf(errLocation, "File %s, line %ld", errData->inputFile, node->lineNb);
+    fprintf(stderr, "Error: file not found\n"); 
 
-    displayError(errType, errDetails, errLocation, out, errData);
-}
+    fprintf(stderr, "Details: file %s not found\n", filename); 
+
+    if(out != NULL){ 
+
+        FILE *file = fopen(out, "ab"); 
+
+        if(file == NULL){ 
+
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno)); 
+
+            exit(EXIT_FAILURE); 
+
+        } 
+
+        // Get current time 
+
+        time_t rawtime; 
+
+        struct tm *timeinfo; 
+
+        time(&rawtime); 
+
+        timeinfo = localtime(&rawtime); 
+
+ 
+
+        // Format date 
+
+        char date_str[20]; // Sufficiently large buffer to hold formatted date 
+
+        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo); 
+
+        fprintf(file, "%s |\tError: file not found\n", date_str); 
+
+        fprintf(file, "%s |\tDetails: file %s not found\n", date_str, filename); 
+
+        fclose(file); 
+
+    } 
+
+    printErrorSummary(errData); 
+
+    exit(EXIT_FAILURE); 
+
+} 
 
 void errorfnf2(char *filename, const char *out, error_t *errData){
     char *errType = "File Not Found Error";
@@ -152,6 +166,58 @@ void errorfnf2(char *filename, const char *out, error_t *errData){
 
     displayError(errType, errDetails, NULL, out, errData);
 }
+
+void errorInvalidExt(char* filename, const char* out, error_t *errData){ 
+
+    ++ errData->errors; 
+
+    fprintf(stderr, "Error: invalid file extension\n"); 
+
+    fprintf(stderr, "Details: file %s has an invalid extension\n", filename); 
+
+    if(out != NULL){ 
+
+        FILE *file = fopen(out, "ab"); 
+
+        if(file == NULL){ 
+
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno)); 
+
+            exit(EXIT_FAILURE); 
+
+        } 
+
+        // Get current time 
+
+        time_t rawtime; 
+
+        struct tm *timeinfo; 
+
+        time(&rawtime); 
+
+        timeinfo = localtime(&rawtime); 
+
+ 
+
+        // Format date 
+
+        char date_str[20]; // Sufficiently large buffer to hold formatted date 
+
+        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo); 
+
+        fprintf(file, "%s |\tError: invalid file extension\n", date_str); 
+
+        fprintf(file, "%s |\tDetails: file %s has an invalid extension\n", date_str, filename); 
+
+        fclose(file); 
+
+    } 
+
+    printErrorSummary(errData); 
+
+    exit(EXIT_FAILURE); 
+
+} 
 
 void errorInvalidExt2(char *filename, const char *out, error_t *errData){
     char *errType = "Invalid File Extension Error";
