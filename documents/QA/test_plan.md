@@ -7,10 +7,10 @@
   - [1. Product Analysis](#1-product-analysis)
     - [1.2. Overview](#12-overview)
   - [2. Glossary](#2-glossary)
-  - [3. Strategy](#3-strategy)
-    - [3.1. Scope of Testing](#31-scope-of-testing)
-      - [3.1.1. In-scope for Testing](#311-in-scope-for-testing)
-      - [3.1.2. Out-of-scope for Testing](#312-out-of-scope-for-testing)
+  - [3. Testing](#31-testing)
+      - [3.0.1. In-scope for Testing](#301-in-scope-for-testing)
+      - [3.0.2. Out-of-scope for Testing](#302-out-of-scope-for-testing)
+    - [3.1 Strategy](#31-strategy)
     - [3.2. Unit Tests](#32-unit-tests)
     - [3.3. Testing sessions](#33-testing-sessions)
       - [3.3.1. Overview](#331-overview)
@@ -20,14 +20,13 @@
       - [3.3.3. Collaborative Testing Sessions](#333-collaborative-testing-sessions)
         - [3.3.3.1. Session Scope](#3331-session-scope)
     - [3.4. External tools](#34-external-tools)
-      - [3.4.1. GitHub](#341-github)
-        - [3.4.1.1. GitHub Actions](#3411-github-actions)
-          - [3.4.1.2.1. GitHub Actions Scope](#34121-github-actions-scope)
-          - [3.4.1.2.2. Workflow](#34122-workflow)
-          - [3.4.1.2.3. Configuration](#34123-configuration)
-      - [3.4.2. GitHub Issues](#342-github-issues)
-      - [3.4.3. Tests and Meetings](#343-tests-and-meetings)
-      - [3.4.4. Tests Convention](#344-tests-convention)
+        - [3.4.1. GitHub Actions](#341-github-actions)
+          - [3.4.1.1. GitHub Actions Scope](#3411-github-actions-scope)
+          - [3.4.1.2. Workflow](#3412-workflow)
+          - [3.4.1.3. Configuration](#3413-configuration)
+        - [3.4.2. GitHub Issues](#342-github-issues)
+        - [3.4.3. Tests and Meetings](#343-tests-and-meetings)
+        - [3.4.4. Tests Convention](#344-tests-convention)
     - [3.5. Documentation](#35-documentation)
       - [3.5.1. GitHub Wiki](#351-github-wiki)
   - [4. Test Criteria](#4-test-criteria)
@@ -35,7 +34,7 @@
     - [4.2. Exit Criteria](#42-exit-criteria)
   - [5. Allocated Resources](#5-allocated-resources)
     - [5.1. Time](#51-time)
-    - [5.2. People](#52-people)
+    - [5.2. Collaborators](#52-collaborators)
 
 </details>
 
@@ -49,7 +48,7 @@ The project aims to create a virtual processor and an interpreter for running as
 
 The assembly code will be created from scratch by us, it will be named AT2. It will deal with new names for several instructions and statements; while making sure that the purpose of an assembly language, which is to be more efficient and closer to the machine, is respected.
 
-For further details, refer to the [functional specifications](../functional/"functional".md) document.
+For further details, refer to the [functional specifications](../functional/functional_specification_documentation.md) document.
 
 
 ## 2. Glossary
@@ -68,36 +67,37 @@ For further details, refer to the [functional specifications](../functional/"fun
 
 ---
 
-## 3. Strategy
-
-Here's the purpose of our testing strategy: <br> - **[Unit Tests](##32-unit-tests)** <br> - **[Testing sessions](#35-testing-sessions)** <br> - **[External tools](#36-external-tools)**
-
-### 3.1. Scope of Testing
+## 3. Testing
 
 Tests serve as a tool for improving the quality of the product.<br>
 Functional testing will mainly contain basic instructions in AT2 code to ensure that the quality of the required product is perfect. <br>The quality of all the product's features is mainly endorsed by Software Engineers and Quality assurances.
 
-#### 3.1.1. In-scope for Testing
+#### 3.0.1. In-scope for Testing
 
 - Test if users can be able to enter, modify, and delete text within the text file using keyboard input or other input methods.
 - Test if the interpreter can be capable of executing the parsed code instructions according to the semantics and rules defined by the programming language.
 - Test if the interface can display text output from the system and accept text input from the user. <br><br>
-For further details, refer to the [functional specifications](../functional/"functional".md) document.
+For further details, refer to the [functional specifications](../functional/functional_specification_documentation.md) document.
 
-#### 3.1.2. Out-of-scope for Testing
+#### 3.0.2. Out-of-scope for Testing
 
 - Test the implementation of a debugger.
 - Test an assembler system. <br><br>
-For further details, refer to the [functional specifications](../functional/"functional".md) document.
+For further details, refer to the [functional specifications](../functional/functional_specification_documentation.md) document.
+
+### 3.1 Strategy
+
+Here's the purpose of our testing strategy: <br> - We will implement **[Unit Tests](##32-unit-tests)** to ensure the quality of the code. <br> - We will perform **[Testing sessions](#333-testing-sessions)** to ensure that the documented quality of the project is up-to-date. <br> - We will use **[External tools](#34-external-tools)** to help us testing the product.
+
 
 ---
 
 ### 3.2. Unit Tests
 
-Unit testing is an important part of the process. These tests will be written by the Software Engineers throughout the project, in parallel with game development. Then, the Quality Assurance will run these tests during tests cases. <br>Regarding this project, most of the tests will be unit tests.
+Unit testing is an important part of the process. These tests will be written by the Software Engineers throughout the project, in parallel with game development. Then, the Quality Assurance will run these tests during tests cases. <br>Regarding this project, most of the tests would be unit tests.
 
 
-These unit tests serve three crucial objectives:
+#### These unit tests serve three crucial objectives:
 
 1. **Code Functionality:** Verify that each function performs as expected under various scenarios. 
 
@@ -113,7 +113,7 @@ These unit tests serve three crucial objectives:
 
 #### 3.3.1. Overview
 
-We will perform functional testing, using a combination of **[Smoke Testing](#352-smoke-testing)** and **[Collaborative Testing Sessions](#353-collaborative-testing-sessions)** to ensure the quality of the product. 
+Once the project will reach a certain term of development, we will perform functional testing, using a combination of **[Smoke Testing](#332-smoke-testing)** and **[Collaborative Testing Sessions](#333-collaborative-testing-sessions)**. It will ensure the quality of the product. 
 
 
 #### 3.3.2. Smoke Testing
@@ -125,7 +125,7 @@ Testing sessions will take place during and after days dedicated to the project,
 The smoke testing scope will focus on the fundamental aspects of the product, including:
 
 1. **Process Launch:** Confirm that the product launches successfully without any critical errors or crashes.
-2. **Instructions functionality:** Check that basic instructions work as intended.
+2. **Instructions functionality:** Check that basic instructions work as expected.
 
 #### 3.3.2.2. Sequence of Smoke Testing
 
@@ -155,14 +155,8 @@ Sessions are designed primarily to:
 
 ### 3.4. External tools
 
-#### 3.4.1. GitHub
 
-
-GitHub serves as our central platform for version control, collaboration, and issue tracking.
-
----
-
-#### 3.4.1.1. GitHub Actions
+#### 3.4.1. GitHub Actions
 
 
 GitHub Actions are utilized for continuous integration and deployment. The workflow is triggered on each push to the main branch, ensuring the automatic execution of tests. (During the development phase, the workflow will also be triggered on each push to the dev branch.)
@@ -170,7 +164,7 @@ GitHub Actions are utilized for continuous integration and deployment. The workf
 It will allow us to know if the code is unfunctional at some points, when it appeared and which changes caused it.
 
 
-#### 3.4.1.2.1. GitHub Actions Scope
+#### 3.4.1.1. GitHub Actions Scope
 
 The GitHub Actions will be activated on pull requests on the dev and main branch and their scope is to:
 
@@ -178,7 +172,7 @@ The GitHub Actions will be activated on pull requests on the dev and main branch
 2. **Run unit tests:** Run unit tests to ensure that the main functions of the product are working properly.
 3. **Ensure that the code on the referenced branches is working:** Ensure that the code on the main and dev branches is working properly. Avoid creating new branches for programs that don't work.
 
-#### 3.4.1.2.2. Workflow
+#### 3.4.1.2. Workflow
 
 The workflow consists of the following steps:
 
@@ -189,9 +183,9 @@ The workflow consists of the following steps:
 
 If any of the steps fail, the workflow will be marked as failed and the development team will be notified at which step the error occurred.
 
-#### 3.4.1.2.3. Configuration
+#### 3.4.1.3. Configuration
 
-Actions, such as interpreting and executing unit tests, will be performed on Quality Assurance's computer. These actions are enabled and synchronized with GitHub. Once the runner has been activated on the computer, it can be selected to execute the various workflow actions.
+Actions will be performed mainly on a dedicated computer, which hosts the runner and serves as a server. These actions are enabled and synchronized with GitHub. Once the runner has been activated on the computer, it can be selected to execute the various workflow actions.
 
 This allows us to have a runner available all time and to have a better overview of the errors that may occur.
 
@@ -235,10 +229,10 @@ By implementing these strategies, we aim to foster a more organized and efficien
 
 #### 3.4.3. Tests and Meetings
 
-**Test Report:**
+**Test Reports:**
 
-The [test case spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?hl=fr#gid=0) will contain all the test cases of the project. Each test case will be listed and named with the ID of the test and the date of the test session.<br>
-The [test report spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?hl=fr#gid=168757114) will contain all the test reports of the project. Each test report will be listed and named with the ID of the test and the date of the test session.
+The [test case spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?usp=sharing) will contain all the test cases of the project. Each test case will be listed and named with the ID of the test and the date of the test session.<br>
+The [test report spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?usp=sharing) will contain all the test reports of the project. Each test report will be listed and named with the ID of the test and the date of the test session.
 
 
 **QA Meetings:**
@@ -266,19 +260,19 @@ We also have to make a certain pattern for test reports to ensure the readabilit
 For further details, refer to the [test report](./test_report.md) document.
 
 3. **Progression:**
-   - **Test Amount Representation:**
-     - A visual schema representing the test cases based on the amount of their status (Passed, Failed, In Progress, Not Implemented).
+  - **Test Amount Representation:**
+     - A visual schema representing the test reports based on the amount of their status (Passed, Failed, In Progress, Not Implemented).
      - Provides a visual snapshot of the overall testing status. <br><br>
      ![Progression Pattern](../images/qa_images/progression_graph.png)
 
-You can see all this stuff on the [test spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?hl=fr#gid=168757114).
+You can see all this stuff on the [test spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?usp=sharing).
 
 ### 3.5. Documentation
 
 #### 3.5.1. GitHub Wiki
 To enhance transparency, collaboration, and knowledge sharing within our development process, we are considering about a centralized documentation approach using GitHub Wiki. This platform would serve as a comprehensive repository for all documentation related to our codebase. 
 
-We will provide a template that guides them on the essential information to include. The template will be available on the project GitHub [here](./code_documentation_template.md). Developers have to use it as a reference when documenting their code. 
+We will provide a template that guides them on the essential information to include. The template will be available in the [code documentation file](./code_documentation.md). Developers have to use it as a reference when documenting their code. 
 
 
 #### The GitHub Wiki will be documented only if major requirements do not need to be implemented. 
@@ -322,7 +316,6 @@ Before the product can be considered ready for distribution, certain benchmarks 
 
 ### 5.1. Time
 
-<!-- Test Schedule -->
 | Task | Start Date | End Date |
 | ---- | ---------- | -------- |
 | Review the documentation | January 15, 2024 | February 23, 2024 |
@@ -334,7 +327,7 @@ Before the product can be considered ready for distribution, certain benchmarks 
 | Unit tests | February 05, 2023 | February 23, 2024 |
 | Functional tests | February 19, 2024 | February 23, 2024 |
 
-### 5.2. People
+### 5.2. Collaborators
 
 For this project, the people involved to perform tests are Quality Assurances of several teams during the team test sessions:
 - Enzo GUILLOUCHE - Team 2

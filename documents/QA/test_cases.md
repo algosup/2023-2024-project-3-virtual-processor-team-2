@@ -1,3 +1,6 @@
+## This is the template of how the test cases will be documented for this project.
+
+
 | ID | Date  | Priority | Test case Scenario                                  | Test case Description     | Pre-conditions    | Test Steps                   | Expected Results                                                |
 | -- | --- | -------- |------------------------------------------------------------------------------------------ | ------ | --------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
 | 01/001 | 01/01/1970 | HIGH | run the program, and see what's displayed | make sure the 'printf' function works correctly | have the most up-dated version of the product | 1. run the program 2. see the result | "Hello World" is displayed |
@@ -12,6 +15,9 @@ The date when the bug has been discovered.
 
 **Priority**<br>
 The priority level of the test case (High, Medium, Low).
+High: A major feature needs to be tested as soon as possible.
+Medium: A feature that could be important needs to be tested.
+Low: A non-required feature needs to be tested.
 
 **Test case Scenario**<br>
 The description of the scenario during testing. 
