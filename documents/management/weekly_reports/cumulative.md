@@ -29,6 +29,10 @@ Quick Access:
     - [Plans for next week](#plans-for-next-week-2)
     - [Conclusion](#conclusion-4)
   - [Weekly Report - Week 6](#weekly-report---week-6)
+    - [Accomplishments](#accomplishments-5)
+    - [Challenges](#challenges-5)
+    - [Plans for next week](#plans-for-next-week-3)
+    - [Conclusion](#conclusion-5)
   - [Weekly Report - Week 7](#weekly-report---week-7)
   - [Weekly Report - Week 8](#weekly-report---week-8)
 
@@ -209,11 +213,34 @@ Not much project time but a satisfying amount of work done, but too much overtim
 The team is tired due to the overcharge of work, it can be good to add more project session mainly the friday to debrief about the week with the entire team.
 
 ## Weekly Report - Week 6
-[Detailed File (WIP)](week_6.md)
-(WIP)
+[Detailed File](week_6.md)
+
+### Accomplishments
+
+1. Successful completion of the test plan.
+2. Successful rework of the parser.
+3. Successful rework of the builder.
+4. Successful setup of GitHub actions.
+
+### Challenges
+
+1. Overcoming challenges in reworking the assembler without unncessary time consumptions.
+2. Strategizing the appearance of the binary code and planning its structure.
+
+### Plans for next week
+
+1. Finalize the rework of the converter.
+2. Complete the development of each error message.
+3. Finalize the development of the virtual processor.
+4. Complete all our unit tests and make them succeed.
+5. Ensuring the precision and correctness of all project documents.
+
+### Conclusion
+
+This week saw substantial advancements in the project, notably in enhancing the assembler and completing the Test Plan, while addressing challenges such as efficient reworking and binary code visualization. Although the team is generally doing well, addressing recent concerns is crucial to prevent potential project impact.
 
 ## Weekly Report - Week 7
-[Detailed File](week_7.md)
+[Detailed File (WIP)](week_7.md)
 (WIP)
 
 ## Weekly Report - Week 8
