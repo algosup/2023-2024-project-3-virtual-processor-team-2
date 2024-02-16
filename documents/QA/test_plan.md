@@ -267,16 +267,6 @@ For further details, refer to the [test report](./test_report.md) document.
 
 You can see all this stuff on the [test spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?usp=sharing).
 
-### 3.5. Documentation
-
-#### 3.5.1. GitHub Wiki
-To enhance transparency, collaboration, and knowledge sharing within our development process, we are considering about a centralized documentation approach using GitHub Wiki. This platform would serve as a comprehensive repository for all documentation related to our codebase. 
-
-We will provide a template that guides them on the essential information to include. The template will be available in the [code documentation file](./code_documentation.md). Developers have to use it as a reference when documenting their code. 
-
-
-#### The GitHub Wiki will be documented only if major requirements do not need to be implemented. 
-
 ---
 
 
@@ -318,7 +308,7 @@ Before the product can be considered ready for distribution, certain benchmarks 
 
 | Task | Start Date | End Date |
 | ---- | ---------- | -------- |
-| Review the documentation | January 15, 2024 | February 23, 2024 |
+| Review the documentation | January 15, 2024 | March 1, 2024 |
 | First meeting with Dev team | January 23, 2024 | January 23, 2024 |
 | Create and give templates | January 29, 2024 | January 29, 2024 |
 | First meeting with other teams' QA | January 29, 2024 | January 29, 2024 |
