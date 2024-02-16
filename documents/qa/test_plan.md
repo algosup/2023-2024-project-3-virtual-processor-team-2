@@ -86,7 +86,7 @@ For further details, refer to the [functional specifications](../functional/func
 
 ### 3.1 Strategy
 
-Here's the purpose of our testing strategy: <br> - We will implement **[Unit Tests](##32-unit-tests)** to ensure the quality of the code. <br> - We will perform **[Testing sessions](#333-testing-sessions)** to ensure that the documented quality of the project is up-to-date. <br> - We will use **[External tools](#34-external-tools)** to help us testing the product.
+Here's the purpose of our testing strategy: <br> - We will implement **[Unit Tests](#32-unit-tests)** to ensure the quality of the code. <br> - We will perform **[Testing sessions](#33-testing-sessions)** to ensure that the documented quality of the project is up-to-date. <br> - We will use **[External tools](#34-external-tools)** to help us testing the product.
 
 
 ---
@@ -256,7 +256,7 @@ For further details, refer to the [test case](./test_cases.md) document.
 We also have to make a certain pattern for test reports to ensure the readability and consistency of the work:
 
 ![test report pattern](../images/qa_images/test_report_pattern.png)
-For further details, refer to the [test report](./test_report.md) document.
+For further details, refer to the [test report](./test_reports.md) document.
 
 3. **Progression:**
   - **Test Amount Representation:**
