@@ -52,6 +52,17 @@ char *getIntCode(enum interruptKind kind){
     }
 }
 
+varList_t *createEmptyVarList(){
+    // Init variables list struct
+    varList_t *varList = malloc(sizeof(varList_t));
+    varList->size = 10;
+    varList->list = malloc(sizeof(var_t) * varList->size);
+    // Init variables list
+    for(size_t i = 0; i < varList->size; i++){
+        varList->list[i].name = NULL;
+    }
+}
+
 bool addVar(varList_t *varList, char *name, char *value){
     // check if the variable already exists
     for(size_t i = 0; i < varList->size; i++){
@@ -105,6 +116,12 @@ int isVarExist(varList_t *varList, char *name){
     return -1;
 }
 
+instList_t *createEmptyInstList(){
+    instList_t *instList = malloc(sizeof(instList_t));
+    instList->head = NULL;
+    return instList;
+}
+
 instNode_t *copyInstNode(instNode_t *node){
     instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
     if(newNode == NULL){
@@ -138,6 +155,16 @@ instNode_t *createEmptyInstNode(){
     newNode->next = NULL;
 
     return newNode;
+}
+
+labelList_t *createEmptyLabelList(){
+    labelList_t *labelList = malloc(sizeof(labelList_t));
+    labelList->size = 10;
+    labelList->list = malloc(sizeof(label_t) * labelList->size);
+    for(size_t i = 0; i < labelList->size; i++){
+        labelList->list[i].name = NULL;
+    }
+    return labelList;
 }
 
 int addLabel(labelList_t *labelList, char *name, long nodeId){

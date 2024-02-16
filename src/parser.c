@@ -11,6 +11,7 @@
 #include "parser.h"
 
 #define LINE_MAX_SIZE 64
+#define MAX_ARGS 2
 
 const char* errorFile= "errors.log";
 
@@ -60,8 +61,7 @@ void flagsSet(char *flag, flags_t *flags){
         flags->verbose = true;
     }
     else{
-        fprintf(stderr, "Invalid flag\n Try 'iat2 --help' for more information\n");
-        exit(EXIT_FAILURE);
+        // TODO: throw error
     }
 }
 
@@ -116,19 +116,16 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData){
         return NULL;
     }
 
-    instNode_t *newNode = malloc(sizeof(instNode_t));
+    instNode_t *newNode = createEmptyInstNode();
     newNode->id = nodeId;
     newNode->lineNb = lineNb;
-    newNode->isInter = false;
-    newNode->isBuilt = false;
-
-    newNode->next = NULL;
 
     // Get the instruction
     char *inst = getInst(line);
     
     // Get the arguments
     char **args = getInstArgs(line);
+
 
     // Set arguments
     setArgs(newNode, args);
@@ -371,35 +368,41 @@ char *getInst(char *line) {
 }
 
 char **getInstArgs(char *line) {
-    char **args = malloc(2 * sizeof(char *));
+    char **args = malloc(MAX_ARGS * sizeof(char *));
     if (!args) {
         fprintf(stderr, "Memory allocation error\n");
         exit(EXIT_FAILURE);
     }
+    args[0] = NULL;
+    args[1] = NULL;
 
-    // Remove the instruction name
     char *token = strtok(line, " ");
     if (!token) {
+        // TODO: throw error
         fprintf(stderr, "Invalid input format\n");
         free(args); // Free allocated memory before exit
-        exit(EXIT_FAILURE);
+
     }
 
-    // Get the arguments
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < MAX_ARGS; i++) {
         token = strtok(NULL, ",");
         if (!token) {
+            if (i == 0) {
+                // TODO: throw error
+                fprintf(stderr, "Invalid input format: missing argument\n");
+                return args;
+            }
             args[i] = NULL;
         } else {
-            // Allocate memory for the argument and copy it
             args[i] = malloc(strlen(token) + 1);
             if (!args[i]) {
+                // TODO: throw error
                 fprintf(stderr, "Memory allocation error\n");
+                // Free previously allocated memory
                 for (int j = 0; j < i; j++) {
-                    free(args[j]); // Free previously allocated memory
+                    free(args[j]);
                 }
                 free(args); // Free args array
-                exit(EXIT_FAILURE);
             }
             strcpy(args[i], cleanString(token));
         }

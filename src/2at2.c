@@ -35,24 +35,13 @@ int main(int argc, char *argv[]) {
     // ---------- Init data ----------
 
     // Init variables list struct
-    varList_t *varList = malloc(sizeof(varList_t));
-    varList->size = 10;
-    varList->list = malloc(sizeof(var_t) * varList->size);
-    // Init variables list
-    for(size_t i = 0; i < varList->size; i++){
-        varList->list[i].name = NULL;
-    }
+    varList_t *varList = createEmptyVarList();
 
     // Init labels list struct
-    labelList_t *labelList = malloc(sizeof(labelList_t));
-    labelList->size = 10;
-    labelList->list = malloc(sizeof(label_t) * labelList->size);
-    for(size_t i = 0; i < labelList->size; i++){
-        labelList->list[i].name = NULL;
-    }
+    labelList_t *labelList = createEmptyLabelList();
+    
     // Init instructions list struct
-    instList_t *instList = malloc(sizeof(instList_t));
-    instList->head = NULL;
+    instList_t *instList = createEmptyInstList();
 
     fprintf(stderr, "[\t10%%\t] Data initialized successfully\n");
 

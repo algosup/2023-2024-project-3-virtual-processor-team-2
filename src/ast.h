@@ -124,6 +124,13 @@ typedef struct labelList{
 char *getIntCode(enum interruptKind kind);
 
 /*
+    Create an empty variable list
+    returns:
+        varList_t: pointer to the variable list
+*/
+varList_t *createEmptyVarList();
+
+/*
     Add a variable to the list
     params:
         varList: pointer to the variable list
@@ -154,11 +161,25 @@ int isVarExist(varList_t *varList, char *name);
 instNode_t *copyInstNode(instNode_t *node);
 
 /*
+    Create an empty instruction list
+    returns:
+        instList_t: pointer to the instruction list
+*/
+instList_t *createEmptyInstList();
+
+/*
     Create an empty instruction node
     returns:
         instNode_t: pointer to the instruction node
 */
 instNode_t *createEmptyInstNode();
+
+/*
+    Create an empty label list
+    returns:
+        labelList_t: pointer to the label list
+*/
+labelList_t *createEmptyLabelList();
 
 /*
     Add a label to the list
