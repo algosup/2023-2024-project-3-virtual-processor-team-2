@@ -7,7 +7,7 @@
   - [1. Product Analysis](#1-product-analysis)
     - [1.2. Overview](#12-overview)
   - [2. Glossary](#2-glossary)
-  - [3. Testing](#31-testing)
+  - [3. Testing](#3-testing)
       - [3.0.1. In-scope for Testing](#301-in-scope-for-testing)
       - [3.0.2. Out-of-scope for Testing](#302-out-of-scope-for-testing)
     - [3.1 Strategy](#31-strategy)
