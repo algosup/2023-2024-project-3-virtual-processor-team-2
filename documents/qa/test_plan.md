@@ -230,8 +230,8 @@ By implementing these strategies, we aim to foster a more organized and efficien
 
 **Test Reports:**
 
-The [test case spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?usp=sharing) will contain all the test cases of the project. Each test case will be listed and named with the ID of the test and the date of the test session.<br>
-The [test report spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?usp=sharing) will contain all the test reports of the project. Each test report will be listed and named with the ID of the test and the date of the test session.
+The [test case spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?hl=fr#gid=0) will contain all the test cases of the project. Each test case will be listed and named with the ID of the test and the date of the test session.<br>
+The [test report spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?hl=fr#gid=2036605100) will contain all the test reports of the project. Each test report will be listed and named with the ID of the test and the date of the test session.
 
 
 **QA Meetings:**
@@ -264,8 +264,7 @@ For further details, refer to the [test report](./test_reports.md) document.
      - Provides a visual snapshot of the overall testing status. <br><br>
      ![Progression Pattern](../images/qa_images/progression_graph.png)
 
-You can see all this stuff on the [test spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?usp=sharing).
-
+You can see all this stuff on the [test spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?hl=fr#gid=1784501131)
 ---
 
 
