@@ -26,6 +26,42 @@ error_t *initErrorFile(const char* out, char *inputFile){
     return errData;
 }
 
+void errorInstruction(char *inst, instNode_t *node, const char *out, error_t *errData){
+	char *errType = "Syntax Error";
+	char errDetails[64];
+	char errLocation[64];
+	sprintf(errDetails, "Instruction \"%s\" not found", inst);
+	sprintf(errLocation, "File %s, Line %ld\n\n", errData->inputFile, node->lineNb);
+	displayError(errType, errDetails, errLocation, out, errData);
+}
+
+void errorLineSize(long lineNb, const char* out, error_t *errData){
+    ++ errData->errors;
+    fprintf(stderr, "Error: syntax error\n");
+    fprintf(stderr, "Details: line must be under 64 characters\n");
+    fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile, lineNb);
+    if(out != NULL){
+        FILE *file = fopen(out, "ab");
+        if(file == NULL){
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        // Get current time
+        time_t rawtime;
+        struct tm *timeinfo;
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+
+        // Format date
+        char date_str[20]; // Sufficiently large buffer to hold formatted date
+        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
+        fprintf(file, "%s |\tError: syntax error\n", date_str);
+        fprintf(file, "%s |\tDetails: line must to be under 64 characters\n", date_str);
+        fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile, lineNb);
+        fclose(file);
+    }
+
+}
 
 void printErrorSummary(error_t *errData){
     fprintf(stderr, "Error summary:\n");

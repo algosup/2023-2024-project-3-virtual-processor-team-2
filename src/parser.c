@@ -142,8 +142,8 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData){
         return newNode;
     }
 
-    // Trow error if the line is not an instruction
-    errorInst(inst, newNode, errorFile, errData);
+    // Throw error if the line is not an instruction
+    errorInstruction(inst, newNode, errorFile, errData);
     return newNode;
 }
 
