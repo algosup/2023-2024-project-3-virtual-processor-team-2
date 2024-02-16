@@ -143,20 +143,17 @@ int* parserBinaryFile(char *line, char *operand, char *reg, char *data, uint8_t 
 void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine, MMU_t processing){
     
     int *lineRead = parserBinaryFile(line, operand, reg, data, currentLine);
-    printf("%d\n", lineRead[0]);
-    printf("%d\n", lineRead[1]);
-    printf("%d\n", lineRead[2]);
 
-    attributeOperand(lineRead, &processing);
-    attributeRegister(lineRead);
+    attributeOperand(lineRead);
+    
 }
 
-void attributeOperand(int *arg, MMU_t *processing){
+void attributeOperand(int *arg){
     
     switch (arg[0]){
     // Define the opCode read in binary
         case 00000:
-            opCodeMov(&processing, arg);
+            opCodeMov(arg);
             break;
         case 00001:
             opCodeGoto(arg);
@@ -256,45 +253,181 @@ void attributeOperand(int *arg, MMU_t *processing){
     }
 }
 
-void attributeRegister(int *arg){
+register_t attributeRegister(int *arg){
     
     switch (arg[1]){
     // Define the register read in binary
         case 000:
-            rg0;
+            return rg0;
             break;
         case 001:
-            rg1;
+            return rg1;
             break;
         case 010:
-            rg2;
+            return rg2;
             break;
         case 011:
-            rg3;
+            return rg3;
             break;
         case 100:
-            rg4;
+            return rg4;
             break;
         case 101:
-            rg5;
+            return rg5;
             break;
         case 110:
-            rg6;
+            return rg6;
             break;
         case 111:
-            rg7;
+            return rg7;
             break;
     }
 }
 
-void opCodeMov(MMU_t *processing, int *arg){
-    if(arg[1] == rgX){
-        rgX.value = arg[2];
-    } else {
-        var.id = arg[2];
-    }
+void opCodeMov(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value = arg[2];
 }
-void opCodeGoto(int *arg){}
+
+void opCodeGoto(int *arg){}                                    
+void opCodeCall(int *arg){}   
+                     
+void opCodeInt(int *arg){
+    int tmp = arg[2];
+    switch(tmp) {
+        case 00000:
+            printf("Case 00000\n");
+            break;
+        case 00001:
+            printf("Case 00001\n");
+            break;
+        case 00010:
+            printf("Case 00010\n");
+            break;
+        case 00011:
+            printf("Case 00011\n");
+            break;
+        case 00100:
+            printf("Case 00100\n");
+            break;
+        case 00101:
+            printf("Case 00101\n");
+            break;
+        case 00110:
+            printf("Case 00110\n");
+            break;
+        case 00111:
+            printf("Case 00111\n");
+            break;
+        case 01000:
+            printf("Case 01000\n");
+            break;
+        case 01001:
+            printf("Case 01001\n");
+            break;
+        case 01010:
+            printf("Case 01010\n");
+            break;
+        case 01011:
+            printf("Case 01011\n");
+            break;
+        case 01100:
+            printf("Case 01100\n");
+            break;
+        case 01101:
+            printf("Case 01101\n");
+            break;
+        case 01110:
+            printf("Case 01110\n");
+            break;
+        case 01111:
+            printf("Case 01111\n");
+            break;
+        case 10000:
+            printf("Case 10000\n");
+            break;
+        default:
+            printf("Invalid input\n");
+            break;
+    }
+}        
+                  
+void opCodePush(int *arg){}     
+
+void opCodeXor(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value = tmp.value ^ arg[2];
+}       
+
+void opCodePop(int *arg){}  
+
+void opCodeDiv(int *arg){
+    register_t tmp = attributeRegister(arg);
+    uint16_t value = tmp.value;
+    tmp.value = value / arg[2];
+}   
+
+void opCodeAdd(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value += arg[2];
+}             
+
+void opCodeSub(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value -= arg[2];
+}   
+
+void opCodeMul(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value *= arg[2];
+}                          
+
+void opCodeRsh(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value = tmp.value >> arg[2];
+}        
+
+void opCodeLsh(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value = tmp.value << arg[2];
+}                   
+
+void opCodeAnd(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value = tmp.value & arg[2];
+} 
+                        
+void opCodeOr(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value = tmp.value | arg[2];
+}      
+
+void opCodeNot(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value = ~tmp.value;
+}
+                          
+void opCodeUseReg(int *arg){}                       
+void opCodeUseVar(int *arg){}                       
+
+void opCodeLab(int *arg){
+    //get lab id end store it in processing
+
+}     
+
+void opCodeVar(int *arg){}                          
+void opCodeNeg(int *arg){}
+
+void opCodeMod(int *arg){
+    register_t tmp = attributeRegister(arg);
+    tmp.value = tmp.value % arg[2];
+}  
+                       
+void opCodeRet(int *arg){}                          
+void opCodeMovFromVar(int *arg){}                   
+void opCodeMovToVar(int *arg){}                     
+void opCodeVarSize(int *arg){}                      
+void opCodeVarData(int *arg){}     
 
 // start:                         ins   reg   value
 //     mov rg0, 5              -> 00000 000 0000 0101 00000 000 0000 0101 
