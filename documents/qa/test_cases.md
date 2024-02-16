@@ -15,9 +15,9 @@ The date when the bug has been discovered.
 
 **Priority**<br>
 The priority level of the test case (High, Medium, Low).
-High: A major feature needs to be tested as soon as possible.
-Medium: A feature that could be important needs to be tested.
-Low: A non-required feature needs to be tested.
+- High: A major feature needs to be tested as soon as possible.
+- Medium: A feature that could be important needs to be tested.
+- Low: A non-required feature needs to be tested.
 
 **Test case Scenario**<br>
 The description of the scenario during testing. 

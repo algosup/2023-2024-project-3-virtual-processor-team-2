@@ -14,9 +14,9 @@ Set the date when the bug has been discovered.
 
 **Priority**<br>
 The priority level of the test case (High, Medium, Low)
-High: An issue about a major feature needs to be fixed as soon as possible.
-Medium: An issue about a feature that could be important needs to be fixed.
-Low: An issue about a non-required feature needs to be fixed.
+- High: An issue about a major feature needs to be fixed as soon as possible.
+- Medium: An issue about a feature that could be important needs to be fixed.
+- Low: An issue about a non-required feature needs to be fixed.
 
 **Description** <br>
 A clear and concise description of what the test deals with. If the Priority is 'High', the tester needs to precise what the piece of code that has been tested is.
