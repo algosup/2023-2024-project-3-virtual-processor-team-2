@@ -264,7 +264,7 @@ For further details, refer to the [test report](./test_reports.md) document.
      - Provides a visual snapshot of the overall testing status. <br><br>
      ![Progression Pattern](../images/qa_images/progression_graph.png)
 
-You can see all this stuff on the [test spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?hl=fr#gid=1784501131)
+You can see all tests on the [test spreadsheet](https://docs.google.com/spreadsheets/d/1_UT7jAKQBPeN4hyx2i_c3qdPqmBhTuxuURp5x7rv-hU/edit?hl=fr#gid=1784501131).
 ---
 
 
@@ -281,7 +281,7 @@ Suspension criteria are established to define conditions under which testing act
    - Critical bugs are those with a "High" impact on the core functionality of the software.
 
 2. **Resource Unavailability:**
-   - If essential testing resources, such as testing environments, tools, or personal, become unavailable for an extended period, testing may be suspended.
+   - If essential testing resources, such as testing environments, tools, or staff, become unavailable for an extended period, testing may be suspended.
    - This criteria ensures that testing can resume only when necessary resources are accessible.
 
 ### 4.2. Exit Criteria
