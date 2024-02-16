@@ -27,8 +27,6 @@
         - [3.4.2. GitHub Issues](#342-github-issues)
         - [3.4.3. Tests and Meetings](#343-tests-and-meetings)
         - [3.4.4. Tests Convention](#344-tests-convention)
-    - [3.5. Documentation](#35-documentation)
-      - [3.5.1. GitHub Wiki](#351-github-wiki)
   - [4. Test Criteria](#4-test-criteria)
     - [4.1. Suspension Criteria](#41-suspension-criteria)
     - [4.2. Exit Criteria](#42-exit-criteria)
