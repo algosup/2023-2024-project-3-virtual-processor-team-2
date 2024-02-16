@@ -25,7 +25,6 @@ error_t *initErrorFile(const char* out, char *inputFile);
 
 /*
     Throw an error when the given instruction doesn't exist
-    Throw an error when the given instruction doesn't exist
     params:
         inst: Instruction
         node: Instruction node to get additional information
@@ -86,13 +85,12 @@ void errorIssues2(char* filename, const char* out, error_t *errData);
 void errorTooManyArg(const char* out, error_t *errData);
 
 /*
-    Throw an error when the given instruction doesn't exist
+    Throw an error when at least one argument is missing
     params:
         out: Target file (can be NULL)
         errData: Error history
 */
 void errorNoArg(const char* out, error_t *errData);
-void errorNoArg2(const char* out, error_t *errData);
 
 // ---------- Display error messages ----------
 

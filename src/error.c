@@ -75,7 +75,7 @@ void displayError(const char *errType, const char *errDetails, char *errLocation
     }
 }
 
-void errorNoArg2(const char *out, error_t *errData){
+void errorNoArg(const char *out, error_t *errData){
     char *errType = "Syntax Error";
     char errDetails[64];
 
@@ -130,12 +130,4 @@ void errorInvalidExt(char *filename, const char *out, error_t *errData){
     exit(EXIT_FAILURE); 
 }
 
-void errorIssues2(char *filename, const char *out, error_t *errData){
-    char *errType = "Invalid File Error";
-    char errDetails[64];
-
-    sprintf(errDetails, "File '%s' contains too many errors to be used", filename);
-
-    displayError(errType, errDetails, NULL, out, errData);
-}
 
