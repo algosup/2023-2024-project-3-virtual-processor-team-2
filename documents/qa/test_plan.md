@@ -294,7 +294,8 @@ Before the product can be considered ready for distribution, certain benchmarks 
    - This ensures that almost all aspects of the software have been tested.
 
 2. **Bug Resolution Rate:**
-   - At least 90% of reported bugs must be addressed and resolved before exiting the testing phase.
+   - At least 100% of 'High' and 'Medium' reported bugs must be addressed and resolved before exiting the testing phase.
+   - At least 80% of 'Low' reported bugs must be addressed and resolved before exiting the testing phase.
    - This criteria emphasizes the importance of resolving identified issues to enhance the software's reliability
   
 3. **Documentation Completeness:**
