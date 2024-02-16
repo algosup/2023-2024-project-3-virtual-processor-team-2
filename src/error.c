@@ -26,155 +26,12 @@ error_t *initErrorFile(const char* out, char *inputFile){
     return errData;
 }
 
-void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData){
-    ++ errData->errors;
-    fprintf(stderr, "Error: syntax error\n");
-    fprintf(stderr, "Details: %s instruction is not recognized\n", inst);
-    fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile, node->lineNb);
-    if(out != NULL){
-        FILE *file = fopen(out, "ab");
-        if(file == NULL){
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-            exit(EXIT_FAILURE);
-        }
-        // Get current time
-        time_t rawtime;
-        struct tm *timeinfo;
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
-
-        // Format date
-        char date_str[20]; // Sufficiently large buffer to hold formatted date
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-        fprintf(file, "%s |\tError: syntax error\n", date_str);
-        fprintf(file, "%s |\tDetails: %s instruction is not recognized\n", date_str, inst);
-        fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile, node->lineNb);
-        fclose(file);
-    }
-}
-
-void errorInst(char *inst, instNode_t *node, const char *out, error_t *errData){
-	char *errType = "Syntax Error";
-	char errDetails[64];
-	char errLocation[64];
-	sprintf(errDetails, "Instruction \"%s\" not found", inst);
-	sprintf(errLocation, "File %s, Line %ld\n\n", errData->inputFile, node->lineNb);
-	displayError(errType, errDetails, errLocation, out, errData);
-}
-
-void errorLineSize(long lineNb, const char* out, error_t *errData){
-    ++ errData->errors;
-    fprintf(stderr, "Error: syntax error\n");
-    fprintf(stderr, "Details: line must be under 64 characters\n");
-    fprintf(stderr, "In: file %s, line %ld\n\n", errData->inputFile, lineNb);
-    if(out != NULL){
-        FILE *file = fopen(out, "ab");
-        if(file == NULL){
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-            exit(EXIT_FAILURE);
-        }
-        // Get current time
-        time_t rawtime;
-        struct tm *timeinfo;
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
-
-        // Format date
-        char date_str[20]; // Sufficiently large buffer to hold formatted date
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-        fprintf(file, "%s |\tError: syntax error\n", date_str);
-        fprintf(file, "%s |\tDetails: line must to be under 64 characters\n", date_str);
-        fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile, lineNb);
-        fclose(file);
-    }
-
-}
 
 void printErrorSummary(error_t *errData){
     fprintf(stderr, "Error summary:\n");
     fprintf(stderr, "Total errors: %ld\n", errData->errors);
 }
 
-void errorfnf(char* filename, const char* out, error_t *errData){
-    ++ errData->errors;
-    fprintf(stderr, "Error: file not found\n");
-    fprintf(stderr, "Details: file %s not found\n", filename);
-    if(out != NULL){
-        FILE *file = fopen(out, "ab");
-        if(file == NULL){
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-            exit(EXIT_FAILURE);
-        }
-        // Get current time
-        time_t rawtime;
-        struct tm *timeinfo;
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
-
-        // Format date
-        char date_str[20]; // Sufficiently large buffer to hold formatted date
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-        fprintf(file, "%s |\tError: file not found\n", date_str);
-        fprintf(file, "%s |\tDetails: file %s not found\n", date_str, filename);
-        fclose(file);
-    }
-    printErrorSummary(errData);
-    exit(EXIT_FAILURE);
-}
-
-void errorInvalidExt(char* filename, const char* out, error_t *errData){
-    ++ errData->errors;
-    fprintf(stderr, "Error: invalid file extension\n");
-    fprintf(stderr, "Details: file %s has an invalid extension\n", filename);
-    if(out != NULL){
-        FILE *file = fopen(out, "ab");
-        if(file == NULL){
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-            exit(EXIT_FAILURE);
-        }
-        // Get current time
-        time_t rawtime;
-        struct tm *timeinfo;
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
-
-        // Format date
-        char date_str[20]; // Sufficiently large buffer to hold formatted date
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-        fprintf(file, "%s |\tError: invalid file extension\n", date_str);
-        fprintf(file, "%s |\tDetails: file %s has an invalid extension\n", date_str, filename);
-        fclose(file);
-    }
-    printErrorSummary(errData);
-    exit(EXIT_FAILURE);
-}
-
-void errorIssues(char* filename, const char* out, error_t *errData){
-    ++ errData->errors;
-    fprintf(stderr, "Error: invalid file\n");
-    fprintf(stderr, "Details: file %s contains too much errors to be used\n", filename);
-    if(out != NULL){
-        FILE *file = fopen(out, "ab");
-        if(file == NULL){
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-            exit(EXIT_FAILURE);
-        }
-        // Get current time
-        time_t rawtime;
-        struct tm *timeinfo;
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
-
-        // Format date
-        char date_str[20]; // Sufficiently large buffer to hold formatted date
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-        fprintf(file, "%s |\tError: syntax error\n", date_str);
-        fprintf(file, "%s |\tDetails: too many arguments\n Try 'iat2 --help' for more information\n", date_str);
-        fprintf(file, "%s |\tIn: file %s, line %ld\n\n", date_str, errData->inputFile);
-        fclose(file);
-    }
-    exit(EXIT_FAILURE);
-}
 
 void displayError(const char *errType, const char *errDetails, char *errLocation, const char *out, error_t *errData){
 	++ errData->errors;
@@ -208,25 +65,73 @@ void displayError(const char *errType, const char *errDetails, char *errLocation
     }
 }
 
-void errorNoArg(char *errType, char *errDetails, const char* out, error_t *errData){
-	char *errType = "syntax error";
-	char errDetails[64];
-	sprintf(errDetails, "No argument found");
-	displayError(errType, errDetails, out, errData);
+void errorNoArg2(const char *out, error_t *errData){
+    char *errType = "Syntax Error";
+    char errDetails[64];
+
+    sprintf(errDetails, "No argument found");
+
+    displayError(errType, errDetails, NULL, out, errData);
 }
 
-void errorTooManyArg(char *errType, char *errDetails, const char* out, error_t *errData){
-	char *errType = "syntax error";
-	char errDetails[64];
-	sprintf(errDetails, "Too many arguments");
-	displayError(errType, errDetails, out, errData);
+
+void errorTooManyArg(const char *out, error_t *errData){
+    char *errType = "Syntax Error";
+    char errDetails[64];
+
+    sprintf(errDetails, "Too many arguments");
+
+    displayError(errType, errDetails, NULL, out, errData);
 }
 
-void errorLineSize(char *errType, char *errDetails, const char* out, error_t *errData){
-	char *errType = "syntax error";
-	char errDetails[64];
+
+void errorLineSize2(long lineNb, const char *out, error_t *errData){
+    char *errType = "Syntax Error";
+    char errDetails[64];
     char errLocation[64];
-	sprintf(errDetails, "line must be under 64 characters");
-    sprintf(errLocation, "file %s, line %ld\n\n", errData->inputFile, node->lineNb);
-	displayError(errType, errDetails, out, errLocation, errData);
+
+    sprintf(errDetails, "Line must be under 64 characters");
+    sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
+
+    displayError(errType, errDetails, errLocation, out, errData);
 }
+
+
+void errorInstruction2(char *inst, instNode_t *node, const char *out, error_t *errData){
+    char *errType = "Syntax Error";
+    char errDetails[64];
+    char errLocation[64];
+
+    sprintf(errDetails, "Instruction '%s' is not recognized", inst);
+    sprintf(errLocation, "File %s, line %ld", errData->inputFile, node->lineNb);
+
+    displayError(errType, errDetails, errLocation, out, errData);
+}
+
+void errorfnf2(char *filename, const char *out, error_t *errData){
+    char *errType = "File Not Found Error";
+    char errDetails[64];
+
+    sprintf(errDetails, "File '%s' not found", filename);
+
+    displayError(errType, errDetails, NULL, out, errData);
+}
+
+void errorInvalidExt2(char *filename, const char *out, error_t *errData){
+    char *errType = "Invalid File Extension Error";
+    char errDetails[64];
+
+    sprintf(errDetails, "File '%s' has an invalid extension", filename);
+
+    displayError(errType, errDetails, NULL, out, errData);
+}
+
+void errorIssues2(char *filename, const char *out, error_t *errData){
+    char *errType = "Invalid File Error";
+    char errDetails[64];
+
+    sprintf(errDetails, "File '%s' contains too many errors to be used", filename);
+
+    displayError(errType, errDetails, NULL, out, errData);
+}
+

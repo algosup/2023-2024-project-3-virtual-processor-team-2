@@ -21,27 +21,17 @@ typedef struct errorData{
 */
 error_t *initErrorFile(const char* out, char *inputFile);
 
-// ---------- Parsing/ Assembling errors ----------
+// ---------- Parsing/Assembling errors ----------
 
 /*
-    Throw an error whrn the given instruction doesn't exist
+    Throw an error when the given instruction doesn't exist
     params:
         inst: Instruction
-        node: Instruction node to get additionnal information
+        node: Instruction node to get additional information
         out: Target file (can be NULL)
         errData: Error history
 */
 void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData);
-
-/*
-    Throw an error when the given instruction doesn't exist NEW VERSION
-    params:
-        inst: Instruction
-        node: Instruction node to get additionnal information
-        out: Target file (can be NULL)
-        errData: Error history
-*/
-void errorInst(char * inst, instNode_t *node, const char* out, error_t *errData);
 
 /*
     Throw an error when the line size is too big
@@ -51,27 +41,11 @@ void errorInst(char * inst, instNode_t *node, const char* out, error_t *errData)
         errData: Error history
 */
 void errorLineSize(long lineNb, const char* out, error_t *errData);
-
-/*
-    Print error summary
-    params:
-        errData: Error history
-        out: Target file (can be NULL)
-*/
-void printErrorSummary(error_t *errData);
+void errorLineSize2(long lineNb, const char* out, error_t *errData);
 
 // ---------- Bin converting errors ----------
 
 // ---------- Fatal errors ----------
-
-/*
-    Throw an error when the file contains errors 
-    params:
-        filename: File name
-        out: Target file (can be NULL)
-        errData: Error history
-*/
-void errorIssues(char* filename, const char* out, error_t *errData);
 
 /*
     Throw an error when the file is not found
@@ -81,7 +55,7 @@ void errorIssues(char* filename, const char* out, error_t *errData);
         errData: Error history
 */
 void errorfnf(char* filename, const char* out, error_t *errData);
-
+void errorfnf2(char* filename, const char* out, error_t *errData);
 
 /*
     Throw an error when the file extension is invalid
@@ -91,10 +65,22 @@ void errorfnf(char* filename, const char* out, error_t *errData);
         errData: Error history
 */
 void errorInvalidExt(char* filename, const char* out, error_t *errData);
-
+void errorInvalidExt2(char* filename, const char* out, error_t *errData);
 
 /*
-    Display a file error with error messages depending on the issue
+    Throw an error when the file contains errors
+    params:
+        filename: File name
+        out: Target file (can be NULL)
+        errData: Error history
+*/
+void errorIssues(char* filename, const char* out, error_t *errData);
+void errorIssues2(char* filename, const char* out, error_t *errData);
+
+// ---------- Other errors ----------
+
+/*
+    Throw an error when there are too many arguments
     params:
         out: Target file (can be NULL)
         errData: Error history
@@ -108,30 +94,20 @@ void errorTooManyArg(const char* out, error_t *errData);
         errData: Error history
 */
 void errorNoArg(const char* out, error_t *errData);
+void errorNoArg2(const char* out, error_t *errData);
+
+// ---------- Display error messages ----------
 
 /*
-    Throw an error when there is a special character is missing
-    params:
-        lineNb: line number
-        filename: File name
-        out: Target file (can be NULL)
-        errData: Error history
-        errorNumber: Type of error
-*/
-void errorSpeCharMiss(long lineNb, const char* out, error_t *errData, char* filename);
-
-/*
-        Display error messages depending on the issue
+    Display error messages depending on the issue
     params:
         errType: Type of error
         errDetails: Details about the error
-        errLocation: Location of the error
+        errLocation: Location of the error (can be NULL)
         out: Target file (can be NULL)
         errData: Error history
 */
 void displayError(const char *errType, const char *errDetails, char *errLocation, const char *out, error_t* errData);
-
-
 
 #ifdef __cplusplus
 }
