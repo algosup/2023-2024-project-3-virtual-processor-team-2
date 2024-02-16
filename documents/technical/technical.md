@@ -7,7 +7,7 @@
 | Team | 2 |
 | Reviewer | Enzo Guillouche |
 | Created on | 01/22/2024 |
-| Last updated | 02/09/2024 |
+| Last updated | 02/12/2024 |
 | Task tracker | [Tasks & Schedule](https://docs.google.com/spreadsheets/d/1nawLT6dMtwPcFpHMa4k32Nxjinokl4ZmX4GMZl1Fatc/edit?usp=sharing) |
 
 ---
@@ -92,7 +92,7 @@ Make sure to read the [functional specifications](/documents/functional/function
 
 ## Overview
 
-The objective of this project is to create a virtual processor that runs customized assembly language. By using C standard libraries, the main aim is to develop a concise assembly language and construct a C program interpreter that can execute and validate assembly code. This solution is specifically designed for educational purposes and software developers who are keen on delving into low-level programming and processor emulation. The stakeholders of this project are on one side ALGOSUP, a international software development school, which gave us this project and 8 weeks to bring it to fruition, and on the other the Team 2 of ALGOSUP.
+The objective of this project is to create a virtual processor that runs customized assembly language. By using C standard libraries, the main aim is to develop a concise assembly language and construct a C program interpreter that can execute and validate assembly code. This solution is specifically designed for educational purposes and software developers who are keen on delving into low-level programming and processor emulation. The stakeholders of this project are on one side ALGOSUP, an international software development school, which gave us this project as well as 8 weeks to bring it to fruition, and on the other side, the Team 2 of ALGOSUP.
 
 ## Glossary
 
@@ -108,6 +108,7 @@ The objective of this project is to create a virtual processor that runs customi
 | Bash | A Unix shell and command language, often used for scripting in various operating systems. |
 | `.aop` Extension | A custom file extension, used for files containing AT2 code. |
 | Debugging | The process of identifying and resolving bugs or errors in computer software. |
+| IDE (Integrated Development Environment) | A software tool that combines code editing, debugging, and project management features to streamline software development |
 
 ## Context
 
@@ -399,6 +400,8 @@ The following table outlines the key dependencies of our solution:
 - **End**
   - Conversion Process Completed
 
+# Files usage
+
 ## `2at2.h`
 
 - `printHelp()`: Displays a help message for the program usage.
@@ -463,6 +466,8 @@ The following table outlines the key dependencies of our solution:
 **Assembler:**
 
 ![Assembler Diagram](../images/technical_images/assembler.png)
+
+---
 
 **Virtual memory:**
 
