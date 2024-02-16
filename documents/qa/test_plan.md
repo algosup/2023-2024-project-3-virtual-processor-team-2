@@ -60,6 +60,7 @@ For further details, refer to the [functional specifications](../functional/func
 | **Interpreter** | In this case, an interpreter is a computer program that directly executes instructions written in a programming or scripting language, without requiring them previously to have been compiled into a machine language program. | [Wikipedia](https://en.wikipedia.org/wiki/Interpreter_(computing)) |
 | **Virtual Processor** | A processor (or processing unit) is an electrical component that performs operations on an external data source, usually memory or some other data stream. A virtual processor is basically a virtual machine that simulates the behavior of a processor. | [Wikipedia](https://en.wikipedia.org/wiki/Processor_(computing)) |
 | **AT2 language** | The revisited Assembly language used in this project. AT2 stands for **A**ssembly **T**eam **2**. | [Documentation](https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/blob/main/documents/functional/at2_language_documentation.pdf) |
+| **Smoke Testing** | A testing method that is used to determine if a new software build is ready for the next testing phase. | [Wikipedia](https://en.wikipedia.org/wiki/Smoke_testing_(software)) |
 | **GitHub Actions** | A CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. | [GitHub](https://docs.github.com/en/actions) |
 | **GitHub Issues** | A tool that allows us to create, manage, and assign issues to team members. | [GitHub](https://docs.github.com/en/issues) |
 | **GitHub Wiki** | Every GitHub repository can be equipped with a wiki, to share long-form content about your project, such as how to use it, how you designed it, or its core principles. | [GitHub](https://docs.github.com/en/communities/documenting-your-project-with-wikis/about-wikis) |
@@ -94,7 +95,7 @@ Here's the purpose of our testing strategy: <br> - We will implement **[Unit Tes
 
 ### 3.2. Unit Tests
 
-Unit testing is an important part of the process. These tests will be written by the Software Engineers throughout the project, in parallel with game development. Then, the Quality Assurance will run these tests during tests cases. <br>Regarding this project, most of the tests would be unit tests.
+Unit testing is an important part of the process. These tests will be written by the Software Engineers throughout the project, in parallel with project development. Then, the Quality Assurance will run these tests during tests cases. <br>Regarding this project, most of the tests would be unit tests.
 
 
 #### These unit tests serve three crucial objectives:
