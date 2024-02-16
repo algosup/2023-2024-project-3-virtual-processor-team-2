@@ -106,126 +106,28 @@ void errorLineSize(long lineNb, const char *out, error_t *errData){
     displayError(errType, errDetails, errLocation, out, errData);
 }
 
-void errorfnf(char* filename, const char* out, error_t *errData){ 
-
-    ++ errData->errors; 
-
-    fprintf(stderr, "Error: file not found\n"); 
-
-    fprintf(stderr, "Details: file %s not found\n", filename); 
-
-    if(out != NULL){ 
-
-        FILE *file = fopen(out, "ab"); 
-
-        if(file == NULL){ 
-
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno)); 
-
-            exit(EXIT_FAILURE); 
-
-        } 
-
-        // Get current time 
-
-        time_t rawtime; 
-
-        struct tm *timeinfo; 
-
-        time(&rawtime); 
-
-        timeinfo = localtime(&rawtime); 
-
- 
-
-        // Format date 
-
-        char date_str[20]; // Sufficiently large buffer to hold formatted date 
-
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo); 
-
-        fprintf(file, "%s |\tError: file not found\n", date_str); 
-
-        fprintf(file, "%s |\tDetails: file %s not found\n", date_str, filename); 
-
-        fclose(file); 
-
-    } 
-
-    printErrorSummary(errData); 
-
-    exit(EXIT_FAILURE); 
-
-} 
-
-void errorfnf2(char *filename, const char *out, error_t *errData){
-    char *errType = "File Not Found Error";
+void errorfnf(char *filename, const char *out, error_t *errData){
+    char *errType = "Error: File Not Found";
     char errDetails[64];
 
     sprintf(errDetails, "File '%s' not found", filename);
 
     displayError(errType, errDetails, NULL, out, errData);
-}
-
-void errorInvalidExt(char* filename, const char* out, error_t *errData){ 
-
-    ++ errData->errors; 
-
-    fprintf(stderr, "Error: invalid file extension\n"); 
-
-    fprintf(stderr, "Details: file %s has an invalid extension\n", filename); 
-
-    if(out != NULL){ 
-
-        FILE *file = fopen(out, "ab"); 
-
-        if(file == NULL){ 
-
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno)); 
-
-            exit(EXIT_FAILURE); 
-
-        } 
-
-        // Get current time 
-
-        time_t rawtime; 
-
-        struct tm *timeinfo; 
-
-        time(&rawtime); 
-
-        timeinfo = localtime(&rawtime); 
-
- 
-
-        // Format date 
-
-        char date_str[20]; // Sufficiently large buffer to hold formatted date 
-
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo); 
-
-        fprintf(file, "%s |\tError: invalid file extension\n", date_str); 
-
-        fprintf(file, "%s |\tDetails: file %s has an invalid extension\n", date_str, filename); 
-
-        fclose(file); 
-
-    } 
 
     printErrorSummary(errData); 
 
     exit(EXIT_FAILURE); 
+}
 
-} 
-
-void errorInvalidExt2(char *filename, const char *out, error_t *errData){
+void errorInvalidExt(char *filename, const char *out, error_t *errData){
     char *errType = "Invalid File Extension Error";
     char errDetails[64];
 
     sprintf(errDetails, "File '%s' has an invalid extension", filename);
 
     displayError(errType, errDetails, NULL, out, errData);
+    printErrorSummary(errData); 
+    exit(EXIT_FAILURE); 
 }
 
 void errorIssues2(char *filename, const char *out, error_t *errData){

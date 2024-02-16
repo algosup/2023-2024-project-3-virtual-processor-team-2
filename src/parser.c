@@ -70,6 +70,7 @@ void parseFile(instList_t *nodeList, char *filename, error_t *errData){
     FILE *file = fopen(filename, "r");
     if(file == NULL){
         errorfnf(filename, errorFile, errData);
+
     }
 
     // Check the file extension 

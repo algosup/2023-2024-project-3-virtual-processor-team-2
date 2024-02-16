@@ -55,7 +55,6 @@ void errorLineSize(long lineNb, const char* out, error_t *errData);
         errData: Error history
 */
 void errorfnf(char* filename, const char* out, error_t *errData);
-void errorfnf2(char* filename, const char* out, error_t *errData);
 
 /*
     Throw an error when the file extension is invalid
@@ -65,7 +64,6 @@ void errorfnf2(char* filename, const char* out, error_t *errData);
         errData: Error history
 */
 void errorInvalidExt(char* filename, const char* out, error_t *errData);
-void errorInvalidExt2(char* filename, const char* out, error_t *errData);
 
 /*
     Throw an error when the file contains errors
