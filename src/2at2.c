@@ -12,7 +12,7 @@
 #include "debug.h"
 #include "error.h"
 
-#define VERSION "0.0.5"
+#define VERSION "0.1.1"
 
 int main(int argc, char *argv[]) {
     // Init error data history
