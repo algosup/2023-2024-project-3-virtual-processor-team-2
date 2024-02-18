@@ -148,7 +148,9 @@ TEST(isOp, add) {
   char *inst = const_cast<char *>("add");
 
   instNode_t *newNode = createEmptyInstNode();
-  bool isThatKind = isOp(inst, newNode, errData);
+
+  varList_t *varList = createEmptyVarList();
+  bool isThatKind = isOp(inst, newNode, varList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_ADD);
