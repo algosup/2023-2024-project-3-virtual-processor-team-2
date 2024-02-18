@@ -8,8 +8,10 @@
 #include <array>
 
 #include "gtest/gtest.h"
+#include "ast.h"
 #include "parser.h"
 #include "builder.h"
+#include "error.h"
 
 char * fileName = const_cast<char *>("test.cc");
 
@@ -83,13 +85,9 @@ TEST(getInst, noInst) {
 
 TEST(getArgs, normal) {
     // Test input line
-    std::string line = "add r1, r2";
-
-    // Convert the string to a C-style string
-    char *c_line = const_cast<char *>(line.c_str());
-
+    char *line = const_cast<char *>("add r1, r2");
     // Call the function under test
-    char **args = getInstArgs(c_line);
+    char **args = getInstArgs(line);
 
     // Check each argument
     ASSERT_STREQ(args[0], "r1");
@@ -104,13 +102,10 @@ TEST(getArgs, normal) {
 
 TEST(getArgs, noComma) {
     // Test input line
-    std::string line = "add r1 r2";
-
-    // Convert the string to a C-style string
-    char *c_line = const_cast<char *>(line.c_str());
+    char *line = const_cast<char *>("add r1 r2");
 
     // Call the function under test
-    char **args = getInstArgs(c_line);
+    char **args = getInstArgs(line);
 
     // Check each argument
     ASSERT_STREQ(args[0], "r1 r2");
@@ -125,13 +120,13 @@ TEST(getArgs, noComma) {
 
 TEST(getArgs, noArgs) {
     // Test input line
-    std::string line = "ret\n";
-
-    // Convert the string to a C-style string
-    char *c_line = const_cast<char *>(line.c_str());
+    char *line = const_cast<char *>("ret\n");
 
     // Call the function under test
-    char **args = getInstArgs(c_line);
+    char **args = getInstArgs(line);
+
+    std::cout << args[0] << std::endl;
+    std::cout << args[1] << std::endl;
 
     // Check each argument
     ASSERT_TRUE(args[0] == NULL);
@@ -145,51 +140,24 @@ TEST(getArgs, noArgs) {
 }
 
 /*
- *  parse line
+ *  is op
  */
 
-TEST(parseLine, normal) {
-    error_t *errData = initErrorFile("errors.log", fileName);
+TEST(isOp, add) {
+  error_t *errData = initErrorFile("errors.log", fileName);
+  char *inst = const_cast<char *>("add");
 
-    char* line = const_cast<char *>("add rg1, 7");
-    
-    instNode *node = parseLine(line, 1, 1, errData);
-    ASSERT_TRUE(node->id == 1);
-    ASSERT_TRUE(node->lineNb == 1);
-    ASSERT_TRUE(node->op == OP_ADD);
-    ASSERT_TRUE(node->inputReg == RG_1);
-    ASSERT_FALSE(node->isInter);
-    ASSERT_STREQ(node->arg0, NULL);
-    ASSERT_STREQ(node->arg1, "7");
+  instNode_t *newNode = createEmptyInstNode();
+  bool isThatKind = isOp(inst, newNode, errData);
+
+  ASSERT_TRUE(isThatKind);
+  ASSERT_TRUE(newNode->op == OP_ADD);
 }
 
 // TODO: Do for all instructions
-TEST(parseLine, interrupt){
-    error_t *errData = initErrorFile("errors.log", fileName);
 
-    char* line = const_cast<char *>("draw \"test\"\n");
-    
-    instNode *node = parseLine(line, 1, 1, errData);
-    ASSERT_TRUE(node->id == 1);
-    ASSERT_TRUE(node->lineNb == 1);
-    ASSERT_TRUE(node->op == OP_INT);
-    ASSERT_TRUE(node->isInter);
-    ASSERT_TRUE(node->inter == INT_DRAW);
-    ASSERT_STREQ(node->arg0, NULL);
-    ASSERT_STREQ(node->arg1, "test");
-}
-TEST(parseLine, opWithouArgs) {
-    error_t *errData = initErrorFile("errors.log", fileName);
+// TODO: test build instruction
 
-    char* line = const_cast<char *>("ret\n");
-    
-    instNode *node = parseLine(line, 1, 1, errData);
-    ASSERT_TRUE(node->id == 1);
-    ASSERT_TRUE(node->lineNb == 1);
-    ASSERT_TRUE(node->op == OP_RET);
-    ASSERT_TRUE(node->arg0 == NULL);
-    ASSERT_TRUE(node->arg1 == NULL);
-}
 
 int main(int argc, char *argv[]) {
   ::testing::InitGoogleTest(&argc, argv);

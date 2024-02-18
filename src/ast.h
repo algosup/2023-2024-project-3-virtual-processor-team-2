@@ -6,6 +6,10 @@
 
 #include <stdbool.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Operation types
 enum opKind{
     OP_MOV,
@@ -201,3 +205,7 @@ int addLabel(labelList_t *labelList, char *name, long nodeId);
         int: id of the label or -1 if it does not exist
 */
 int isLabelExist(labelList_t *labelList, char *name);
+
+#ifdef __cplusplus
+}
+#endif

@@ -369,15 +369,23 @@ char *getInst(char *line) {
 
 char **getInstArgs(char *line) {
     char **args = malloc(MAX_ARGS * sizeof(char *));
+    // init args to NULL
+    for (int i = 0; i < MAX_ARGS; i++) {
+        args[i] = NULL;
+    }
     if (!args) {
         fprintf(stderr, "Memory allocation error\n");
         exit(EXIT_FAILURE);
     }
-    args[0] = NULL;
-    args[1] = NULL;
-
-    char *token = strtok(line, " ");
-    if (!token) {
+    char *buffer = malloc((strlen(line) + 1) * sizeof(char));
+    if (!buffer) {
+        fprintf(stderr, "Memory allocation error\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    strcpy(buffer, line);
+    char *token = strtok(buffer, " ");
+    if (token == NULL) {
         // TODO: throw error
         fprintf(stderr, "Invalid input format\n");
         free(args); // Free allocated memory before exit

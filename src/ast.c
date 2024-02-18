@@ -61,6 +61,7 @@ varList_t *createEmptyVarList(){
     for(size_t i = 0; i < varList->size; i++){
         varList->list[i].name = NULL;
     }
+    return varList;
 }
 
 bool addVar(varList_t *varList, char *name, char *value){
@@ -140,10 +141,10 @@ instNode_t *copyInstNode(instNode_t *node){
     return newNode;
 }
 
-instNode_t *createEmptyInstNode(){
+instNode_t *createEmptyInstNode() {
     instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
-    if(newNode == NULL){
-        // TODO: thorw memory alloc error
+    if (newNode == NULL) {
+        fprintf(stderr, "Memory allocation error\n");
         exit(EXIT_FAILURE);
     }
     newNode->id = -1;
@@ -156,6 +157,7 @@ instNode_t *createEmptyInstNode(){
 
     return newNode;
 }
+
 
 labelList_t *createEmptyLabelList(){
     labelList_t *labelList = malloc(sizeof(labelList_t));
