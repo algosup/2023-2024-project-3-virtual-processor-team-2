@@ -54,6 +54,16 @@ int main(int argc, char *argv[]) {
         printAst(instList);
     }
 
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        free(varList);
+        free(labelList);
+        free(instList);
+        exit(EXIT_FAILURE);
+    }
+
     fprintf(stderr, "[\t45%%\t] File parsed successfully\n");
 
     // ---------- Build ----------
@@ -61,16 +71,37 @@ int main(int argc, char *argv[]) {
     // run builder
     buildProgram(instList, varList, labelList, errData);
 
-    fprintf(stderr, "[\t70%%\t] File built successfully\n");
-
     if(flags.debug){
         printAst(instList);
     }
+    
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        free(varList);
+        free(labelList);
+        free(instList);
+        exit(EXIT_FAILURE);
+    }
+
+    fprintf(stderr, "[\t70%%\t] File built successfully\n");
+
 
     // ---------- Assemble ----------
 
     // run exporter
     // TODO: make the function export to binary
+
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        free(varList);
+        free(labelList);
+        free(instList);
+        exit(EXIT_FAILURE);
+    }
 
     fprintf(stderr, "[\t95%%\t] File assembled successfully\n");
 
