@@ -4,14 +4,22 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "parser.h"
 #include "builder.h"
 #include "2at2.h"
 #include "debug.h"
+#include "error.h"
 
-#define VERSION "0.0.3"
+#define VERSION "0.1.1"
 
 int main(int argc, char *argv[]) {
+    // Init error data history
+    asm_error_t *errData = initErrorFile("errors.log", argv[1]);
+
+    // ---------- Parse arguments ----------
+
     // Parse program arguments and get flags
     flags_t flags = parseArgs(argc, argv);
 
@@ -22,53 +30,64 @@ int main(int argc, char *argv[]) {
         printVersion();
     }
 
+    fprintf(stderr, "[\t5%%\t] Parsing arguments successfully\n");
+
+    // ---------- Init data ----------
+
     // Init variables list struct
-    varList_t *varList = malloc(sizeof(varList_t));
-    varList->size = 10;
-    varList->list = malloc(sizeof(var_t) * varList->size);
-    // Init variables list
-    for(size_t i = 0; i < varList->size; i++){
-        varList->list[i].name = NULL;
-    }
+    varList_t *varList = createEmptyVarList();
 
     // Init labels list struct
-    labelList_t *labelList = malloc(sizeof(labelList_t));
-    labelList->size = 10;
-    labelList->list = malloc(sizeof(label_t) * labelList->size);
-    for(size_t i = 0; i < labelList->size; i++){
-        labelList->list[i].name = NULL;
-    }
+    labelList_t *labelList = createEmptyLabelList();
+    
     // Init instructions list struct
-    instList_t *instList = malloc(sizeof(instList_t));
-    instList->head = NULL;
+    instList_t *instList = createEmptyInstList();
+
+    fprintf(stderr, "[\t10%%\t] Data initialized successfully\n");
+
+    // ---------- Parse ----------
 
     // run parser
-    parseFile(instList, argv[1]);
+    parseFile(instList, argv[1], errData);
 
-    if(flags.debug) {
-        printInstList(instList, "../others/parsing.log");
-        printVarList(varList, "../others/parsing.log");
-        printLabelList(labelList, "../others/parsing.log");
+    if(flags.debug){
+        printAst(instList);
     }
 
+    fprintf(stderr, "[\t45%%\t] File parsed successfully\n");
+
+    // ---------- Build ----------
     
     // run builder
-    build(instList, labelList, varList);
+    buildProgram(instList, varList, labelList, errData);
 
-    if(flags.debug) {
-        printInstList(instList, "../others/building.log");
-        printVarList(varList, "../others/building.log");
-        printLabelList(labelList, "../others/building.log");
+    fprintf(stderr, "[\t70%%\t] File built successfully\n");
+
+    if(flags.debug){
+        printAst(instList);
     }
+
+    // ---------- Assemble ----------
 
     // run exporter
     // TODO: make the function export to binary
+
+    fprintf(stderr, "[\t95%%\t] File assembled successfully\n");
+
+    // ---------- Print error summary ----------
 
     // Free memory
     free(varList);
     free(labelList);
     free(instList);
-    
+
+    fprintf(stderr, "[\t100%%\t] Work success\n");
+
+    printErrorSummary(errData);
+
+    // Free error data
+    free(errData);
+
     exit(EXIT_SUCCESS);
 }
 
