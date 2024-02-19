@@ -9,7 +9,7 @@ extern "C" {
 typedef struct errorData{
     long errors;
     char *inputFile;
-} error_t;
+} asm_error_t;
 
 /*
     Init error file
@@ -19,7 +19,7 @@ typedef struct errorData{
     returns:
         error_t: Error history
 */
-error_t *initErrorFile(const char* out, char *inputFile);
+asm_error_t *initErrorFile(const char* out, char *inputFile);
 
 // ---------- Parsing/ Assembling errors ----------
 
@@ -31,7 +31,7 @@ error_t *initErrorFile(const char* out, char *inputFile);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData);
+void errorInstruction(char* inst, instNode_t *node, const char* out, asm_error_t *errData);
 
 /*
     Throw an error when the line size is too big
@@ -40,7 +40,7 @@ void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *er
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorLineSize(long lineNb, const char* out, error_t *errData);
+void errorLineSize(long lineNb, const char* out, asm_error_t *errData);
 
 /*
     Print error summary
@@ -48,7 +48,7 @@ void errorLineSize(long lineNb, const char* out, error_t *errData);
         errData: Error history
         out: Target file (can be NULL)
 */
-void printErrorSummary(error_t *errData);
+void printErrorSummary(asm_error_t *errData);
 
 // ---------- Fatal errors ----------
 
@@ -60,7 +60,7 @@ void printErrorSummary(error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorfnf(char* filename, const char* out, error_t *errData);
+void errorfnf(char* filename, const char* out, asm_error_t *errData);
 
 /*
     Throw an error when the file extension is invalid
@@ -69,7 +69,7 @@ void errorfnf(char* filename, const char* out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorInvalidExt(char* filename, const char* out, error_t *errData);
+void errorInvalidExt(char* filename, const char* out, asm_error_t *errData);
 
 #ifdef __cplusplus
 }

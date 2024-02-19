@@ -40,7 +40,7 @@ void flagsSet(char *flag, flags_t *flags);
         nodeList: pointer to the instruction list
         filename: name of the file to be parsed
 */
-void parseFile(instList_t *nodeList, char *filename, error_t *errData);
+void parseFile(instList_t *nodeList, char *filename, asm_error_t *errData);
 
 /*
     Parse a line and return an instruction node
@@ -49,7 +49,7 @@ void parseFile(instList_t *nodeList, char *filename, error_t *errData);
     returns:
         instNode_t: instruction node
 */
-instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData);
+instNode_t *parseLine(char *line, long nodeId, long lineNb, asm_error_t *errData);
 
 /*
     Read the line and check if it is an operation
@@ -59,7 +59,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData);
     returns:
         bool: true if it is an operation
 */
-bool isOp(char *inst, instNode_t *newNode, error_t *errData);
+bool isOp(char *inst, instNode_t *newNode, asm_error_t *errData);
 
 
 /*
@@ -112,7 +112,7 @@ enum regKind strToReg(char *arg);
         filename: name of the file to check
         errData: error history
 */
-void checkAOPFile(char* fileName, error_t *errData);
+void checkAOPFile(char* fileName, asm_error_t *errData);
   
 /*
     Checks if a line has more than 64 characters or not

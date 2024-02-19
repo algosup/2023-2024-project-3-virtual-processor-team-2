@@ -14,7 +14,7 @@
 
 #define IMMEDIATE_VAL_SIZE 8
 
-void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeList, error_t *errData) {
+void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeList, asm_error_t *errData) {
     instNode_t *node = nodeList->head;
     while(node != NULL){
         buildNode(node, varList, labeList, errData);
@@ -25,7 +25,7 @@ void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeLis
     }
 }
 
-void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, error_t *errData) {
+void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_error_t *errData) {
     switch(node->op){
         case OP_MOV:
             buildMov(node, varList, errData);
@@ -53,7 +53,7 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, erro
     }
 }
 
-void buildVar(instNode_t *node, varList_t *varList, error_t *errData){
+void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
     // copy variable value
     char *varData = (char *)malloc(sizeof(char) * (strlen(node->arg1) + 1));
     strcpy(varData, node->arg1);
@@ -144,7 +144,7 @@ void buildVar(instNode_t *node, varList_t *varList, error_t *errData){
     }
 }
 
-void buildLabel(instNode_t *node, labelList_t *labelList, error_t *errData){
+void buildLabel(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // try to add the label to the list
     int labId = addLabel(labelList, node->arg0, node->id);
     if(labId == -1){
@@ -158,7 +158,7 @@ void buildLabel(instNode_t *node, labelList_t *labelList, error_t *errData){
     node->isBuilt = true;
 }
 
-void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
+void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
     // check if it's mov to reg
     if(node->arg0 == NULL){
         // check if it's val -> reg
@@ -329,7 +329,7 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData){
     return;
 }
 
-void buildGoto(instNode_t *node, labelList_t *labelList, error_t *errData){
+void buildGoto(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // check if the label is in the list
     int labId = isLabelExist(labelList, node->arg0);
     if(labId == -1){
@@ -346,7 +346,7 @@ void buildGoto(instNode_t *node, labelList_t *labelList, error_t *errData){
     return;
 }
 
-void buildCall(instNode_t *node, labelList_t *labelList, error_t *errData){
+void buildCall(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // check if the label is in the list
     int labId = isLabelExist(labelList, node->arg0);
     if(labId == -1){
@@ -364,7 +364,7 @@ void buildCall(instNode_t *node, labelList_t *labelList, error_t *errData){
     return;
 }
 
-void buildOperation(instNode_t *node, varList_t *varList, error_t *errData){
+void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
     // check if the second argument is an unsigned int
     if(node->arg1 != NULL && isUnsignedInt(node->arg1)){
         // pass argument 1 to arg0

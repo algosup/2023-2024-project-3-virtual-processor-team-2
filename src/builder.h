@@ -13,7 +13,7 @@ extern "C" {
         labeList: pointer to the label list
         errData: pointer to the error struct
 */
-void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeList, error_t *errData);
+void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeList, asm_error_t *errData);
 
 /*
     Build a node
@@ -23,7 +23,7 @@ void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeLis
         labeList: pointer to the label list
         errData: pointer to the error struct
 */
-void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, error_t *errData);
+void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_error_t *errData);
 
 /*
     Build a variable
@@ -32,7 +32,7 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, erro
         varList: pointer to the variable list
         errData: pointer to the error struct
 */
-void buildVar(instNode_t *node, varList_t *varList, error_t *errData);
+void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData);
 
 /*
     Build a label
@@ -41,7 +41,7 @@ void buildVar(instNode_t *node, varList_t *varList, error_t *errData);
         labelList: pointer to the label list
         errData: pointer to the error struct
 */
-void buildLabel(instNode_t *node, labelList_t *labelList, error_t *errData);
+void buildLabel(instNode_t *node, labelList_t *labelList, asm_error_t *errData);
 
 /*
     Build a mov instruction
@@ -50,7 +50,7 @@ void buildLabel(instNode_t *node, labelList_t *labelList, error_t *errData);
         varList: pointer to the variable list
         errData: pointer to the error struct
 */
-void buildMov(instNode_t *node, varList_t *varList, error_t *errData);
+void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData);
 
 /*
     Build a goto instruction
@@ -59,7 +59,7 @@ void buildMov(instNode_t *node, varList_t *varList, error_t *errData);
         labelList: pointer to the label list
         errData: pointer to the error struct
 */
-void buildGoto(instNode_t *node, labelList_t *labelList, error_t *errData);
+void buildGoto(instNode_t *node, labelList_t *labelList, asm_error_t *errData);
 
 /*
     Build a call instruction
@@ -68,7 +68,7 @@ void buildGoto(instNode_t *node, labelList_t *labelList, error_t *errData);
         labelList: pointer to the label list
         errData: pointer to the error struct
 */
-void buildCall(instNode_t *node, labelList_t *labelList, error_t *errData);
+void buildCall(instNode_t *node, labelList_t *labelList, asm_error_t *errData);
 
 /*
     Build an operation (add, xor, etc.)
@@ -77,7 +77,7 @@ void buildCall(instNode_t *node, labelList_t *labelList, error_t *errData);
         varList: pointer to the variable list
         errData: pointer to the error struct
 */
-void buildOperation(instNode_t *node, varList_t *varList, error_t *errData);
+void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData);
 
 /*
     Get the register kind
