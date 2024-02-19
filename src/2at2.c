@@ -11,8 +11,10 @@
 #include "2at2.h"
 #include "debug.h"
 #include "error.h"
+#include "binExporter.h"
 
 #define VERSION "0.1.1"
+#define BIN_NAME "bin.2at2"
 
 int main(int argc, char *argv[]) {
     // Init error data history
@@ -91,7 +93,7 @@ int main(int argc, char *argv[]) {
     // ---------- Assemble ----------
 
     // run exporter
-    // TODO: make the function export to binary
+    exportToBin(instList, BIN_NAME, varList, errData);
 
     // Stop if there are errors
     if(errData->errors > 0){
