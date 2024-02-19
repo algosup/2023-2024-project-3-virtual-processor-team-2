@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <errno.h>
 #include <time.h>
 
 #include "debug.h"
@@ -26,7 +27,6 @@ void printNodeData(instNode_t *node){
         fprintf(stderr, "Error opening file: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
-
     // Get current time
     time_t rawtime;
     struct tm *timeinfo;
@@ -35,12 +35,17 @@ void printNodeData(instNode_t *node){
     // Format date
     char date_str[20];
     strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-
     fprintf(file, "%s | Node ID: %ld\n", date_str, node->id);
     fprintf(file, "%s | Line number: %ld\n", date_str, node->lineNb);
     fprintf(file, "%s | Instruction: %s\n", date_str, getOpName(node->op));
+    fprintf(file, "%s | Is interrupt: %s\n", date_str, node->isInter ? "true" : "false");
+    if(node->isInter){
+        fprintf(file, "%s | Interrupt: %s\n", date_str, getInterName(node->inter));
+    }
     fprintf(file, "%s | Target reg: %d\n", date_str, node->inputReg);
-    fprintf(file, "%s | Arguments: %s\n", date_str, node->arg);
+    fprintf(file, "%s | Argument 0: %s\n", date_str, node->arg0);
+    fprintf(file, "%s | Argument 1: %s\n", date_str, node->arg1);
+    fprintf(file, "%s | Is built: %s\n", date_str, node->isBuilt ? "true" : "false");
     fprintf(file, "\n");
     fclose(file);
 }
@@ -79,10 +84,6 @@ char *getOpName(enum opKind kind){
             return "OR";
         case OP_B_NOT:
             return "NOT";
-        case OP_INC:
-            return "INC";
-        case OP_DEC:
-            return "DEC";
         case OP_LAB:
             return "LAB";
         case OP_VAR:
@@ -91,6 +92,55 @@ char *getOpName(enum opKind kind){
             return "MOD";
         case OP_RET:
             return "RET";
+        case OP_MOV_F_VAR:
+            return "MOV_F_VAR";
+        case OP_MOV_T_VAR:
+            return "MOV_T_VAR";
+        case OP_VAR_SIZE:
+            return "VAR_SIZE";
+        case OP_VAR_DATA:
+            return "VAR_DATA";
+        default:
+            return "UNKNOWN";
+    }
+}
+
+char *getInterName(enum interruptKind kind){
+    switch(kind){
+        case INT_EXIT:
+            return "EXIT";
+        case INT_DRAW:
+            return "DRAW";
+        case INT_OB1:
+            return "OB1";
+        case INT_OR:
+            return "OR";
+        case INT_AND:
+            return "AND";
+        case INT_XOR:
+            return "XOR";
+        case INT_LT:
+            return "LT";
+        case INT_LTE:
+            return "LTE";
+        case INT_GT:
+            return "GT";
+        case INT_GTE:
+            return "GTE";
+        case INT_EQ:
+            return "EQ";
+        case INT_NEQ:
+            return "NEQ";
+        case INT_PUSHA:
+            return "PUSHA";
+        case INT_POPA:
+            return "POPA";
+        case INT_MOV_F_REG:
+            return "MOV_F_REG";
+        case INT_ELSE:
+            return "ELSE";
+        case INT_END:
+            return "END";
         default:
             return "UNKNOWN";
     }

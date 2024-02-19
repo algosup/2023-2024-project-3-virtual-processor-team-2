@@ -6,12 +6,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <errno.h>
 #include <time.h>
 
 #include "error.h"
 
-error_t *initErrorFile(const char* out, char *inputFile){
-    error_t *errData = malloc(sizeof(error_t));
+asm_error_t *initErrorFile(const char* out, char *inputFile){
+    asm_error_t *errData = malloc(sizeof(asm_error_t));
     errData->errors = 0;
     errData->inputFile = inputFile;
     if(out != NULL){
@@ -26,7 +27,7 @@ error_t *initErrorFile(const char* out, char *inputFile){
     return errData;
 }
 
-void errorInstruction(char *inst, instNode_t *node, const char *out, error_t *errData){
+void errorInstruction(char *inst, instNode_t *node, const char *out, asm_error_t *errData){
 	char *errType = "Syntax Error";
 	char errDetails[64];
 	char errLocation[64];
@@ -37,13 +38,13 @@ void errorInstruction(char *inst, instNode_t *node, const char *out, error_t *er
 
 
 
-void printErrorSummary(error_t *errData){
+void printErrorSummary(asm_error_t *errData){
     fprintf(stderr, "Error summary:\n");
     fprintf(stderr, "Total errors: %ld\n", errData->errors);
 }
 
 
-void displayError(const char *errType, const char *errDetails, char *errLocation, const char *out, error_t *errData){
+void displayError(const char *errType, const char *errDetails, char *errLocation, const char *out, asm_error_t *errData){
 	++ errData->errors;
     fprintf(stderr, "Error: %s\n", errType);
     fprintf(stderr, "Details: %s\n", errDetails);
@@ -75,10 +76,9 @@ void displayError(const char *errType, const char *errDetails, char *errLocation
     }
 }
 
-
 // ---------------------------PARSER ERROR--------------------------------------
 
-void errorNoArg(const char *out, error_t *errData){
+void errorNoArg(const char *out, asm_error_t *errData){
     char *errType = "Syntax Error";
     char errDetails[64];
 
@@ -88,7 +88,7 @@ void errorNoArg(const char *out, error_t *errData){
 }
 
 
-void errorTooManyArg(const char *out, error_t *errData){
+void errorTooManyArg(const char *out, asm_error_t *errData){
     char *errType = "Syntax Error";
     char errDetails[64];
 
@@ -98,7 +98,7 @@ void errorTooManyArg(const char *out, error_t *errData){
 }
 
 
-void errorLineSize(long lineNb, const char *out, error_t *errData){
+void errorLineSize(long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Syntax Error";
     char errDetails[64];
     char errLocation[64];
@@ -109,7 +109,7 @@ void errorLineSize(long lineNb, const char *out, error_t *errData){
     displayError(errType, errDetails, errLocation, out, errData);
 }
 
-void errorfnf(char *filename, const char *out, error_t *errData){
+void errorfnf(char *filename, const char *out, asm_error_t *errData){
     char *errType = "Error: File Not Found";
     char errDetails[64];
 
@@ -122,7 +122,7 @@ void errorfnf(char *filename, const char *out, error_t *errData){
     exit(EXIT_FAILURE); 
 }
 
-void errorInvalidExt(char *filename, const char *out, error_t *errData){
+void errorInvalidExt(char *filename, const char *out, asm_error_t *errData){
     char *errType = "Invalid File Extension Error";
     char errDetails[64];
 
@@ -134,7 +134,7 @@ void errorInvalidExt(char *filename, const char *out, error_t *errData){
 }
 
 
-void errorInstructionMissing(long lineNb, const char *out, error_t *errData){
+void errorInstructionMissing(long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Syntax Error";
     char errDetails[64];
     char errLocation[64];
@@ -146,7 +146,7 @@ void errorInstructionMissing(long lineNb, const char *out, error_t *errData){
 }
 
 
-void errorInvalidRegister(char *reg, long lineNb, const char *out, error_t *errData){
+void errorInvalidRegister(char *reg, long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Register Error";
     char errDetails[64];
     char errLocation[64];
@@ -158,7 +158,7 @@ void errorInvalidRegister(char *reg, long lineNb, const char *out, error_t *errD
 }
 
 
-void errorUnexpectedSymbol(char symbol, long lineNb, const char *out, error_t *errData){
+void errorUnexpectedSymbol(char symbol, long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Syntax Error";
     char errDetails[64];
     char errLocation[64];
@@ -170,7 +170,7 @@ void errorUnexpectedSymbol(char symbol, long lineNb, const char *out, error_t *e
 }
 
 
-void errorMissingSymbol(char symbol, long lineNb, const char *out, error_t *errData){
+void errorMissingSymbol(char symbol, long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Syntax Error";
     char errDetails[64];
     char errLocation[64];
@@ -182,7 +182,7 @@ void errorMissingSymbol(char symbol, long lineNb, const char *out, error_t *errD
 }
 
 
-void errorInvalidComparison(long lineNb, const char *out, error_t *errData){
+void errorInvalidComparison(long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Comparison Error";
     char errDetails[64];
     char errLocation[64];
@@ -194,7 +194,7 @@ void errorInvalidComparison(long lineNb, const char *out, error_t *errData){
 }
 
 
-void errorTypeIncompatibility(char *type1, char *type2, long lineNb, const char *out, error_t *errData){
+void errorTypeIncompatibility(char *type1, char *type2, long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Type Error";
     char errDetails[64];
     char errLocation[64];
@@ -206,7 +206,7 @@ void errorTypeIncompatibility(char *type1, char *type2, long lineNb, const char 
 }
 
 
-void errorSizeIncompatibility(char *var1, char *var2, long lineNb, const char *out, error_t *errData){
+void errorSizeIncompatibility(char *var1, char *var2, long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Size Error";
     char errDetails[64];
     char errLocation[64];
@@ -218,7 +218,7 @@ void errorSizeIncompatibility(char *var1, char *var2, long lineNb, const char *o
 }
 
 
-void errorFilename(const char *filename, const char *out, error_t *errData){
+void errorFilename(const char *filename, const char *out, asm_error_t *errData){
     char *errType = "Filename Error";
     char errDetails[64];
     char errLocation[64] = "";
@@ -229,7 +229,7 @@ void errorFilename(const char *filename, const char *out, error_t *errData){
 }
 
 
-void errorLineCharactersExceed(long lineNb, const char *out, error_t *errData){
+void errorLineCharactersExceed(long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Line Characters Exceed Error";
     char errDetails[64];
     char errLocation[64];
@@ -241,7 +241,7 @@ void errorLineCharactersExceed(long lineNb, const char *out, error_t *errData){
 }
 
 
-void errorNonExistent(const char *varName, long lineNb, const char *out, error_t *errData){
+void errorNonExistent(const char *varName, long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Non-existent Error";
     char errDetails[64];
     char errLocation[64];
@@ -255,7 +255,7 @@ void errorNonExistent(const char *varName, long lineNb, const char *out, error_t
 
 // ---------------------------------BUILDER ERROR-----------------------------------------
 
-void errorLifoSize(const char *out, error_t *errData){
+void errorLifoSize(const char *out, asm_error_t *errData){
     char *errType = "Lifo Size Error";
     char errDetails[64];
 
@@ -265,7 +265,7 @@ void errorLifoSize(const char *out, error_t *errData){
 }
 
 
-void errorBuildComparison(const char *out, error_t *errData){
+void errorBuildComparison(const char *out, asm_error_t *errData){
     char *errType = "Build Comparison Error";
     char errDetails[64];
 
@@ -275,7 +275,7 @@ void errorBuildComparison(const char *out, error_t *errData){
 }
 
 
-void errorLabelDeclaration(const char *label, const char *out, error_t *errData){
+void errorLabelDeclaration(const char *label, const char *out, asm_error_t *errData){
     char *errType = "Label Declaration Error";
     char errDetails[64];
 
@@ -296,7 +296,7 @@ void errorEmptyLifo(const char *out, error_t *errData){
 
 //-------------------BIN CONVERTER ERROR-------------------------------------
 
-void errorFileDetection(const char *filename, const char *out, error_t *errData){
+void errorFileDetection(const char *filename, const char *out, asm_error_t *errData){
     char *errType = "File Detection Error";
     char errDetails[64];
 
@@ -306,7 +306,7 @@ void errorFileDetection(const char *filename, const char *out, error_t *errData)
 }
 
 
-void errorFileType(const char *filename, const char *out, error_t *errData){
+void errorFileType(const char *filename, const char *out, asm_error_t *errData){
     char *errType = "File Type Error";
     char errDetails[64];
 
@@ -316,7 +316,7 @@ void errorFileType(const char *filename, const char *out, error_t *errData){
 }
 
 
-void errorFileIssues(const char *filename, const char *out, error_t *errData){
+void errorFileIssues(const char *filename, const char *out, asm_error_t *errData){
     char *errType = "File Issues Error";
     char errDetails[64];
 
@@ -326,7 +326,7 @@ void errorFileIssues(const char *filename, const char *out, error_t *errData){
 }
 
 
-void errorConversion(const char *variable, const char *issue, const char *out, error_t *errData){
+void errorConversion(const char *variable, const char *issue, const char *out, asm_error_t *errData){
     char *errType = "Conversion Error";
     char errDetails[64];
 
@@ -338,7 +338,7 @@ void errorConversion(const char *variable, const char *issue, const char *out, e
 
 // ---------RUNNER ERRORS---------
 
-void errorMissingDependencies(const char *details, const char *out, error_t *errData){
+void errorMissingDependencies(const char *details, const char *out, asm_error_t *errData){
     char *errType = "Missing Dependencies Error";
     char errDetails[64];
 
@@ -348,7 +348,7 @@ void errorMissingDependencies(const char *details, const char *out, error_t *err
 }
 
 
-void errorResourceExhaustion(const char *out, error_t *errData){
+void errorResourceExhaustion(const char *out, asm_error_t *errData){
     char *errType = "Resource Exhaustion Error";
     char errDetails[64] = "The system doesn't have any resources left.";
 
@@ -356,7 +356,7 @@ void errorResourceExhaustion(const char *out, error_t *errData){
 }
 
 
-void errorPathIssues(const char *path, const char *out, error_t *errData){
+void errorPathIssues(const char *path, const char *out, asm_error_t *errData){
     char *errType = "Path Issues Error";
     char errDetails[64];
 
@@ -366,7 +366,7 @@ void errorPathIssues(const char *path, const char *out, error_t *errData){
 }
 
 
-void errorEnvironmentIncompatibility(const char *os, const char *out, error_t *errData){
+void errorEnvironmentIncompatibility(const char *os, const char *out, asm_error_t *errData){
     char *errType = "Environment Incompatibility Error";
     char errDetails[64];
 
@@ -376,7 +376,7 @@ void errorEnvironmentIncompatibility(const char *os, const char *out, error_t *e
 }
 
 
-void errorTimeout(const char *program, const char *out, error_t *errData){
+void errorTimeout(const char *program, const char *out, asm_error_t *errData){
     char *errType = "Timeout Error";
     char errDetails[64];
 

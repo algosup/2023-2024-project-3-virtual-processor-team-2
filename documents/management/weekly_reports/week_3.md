@@ -45,7 +45,7 @@ The third week was focused on sharing all the information within the team, gathe
 
 ## Team mood
 
-Average team mood rating: 6,8/10
+Average team mood rating: 6.8/10
 
 The team is quite tired from this hectic week, but everyone remains motivated. Fortunately, they have a weekend to rest and recharge, aiming to be at 100% on Monday!
 

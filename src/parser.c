@@ -11,6 +11,7 @@
 #include "parser.h"
 
 #define LINE_MAX_SIZE 64
+#define MAX_ARGS 2
 
 const char* errorFile= "errors.log";
 
@@ -60,12 +61,11 @@ void flagsSet(char *flag, flags_t *flags){
         flags->verbose = true;
     }
     else{
-        fprintf(stderr, "Invalid flag\n Try 'iat2 --help' for more information\n");
-        exit(EXIT_FAILURE);
+        // TODO: throw error
     }
 }
 
-void parseFile(instList_t *nodeList, char *filename, error_t *errData){
+void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData){
     // check if the file exists
     FILE *file = fopen(filename, "r");
     if(file == NULL){
@@ -89,8 +89,7 @@ void parseFile(instList_t *nodeList, char *filename, error_t *errData){
         }
 
         // parse the line
-        instNode_t *node = parseLine(line, nodeId, lineNb, errData);
-
+        instNode_t *node = parseLine(line, nodeId, lineNb, varList, errData);
         // continue if the line is empty
         if(node == NULL){
             ++ lineNb;
@@ -112,24 +111,22 @@ void parseFile(instList_t *nodeList, char *filename, error_t *errData){
     fclose(file);
 }
 
-instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData){
+instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, asm_error_t *errData){
     // check if the line is empty or a comment
-    if(line[0] == '\n' || strncmp(line, "//", 2) == 0){
+    if(line[0] == '\n' || strncmp(cleanString(line), "//", 2) == 0){
         return NULL;
     }
 
-    instNode_t *newNode = malloc(sizeof(instNode_t));
+    instNode_t *newNode = createEmptyInstNode();
     newNode->id = nodeId;
     newNode->lineNb = lineNb;
-    newNode->isInter = false;
-
-    newNode->next = NULL;
 
     // Get the instruction
     char *inst = getInst(line);
     
     // Get the arguments
     char **args = getInstArgs(line);
+
 
     // Set arguments
     setArgs(newNode, args);
@@ -138,7 +135,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData){
         
     bool isThatKind = false;
     // Set the instruction
-    isThatKind = isOp(inst, newNode, errData);
+    isThatKind = isOp(inst, newNode, varList, errData);
     if(isThatKind){
         return newNode;
     }
@@ -148,7 +145,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData){
     return newNode;
 }
 
-bool isOp(char *inst, instNode_t *newNode, error_t *errData){
+bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errData){
     if(strcmp(inst, "mov") == 0){
         newNode->op = OP_MOV;
     }
@@ -167,51 +164,183 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData){
     }
     else if(strcmp(inst, "xor") == 0 || strcmp(inst, "^") == 0){
         newNode->op = OP_B_XOR;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
+
     }
     else if(strcmp(inst, "pop") == 0){
         newNode->op = OP_POP;
     }
     else if(strcmp(inst, "div") == 0 || strcmp(inst, "/") == 0){
         newNode->op = OP_DIV;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "add") == 0 || strcmp(inst, "+") == 0){
         newNode->op = OP_ADD;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "sub") == 0 || strcmp(inst, "-") == 0){
         newNode->op = OP_SUB;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "mul") == 0 || strcmp(inst, "*") == 0){
         newNode->op = OP_MUL;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "shr") == 0 || strcmp(inst, ">>") == 0){
         newNode->op = OP_R_SHIFT;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "shl") == 0 || strcmp(inst, "<<") == 0){
         newNode->op = OP_L_SHIFT;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "and") == 0 || strcmp(inst, "&") == 0){
         newNode->op = OP_B_AND;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "or") == 0 || strcmp(inst, "|") == 0){
         newNode->op = OP_B_OR;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "not") == 0 || strcmp(inst, "!") == 0){
         newNode->op = OP_B_NOT;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
     }
     else if(strcmp(inst, "inc") == 0 || strcmp(inst, "++") == 0){
-        newNode->op = OP_INC;
+        newNode->op = OP_ADD;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
+        newNode->arg1 = "1";
     }
     else if(strcmp(inst, "dec") == 0 || strcmp(inst, "--") == 0){
-        newNode->op = OP_DEC;
+        newNode->op = OP_SUB;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
+        newNode->arg1 = "1";
     }
     else if(strcmp(inst, "lab") == 0){
         newNode->op = OP_LAB;
     }
     else if(strcmp(inst, "var") == 0){
         newNode->op = OP_VAR;
+        // add var to varList
+        addVar(varList, newNode->arg0, newNode->arg1);
     }
     else if(strcmp(inst, "mod") == 0 || strcmp(inst, "%") == 0){
         newNode->op = OP_MOD;
+        // check if first argument is null
+        if(newNode->arg0 == NULL){
+            // TODO: throw error
+        }
+    }
+    else if(strcmp(inst, "ret") == 0){
+        newNode->op = OP_RET;
+        newNode->arg0 = "0";
+        newNode->arg1 = "0";
+    }
+    else if(strcmp(inst, "ngr") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "0";
+    }
+    else if(strcmp(inst, "draw") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "1";
+    }
+    else if(strcmp(inst, "ob1") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "2";
+    }
+    else if(strcmp(inst, "or") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "3";
+    }
+    else if(strcmp(inst, "if_and") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "4";
+    }
+    else if(strcmp(inst, "if_xor") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "5";
+    }
+    else if(strcmp(inst, "if_lt") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "6";
+    }
+    else if(strcmp(inst, "if_lte") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "7";
+    }
+    else if(strcmp(inst, "if_gt") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "8";
+    }
+    else if(strcmp(inst, "if_gte") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "9";
+    }
+    else if(strcmp(inst, "if_eq") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "10";
+    }
+    else if(strcmp(inst, "if_neq") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "11";
+    }
+    else if(strcmp(inst, "pusha") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "12";
+    }
+    else if(strcmp(inst, "popa") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->arg0 = "13";
     }
     else{
         errorInstruction(inst, newNode, errorFile, errData);
@@ -219,7 +348,6 @@ bool isOp(char *inst, instNode_t *newNode, error_t *errData){
     }
     return true;
 }
-
 
 char *getInst(char *line) {
     char *buffer = malloc((strlen(line) + 1) * sizeof(char));
@@ -242,35 +370,49 @@ char *getInst(char *line) {
 }
 
 char **getInstArgs(char *line) {
-    char **args = malloc(2 * sizeof(char *));
+    char **args = malloc(MAX_ARGS * sizeof(char *));
+    // init args to NULL
+    for (int i = 0; i < MAX_ARGS; i++) {
+        args[i] = NULL;
+    }
     if (!args) {
         fprintf(stderr, "Memory allocation error\n");
         exit(EXIT_FAILURE);
     }
-
-    // Remove the instruction name
-    char *token = strtok(line, " ");
-    if (!token) {
-        fprintf(stderr, "Invalid input format\n");
-        free(args); // Free allocated memory before exit
+    char *buffer = malloc((strlen(line) + 1) * sizeof(char));
+    if (!buffer) {
+        fprintf(stderr, "Memory allocation error\n");
         exit(EXIT_FAILURE);
     }
+    
+    strcpy(buffer, line);
+    char *token = strtok(buffer, " ");
+    if (token == NULL) {
+        // TODO: throw error
+        fprintf(stderr, "Invalid input format\n");
+        free(args); // Free allocated memory before exit
 
-    // Get the arguments
-    for (int i = 0; i < 2; i++) {
+    }
+
+    for (int i = 0; i < MAX_ARGS; i++) {
         token = strtok(NULL, ",");
         if (!token) {
+            if (i == 0) {
+                // TODO: throw error
+                fprintf(stderr, "Invalid input format: missing argument\n");
+                return args;
+            }
             args[i] = NULL;
         } else {
-            // Allocate memory for the argument and copy it
             args[i] = malloc(strlen(token) + 1);
             if (!args[i]) {
+                // TODO: throw error
                 fprintf(stderr, "Memory allocation error\n");
+                // Free previously allocated memory
                 for (int j = 0; j < i; j++) {
-                    free(args[j]); // Free previously allocated memory
+                    free(args[j]);
                 }
                 free(args); // Free args array
-                exit(EXIT_FAILURE);
             }
             strcpy(args[i], cleanString(token));
         }
@@ -280,132 +422,28 @@ char **getInstArgs(char *line) {
 }
 
 void setArgs(instNode_t *node, char **args){
-    if(isReg(args[0])){
+    if(args[0] != NULL && isReg(args[0])){
         node->inputReg = strToReg(args[0]);
         if(args[1] != NULL){
-            node->arg = malloc(sizeof(args[1])+1);
-            strcpy(node->arg, args[1]);
-            return;
+            node->arg1 = malloc(sizeof(args[1])+1);
+            strcpy(node->arg1, args[1]);
         }
     }
     else if(args[0] != NULL){
-        node->arg = malloc(sizeof(args[0])+1);
-        strcpy(node->arg, args[0]);
-    }
-}
-
-bool isInt(char *arg) {
-    // Check if the argument is a number
-    size_t size = strlen(arg);
-    for (size_t i = 0; i < size; i++) {
-        if (arg[i] < '0' || arg[i] > '9') {
-            return false;
+        node->arg0 = malloc(sizeof(args[0])+1);
+        strcpy(node->arg0, args[0]);
+        if(args[1] != NULL){
+            node->arg1 = malloc(sizeof(args[1])+1);
+            strcpy(node->arg1, args[1]);
         }
     }
-
-    return true;
-}
-
-bool isBinary(char *arg) {
-    // Check if the argument is a binary number
-    size_t size = strlen(arg);
-    if (size < 3 || arg[0] != '0' || arg[1] != 'b') {
-        return false;
-    }
-
-    for (size_t i = 2; i < size; i++) {
-        if (arg[i] != '0' && arg[i] != '1') {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-bool isOctal(char *arg) {
-    // Check if the argument is a octal number
-    size_t size = strlen(arg);
-    if (size < 3 || arg[0] != '0' || arg[1] != 'o') {
-        return false;
-    }
-
-    for (size_t i = 2; i < size; i++) {
-        if (arg[i] < '0' || arg[i] > '7') {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-bool isHex(char *arg) {
-    // Check if the argument is a hexadecimal number
-    size_t size = strlen(arg);
-    if (size < 3 || arg[0] != '0' || arg[1] != 'x') {
-        return false;
-    }
-
-    for (size_t i = 2; i < size; i++) {
-        if ((arg[i] < '0' || arg[i] > '9') && (arg[i] < 'a' || arg[i] > 'f') && (arg[i] < 'A' || arg[i] > 'F')) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-bool isFloat(char *arg) {
-    // Check if the argument is a float
-    size_t size = strlen(arg);
-    bool dot = false;
-    for (size_t i = 0; i < size; i++) {
-        if (arg[i] < '0' || arg[i] > '9') {
-            if (arg[i] == '.' && !dot) {
-                dot = true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
-bool isChar(char *arg) {
-    // Check if the argument is a char
-    size_t size = strlen(arg);
-    if (size != 3 || arg[0] != '\'' || arg[2] != '\'') {
-        return false;
-    }
-
-    return true;
-}
-
-bool isString(char *arg) {
-    // Check if the argument is a string
-    size_t size = strlen(arg);
-    if (size < 3 || arg[0] != '"' || arg[size - 1] != '"') {
-        return false;
-    }
-
-    return true;
+    return;
 }
 
 bool isReg(char *arg) {
     // Check if the argument is a register
     if (strlen(arg) != 3 || arg[0] != 'r' || arg[1] != 'g' || arg[2] < '0' || arg[2] > '7') {
         return false;
-    }
-
-    return true;
-}
-
-bool isTarget(char *arg) {
-    // Check if the argument contain other characters than letters, numbers and underscores
-    for (size_t i = 0; i < strlen(arg); i++) {
-        if ((arg[i] < 'a' || arg[i] > 'z') && (arg[i] < 'A' || arg[i] > 'Z') && (arg[i] < '0' || arg[i] > '9') && arg[i] != '_') {
-            return false;
-        }
     }
 
     return true;
@@ -436,7 +474,7 @@ enum regKind strToReg(char *arg) {
     }
 }
 
-void checkAOPFile(char* fileName, error_t *errData) {
+void checkAOPFile(char* fileName, asm_error_t *errData) {
     size_t size = strlen(fileName);
     //Check if the filename ends by ".aop" and contains at least 5 characters
     if (size < 5 || fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') {

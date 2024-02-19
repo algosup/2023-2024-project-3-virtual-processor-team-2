@@ -11,12 +11,17 @@
 #include "2at2.h"
 #include "debug.h"
 #include "error.h"
+#include "binExporter.h"
 
-#define VERSION "0.0.5"
+#define VERSION "0.2.0"
+#define BIN_NAME "bin.2at2"
 
 int main(int argc, char *argv[]) {
+    // Init error data history
+    asm_error_t *errData = initErrorFile("errors.log", argv[1]);
+
     // ---------- Parse arguments ----------
-    error_t *errData = initErrorFile("errors.log", argv[1]);
+    asm_error_t *errData = initErrorFile("errors.log", argv[1]);
     // Parse program arguments and get flags
     flags_t flags = parseArgs(argc, argv);
 
@@ -32,34 +37,33 @@ int main(int argc, char *argv[]) {
     // ---------- Init data ----------
 
     // Init variables list struct
-    varList_t *varList = malloc(sizeof(varList_t));
-    varList->size = 10;
-    varList->list = malloc(sizeof(var_t) * varList->size);
-    // Init variables list
-    for(size_t i = 0; i < varList->size; i++){
-        varList->list[i].name = NULL;
-    }
+    varList_t *varList = createEmptyVarList();
 
     // Init labels list struct
-    labelList_t *labelList = malloc(sizeof(labelList_t));
-    labelList->size = 10;
-    labelList->list = malloc(sizeof(label_t) * labelList->size);
-    for(size_t i = 0; i < labelList->size; i++){
-        labelList->list[i].name = NULL;
-    }
+    labelList_t *labelList = createEmptyLabelList();
+    
     // Init instructions list struct
-    instList_t *instList = malloc(sizeof(instList_t));
-    instList->head = NULL;
+    instList_t *instList = createEmptyInstList();
 
     fprintf(stderr, "[\t10%%\t] Data initialized successfully\n");
 
     // ---------- Parse ----------
 
     // run parser
-    parseFile(instList, argv[1], errData);
+    parseFile(instList, argv[1], varList, errData);
 
     if(flags.debug){
         printAst(instList);
+    }
+
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        free(varList);
+        free(labelList);
+        free(instList);
+        exit(EXIT_FAILURE);
     }
 
     fprintf(stderr, "[\t45%%\t] File parsed successfully\n");
@@ -67,14 +71,39 @@ int main(int argc, char *argv[]) {
     // ---------- Build ----------
     
     // run builder
-    // TODO: Do Builder
+    buildProgram(instList, varList, labelList, errData);
+
+    if(flags.debug){
+        printAst(instList);
+    }
+    
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        free(varList);
+        free(labelList);
+        free(instList);
+        exit(EXIT_FAILURE);
+    }
 
     fprintf(stderr, "[\t70%%\t] File built successfully\n");
+
 
     // ---------- Assemble ----------
 
     // run exporter
-    // TODO: make the function export to binary
+    exportToBin(instList, BIN_NAME, varList, errData);
+
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        free(varList);
+        free(labelList);
+        free(instList);
+        exit(EXIT_FAILURE);
+    }
 
     fprintf(stderr, "[\t95%%\t] File assembled successfully\n");
 

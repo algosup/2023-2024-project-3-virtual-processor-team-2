@@ -6,6 +6,10 @@
 
 #include <stdbool.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Operation types
 enum opKind{
     OP_MOV,
@@ -13,8 +17,8 @@ enum opKind{
     OP_CALL,
     OP_INT,
     OP_PUSH,
-    OP_B_XOR,
     OP_POP,
+    OP_B_XOR,
     OP_DIV,
     OP_ADD,
     OP_SUB,
@@ -24,12 +28,16 @@ enum opKind{
     OP_B_AND,
     OP_B_OR,
     OP_B_NOT,
-    OP_INC,
-    OP_DEC,
+    OP_MOD,
+    OP_USE_REG,
+    OP_USE_VAR,
     OP_LAB,
     OP_VAR,
-    OP_MOD,
     OP_RET,
+    OP_MOV_F_VAR,
+    OP_MOV_T_VAR,
+    OP_VAR_SIZE,
+    OP_VAR_DATA,
 };
 
 // interrupt types
@@ -48,6 +56,9 @@ enum interruptKind{
     INT_NEQ,
     INT_PUSHA,
     INT_POPA,
+    INT_MOV_F_REG,
+    INT_ELSE,
+    INT_END,
 };
 
 // Register names
@@ -70,8 +81,10 @@ typedef struct instNode{
     enum opKind op;
     bool isInter;
     enum interruptKind inter;
-    char * arg;
+    char * arg0;
+    char * arg1;
     enum regKind inputReg;
+    bool isBuilt;
     struct instNode *next;
 } instNode_t;
 
@@ -82,14 +95,14 @@ typedef struct instList{
 
 // Structs for variable storage
 typedef struct var{
+    int id;
+    int size;
     char *name;
     char * value;
 } var_t;
 
 // Structs for variable list
 typedef struct varList{
-    char* name;
-    long id;
     size_t size;
     var_t *list;
 } varList_t;
@@ -106,3 +119,93 @@ typedef struct labelList{
     size_t size;
     label_t *list;
 } labelList_t;
+
+/*
+    given a string, return the code of the interrupt
+    params:
+        kind: interrupt type
+*/
+char *getIntCode(enum interruptKind kind);
+
+/*
+    Create an empty variable list
+    returns:
+        varList_t: pointer to the variable list
+*/
+varList_t *createEmptyVarList();
+
+/*
+    Add a variable to the list
+    params:
+        varList: pointer to the variable list
+        name: name of the variable
+        value: value of the variable
+    returns:
+        bool: true if the variable was added
+*/
+bool addVar(varList_t *varList, char *name, char *value);
+
+/*
+    Check if a variable exists in the list
+    params:
+        varList: pointer to the variable list
+        name: name of the variable
+    returns:
+        int: id of the variable or -1 if it does not exist
+*/
+int isVarExist(varList_t *varList, char *name);
+
+/*
+    Copy an instruction node
+    params:
+        node: pointer to the instruction node
+    returns:
+        instNode_t: copy of the instruction node
+*/
+instNode_t *copyInstNode(instNode_t *node);
+
+/*
+    Create an empty instruction list
+    returns:
+        instList_t: pointer to the instruction list
+*/
+instList_t *createEmptyInstList();
+
+/*
+    Create an empty instruction node
+    returns:
+        instNode_t: pointer to the instruction node
+*/
+instNode_t *createEmptyInstNode();
+
+/*
+    Create an empty label list
+    returns:
+        labelList_t: pointer to the label list
+*/
+labelList_t *createEmptyLabelList();
+
+/*
+    Add a label to the list
+    params:
+        labelList: pointer to the label list
+        name: name of the label
+        nodeId: id of the node
+    returns:
+        int: id of the label or -1 if it does not exist
+*/
+int addLabel(labelList_t *labelList, char *name, long nodeId);
+
+/*
+    Check if a label exists in the list
+    params:
+        labelList: pointer to the label list
+        name: name of the label
+    returns:
+        int: id of the label or -1 if it does not exist
+*/
+int isLabelExist(labelList_t *labelList, char *name);
+
+#ifdef __cplusplus
+}
+#endif

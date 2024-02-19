@@ -40,37 +40,33 @@ void flagsSet(char *flag, flags_t *flags);
         nodeList: pointer to the instruction list
         filename: name of the file to be parsed
 */
-void parseFile(instList_t *nodeList, char *filename, error_t *errData);
+void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData);
 
 /*
     Parse a line and return an instruction node
     params:
         line: line to be parsed
+        nodeId: id of the node
+        lineNb: number of the line
+        varList: variable list
+        errData: error history
     returns:
         instNode_t: instruction node
 */
-instNode_t *parseLine(char *line, long nodeId, long lineNb, error_t *errData);
+instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, asm_error_t *errData);
 
 /*
     Read the line and check if it is an operation
     params:
         char*: instruction to be checked
         instNode_t*: pointer to the instruction node
+        varList_t: variable list
+        error_t*: error history
     returns:
         bool: true if it is an operation
 */
-bool isOp(char *inst, instNode_t *newNode, error_t *errData);
+bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errData);
 
-
-/*
-    Read the line and check if it is a declaration for a label or a variable
-    params:
-        char*: instruction to be checked
-        instNode_t*: pointer to the instruction node
-    returns:
-        bool: true if it is a label
-*/
-bool isDecla(char *inst, instNode_t *newNode);
 
 /*
     Get instruction from line
@@ -91,84 +87,12 @@ char* getInst(char *line);
 char** getInstArgs(char *line);
 
 /*
-    Get arguments from a if instruction line 
-    params:
-        line: line to be parsed
-    returns:
-        char**: array of strings (no more than 2)
-*/
-char **getIfArgs(char *line);
-
-/*
     Set the arguments of an instruction node
     params:
         node: pointer to the instruction node
         args: array of strings (no more than 2)
 */
 void setArgs(instNode_t *node, char **args);
-
-/*
-    Check if the argument is a number
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a number
-*/
-bool isInt(char *arg);
-
-/*
-    Check if the argument is a binary number
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a binary number
-*/
-bool isBinary(char *arg);
-
-/*
-    Check if the argument is a octal number
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a octal number
-*/
-bool isOctal(char *arg);
-
-/*
-    Check if the argument is a hexadecimal number
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a hexadecimal number
-*/
-bool isHex(char *arg);
-
-/*
-    Check if the argument is a float
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a float
-*/
-bool isFloat(char *arg);
-
-/*
-    Check if the argument is a char
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a char
-*/
-bool isChar(char *arg);
-
-/*
-    Check if the argument is a string
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a string
-*/
-bool isString(char *arg);
 
 /*
     Check if the argument is a register
@@ -178,15 +102,6 @@ bool isString(char *arg);
         bool: true if it is a register
 */
 bool isReg(char *arg);
-
-/*
-    Check if the argument is a variable or a label
-    params:
-        arg: argument to be checked
-    returns:
-        bool: true if it is a variable
-*/
-bool isTarget(char *arg);
 
 /*
     Convert a string to a register
@@ -203,7 +118,7 @@ enum regKind strToReg(char *arg);
         filename: name of the file to check
         errData: error history
 */
-void checkAOPFile(char* fileName, error_t *errData);
+void checkAOPFile(char* fileName, asm_error_t *errData);
   
 /*
     Checks if a line has more than 64 characters or not

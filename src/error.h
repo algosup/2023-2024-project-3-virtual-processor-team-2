@@ -9,7 +9,7 @@ extern "C" {
 typedef struct errorData{
     long errors;
     char *inputFile;
-} error_t;
+} asm_error_t;
 
 /*
     Init error file
@@ -19,7 +19,7 @@ typedef struct errorData{
     returns:
         error_t: Error history
 */
-error_t *initErrorFile(const char* out, char *inputFile);
+asm_error_t *initErrorFile(const char* out, char *inputFile);
 
 // ---------- Parsing/Assembling errors ----------
 
@@ -31,7 +31,7 @@ error_t *initErrorFile(const char* out, char *inputFile);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData);
+void errorInstruction(char* inst, instNode_t *node, const char* out, asm_error_t *errData);
 
 /*
     Throw an error when the line size is too big
@@ -40,7 +40,7 @@ void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *er
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorLineSize(long lineNb, const char* out, error_t *errData);
+void errorLineSize(long lineNb, const char* out, asm_error_t *errData);
 
 /*
     Throw an error when no instruction is found in the input line
@@ -49,7 +49,7 @@ void errorLineSize(long lineNb, const char* out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorInstructionMissing(long lineNb, const char *out, error_t *errData);
+void errorInstructionMissing(long lineNb, const char *out, asm_error_t *errData);
 
 /*
     Throw an error for an invalid register
@@ -59,7 +59,7 @@ void errorInstructionMissing(long lineNb, const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorInvalidRegister(char *reg, long lineNb, const char *out, error_t *errData);
+void errorInvalidRegister(char *reg, long lineNb, const char *out, asm_error_t *errData);
 
 /*
     Throw an error for an unexpected symbol
@@ -69,7 +69,7 @@ void errorInvalidRegister(char *reg, long lineNb, const char *out, error_t *errD
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorUnexpectedSymbol(char symbol, long lineNb, const char *out, error_t *errData);
+void errorUnexpectedSymbol(char symbol, long lineNb, const char *out, asm_error_t *errData);
 
 /*
     Throw an error when a symbol is missing between arguments
@@ -79,7 +79,7 @@ void errorUnexpectedSymbol(char symbol, long lineNb, const char *out, error_t *e
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorMissingSymbol(char symbol, long lineNb, const char *out, error_t *errData);
+void errorMissingSymbol(char symbol, long lineNb, const char *out, asm_error_t *errData);
 
 /*
     Throw an error for an invalid comparison
@@ -88,7 +88,7 @@ void errorMissingSymbol(char symbol, long lineNb, const char *out, error_t *errD
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorInvalidComparison(long lineNb, const char *out, error_t *errData);
+void errorInvalidComparison(long lineNb, const char *out, asm_error_t *errData);
 
 /*
     Throw an error for type incompatibility in comparisons
@@ -99,7 +99,7 @@ void errorInvalidComparison(long lineNb, const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorTypeIncompatibility(char *type1, char *type2, long lineNb, const char *out, error_t *errData);
+void errorTypeIncompatibility(char *type1, char *type2, long lineNb, const char *out, asm_error_t *errData);
 
 /*
     Throw an error for size incompatibility in comparisons
@@ -110,7 +110,7 @@ void errorTypeIncompatibility(char *type1, char *type2, long lineNb, const char 
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorSizeIncompatibility(char *var1, char *var2, long lineNb, const char *out, error_t *errData);
+void errorSizeIncompatibility(char *var1, char *var2, long lineNb, const char *out, asm_error_t *errData);
 
 // ---------- Builder Errors ----------
 
@@ -120,7 +120,7 @@ void errorSizeIncompatibility(char *var1, char *var2, long lineNb, const char *o
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorLifoSize(const char *out, error_t *errData);
+void errorLifoSize(const char *out, asm_error_t *errData);
 
 /*
     Throw an error when an unknown comparison statement is encountered
@@ -128,7 +128,7 @@ void errorLifoSize(const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorBuildComparison(const char *out, error_t *errData);
+void errorBuildComparison(const char *out, asm_error_t *errData);
 
 /*
     Throw an error when a label is already declared
@@ -137,7 +137,7 @@ void errorBuildComparison(const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorLabelDeclaration(const char *label, const char *out, error_t *errData);
+void errorLabelDeclaration(const char *label, const char *out, asm_error_t *errData);
 
 /*
     Throw an error when the lifo is empty
@@ -145,7 +145,7 @@ void errorLabelDeclaration(const char *label, const char *out, error_t *errData)
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorEmptyLifo(const char *out, error_t *errData);
+void errorEmptyLifo(const char *out, asm_error_t *errData);
 
 // ---------- Bin Converter Errors ----------
 
@@ -156,7 +156,7 @@ void errorEmptyLifo(const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorFileDetection(const char *filename, const char *out, error_t *errData);
+void errorFileDetection(const char *filename, const char *out, asm_error_t *errData);
 
 /*
     Throw an error when the file type is not suitable for binary conversion
@@ -165,7 +165,7 @@ void errorFileDetection(const char *filename, const char *out, error_t *errData)
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorFileType(const char *filename, const char *out, error_t *errData);
+void errorFileType(const char *filename, const char *out, asm_error_t *errData);
 
 /*
     Throw an error when the targeted file contains errors and can't be converted
@@ -174,7 +174,7 @@ void errorFileType(const char *filename, const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorFileIssues(const char *filename, const char *out, error_t *errData);
+void errorFileIssues(const char *filename, const char *out, asm_error_t *errData);
 
 /*
     Throw a conversion error with a specific message
@@ -184,7 +184,7 @@ void errorFileIssues(const char *filename, const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorConversion(const char *variable, const char *issue, const char *out, error_t *errData);
+void errorConversion(const char *variable, const char *issue, const char *out, asm_error_t *errData);
 
 
 // ---------- Runner Errors ----------
@@ -196,7 +196,7 @@ void errorConversion(const char *variable, const char *issue, const char *out, e
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorMissingDependencies(const char *details, const char *out, error_t *errData);
+void errorMissingDependencies(const char *details, const char *out, asm_error_t *errData);
 
 /*
     Throw an error when the system runs out of resources
@@ -204,7 +204,7 @@ void errorMissingDependencies(const char *details, const char *out, error_t *err
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorResourceExhaustion(const char *out, error_t *errData);
+void errorResourceExhaustion(const char *out, asm_error_t *errData);
 
 /*
     Throw an error for incorrect file paths
@@ -213,7 +213,7 @@ void errorResourceExhaustion(const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorPathIssues(const char *path, const char *out, error_t *errData);
+void errorPathIssues(const char *path, const char *out, asm_error_t *errData);
 
 /*
     Throw an error when the current environment is incompatible with the program
@@ -222,7 +222,7 @@ void errorPathIssues(const char *path, const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorEnvironmentIncompatibility(const char *os, const char *out, error_t *errData);
+void errorEnvironmentIncompatibility(const char *os, const char *out, asm_error_t *errData);
 
 /*
     Throw a timeout error for a non-responsive program
@@ -231,7 +231,7 @@ void errorEnvironmentIncompatibility(const char *os, const char *out, error_t *e
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorTimeout(const char *program, const char *out, error_t *errData);
+void errorTimeout(const char *program, const char *out, asm_error_t *errData);
 
 
 // ---------- Fatal errors ----------
@@ -243,7 +243,7 @@ void errorTimeout(const char *program, const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorfnf(char* filename, const char* out, error_t *errData);
+void errorfnf(char* filename, const char* out, asm_error_t *errData);
 
 /*
     Throw an error when the file extension is invalid
@@ -252,7 +252,7 @@ void errorfnf(char* filename, const char* out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorInvalidExt(char* filename, const char* out, error_t *errData);
+void errorInvalidExt(char* filename, const char* out, asm_error_t *errData);
 
 /*
     Throw an error when the file contains errors
@@ -261,8 +261,8 @@ void errorInvalidExt(char* filename, const char* out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorIssues(char* filename, const char* out, error_t *errData);
-void errorIssues2(char* filename, const char* out, error_t *errData);
+void errorIssues(char* filename, const char* out, asm_error_t *errData);
+void errorIssues2(char* filename, const char* out, asm_error_t *errData);
 
 // ---------- Other errors ----------
 
@@ -272,7 +272,7 @@ void errorIssues2(char* filename, const char* out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorTooManyArg(const char* out, error_t *errData);
+void errorTooManyArg(const char* out, asm_error_t *errData);
 
 /*
     Throw an error when at least one argument is missing
@@ -280,7 +280,7 @@ void errorTooManyArg(const char* out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorNoArg(const char* out, error_t *errData);
+void errorNoArg(const char* out, asm_error_t *errData);
 
 // ---------- Semantic Errors ----------
 
@@ -291,7 +291,7 @@ void errorNoArg(const char* out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorFilename(const char *filename, const char *out, error_t *errData);
+void errorFilename(const char *filename, const char *out, asm_error_t *errData);
 
 /*
     Throw an error when line characters exceed the maximum allowed
@@ -300,7 +300,7 @@ void errorFilename(const char *filename, const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorLineCharactersExceed(long lineNb, const char *out, error_t *errData);
+void errorLineCharactersExceed(long lineNb, const char *out, asm_error_t *errData);
 
 /*
     Throw an error for using a non-existent variable or register
@@ -310,7 +310,7 @@ void errorLineCharactersExceed(long lineNb, const char *out, error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorNonExistent(const char *varName, long lineNb, const char *out, error_t *errData);
+void errorNonExistent(const char *varName, long lineNb, const char *out, asm_error_t *errData);
 
 
 // ---------- Display error messages ----------
@@ -324,7 +324,7 @@ void errorNonExistent(const char *varName, long lineNb, const char *out, error_t
         out: Target file (can be NULL)
         errData: Error history
 */
-void displayError(const char *errType, const char *errDetails, char *errLocation, const char *out, error_t* errData);
+void displayError(const char *errType, const char *errDetails, char *errLocation, const char *out, asm_error_t* errData);
 
 #ifdef __cplusplus
 }
