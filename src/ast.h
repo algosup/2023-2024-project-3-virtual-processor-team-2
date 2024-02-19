@@ -140,10 +140,12 @@ varList_t *createEmptyVarList();
         varList: pointer to the variable list
         name: name of the variable
         value: value of the variable
+        lineNb: number of the line
+        errData: error history
     returns:
         bool: true if the variable was added
 */
-bool addVar(varList_t *varList, char *name, char *value);
+bool addVar(varList_t *varList, char *name, char *value, long lineNb, asm_error_t *errData);
 
 /*
     Check if a variable exists in the list

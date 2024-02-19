@@ -66,16 +66,18 @@ TEST(parseArgs, invalidFlag) {
  */
 
 TEST(getInst, normal) {
+    asm_error_t *errData = initErrorFile("errors.log", fileName);
     char *line = const_cast<char *>("add r1, r2, r3\n");
 
-    char *inst = getInst(line);
+    char *inst = getInst(line, 1, errData);
     ASSERT_STREQ(inst, "add");
 }
 
 TEST(getInst, noInst) {
+    asm_error_t *errData = initErrorFile("errors.log", fileName);
     char *line = const_cast<char *>("r1, r2, r3\n");
 
-    char *inst = getInst(line);
+    char *inst = getInst(line, 1, errData);
     ASSERT_STREQ(inst, "r1,");
 }
 

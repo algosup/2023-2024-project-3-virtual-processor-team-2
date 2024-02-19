@@ -10,6 +10,8 @@
 
 #include "ast.h"
 
+const char* errorFile= "errors.log";
+
 char *getIntCode(enum interruptKind kind){
     switch(kind){
         case INT_EXIT:
@@ -64,14 +66,14 @@ varList_t *createEmptyVarList(){
     return varList;
 }
 
-bool addVar(varList_t *varList, char *name, char *value){
+bool addVar(varList_t *varList, char *name, char *value, long lineNb, asm_error_t *errData){
     // check if the variable already exists
     for(size_t i = 0; i < varList->size; i++){
         if (varList->list[i].name == NULL){
             continue;
         }
         if(strcmp(varList->list[i].name, name) == 0){
-            // TODO: add error variable already exists
+            errorVarAlreadyExists(name, lineNb, errData);
             return false;
         }
     }

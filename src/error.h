@@ -49,7 +49,6 @@ void errorLineSize(long lineNb, const char* out, asm_error_t *errData);
 */
 void errorInstruction(char* inst, instNode_t *node, const char* out, asm_error_t *errData);
 
-
 /*
     Throw an error when no instruction is found in the input line
     params:
@@ -285,10 +284,11 @@ void errorTooManyArg(const char* out, asm_error_t *errData);
 /*
     Throw an error when at least one argument is missing
     params:
+        lineNb: Line number
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorNoArg(const char* out, asm_error_t *errData);
+void errorNoArg(long lineNb, const char *out, asm_error_t *errData);
 
 // ---------- Semantic Errors ----------
 
@@ -328,7 +328,7 @@ void errorVarNotExist(const char *varName, long lineNb, const char *out, asm_err
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorVarAlreadyExist(const char *varName, long lineNb, const char *out, asm_error_t *errData);
+void errorVarAlreadyExist(char *varName, long lineNb, const char *out, asm_error_t *errData);
 
 // ---------- Display error messages ----------
 

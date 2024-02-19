@@ -34,13 +34,15 @@ void printErrorSummary(asm_error_t *errData){
 
 // ---------------------------PARSER ERROR--------------------------------------
 
-void errorNoArg(const char *out, asm_error_t *errData){
+void errorNoArg(long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Syntax Error";
     char errDetails[64];
+    char errLocation[64];
 
     sprintf(errDetails, "No argument found");
+    sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
 
-    displayError(errType, errDetails, NULL, out, errData);
+    displayError(errType, errDetails, errLocation, out, errData);
 }
 
 
@@ -107,6 +109,8 @@ void errorInstructionMissing(long lineNb, const char *out, asm_error_t *errData)
     sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
 
     displayError(errType, errDetails, errLocation, out, errData);
+    printErrorSummary(errData); 
+    exit(EXIT_FAILURE); 
 }
 
 
@@ -215,7 +219,7 @@ void errorVarNotExist(const char *varName, long lineNb, const char *out, asm_err
     displayError(errType, errDetails, errLocation, out, errData);
 }
 
-void errorVarAlreadyExist(const char *varName, long lineNb, const char *out, asm_error_t *errData){
+void errorVarAlreadyExist(char *varName, long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Already Exist Error";
     char errDetails[64];
     char errLocation[64];

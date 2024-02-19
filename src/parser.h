@@ -75,7 +75,7 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
     returns:
         char*: instruction
 */
-char* getInst(char *line);
+char* getInst(char *line, long lineNb, asm_error_t *errData);
 
 /*
     Get arguments from an instruction line
