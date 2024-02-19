@@ -23,6 +23,7 @@
 | <img src=https://ca.slack-edge.com/T06AELBCZSB-U06CFLBV3MZ-g3621cbd420c-512 style="width:200px"> | **Paul NOWAK**         | Software Engineer | <a href="https://github.com/PaulNowak36">       <picture><source media="(prefers-color-scheme: dark)" srcset="documents/images/management/github_light_logo.png"><source media="(prefers-color-scheme: light)" srcset="documents/images/management/github_dark_logo.png"><img alt="GitHub Logo"  style="width:50px;max-width:50%">    </picture></a>   | [<img src="documents/images/management/linkedin_logo.png" alt="LinkedIn" style="width:50px">](https://www.linkedin.com/in/paul-nowak-0757a61a7/)         |              
 | <img src=https://ca.slack-edge.com/T06AELBCZSB-U06ANSN526S-g20f42d2a13d-512 style="width:200px"> | **Enzo GUILLOUCHE**    | Quality Assurance | <a href="https://github.com/EnzoGuillouche">    <picture><source media="(prefers-color-scheme: dark)" srcset="documents/images/management/github_light_logo.png"><source media="(prefers-color-scheme: light)" srcset="documents/images/management/github_dark_logo.png"><img alt="GitHub Logo"  style="width:50px;max-width:50%">    </picture></a>   | [<img src="documents/images/management/linkedin_logo.png" alt="LinkedIn" style="width:50px">](https://www.linkedin.com/in/enzo-g-b62114293/)             |                 
 
+Read the list of [contributors](https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/contributors) to see who helped with the project!
 <hr>
 
 ## 📚 What is this project ?
@@ -50,5 +51,52 @@ To assemble your code in `.aop`, here is some commands related to **2AT2** usage
 3. Compile + run your AT2's code with VAT2: `2at2 -run`
 
 
+### 🔗 Requires
+
+To use IAT2 you need:
+
+- A computer *(Windows Recommended)*
+- GCC installed, you can install it [here](https://www.devdungeon.com/content/install-gcc-compiler-windows-msys2-cc)
+
+### 💽 Installation
+
+Step By Step:
+
+1. Clone the repository: `git clone https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2.git`
+2. Go at the project root
+3. Build the project
+   - How to use with mingw: (Windows)
+     1. Execute ``cmake -S . -B Build -G "MinGW Makefiles"``
+     2. Execute ``cd Build``
+     3. Execute ``mingw32-make``
+   - How to use with msys2: (Windows)
+     1. Execute ``cmake -S . -B Build -G "MSYS Makefiles"``
+     2. Execute ``cd Build``
+     3. Execute ``make``
+
+It will generate a bin folder containing our runners to use it refers to [How does it work](#🔎-how-does-it-work)
+
+## 🛠️ Made with
+
+* [C99](https://en.wikipedia.org/wiki/C99) - C programming Language[.](https://www.youtube.com/watch?v=tas0O586t80)
+* [C++](https://cplusplus.com/) - C++ Language used for unit tests.
+* [Visual Studio Code](https://code.visualstudio.com/) - [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) (Integrated Developement Environement).
+* [CMake](https://cmake.org/) - Software Build System for C & C++ code.
+* [GoogleTest](https://github.com/google/googletest) - Google's internal systems for continuous integration.
+* [GCC](https://gcc.gnu.org/) - Used to compile C language.
+* [G++](https://gcc.gnu.org/) - Used to compile C++ language 
+
+## 🤝 Contributing
+
+If you want to contribute please take a look to [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## 🗃️ Versions
+- **Latest :** 0.2.0
+- **Current :** 0.2.0
+- Versions List : [Cliquer pour afficher](https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/tags)
+
+## ⚖️ License
+
+This project is under license ``MIT`` - see the [LICENSE](LICENSE) file for more information.
 
 <a target="_blank" href="https://algosup.com/"><picture><source media="(prefers-color-scheme: dark)" srcset="documents/images/management/algosup_orange.svg"><source media="(prefers-color-scheme: light)" srcset="documents/images/management/algosup_light_blue.svg"><img alt="ALGOSUP Logo" style="max-width:1440px" >
