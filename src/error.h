@@ -21,7 +21,23 @@ typedef struct errorData{
 */
 asm_error_t *initErrorFile(const char* out, char *inputFile);
 
+/*
+    Print error summary
+    params:
+        errData: Error history
+*/
+void printErrorSummary(asm_error_t *errData);
+
 // ---------- Parsing/Assembling errors ----------
+
+/*
+    Throw an error when the line size is too big
+    params:
+        lineNb: Line number
+        out: Target file (can be NULL)
+        errData: Error history
+*/
+void errorLineSize(long lineNb, const char* out, asm_error_t *errData);
 
 /*
     Throw an error when the given instruction doesn't exist
@@ -33,14 +49,6 @@ asm_error_t *initErrorFile(const char* out, char *inputFile);
 */
 void errorInstruction(char* inst, instNode_t *node, const char* out, asm_error_t *errData);
 
-/*
-    Throw an error when the line size is too big
-    params:
-        lineNb: Line number
-        out: Target file (can be NULL)
-        errData: Error history
-*/
-void errorLineSize(long lineNb, const char* out, asm_error_t *errData);
 
 /*
     Throw an error when no instruction is found in the input line
@@ -310,7 +318,7 @@ void errorLineCharactersExceed(long lineNb, const char *out, asm_error_t *errDat
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorNonExistent(const char *varName, long lineNb, const char *out, asm_error_t *errData);
+void errorVarNotExist(const char *varName, long lineNb, const char *out, asm_error_t *errData);
 
 
 // ---------- Display error messages ----------

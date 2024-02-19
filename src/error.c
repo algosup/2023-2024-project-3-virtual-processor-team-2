@@ -27,53 +27,9 @@ asm_error_t *initErrorFile(const char* out, char *inputFile){
     return errData;
 }
 
-void errorInstruction(char *inst, instNode_t *node, const char *out, asm_error_t *errData){
-	char *errType = "Syntax Error";
-	char errDetails[64];
-	char errLocation[64];
-	sprintf(errDetails, "Instruction \"%s\" not found", inst);
-	sprintf(errLocation, "File %s, Line %ld\n\n", errData->inputFile, node->lineNb);
-	displayError(errType, errDetails, errLocation, out, errData);
-}
-
-
-
 void printErrorSummary(asm_error_t *errData){
     fprintf(stderr, "Error summary:\n");
     fprintf(stderr, "Total errors: %ld\n", errData->errors);
-}
-
-
-void displayError(const char *errType, const char *errDetails, char *errLocation, const char *out, asm_error_t *errData){
-	++ errData->errors;
-    fprintf(stderr, "Error: %s\n", errType);
-    fprintf(stderr, "Details: %s\n", errDetails);
-	if(errLocation != NULL){
-	    fprintf(stderr, "In: %s\n", errLocation);
-	}
-    if(out != NULL){
-        FILE *file = fopen(out, "ab");
-        if(file == NULL){
-            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
-            exit(EXIT_FAILURE);
-        }
-        // Get current time
-        time_t rawtime;
-        struct tm *timeinfo;
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
-
-        // Format date
-        char date_str[20]; // Sufficiently large buffer to hold formatted date
-        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
-		
-		fprintf(file, "%s |\tError: %s\n",date_str, errType);
-	    fprintf(file, "%s |\tDetails: %s\n",date_str, errDetails);
-		if(errLocation != NULL){
-		    fprintf(file, "%s |\tIn: %s\n",date_str, errLocation);
-		}
-        fclose(file);
-    }
 }
 
 // ---------------------------PARSER ERROR--------------------------------------
@@ -133,6 +89,14 @@ void errorInvalidExt(char *filename, const char *out, asm_error_t *errData){
     exit(EXIT_FAILURE); 
 }
 
+void errorInstruction(char *inst, instNode_t *node, const char *out, asm_error_t *errData){
+	char *errType = "Syntax Error";
+	char errDetails[64];
+	char errLocation[64];
+	sprintf(errDetails, "Instruction \"%s\" not found", inst);
+	sprintf(errLocation, "File %s, Line %ld\n\n", errData->inputFile, node->lineNb);
+	displayError(errType, errDetails, errLocation, out, errData);
+}
 
 void errorInstructionMissing(long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Syntax Error";
@@ -221,11 +185,10 @@ void errorSizeIncompatibility(char *var1, char *var2, long lineNb, const char *o
 void errorFilename(const char *filename, const char *out, asm_error_t *errData){
     char *errType = "Filename Error";
     char errDetails[64];
-    char errLocation[64] = "";
 
     sprintf(errDetails, "The filename '%s' should end by .aop and be at least 5 characters", filename);
 
-    displayError(errType, errDetails, errLocation, out, errData);
+    displayError(errType, errDetails, NULL, out, errData);
 }
 
 
@@ -241,12 +204,12 @@ void errorLineCharactersExceed(long lineNb, const char *out, asm_error_t *errDat
 }
 
 
-void errorNonExistent(const char *varName, long lineNb, const char *out, asm_error_t *errData){
+void errorVarNotExist(const char *varName, long lineNb, const char *out, asm_error_t *errData){
     char *errType = "Non-existent Error";
     char errDetails[64];
     char errLocation[64];
 
-    sprintf(errDetails, "'%s' wasn't defined", varName);
+    sprintf(errDetails, "'%s' variable is not defined", varName);
     sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
 
     displayError(errType, errDetails, errLocation, out, errData);
@@ -285,7 +248,7 @@ void errorLabelDeclaration(const char *label, const char *out, asm_error_t *errD
 }
 
 
-void errorEmptyLifo(const char *out, error_t *errData){
+void errorEmptyLifo(const char *out, asm_error_t *errData){
     char *errType = "Empty Lifo Error";
     char errDetails[64];
 
@@ -344,7 +307,7 @@ void errorMissingDependencies(const char *details, const char *out, asm_error_t 
 
     sprintf(errDetails, "These libraries/components are undefined: %s", details);
 
-    displayError(errType, errDetails, out, errData);
+    displayError(errType, errDetails, NULL, out, errData);
 }
 
 
@@ -385,4 +348,35 @@ void errorTimeout(const char *program, const char *out, asm_error_t *errData){
     displayError(errType, errDetails, NULL, out, errData);
 }
 
+void displayError(const char *errType, const char *errDetails, char *errLocation, const char *out, asm_error_t *errData){
+	++ errData->errors;
+    fprintf(stderr, "Error: %s\n", errType);
+    fprintf(stderr, "Details: %s\n", errDetails);
+	if(errLocation != NULL){
+	    fprintf(stderr, "In: %s\n", errLocation);
+	}
+    if(out != NULL){
+        FILE *file = fopen(out, "ab");
+        if(file == NULL){
+            fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        // Get current time
+        time_t rawtime;
+        struct tm *timeinfo;
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+
+        // Format date
+        char date_str[20]; // Sufficiently large buffer to hold formatted date
+        strftime(date_str, sizeof(date_str), "%d-%m-%y %H:%M:%S", timeinfo);
+		
+		fprintf(file, "%s |\tError: %s\n",date_str, errType);
+	    fprintf(file, "%s |\tDetails: %s\n",date_str, errDetails);
+		if(errLocation != NULL){
+		    fprintf(file, "%s |\tIn: %s\n",date_str, errLocation);
+		}
+        fclose(file);
+    }
+}
 
