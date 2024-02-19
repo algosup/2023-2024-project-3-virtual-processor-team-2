@@ -65,7 +65,7 @@ void flagsSet(char *flag, flags_t *flags){
     }
 }
 
-void parseFile(instList_t *nodeList, char *filename, varList_t *varList, error_t *errData){
+void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData){
     // check if the file exists
     FILE *file = fopen(filename, "r");
     if(file == NULL){
@@ -110,7 +110,7 @@ void parseFile(instList_t *nodeList, char *filename, varList_t *varList, error_t
     fclose(file);
 }
 
-instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, error_t *errData){
+instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, asm_error_t *errData){
     // check if the line is empty or a comment
     if(line[0] == '\n' || strncmp(cleanString(line), "//", 2) == 0){
         return NULL;
@@ -144,7 +144,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, 
     return newNode;
 }
 
-bool isOp(char *inst, instNode_t *newNode, varList_t *varList, error_t *errData){
+bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errData){
     if(strcmp(inst, "mov") == 0){
         newNode->op = OP_MOV;
     }
@@ -473,7 +473,7 @@ enum regKind strToReg(char *arg) {
     }
 }
 
-void checkAOPFile(char* fileName, error_t *errData) {
+void checkAOPFile(char* fileName, asm_error_t *errData) {
     size_t size = strlen(fileName);
     //Check if the filename ends by ".aop" and contains at least 5 characters
     if (size < 5 || fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') {

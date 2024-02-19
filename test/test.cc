@@ -20,7 +20,7 @@ char * fileName = const_cast<char *>("test.cc");
  */
 
 TEST(parseArgs, help) {
-    error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log", fileName);
     // Test help flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-h")};
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -28,7 +28,7 @@ TEST(parseArgs, help) {
     ASSERT_TRUE(flags.help);
 }
 TEST(parseArgs, version) {
-    error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log", fileName);
     // Test version flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-v")};
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -36,7 +36,7 @@ TEST(parseArgs, version) {
     ASSERT_TRUE(flags.version);
 }
 TEST(parseArgs, verbose) {
-    error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log", fileName);
     // Test verbose flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-V")};
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -44,7 +44,7 @@ TEST(parseArgs, verbose) {
     ASSERT_TRUE(flags.verbose);
 }
 TEST(parseArgs, debug) {
-    error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log", fileName);
     // Test debug flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-d")};
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -53,7 +53,7 @@ TEST(parseArgs, debug) {
 }
 
 TEST(parseArgs, invalidFlag) {
-    error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log", fileName);
     // Test false argv
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-a")};
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -144,7 +144,7 @@ TEST(getArgs, noArgs) {
  */
 
 TEST(isOp, add) {
-  error_t *errData = initErrorFile("errors.log", fileName);
+  asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("add");
 
   instNode_t *newNode = createEmptyInstNode();

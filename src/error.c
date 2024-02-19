@@ -6,12 +6,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <errno.h>
 #include <time.h>
 
 #include "error.h"
 
-error_t *initErrorFile(const char* out, char *inputFile){
-    error_t *errData = malloc(sizeof(error_t));
+asm_error_t *initErrorFile(const char* out, char *inputFile){
+    asm_error_t *errData = malloc(sizeof(asm_error_t));
     errData->errors = 0;
     errData->inputFile = inputFile;
     if(out != NULL){
@@ -26,7 +27,7 @@ error_t *initErrorFile(const char* out, char *inputFile){
     return errData;
 }
 
-void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *errData){
+void errorInstruction(char* inst, instNode_t *node, const char* out, asm_error_t *errData){
     ++ errData->errors;
     fprintf(stderr, "Error: syntax error\n");
     fprintf(stderr, "Details: %s instruction is not recognized\n", inst);
@@ -53,7 +54,7 @@ void errorInstruction(char* inst, instNode_t *node, const char* out, error_t *er
     }
 }
 
-void errorLineSize(long lineNb, const char* out, error_t *errData){
+void errorLineSize(long lineNb, const char* out, asm_error_t *errData){
     ++ errData->errors;
     fprintf(stderr, "Error: syntax error\n");
     fprintf(stderr, "Details: line must to be under 64 characters\n");
@@ -81,12 +82,12 @@ void errorLineSize(long lineNb, const char* out, error_t *errData){
 
 }
 
-void printErrorSummary(error_t *errData){
+void printErrorSummary(asm_error_t *errData){
     fprintf(stderr, "Error summary:\n");
     fprintf(stderr, "Total errors: %ld\n", errData->errors);
 }
 
-void errorfnf(char* filename, const char* out, error_t *errData){
+void errorfnf(char* filename, const char* out, asm_error_t *errData){
     ++ errData->errors;
     fprintf(stderr, "Error: file not found\n");
     fprintf(stderr, "Details: file %s not found\n", filename);
@@ -113,7 +114,7 @@ void errorfnf(char* filename, const char* out, error_t *errData){
     exit(EXIT_FAILURE);
 }
 
-void errorInvalidExt(char* filename, const char* out, error_t *errData){
+void errorInvalidExt(char* filename, const char* out, asm_error_t *errData){
     ++ errData->errors;
     fprintf(stderr, "Error: invalid file extension\n");
     fprintf(stderr, "Details: file %s has an invalid extension\n", filename);
