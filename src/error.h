@@ -145,7 +145,17 @@ void errorBuildComparison(const char *out, asm_error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void errorLabelDeclaration(const char *label, const char *out, asm_error_t *errData);
+void errorLabelDeclaration(char *label, const char *out, asm_error_t *errData);
+
+/*
+    Throw an error when a label is not found
+    params:
+        label: Label that is not found
+        out: Target file (can be NULL)
+        errData: Error history
+
+*/
+void errorLabelNotFound(instNode_t *node, char *label, const char *out, asm_error_t *errData);
 
 /*
     Throw an error when the lifo is empty
@@ -262,16 +272,6 @@ void errorfnf(char* filename, const char* out, asm_error_t *errData);
 */
 void errorInvalidExt(char* filename, const char* out, asm_error_t *errData);
 
-/*
-    Throw an error when the file contains errors
-    params:
-        filename: File name
-        out: Target file (can be NULL)
-        errData: Error history
-*/
-void errorIssues(char* filename, const char* out, asm_error_t *errData);
-void errorIssues2(char* filename, const char* out, asm_error_t *errData);
-
 // ---------- Other errors ----------
 
 /*
@@ -320,6 +320,15 @@ void errorLineCharactersExceed(long lineNb, const char *out, asm_error_t *errDat
 */
 void errorVarNotExist(const char *varName, long lineNb, const char *out, asm_error_t *errData);
 
+/*
+    Throw an error for using a variable that is already declared
+    params:
+        varName: Variable name
+        lineNb: Line number
+        out: Target file (can be NULL)
+        errData: Error history
+*/
+void errorVarAlreadyExist(const char *varName, long lineNb, const char *out, asm_error_t *errData);
 
 // ---------- Display error messages ----------
 

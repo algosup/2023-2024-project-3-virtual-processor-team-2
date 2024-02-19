@@ -215,6 +215,16 @@ void errorVarNotExist(const char *varName, long lineNb, const char *out, asm_err
     displayError(errType, errDetails, errLocation, out, errData);
 }
 
+void errorVarAlreadyExist(const char *varName, long lineNb, const char *out, asm_error_t *errData){
+    char *errType = "Already Exist Error";
+    char errDetails[64];
+    char errLocation[64];
+
+    sprintf(errDetails, "'%s' variable is already defined", varName);
+    sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
+
+    displayError(errType, errDetails, errLocation, out, errData);
+}
 
 // ---------------------------------BUILDER ERROR-----------------------------------------
 
@@ -238,13 +248,24 @@ void errorBuildComparison(const char *out, asm_error_t *errData){
 }
 
 
-void errorLabelDeclaration(const char *label, const char *out, asm_error_t *errData){
+void errorLabelDeclaration(char *label, const char *out, asm_error_t *errData){
     char *errType = "Label Declaration Error";
     char errDetails[64];
 
     sprintf(errDetails, "Label %s already declared", label);
 
     displayError(errType, errDetails, NULL, out, errData);
+}
+
+void errorLabelNotFound(instNode_t *node, char *label, const char *out, asm_error_t *errData){
+    char *errType = "Label Not Found Error";
+    char errDetails[64];
+    char errLocation[64];
+
+    sprintf(errDetails, "Label %s not found", label);
+    sprintf(errLocation, "File %s, line %ld", errData->inputFile, node->lineNb);
+
+    displayError(errType, errDetails, errLocation, out, errData);
 }
 
 
