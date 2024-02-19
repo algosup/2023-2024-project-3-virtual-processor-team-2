@@ -15,10 +15,14 @@
 
 char * fileName = const_cast<char *>("test.cc");
 
+// =========================================================================
+// =============================  PARSER  ==================================
+// =========================================================================
+
+
 /*
  *  parseArgs
  */
-
 TEST(parseArgs, help) {
     asm_error_t *errData = initErrorFile("errors.log", fileName);
     // Test help flag
@@ -60,11 +64,9 @@ TEST(parseArgs, invalidFlag) {
     flags_t flags = parseArgs(argc, argv);
     ASSERT_FALSE(flags.help);
 }
-
 /*
  *  get isntruction
  */
-
 TEST(getInst, normal) {
     char *line = const_cast<char *>("add r1, r2, r3\n");
 
@@ -78,11 +80,9 @@ TEST(getInst, noInst) {
     char *inst = getInst(line);
     ASSERT_STREQ(inst, "r1,");
 }
-
 /*
  *  get unstruction arguments
  */
-
 TEST(getArgs, normal) {
     // Test input line
     char *line = const_cast<char *>("add r1, r2");
@@ -138,11 +138,9 @@ TEST(getArgs, noArgs) {
     }
     delete[] args;
 }
-
 /*
  *  is op
  */
-
 TEST(isOp, add) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("+");
@@ -153,7 +151,6 @@ TEST(isOp, add) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_ADD);
 }
-
 TEST(isOp, sub) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("-");
@@ -164,7 +161,6 @@ TEST(isOp, sub) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_SUB);
 }
-
 TEST(isOp, mul) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("*");
@@ -175,7 +171,6 @@ TEST(isOp, mul) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_MUL);
 }
-
 TEST(isOp, div) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("/");
@@ -186,7 +181,6 @@ TEST(isOp, div) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_DIV);
 }
-
 TEST(isOp, incOp) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("=");
@@ -197,7 +191,6 @@ TEST(isOp, incOp) {
   ASSERT_FALSE(isThatKind);
   ASSERT_FALSE(newNode->op == OP_ADD);
 }
-
 TEST(isOp, push) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("push");
@@ -208,7 +201,6 @@ TEST(isOp, push) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_PUSH);
 }
-
 TEST(isOp, pop) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("pop");
@@ -219,7 +211,6 @@ TEST(isOp, pop) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_POP);
 }
-
 TEST(isOp, goto) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("goto");
@@ -230,7 +221,6 @@ TEST(isOp, goto) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_GOTO);
 }
-
 TEST(isOp, call) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("call");
@@ -241,7 +231,6 @@ TEST(isOp, call) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_CALL);
 }
-
 TEST(isOp, and) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("&");
@@ -252,7 +241,6 @@ TEST(isOp, and) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_B_AND);
 }
-
 TEST(isOp, or) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("|");
@@ -263,7 +251,6 @@ TEST(isOp, or) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_B_OR);
 }
-
 TEST(isOp, not) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("!");
@@ -274,7 +261,6 @@ TEST(isOp, not) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_B_NOT);
 }
-
 TEST(isOp, xor) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("^");
@@ -285,7 +271,6 @@ TEST(isOp, xor) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_B_XOR);
 }
-
 TEST(isOp, mod) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("%");
@@ -296,7 +281,6 @@ TEST(isOp, mod) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_MOD);
 }
-
 TEST(isOp, shr) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>(">>");
@@ -307,7 +291,6 @@ TEST(isOp, shr) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_R_SHIFT);
 }
-
 TEST(isOp, shl) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("<<");
@@ -318,7 +301,6 @@ TEST(isOp, shl) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_L_SHIFT);
 }
-
 TEST(isOp, inc) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("++");
@@ -329,7 +311,6 @@ TEST(isOp, inc) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_ADD);
 }
-
 TEST(isOp, dec) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("--");
@@ -340,7 +321,6 @@ TEST(isOp, dec) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_SUB);
 }
-
 TEST(isOp, lab) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("lab");
@@ -351,7 +331,6 @@ TEST(isOp, lab) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_LAB);
 }
-
 TEST(isOp, var) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("var");
@@ -362,7 +341,6 @@ TEST(isOp, var) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_VAR);
 }
-
 TEST(isOp, ret) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("ret");
@@ -373,7 +351,6 @@ TEST(isOp, ret) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_RET);
 }
-
 TEST(isOp, int) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("int");
@@ -384,7 +361,6 @@ TEST(isOp, int) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, ngr) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("ngr");
@@ -395,7 +371,6 @@ TEST(isOp, ngr) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, draw) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("draw");
@@ -406,7 +381,6 @@ TEST(isOp, draw) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, ob1) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("ob1");
@@ -439,7 +413,6 @@ TEST(isOp, IntIF_AND) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, IntIF_XOR) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("if_xor");
@@ -450,7 +423,6 @@ TEST(isOp, IntIF_XOR) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, IntIF_LT) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("if_lt");
@@ -461,7 +433,6 @@ TEST(isOp, IntIF_LT) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, IntIF_LTE) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("if_lte");
@@ -472,7 +443,6 @@ TEST(isOp, IntIF_LTE) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, IntIF_GT) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("if_gt");
@@ -483,7 +453,6 @@ TEST(isOp, IntIF_GT) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, IntIF_GTE) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("if_gte");
@@ -494,7 +463,6 @@ TEST(isOp, IntIF_GTE) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, IntIF_EQ) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("if_eq");
@@ -505,7 +473,6 @@ TEST(isOp, IntIF_EQ) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, IntIF_NEQ) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("if_neq");
@@ -516,7 +483,6 @@ TEST(isOp, IntIF_NEQ) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, pusha) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("pusha");
@@ -527,7 +493,6 @@ TEST(isOp, pusha) {
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
 }
-
 TEST(isOp, popa) {
   asm_error_t *errData = initErrorFile("errors.log", fileName);
   char *inst = const_cast<char *>("popa");
@@ -540,8 +505,22 @@ TEST(isOp, popa) {
 }
 
 
+// =========================================================================
+// =============================  BUILDER  =================================
+// =========================================================================
 
-// TODO: test build instruction
+TEST(buildProgram, CorrectBuild) {
+//   asm_error_t *errData = initErrorFile("errors.log", fileName);
+//   char *inst = const_cast<char *>("popa");
+
+//   instNode_t *newNode = createEmptyInstNode();
+//   bool isThatKind = isOp(inst, newNode, errData);
+
+//   ASSERT_TRUE(isThatKind);
+//   ASSERT_TRUE(newNode->op == OP_INT);
+}
+
+
 
 int main(int argc, char *argv[]) {
   ::testing::InitGoogleTest(&argc, argv);
