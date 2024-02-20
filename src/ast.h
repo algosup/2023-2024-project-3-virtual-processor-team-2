@@ -195,10 +195,12 @@ labelList_t *createEmptyLabelList();
         labelList: pointer to the label list
         name: name of the label
         nodeId: id of the node
+        lineNb: number of the line
+        errData: error history
     returns:
         int: id of the label or -1 if it does not exist
 */
-int addLabel(labelList_t *labelList, char *name, long nodeId);
+int addLabel(labelList_t *labelList, char *name, long nodeId, long lineNb, asm_error_t *errData);
 
 /*
     Check if a label exists in the list

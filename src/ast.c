@@ -170,15 +170,14 @@ labelList_t *createEmptyLabelList(){
     return labelList;
 }
 
-int addLabel(labelList_t *labelList, char *name, long nodeId){
+int addLabel(labelList_t *labelList, char *name, long nodeId, long lineNb, asm_error_t *errData){
     // check if the label already exists
     for(size_t i = 0; i < labelList->size; i++){
         if (labelList->list[i].name == NULL){
             continue;
         }
         if(strcmp(labelList->list[i].name, name) == 0){
-            // TODO: add error label already exists
-            return -1;
+            errorLabelDeclaration(lineNb, name, errData);
         }
     }
 

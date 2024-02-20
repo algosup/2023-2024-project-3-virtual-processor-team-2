@@ -60,7 +60,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
 ;
     int varId = isVarExist(varList, node->arg0);
     if(varId == -1){
-        // TODO: throw error
+        errorVarNotExist(node->lineNb, node->arg0, errData);
     }
     // set arg0 as id
     node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
@@ -144,9 +144,9 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
 
 void buildLabel(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // try to add the label to the list
-    int labId = addLabel(labelList, node->arg0, node->id);
+    int labId = addLabel(labelList, node->arg0, node->id, node->lineNb, errData);
     if(labId == -1){
-        // TODO: throw error
+        errorLabelNotFound(node->lineNb, node->arg0, errData);
     }
 
     // set arg0 as id
@@ -192,7 +192,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             // check if the variable is in the list
             int varId = isVarExist(varList, node->arg1);
             if(varId == -1){
-                // TODO: throw error
+                errorVarNotExist(node->lineNb, node->arg1, errData);
             }
 
             // Create a new node
@@ -222,7 +222,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             // check if the variable is in the list
             int varId = isVarExist(varList, node->arg0);
             if(varId == -1){
-                // TODO: throw error
+                errorVarNotExist(node->lineNb, node->arg0, errData);
             }
             // Create a new node
             instNode_t *newNode = copyInstNode(node);
@@ -255,7 +255,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             // check if the variable is in the list
             int varId = isVarExist(varList, node->arg0);
             if(varId == -1){
-                // TODO: throw error
+                errorVarNotExist(node->lineNb, node->arg0, errData);
             }
 
             // Create a new node
@@ -290,7 +290,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             // check if the variable is in the list
             int varId = isVarExist(varList, node->arg0);
             if(varId == -1){
-                // TODO: throw error
+                errorVarNotExist(node->lineNb, node->arg0, errData);
             }
             newNode->op = OP_MOV_T_VAR;
             newNode->isInter = false;
@@ -306,7 +306,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             // check if the variable is in the list
             varId = isVarExist(varList, node->arg1);
             if(varId == -1){
-                // TODO: throw error
+                errorVarNotExist(node->lineNb, node->arg1, errData);
             }
 
             node->op = OP_MOV_F_VAR;
@@ -331,8 +331,7 @@ void buildGoto(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // check if the label is in the list
     int labId = isLabelExist(labelList, node->arg0);
     if(labId == -1){
-        // TODO: throw error
-        return;
+        errorLabelNotFound(node->lineNb, node->arg0, errData);
     }
 
     // change arg0 to id
@@ -348,7 +347,7 @@ void buildCall(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // check if the label is in the list
     int labId = isLabelExist(labelList, node->arg0);
     if(labId == -1){
-        // TODO: throw error
+        errorLabelNotFound(node->lineNb, node->arg0, errData);
         return;
     }
 
@@ -398,7 +397,7 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
         // check if the variable is in the list
         int varId = isVarExist(varList, node->arg1);
         if(varId == -1){
-            // TODO: throw error
+            errorVarNotExist(node->lineNb, node->arg1, errData);
         }
 
         // Create a new node

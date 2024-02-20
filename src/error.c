@@ -172,7 +172,7 @@ void errorTypeIncompatibility(char *type1, char *type2, long lineNb,  asm_error_
     sprintf(errDetails, "%s cannot be compared with %s", type1, type2);
     sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
 
-    displayError(errType, errDetails, errLocation,  errorFile, errData);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
 }
 
 
@@ -184,7 +184,7 @@ void errorSizeIncompatibility(char *var1, char *var2, long lineNb,  asm_error_t 
     sprintf(errDetails, "%s's size is incompatible with %s's size", var1, var2);
     sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
 
-    displayError(errType, errDetails, errLocation,  errorFile, errData);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
 }
 
 
@@ -194,7 +194,7 @@ void errorFilename(const char *filename,  asm_error_t *errData){
 
     sprintf(errDetails, "The filename '%s' should end by .aop and be at least 5 characters", filename);
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
@@ -206,11 +206,11 @@ void errorLineCharactersExceed(long lineNb,  asm_error_t *errData){
     sprintf(errDetails, "The lines of a file shouldn’t exceed 64 characters each");
     sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
 
-    displayError(errType, errDetails, errLocation,  errorFile, errData);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
 }
 
 
-void errorVarNotExist(const char *varName, long lineNb,  asm_error_t *errData){
+void errorVarNotExist(long lineNb, char *varName, asm_error_t *errData){
     char *errType = "Non-existent Error";
     char errDetails[64];
     char errLocation[64];
@@ -218,7 +218,7 @@ void errorVarNotExist(const char *varName, long lineNb,  asm_error_t *errData){
     sprintf(errDetails, "'%s' variable is not defined", varName);
     sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
 
-    displayError(errType, errDetails, errLocation,  errorFile, errData);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
 }
 
 void errorVarAlreadyExist(char *varName, long lineNb,  asm_error_t *errData){
@@ -229,7 +229,7 @@ void errorVarAlreadyExist(char *varName, long lineNb,  asm_error_t *errData){
     sprintf(errDetails, "'%s' variable is already defined", varName);
     sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
 
-    displayError(errType, errDetails, errLocation,  errorFile, errData);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
 }
 
 // ---------------------------------BUILDER ERROR-----------------------------------------
@@ -240,7 +240,7 @@ void errorLifoSize( asm_error_t *errData){
 
     sprintf(errDetails, "Error: comparison lifo isn't empty");
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
@@ -250,17 +250,19 @@ void errorBuildComparison( asm_error_t *errData){
 
     sprintf(errDetails, "Error: unknown comparison statement");
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
-void errorLabelDeclaration(char *label,  asm_error_t *errData){
+void errorLabelDeclaration(long lineNb, char *label, asm_error_t *errData){
     char *errType = "Label Declaration Error";
     char errDetails[64];
+    char errLocation[64];
 
     sprintf(errDetails, "Label %s already declared", label);
+    sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
 }
 
 void errorLabelNotFound(long lineNb, char *label,  asm_error_t *errData){
@@ -271,7 +273,7 @@ void errorLabelNotFound(long lineNb, char *label,  asm_error_t *errData){
     sprintf(errDetails, "Label %s not found", label);
     sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
 
-    displayError(errType, errDetails, errLocation,  errorFile, errData);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
 }
 
 
@@ -281,7 +283,7 @@ void errorEmptyLifo( asm_error_t *errData){
 
     sprintf(errDetails, "Error: Lifo is empty");
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 //-------------------BIN CONVERTER ERROR-------------------------------------
@@ -292,7 +294,7 @@ void errorFileDetection(const char *filename,  asm_error_t *errData){
 
     sprintf(errDetails, "Error: no such file or directory '%s'", filename);
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
@@ -302,7 +304,7 @@ void errorFileType(const char *filename,  asm_error_t *errData){
 
     sprintf(errDetails, "Error: this file '%s' couldn’t be used for bin conversion", filename);
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
@@ -312,7 +314,7 @@ void errorFileIssues(const char *filename,  asm_error_t *errData){
 
     sprintf(errDetails, "Error: the targeted file '%s' contains errors and couldn't be converted properly", filename);
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
@@ -322,7 +324,7 @@ void errorConversion(const char *variable, const char *issue,  asm_error_t *errD
 
     sprintf(errDetails, "The variable %s %s", variable, issue);
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
@@ -334,7 +336,7 @@ void errorMissingDependencies(const char *details,  asm_error_t *errData){
 
     sprintf(errDetails, "These libraries/components are undefined: %s", details);
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
@@ -342,7 +344,7 @@ void errorResourceExhaustion( asm_error_t *errData){
     char *errType = "Resource Exhaustion Error";
     char errDetails[64] = "The system doesn't have any resources left.";
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
@@ -352,7 +354,7 @@ void errorPathIssues(const char *path,  asm_error_t *errData){
 
     sprintf(errDetails, "Incorrect file paths: %s", path);
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
@@ -362,7 +364,7 @@ void errorEnvironmentIncompatibility(const char *os,  asm_error_t *errData){
 
     sprintf(errDetails, "The current operating system '%s' is unable to run this program", os);
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 
@@ -372,18 +374,18 @@ void errorTimeout(const char *program,  asm_error_t *errData){
 
     sprintf(errDetails, "The program '%s' didn’t respond anymore", program);
 
-    displayError(errType, errDetails, NULL,  errorFile, errData);
+    displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
-void displayError(const char *errType, const char *errDetails, char *errLocation, char *out, asm_error_t *errData){
+void displayError(char *errType, char *errDetails, char *errLocation, const char *out, asm_error_t *errData){
 	++ errData->errors;
     fprintf(stderr, "Error: %s\n", errType);
     fprintf(stderr, "Details: %s\n", errDetails);
 	if(errLocation != NULL){
 	    fprintf(stderr, "In: %s\n", errLocation);
 	}
-    if( errorFile != NULL){
-        FILE *file = fopen( errorFile, "ab");
+    if(out != NULL){
+        FILE *file = fopen( out, "ab");
         if(file == NULL){
             fprintf(stderr, "Error opening file: %s\n", strerror(errno));
             exit(EXIT_FAILURE);

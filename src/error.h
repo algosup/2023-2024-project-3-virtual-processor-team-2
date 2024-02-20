@@ -126,10 +126,11 @@ void errorBuildComparison(asm_error_t *errData);
 /*
     Throw an error when a label is already declared
     params:
+        lineNb: Line number
         label: Label that is already declared
         errData: Error history
 */
-void errorLabelDeclaration(char *label, asm_error_t *errData);
+void errorLabelDeclaration(long lineNb, char *label, asm_error_t *errData);
 
 /*
     Throw an error when a label is not found
@@ -285,7 +286,7 @@ void errorLineCharactersExceed(long lineNb, asm_error_t *errData);
         lineNb: Line number
         errData: Error history
 */
-void errorVarNotExist(const char *varName, long lineNb, asm_error_t *errData);
+void errorVarNotExist(long lineNb, char *varName, asm_error_t *errData);
 
 /*
     Throw an error for using a variable that is already declared
@@ -307,7 +308,7 @@ void errorVarAlreadyExist(char *varName, long lineNb, asm_error_t *errData);
         out: Target file (can be NULL)
         errData: Error history
 */
-void displayError(const char *errType, const char *errDetails, char *errLocation, char *out, asm_error_t* errData);
+void displayError(char *errType, char *errDetails, char *errLocation, const char *out, asm_error_t* errData);
 
 #ifdef __cplusplus
 }
