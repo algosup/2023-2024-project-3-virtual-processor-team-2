@@ -24,7 +24,7 @@ TEST(parseArgs, help) {
     // Test help flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-h")};
     int argc = sizeof(argv) / sizeof(argv[0]);
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
     ASSERT_TRUE(flags.help);
 }
 TEST(parseArgs, version) {
@@ -32,7 +32,7 @@ TEST(parseArgs, version) {
     // Test version flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-v")};
     int argc = sizeof(argv) / sizeof(argv[0]);
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
     ASSERT_TRUE(flags.version);
 }
 TEST(parseArgs, verbose) {
@@ -40,7 +40,7 @@ TEST(parseArgs, verbose) {
     // Test verbose flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-V")};
     int argc = sizeof(argv) / sizeof(argv[0]);
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
     ASSERT_TRUE(flags.verbose);
 }
 TEST(parseArgs, debug) {
@@ -48,7 +48,7 @@ TEST(parseArgs, debug) {
     // Test debug flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-d")};
     int argc = sizeof(argv) / sizeof(argv[0]);
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
     ASSERT_TRUE(flags.debug);
 }
 
@@ -57,7 +57,7 @@ TEST(parseArgs, invalidFlag) {
     // Test false argv
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-a")};
     int argc = sizeof(argv) / sizeof(argv[0]);
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
     ASSERT_FALSE(flags.help);
 }
 

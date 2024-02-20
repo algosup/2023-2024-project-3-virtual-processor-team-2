@@ -261,6 +261,14 @@ void errorTooManyArg(asm_error_t *errData);
 */
 void errorNoArg(long lineNb, asm_error_t *errData);
 
+/*
+    Throw an error when an argument is invalid
+    params:
+        arg: Invalid argument
+        errData: Error history
+*/
+void invalidArg(char *arg, asm_error_t *errData);
+
 // ---------- Semantic Errors ----------
 
 /*

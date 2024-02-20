@@ -13,7 +13,7 @@
 #define LINE_MAX_SIZE 64
 #define MAX_ARGS 2
 
-flags_t parseArgs(int argc, char *argv[]){
+flags_t parseArgs(int argc, char *argv[], asm_error_t *errData){
     if(argc > 3){
         fprintf(stderr, "Too many arguments\n Try 'iat2 --help' for more information\n");
         exit(EXIT_FAILURE);
@@ -24,14 +24,14 @@ flags_t parseArgs(int argc, char *argv[]){
 
     // Check if it's a flag or a file
     if(argv[1][0]=='-'){
-        flagsSet(argv[1], &flags);
+        flagsSet(argv[1], &flags, errData);
         return flags;
     }
     else{
         // Check if the second arg is flag
         if(argc == 3){
             if(argv[2][0]=='-'){
-                flagsSet(argv[2], &flags);
+                flagsSet(argv[2], &flags, errData);
                 return flags;
             }
             else{
@@ -45,7 +45,7 @@ flags_t parseArgs(int argc, char *argv[]){
     }
 }
 
-void flagsSet(char *flag, flags_t *flags){
+void flagsSet(char *flag, flags_t *flags, asm_error_t *errData){
     if(strcmp(flag, "-h") == 0 || strcmp(flag, "--help") == 0){
         flags->help = true;
     }
@@ -59,7 +59,8 @@ void flagsSet(char *flag, flags_t *flags){
         flags->verbose = true;
     }
     else{
-        // TODO: throw error
+        invalidArg(flag, errData);
+        exit(EXIT_FAILURE);
     }
 }
 

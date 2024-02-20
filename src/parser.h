@@ -21,18 +21,20 @@ typedef struct {
     params:
         argc: number of arguments
         argv: array of arguments
+        errData: error history
     returns:
         flags_t: struct with the flags
 */ 
-flags_t parseArgs(int argc, char *argv[]);
+flags_t parseArgs(int argc, char *argv[], asm_error_t *errData);
 
 /*
     Read the flag and set the flag struct
     params:
         flag: flag to be read
         flags: pointer to the flags struct
+        errData: error history
 */
-void flagsSet(char *flag, flags_t *flags);
+void flagsSet(char *flag, flags_t *flags, asm_error_t *errData);
 
 /*
     Read the file and parse it line by line

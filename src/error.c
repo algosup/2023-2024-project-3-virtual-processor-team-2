@@ -47,6 +47,15 @@ void errorNoArg(long lineNb, asm_error_t *errData){
     displayError(errType, errDetails, errLocation, errorFile, errData);
 }
 
+void invalidArg(char *arg, asm_error_t *errData){
+    char *errType = "Syntax Error";
+    char errDetails[64];
+
+    sprintf(errDetails, "Invalid argument '%s'", arg);
+
+    displayError(errType, errDetails, NULL, errorFile, errData);
+}
+
 
 void errorTooManyArg(asm_error_t *errData){
     char *errType = "Syntax Error";

@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
 
     // ---------- Parse arguments ----------
     // Parse program arguments and get flags
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
 
     if (flags.help) {
         printHelp();
