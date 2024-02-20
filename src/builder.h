@@ -1,117 +1,101 @@
 #include "ast.h"
+#include "error.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// Lifo to build if/ else statements
-typedef struct lifoCmpNode{
-    cmpNode_t **list;
-    size_t size;
-} lifoCmpNode_t;
-
-
 /*
-    Read nodes from the instruction list and build the program
+    Build the program
     params:
         nodeList: pointer to the instruction list
-        labelList: pointer to the label list    
         varList: pointer to the variable list
+        labeList: pointer to the label list
+        errData: pointer to the error struct
 */
-void build(instList_t *nodeList, labelList_t *labelList, varList_t *varList);
+void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeList, asm_error_t *errData);
 
 /*
-    Build an operation node
+    Build a node
     params:
         node: pointer to the instruction node
+        varList: pointer to the variable list
+        labeList: pointer to the label list
+        errData: pointer to the error struct
 */
-// void buildOpNode(instNode_t *node);
+void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_error_t *errData);
 
 /*
-    Build an action node
+    Build a variable
     params:
         node: pointer to the instruction node
+        varList: pointer to the variable list
+        errData: pointer to the error struct
 */
-void buildActNode(instNode_t *node, lifoCmpNode_t *lifo);
+void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData);
 
 /*
-    Build a comparison node
-    params:
-        node: pointer to the instruction node
-*/
-void buildCmpNode(instNode_t *node, lifoCmpNode_t *lifo);
-
-
-
-/*
-    Build a label node
+    Build a label
     params:
         node: pointer to the instruction node
         labelList: pointer to the label list
+        errData: pointer to the error struct
 */
-void buildLabelNode(instNode_t *node, labelList_t *labelList);
+void buildLabel(instNode_t *node, labelList_t *labelList, asm_error_t *errData);
 
 /*
-    Add a label to the label list
+    Build a mov instruction
     params:
-        list: pointer to the label list
-        name: label name
-        nodeId: node id
+        node: pointer to the instruction node
+        varList: pointer to the variable list
+        errData: pointer to the error struct
 */
-void addLabel(labelList_t *list, char *name, long nodeId);
+void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData);
 
 /*
-    Upgrades the size of the variable list
+    Build a goto instruction
     params:
-        list: pointer to the variable list
+        node: pointer to the instruction node
+        labelList: pointer to the label list
+        errData: pointer to the error struct
 */
-void incLabelList(labelList_t *list);
+void buildGoto(instNode_t *node, labelList_t *labelList, asm_error_t *errData);
 
 /*
-    Init the label list
-    return:
-        labelList_t: pointer to the label list
-*/
-labelList_t* initLabelList();
-
-/*
-    Add cmp node to the lifo (as new head)
+    Build a call instruction
     params:
-        lifo: pointer to the lifo
-        node: pointer to the node
+        node: pointer to the instruction node
+        labelList: pointer to the label list
+        errData: pointer to the error struct
 */
-void pushCmpLifo(lifoCmpNode_t *lifo, cmpNode_t *node);
+void buildCall(instNode_t *node, labelList_t *labelList, asm_error_t *errData);
 
 /*
-    Remove cmp node from the lifo (as head)
+    Build an operation (add, xor, etc.)
     params:
-        lifo: pointer to the lifo
-    return:
-        cmpNode_t: pointer to the node
+        node: pointer to the instruction node
+        varList: pointer to the variable list
+        errData: pointer to the error struct
 */
-cmpNode_t *popCmpLifo(lifoCmpNode_t *lifo);
+void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData);
 
 /*
-    Add variable to the variable list
+    Get the register kind
     params:
-        list: pointer to the variable list
-        nide: instNode_t pointer
+        str: string to be checked
+    returns:
+        regKind: kind of the register
 */
-void addVar(varList_t *list, instNode_t *node);
+enum regKind getRegKind(char *str);
 
 /*
-    Upgrades the size of the variable list
+    Get the data size of a variable in bytes
     params:
-        list: pointer to the variable list
+        str: string to be checked
+    returns:
+        int: data size
 */
-void incVarList(varList_t *list);
-
-/*
-    Init the variable list
-    return:
-        varList_t: pointer to the variable list
-*/
-varList_t* initVarList();
+int getVarDatasize(char *str);
 
 #ifdef __cplusplus
 }
