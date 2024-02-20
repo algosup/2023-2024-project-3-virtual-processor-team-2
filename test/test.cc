@@ -86,10 +86,11 @@ TEST(getInst, noInst) {
  */
 
 TEST(getArgs, normal) {
+    asm_error_t *errData = initErrorFile("errors.log");
     // Test input line
     char *line = const_cast<char *>("add r1, r2");
     // Call the function under test
-    char **args = getInstArgs(line);
+    char **args = getInstArgs(line, 1, errData);
 
     // Check each argument
     ASSERT_STREQ(args[0], "r1");
@@ -103,11 +104,12 @@ TEST(getArgs, normal) {
 }
 
 TEST(getArgs, noComma) {
+    asm_error_t *errData = initErrorFile("errors.log");
     // Test input line
     char *line = const_cast<char *>("add r1 r2");
 
     // Call the function under test
-    char **args = getInstArgs(line);
+    char **args = getInstArgs(line, 1, errData);
 
     // Check each argument
     ASSERT_STREQ(args[0], "r1 r2");
@@ -121,11 +123,12 @@ TEST(getArgs, noComma) {
 }
 
 TEST(getArgs, noArgs) {
+    asm_error_t *errData = initErrorFile("errors.log");
     // Test input line
     char *line = const_cast<char *>("ret\n");
 
     // Call the function under test
-    char **args = getInstArgs(line);
+    char **args = getInstArgs(line, 1, errData);
 
     std::cout << args[0] << std::endl;
     std::cout << args[1] << std::endl;

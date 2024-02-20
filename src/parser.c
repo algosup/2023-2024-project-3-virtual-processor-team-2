@@ -124,7 +124,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, 
     char *inst = getInst(line, lineNb, errData);
     
     // Get the arguments
-    char **args = getInstArgs(line);
+    char **args = getInstArgs(line, lineNb, errData);
 
 
     // Set arguments

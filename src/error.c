@@ -391,7 +391,7 @@ void displayError(char *errType, char *errDetails, char *errLocation, const char
     fprintf(stderr, "Error: %s\n", errType);
     fprintf(stderr, "Details: %s\n", errDetails);
 	if(errLocation != NULL){
-	    fprintf(stderr, "In: %s\n", errLocation);
+	    fprintf(stderr, "In: %s\n\n", errLocation);
 	}
     if(out != NULL){
         FILE *file = fopen( out, "ab");
@@ -412,7 +412,7 @@ void displayError(char *errType, char *errDetails, char *errLocation, const char
 		fprintf(file, "%s |\tError: %s\n",date_str, errType);
 	    fprintf(file, "%s |\tDetails: %s\n",date_str, errDetails);
 		if(errLocation != NULL){
-		    fprintf(file, "%s |\tIn: %s\n",date_str, errLocation);
+		    fprintf(file, "%s |\tIn: %s\n\n",date_str, errLocation);
 		}
         fclose(file);
     }
