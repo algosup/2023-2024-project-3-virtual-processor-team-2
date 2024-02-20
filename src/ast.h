@@ -148,6 +148,7 @@ varList_t *createEmptyVarList();
 */
 bool addVar(varList_t *varList, char *name, char *value, long lineNb, asm_error_t *errData);
 
+
 /*
     Check if a variable exists in the list
     params:
