@@ -20,7 +20,7 @@ char * fileName = const_cast<char *>("test.cc");
  */
 
 TEST(parseArgs, help) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log");
     // Test help flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-h")};
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -28,7 +28,7 @@ TEST(parseArgs, help) {
     ASSERT_TRUE(flags.help);
 }
 TEST(parseArgs, version) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log");
     // Test version flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-v")};
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -36,7 +36,7 @@ TEST(parseArgs, version) {
     ASSERT_TRUE(flags.version);
 }
 TEST(parseArgs, verbose) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log");
     // Test verbose flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-V")};
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -44,7 +44,7 @@ TEST(parseArgs, verbose) {
     ASSERT_TRUE(flags.verbose);
 }
 TEST(parseArgs, debug) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log");
     // Test debug flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-d")};
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -53,7 +53,7 @@ TEST(parseArgs, debug) {
 }
 
 TEST(parseArgs, invalidFlag) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log");
     // Test false argv
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-a")};
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -66,7 +66,7 @@ TEST(parseArgs, invalidFlag) {
  */
 
 TEST(getInst, normal) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log");
     char *line = const_cast<char *>("add r1, r2, r3\n");
 
     char *inst = getInst(line, 1, errData);
@@ -74,7 +74,7 @@ TEST(getInst, normal) {
 }
 
 TEST(getInst, noInst) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile("errors.log");
     char *line = const_cast<char *>("r1, r2, r3\n");
 
     char *inst = getInst(line, 1, errData);
@@ -146,7 +146,7 @@ TEST(getArgs, noArgs) {
  */
 
 TEST(isOp, add) {
-  asm_error_t *errData = initErrorFile("errors.log", fileName);
+  asm_error_t *errData = initErrorFile("errors.log");
   char *inst = const_cast<char *>("add");
 
   instNode_t *newNode = createEmptyInstNode();

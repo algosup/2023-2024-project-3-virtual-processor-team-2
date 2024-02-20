@@ -13,8 +13,6 @@
 #define LINE_MAX_SIZE 64
 #define MAX_ARGS 2
 
-const char* errorFile= "errors.log";
-
 flags_t parseArgs(int argc, char *argv[]){
     if(argc > 3){
         fprintf(stderr, "Too many arguments\n Try 'iat2 --help' for more information\n");
@@ -69,7 +67,7 @@ void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_err
     // check if the file exists
     FILE *file = fopen(filename, "r");
     if(file == NULL){
-        errorfnf(filename, errorFile, errData);
+        errorfnf(filename, errData);
 
     }
 
@@ -85,7 +83,7 @@ void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_err
     while(fgets(line, LINE_MAX_SIZE, file)){
             // Check if one of the file's line doesn't exceed 64 characters
         if (!checkLineSize(line, file)){
-            errorLineSize(lineNb, errorFile, errData);
+            errorLineSize(lineNb, errData);
         }
 
         // parse the line
@@ -141,7 +139,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, 
     }
 
     // Throw error if the line is not an instruction
-    errorInstruction(inst, newNode, errorFile, errData);
+    errorInstruction(inst, newNode->lineNb, errData);
     return newNode;
 }
 
@@ -166,7 +164,7 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
         newNode->op = OP_B_XOR;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
 
     }
@@ -177,70 +175,70 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
         newNode->op = OP_DIV;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "add") == 0 || strcmp(inst, "+") == 0){
         newNode->op = OP_ADD;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "sub") == 0 || strcmp(inst, "-") == 0){
         newNode->op = OP_SUB;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "mul") == 0 || strcmp(inst, "*") == 0){
         newNode->op = OP_MUL;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "shr") == 0 || strcmp(inst, ">>") == 0){
         newNode->op = OP_R_SHIFT;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "shl") == 0 || strcmp(inst, "<<") == 0){
         newNode->op = OP_L_SHIFT;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "and") == 0 || strcmp(inst, "&") == 0){
         newNode->op = OP_B_AND;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "or") == 0 || strcmp(inst, "|") == 0){
         newNode->op = OP_B_OR;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "not") == 0 || strcmp(inst, "!") == 0){
         newNode->op = OP_B_NOT;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "inc") == 0 || strcmp(inst, "++") == 0){
         newNode->op = OP_ADD;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
         newNode->arg1 = "1";
     }
@@ -248,7 +246,7 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
         newNode->op = OP_SUB;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
         newNode->arg1 = "1";
     }
@@ -264,7 +262,7 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
         newNode->op = OP_MOD;
         // check if first argument is null
         if(newNode->arg0 == NULL){
-            errorNoArg(newNode->lineNb, errorFile, errData);
+            errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "ret") == 0){
@@ -343,7 +341,7 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
         newNode->arg0 = "13";
     }
     else{
-        errorInstruction(inst, newNode, errorFile, errData);
+        errorInstruction(inst, newNode->lineNb, errData);
         return false;
     }
     return true;
@@ -361,7 +359,7 @@ char *getInst(char *line, long lineNb, asm_error_t *errData) {
     char *inst = strtok(buffer, " ");
     if (inst == NULL) {
         free(buffer);
-        errorInstructionMissing(lineNb, errorFile, errData);
+        errorInstructionMissing(lineNb, errData);
     }
 
     return cleanString(inst);
@@ -477,7 +475,7 @@ void checkAOPFile(char* fileName, asm_error_t *errData) {
     //Check if the filename ends by ".aop" and contains at least 5 characters
     if (size < 5 || fileName[size - 4] != '.' || fileName[size - 3] != 'a' || fileName[size - 2] != 'o' || fileName[size - 1] != 'p') {
         // throw error
-       errorInvalidExt(fileName, errorFile, errData);
+       errorInvalidExt(fileName, errData);
     }
 }
 

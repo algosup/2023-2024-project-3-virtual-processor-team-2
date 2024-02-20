@@ -18,7 +18,7 @@
 
 int main(int argc, char *argv[]) {
     // Init error data history
-    asm_error_t *errData = initErrorFile("errors.log", argv[1]);
+    asm_error_t *errData = initErrorFile(argv[1]);
 
     // ---------- Parse arguments ----------
     // Parse program arguments and get flags

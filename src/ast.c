@@ -10,7 +10,6 @@
 
 #include "ast.h"
 
-const char* errorFile= "errors.log";
 
 char *getIntCode(enum interruptKind kind){
     switch(kind){
@@ -73,7 +72,7 @@ bool addVar(varList_t *varList, char *name, char *value, long lineNb, asm_error_
             continue;
         }
         if(strcmp(varList->list[i].name, name) == 0){
-            errorVarAlreadyExists(name, lineNb, errData);
+            errorVarAlreadyExist(name, lineNb, errData);
             return false;
         }
     }
