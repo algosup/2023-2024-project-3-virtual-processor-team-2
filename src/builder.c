@@ -433,7 +433,6 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
 enum regKind getRegKind(char *str) {
     if (str == NULL || str[0] != 'r' || str[1] != 'g' || str[2] < '0' || str[2] > '7' || str[3] != '\0') {
         fprintf(stderr, "Error: invalid register format\n");
-        exit(EXIT_FAILURE);
     }
 
     switch (str[2]) {
@@ -455,7 +454,6 @@ enum regKind getRegKind(char *str) {
         return RG_7;
     default:
         fprintf(stderr, "Error: unknown register\n");
-        exit(EXIT_FAILURE);
     }
 }
 

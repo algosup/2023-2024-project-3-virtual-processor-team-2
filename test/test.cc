@@ -504,22 +504,41 @@ TEST(isOp, popa) {
   ASSERT_TRUE(newNode->op == OP_INT);
 }
 
+TEST(parseFile, Parsing) {
+  asm_error_t *errData = initErrorFile("errors.log", fileName);
+  instList_t *nodeList = createEmptyInstList();
+  char *fileName = "../test/test.aop";
+  bool parsing = false;
+  parseFile(nodeList, fileName, errData);
+
+  ASSERT_TRUE(parsing == true);
+}
 
 // =========================================================================
 // =============================  BUILDER  =================================
 // =========================================================================
 
-TEST(buildProgram, CorrectBuild) {
-//   asm_error_t *errData = initErrorFile("errors.log", fileName);
-//   char *inst = const_cast<char *>("popa");
 
-//   instNode_t *newNode = createEmptyInstNode();
-//   bool isThatKind = isOp(inst, newNode, errData);
+TEST(getRegKind, rg0) {
+  char *reg = const_cast<char *>("rg0");
+  bool checkRegister = getRegKind(reg);
 
-//   ASSERT_TRUE(isThatKind);
-//   ASSERT_TRUE(newNode->op == OP_INT);
+  ASSERT_TRUE(checkRegister == RG_0);
 }
 
+TEST(getRegKind, rg8) {
+  char *reg = const_cast<char *>("rg8");
+  bool checkRegister = getRegKind(reg);
+
+  ASSERT_FALSE(checkRegister == RG_7);
+}
+
+TEST(getRegKind, r3) {
+  char *reg = const_cast<char *>("r3");
+  bool checkRegister = getRegKind(reg);
+
+  ASSERT_FALSE(checkRegister == RG_3);
+}
 
 
 int main(int argc, char *argv[]) {
