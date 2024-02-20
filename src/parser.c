@@ -15,8 +15,7 @@
 
 flags_t parseArgs(int argc, char *argv[], asm_error_t *errData){
     if(argc > 3){
-        fprintf(stderr, "Too many arguments\n Try 'iat2 --help' for more information\n");
-        exit(EXIT_FAILURE);
+        errorTooManyArg(errData);
     }
 
     // Create the flags struct
@@ -35,8 +34,8 @@ flags_t parseArgs(int argc, char *argv[], asm_error_t *errData){
                 return flags;
             }
             else{
-                fprintf(stderr, "Invalid flag\n Try 'iat2 --help' for more information\n");
-                exit(EXIT_FAILURE);
+                invalidArg(argv[2], errData);
+                return flags;
             }
         }
         else{
@@ -60,7 +59,6 @@ void flagsSet(char *flag, flags_t *flags, asm_error_t *errData){
     }
     else{
         invalidArg(flag, errData);
-        exit(EXIT_FAILURE);
     }
 }
 
@@ -112,11 +110,11 @@ void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_err
 
 instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, asm_error_t *errData){
     // check if the line is empty or a comment
-    if(line[0] == '\n' || strncmp(cleanString(line), "//", 2) == 0){
+    if(line[0] == '\n' || strncmp(cleanString(line, errData), "//", 2) == 0){
         return NULL;
     }
 
-    instNode_t *newNode = createEmptyInstNode();
+    instNode_t *newNode = createEmptyInstNode(errData);
     newNode->id = nodeId;
     newNode->lineNb = lineNb;
 
@@ -164,7 +162,7 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
     else if(strcmp(inst, "xor") == 0 || strcmp(inst, "^") == 0){
         newNode->op = OP_B_XOR;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
 
@@ -175,81 +173,81 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
     else if(strcmp(inst, "div") == 0 || strcmp(inst, "/") == 0){
         newNode->op = OP_DIV;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "add") == 0 || strcmp(inst, "+") == 0){
         newNode->op = OP_ADD;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "sub") == 0 || strcmp(inst, "-") == 0){
         newNode->op = OP_SUB;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "mul") == 0 || strcmp(inst, "*") == 0){
         newNode->op = OP_MUL;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "shr") == 0 || strcmp(inst, ">>") == 0){
         newNode->op = OP_R_SHIFT;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "shl") == 0 || strcmp(inst, "<<") == 0){
         newNode->op = OP_L_SHIFT;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "and") == 0 || strcmp(inst, "&") == 0){
         newNode->op = OP_B_AND;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "or") == 0 || strcmp(inst, "|") == 0){
         newNode->op = OP_B_OR;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "not") == 0 || strcmp(inst, "!") == 0){
         newNode->op = OP_B_NOT;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
     }
     else if(strcmp(inst, "inc") == 0 || strcmp(inst, "++") == 0){
         newNode->op = OP_ADD;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        newNode->arg1 = "1";
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
-        newNode->arg1 = "1";
     }
     else if(strcmp(inst, "dec") == 0 || strcmp(inst, "--") == 0){
         newNode->op = OP_SUB;
+        newNode->arg1 = "1";
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
-        newNode->arg1 = "1";
     }
     else if(strcmp(inst, "lab") == 0){
         newNode->op = OP_LAB;
@@ -262,7 +260,7 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
     else if(strcmp(inst, "mod") == 0 || strcmp(inst, "%") == 0){
         newNode->op = OP_MOD;
         // check if first argument is null
-        if(newNode->arg0 == NULL){
+        if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
     }
@@ -351,8 +349,7 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
 char *getInst(char *line, long lineNb, asm_error_t *errData) {
     char *buffer = malloc((strlen(line) + 1) * sizeof(char));
     if (!buffer) {
-        fprintf(stderr, "Memory allocation error\n");
-        exit(EXIT_FAILURE);
+        errorMemAlloc(errData);
     }
     
     strcpy(buffer, line);
@@ -363,7 +360,7 @@ char *getInst(char *line, long lineNb, asm_error_t *errData) {
         errorInstructionMissing(lineNb, errData);
     }
 
-    return cleanString(inst);
+    return cleanString(inst, errData);
 }
 
 char **getInstArgs(char *line, long lineNb, asm_error_t *errData){
@@ -373,20 +370,18 @@ char **getInstArgs(char *line, long lineNb, asm_error_t *errData){
         args[i] = NULL;
     }
     if (!args) {
-        fprintf(stderr, "Memory allocation error\n");
-        exit(EXIT_FAILURE);
+        errorMemAlloc(errData);
     }
     char *buffer = malloc((strlen(line) + 1) * sizeof(char));
     if (!buffer) {
-        fprintf(stderr, "Memory allocation error\n");
-        exit(EXIT_FAILURE);
+        errorMemAlloc(errData);
     }
     
     strcpy(buffer, line);
     char *token = strtok(buffer, " ");
     if (token == NULL) {
         errorInstructionMissing(lineNb, errData);
-        free(args); // Free allocated memory before exit
+        free(args);
 
     }
 
@@ -408,7 +403,7 @@ char **getInstArgs(char *line, long lineNb, asm_error_t *errData){
                 }
                 free(args); // Free args array
             }
-            strcpy(args[i], cleanString(token));
+            strcpy(args[i], cleanString(token, errData));
         }
     }
 

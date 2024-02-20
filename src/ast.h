@@ -125,8 +125,11 @@ typedef struct labelList{
     given a string, return the code of the interrupt
     params:
         kind: interrupt type
+        errData: error history
+    returns:
+        char *: code of the interrupt
 */
-char *getIntCode(enum interruptKind kind);
+char *getIntCode(enum interruptKind kind, asm_error_t *errData);
 
 /*
     Create an empty variable list
@@ -178,10 +181,12 @@ instList_t *createEmptyInstList();
 
 /*
     Create an empty instruction node
+    params:
+        errData: error history
     returns:
         instNode_t: pointer to the instruction node
 */
-instNode_t *createEmptyInstNode();
+instNode_t *createEmptyInstNode(asm_error_t *errData);
 
 /*
     Create an empty label list

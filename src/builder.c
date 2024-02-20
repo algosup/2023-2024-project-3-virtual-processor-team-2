@@ -46,8 +46,7 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_
             buildOperation(node, varList, errData);
             break;
         default:
-            // TODO: transform to build error
-            // errorInstruction("unknown", node, NULL, errData);
+            unknowError("Operation code not found during build", errData);
             node->isBuilt = true;
             break;
     }
@@ -77,7 +76,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
     }
 
     // create a new node
-    instNode_t *newNode = createEmptyInstNode();
+    instNode_t *newNode = createEmptyInstNode(errData);
     newNode->id = node->id;
     newNode->lineNb = node->lineNb;
     newNode->op = OP_VAR_SIZE;
@@ -92,7 +91,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
 
     if(dataSize == 1){
         // create a new node
-        instNode_t *dataNode = createEmptyInstNode();
+        instNode_t *dataNode = createEmptyInstNode(errData);
         dataNode->id = node->id;
         dataNode->lineNb = node->lineNb;
         dataNode->op = OP_VAR_DATA;
@@ -110,7 +109,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
     else{
         // add the null terminator
         // create a new node
-        instNode_t *nullNode = createEmptyInstNode();
+        instNode_t *nullNode = createEmptyInstNode(errData);
         nullNode->id = node->id;
         nullNode->lineNb = node->lineNb;
         nullNode->op = OP_VAR_DATA;
@@ -126,7 +125,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
         // Reverse iteration over varData to create nodes
         for (int i = dataSize - 1; i >= 0; i--) {
             // create a new node
-            instNode_t *dataNode = createEmptyInstNode();
+            instNode_t *dataNode = createEmptyInstNode(errData);
             dataNode->id = node->id;
             dataNode->lineNb = node->lineNb;
             dataNode->op = OP_VAR_DATA;
@@ -322,7 +321,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             return;
         }
     }
-    // TODO: throw error
+    unknowError("Mov build is failed", errData);
 
     return;
 }
@@ -422,8 +421,7 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
 
         return;
     }
-
-    // TODO: throw error
+    unknowError("Operation connot be built", errData);
     return;
 }
 

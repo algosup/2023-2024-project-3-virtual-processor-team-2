@@ -152,7 +152,7 @@ TEST(isOp, add) {
   asm_error_t *errData = initErrorFile("errors.log");
   char *inst = const_cast<char *>("add");
 
-  instNode_t *newNode = createEmptyInstNode();
+  instNode_t *newNode = createEmptyInstNode(errData);
 
   varList_t *varList = createEmptyVarList();
   bool isThatKind = isOp(inst, newNode, varList, errData);

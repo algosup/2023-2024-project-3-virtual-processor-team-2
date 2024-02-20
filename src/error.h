@@ -325,6 +325,22 @@ void errorMemAlloc(asm_error_t *errData);
 */
 void displayError(char *errType, char *errDetails, char *errLocation, const char *out, asm_error_t* errData);
 
+/*
+    Display error messages for unsupported interrupt codes
+    params:
+        code: Invalid instruction code
+        errData: Error history
+*/
+void errorIntCodeNotSupported(long code, asm_error_t *errData);
+
+/*
+    Display error messages for unkwown errors
+    params:
+        details: Details about the error
+        errData: Error history
+*/
+void unknowError(const char *details, asm_error_t *errData);
+
 #ifdef __cplusplus
 }
 #endif

@@ -427,3 +427,14 @@ void errorMemAlloc(asm_error_t *errData){
     exit(EXIT_FAILURE); 
 }
 
+void errorIntCodeNotSupported(long code, asm_error_t *errData){
+    char *errType = "Interrupt Code Error";
+    char errDetails[64];
+    sprintf(errDetails, "Interrupt code %ld not supported", code);
+    displayError(errType, errDetails, NULL, errorFile, errData);
+}
+
+void unknowError(const char *details, asm_error_t *errData){
+    char *errType = "Unknown Error";
+    displayError(errType, details, NULL, errorFile, errData);
+}

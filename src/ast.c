@@ -11,7 +11,7 @@
 #include "ast.h"
 
 
-char *getIntCode(enum interruptKind kind){
+char *getIntCode(enum interruptKind kind, asm_error_t *errData){
     switch(kind){
         case INT_EXIT:
             return "0";
@@ -48,8 +48,8 @@ char *getIntCode(enum interruptKind kind){
         case INT_END:
             return "16";
         default:
-            // TODO: transform to error
-            exit(EXIT_FAILURE);
+            errorIntCodeNotSupported(kind, errData);
+            return NULL;
     }
 }
 
@@ -102,8 +102,7 @@ bool addVar(varList_t *varList, char *name, char *value, long lineNb, asm_error_
             return true;
         }
     }
-    // TODO: throw error
-    exit(EXIT_FAILURE);
+    unknowError("On variable declaration", errData);
 }
 
 int isVarExist(varList_t *varList, char *name){
@@ -141,11 +140,10 @@ instNode_t *copyInstNode(instNode_t *node, asm_error_t *errData){
     return newNode;
 }
 
-instNode_t *createEmptyInstNode() {
+instNode_t *createEmptyInstNode(asm_error_t *errData) {
     instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
     if (newNode == NULL) {
-        fprintf(stderr, "Memory allocation error\n");
-        exit(EXIT_FAILURE);
+        errorMemAlloc(errData);
     }
     newNode->id = -1;
     newNode->lineNb = -1;
@@ -207,7 +205,7 @@ int addLabel(labelList_t *labelList, char *name, long nodeId, long lineNb, asm_e
         }
     }
 
-    // TODO: throw error
+    unknowError("On label declaration", errData);
     return -1;
 }
 

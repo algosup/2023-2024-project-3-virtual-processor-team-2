@@ -24,6 +24,13 @@ int main(int argc, char *argv[]) {
     // Parse program arguments and get flags
     flags_t flags = parseArgs(argc, argv, errData);
 
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        exit(EXIT_FAILURE);
+    }
+
     if (flags.help) {
         printHelp();
     }

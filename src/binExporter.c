@@ -44,10 +44,10 @@ void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_e
         } else {
             // write the argument
             if(node->arg0 != NULL){
-                fwrite(stringToBinary(node->arg0), 1, strlen(node->arg0) * 8, file);
+                fwrite(stringToBinary(node->arg0, errData), 1, strlen(node->arg0) * 8, file);
             }
             else if(node->arg1 != NULL){
-                fwrite(stringToBinary(node->arg1), 1, strlen(node->arg1) * 8, file);
+                fwrite(stringToBinary(node->arg1, errData), 1, strlen(node->arg1) * 8, file);
             }
             else {
                 fwrite("00000000", 1, 8, file);
@@ -189,28 +189,26 @@ char *interToBinCode(enum interruptKind inter){
     }
 }
 
-char *stringToBinary(char *s) {
+char *stringToBinary(char *s, asm_error_t *errData) {
     // check if it's a number
     if (s[0] >= '0' && s[0] <= '9') {
         int num = atoi(s);
-        char *bin = (char *)malloc(9); // Allocate 9 bytes including space for null terminator
+        char *bin = (char *)malloc(9);
         if (bin == NULL) {
-            fprintf(stderr, "Memory allocation error\n");
-            exit(EXIT_FAILURE);
+            errorMemAlloc(errData);
         }
 
         // Fill binary representation with leading zeros
         for (int i = 7; i >= 0; i--) {
             bin[i] = (num >> (7 - i)) & 1 ? '1' : '0';
         }
-        bin[8] = '\0'; // Null-terminate the string
+        bin[8] = '\0'; //
         return bin;
     } else {
         // Convert char to byte
-        char *bin = (char *)malloc(strlen(s) * 8 + 1); // Allocate enough memory
+        char *bin = (char *)malloc(strlen(s) * 8 + 1);
         if (bin == NULL) {
-            fprintf(stderr, "Memory allocation error\n");
-            exit(EXIT_FAILURE);
+            errorMemAlloc(errData);
         }
 
         // Fill binary representation
@@ -220,10 +218,8 @@ char *stringToBinary(char *s) {
                 bin[index++] = (s[i] >> j) & 1 ? '1' : '0';
             }
         }
-        bin[index] = '\0'; // Null-terminate the string
+        bin[index] = '\0';
         return bin;
     }
 }
-
-#include "binExporter.h"
 
