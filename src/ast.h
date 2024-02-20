@@ -163,10 +163,11 @@ int isVarExist(varList_t *varList, char *name);
     Copy an instruction node
     params:
         node: pointer to the instruction node
+        errData: error history
     returns:
         instNode_t: copy of the instruction node
 */
-instNode_t *copyInstNode(instNode_t *node);
+instNode_t *copyInstNode(instNode_t *node, asm_error_t *errData);
 
 /*
     Create an empty instruction list

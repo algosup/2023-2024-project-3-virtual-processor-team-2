@@ -168,7 +168,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
         // check if it's reg -> reg
         if (isFromReg(node->arg1)){
             // Create a new node
-            instNode_t *newNode = copyInstNode(node);
+            instNode_t *newNode = copyInstNode(node, errData);
             
             // set the node
             node->op = OP_INT;
@@ -196,7 +196,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             }
 
             // Create a new node
-            instNode_t *newNode = copyInstNode(node);
+            instNode_t *newNode = copyInstNode(node, errData);
             
             // set the node
             node->op = OP_MOV_F_VAR;
@@ -225,7 +225,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
                 errorVarNotExist(node->lineNb, node->arg0, errData);
             }
             // Create a new node
-            instNode_t *newNode = copyInstNode(node);
+            instNode_t *newNode = copyInstNode(node, errData);
             
             // set the node
             node->op = OP_INT;
@@ -259,7 +259,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             }
 
             // Create a new node
-            instNode_t *newNode = copyInstNode(node);
+            instNode_t *newNode = copyInstNode(node, errData);
             
             // set the node
             node->op = OP_MOV_T_VAR;
@@ -284,7 +284,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
         // check if it's var -> var
         else{
             // Create a new node
-            instNode_t *newNode = copyInstNode(node);
+            instNode_t *newNode = copyInstNode(node, errData);
 
             // set the new node
             // check if the variable is in the list
@@ -372,7 +372,7 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
     // check if the second argument is a register
     else if(node->arg1 != NULL && isFromReg(node->arg1)){
         // Create a new node
-        instNode_t *newNode = copyInstNode(node);
+        instNode_t *newNode = copyInstNode(node, errData);
         
         // set the node
         node->op = OP_INT;
@@ -401,7 +401,7 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
         }
 
         // Create a new node
-        instNode_t *newNode = copyInstNode(node);
+        instNode_t *newNode = copyInstNode(node, errData);
 
         // set the node
         node->op = OP_MOV_F_VAR;

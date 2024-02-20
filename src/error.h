@@ -305,6 +305,13 @@ void errorVarNotExist(long lineNb, char *varName, asm_error_t *errData);
 */
 void errorVarAlreadyExist(char *varName, long lineNb, asm_error_t *errData);
 
+/*
+    Exit the program when memory allocation fails
+    params:
+        errData: Error history
+*/
+void errorMemAlloc(asm_error_t *errData);
+
 // ---------- Display error messages ----------
 
 /*

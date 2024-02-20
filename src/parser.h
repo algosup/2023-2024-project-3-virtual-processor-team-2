@@ -83,11 +83,12 @@ char* getInst(char *line, long lineNb, asm_error_t *errData);
     Get arguments from an instruction line
     params:
         line: line to be parsed
+        lineNb: number of the line
+        errData: error history
     returns:
         char**: array of strings (no more than 2)
 */
-char** getInstArgs(char *line);
-
+char **getInstArgs(char *line, long lineNb, asm_error_t *errData);
 /*
     Set the arguments of an instruction node
     params:

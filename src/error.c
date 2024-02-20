@@ -418,3 +418,12 @@ void displayError(char *errType, char *errDetails, char *errLocation, const char
     }
 }
 
+void errorMemAlloc(asm_error_t *errData){
+    char *errType = "Memory Allocation Error";
+    char *errDetails = "Memory allocation failed";
+
+    displayError(errType, errDetails, NULL, errorFile, errData);
+    printErrorSummary(errData); 
+    exit(EXIT_FAILURE); 
+}
+

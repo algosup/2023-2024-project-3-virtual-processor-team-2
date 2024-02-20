@@ -366,7 +366,7 @@ char *getInst(char *line, long lineNb, asm_error_t *errData) {
     return cleanString(inst);
 }
 
-char **getInstArgs(char *line) {
+char **getInstArgs(char *line, long lineNb, asm_error_t *errData){
     char **args = malloc(MAX_ARGS * sizeof(char *));
     // init args to NULL
     for (int i = 0; i < MAX_ARGS; i++) {
@@ -385,8 +385,7 @@ char **getInstArgs(char *line) {
     strcpy(buffer, line);
     char *token = strtok(buffer, " ");
     if (token == NULL) {
-        // TODO: throw error
-        fprintf(stderr, "Invalid input format\n");
+        errorInstructionMissing(lineNb, errData);
         free(args); // Free allocated memory before exit
 
     }
@@ -395,16 +394,14 @@ char **getInstArgs(char *line) {
         token = strtok(NULL, ",");
         if (!token) {
             if (i == 0) {
-                // TODO: throw error
-                fprintf(stderr, "Invalid input format: missing argument\n");
+                errorNoArg(lineNb, errData);
                 return args;
             }
             args[i] = NULL;
         } else {
             args[i] = malloc(strlen(token) + 1);
             if (!args[i]) {
-                // TODO: throw error
-                fprintf(stderr, "Memory allocation error\n");
+                errorMemAlloc(errData);
                 // Free previously allocated memory
                 for (int j = 0; j < i; j++) {
                     free(args[j]);

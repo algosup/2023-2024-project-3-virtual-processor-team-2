@@ -124,11 +124,10 @@ instList_t *createEmptyInstList(){
     return instList;
 }
 
-instNode_t *copyInstNode(instNode_t *node){
+instNode_t *copyInstNode(instNode_t *node, asm_error_t *errData){
     instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
     if(newNode == NULL){
-        // TODO: thorw memory alloc error
-        exit(EXIT_FAILURE);
+        errorMemAlloc(errData);
     }
     newNode->id = node->id;
     newNode->lineNb = node->lineNb;
