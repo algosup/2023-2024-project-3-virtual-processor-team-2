@@ -126,7 +126,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, 
 
 
     // Set arguments
-    setArgs(newNode, args);
+    setArgs(newNode, args, errData);
 
     newNode->isInter = false;
         
@@ -410,9 +410,9 @@ char **getInstArgs(char *line, long lineNb, asm_error_t *errData){
     return args;
 }
 
-void setArgs(instNode_t *node, char **args){
+void setArgs(instNode_t *node, char **args, asm_error_t *errData){
     if(args[0] != NULL && isReg(args[0])){
-        node->inputReg = strToReg(args[0]);
+        node->inputReg = strToReg(args[0], node->lineNb, errData);
         if(args[1] != NULL){
             node->arg1 = malloc(sizeof(args[1])+1);
             strcpy(node->arg1, args[1]);
@@ -438,7 +438,7 @@ bool isReg(char *arg) {
     return true;
 }
 
-enum regKind strToReg(char *arg) {
+enum regKind strToReg(char *arg, long lineNb, asm_error_t *errData) {
     // Convert a string to a register
     switch (arg[2]) {
         case '0':
@@ -458,8 +458,8 @@ enum regKind strToReg(char *arg) {
         case '7':
             return RG_7;
         default:
-            fprintf(stderr, "Invalid register\n");
-            exit(EXIT_FAILURE);
+            errorInvalidRegister(arg, lineNb, errData);
+            return RG_0;
     }
 }
 

@@ -94,8 +94,9 @@ char **getInstArgs(char *line, long lineNb, asm_error_t *errData);
     params:
         node: pointer to the instruction node
         args: array of strings (no more than 2)
+        errData: error history
 */
-void setArgs(instNode_t *node, char **args);
+void setArgs(instNode_t *node, char **args, asm_error_t *errData);
 
 /*
     Check if the argument is a register
@@ -110,10 +111,12 @@ bool isReg(char *arg);
     Convert a string to a register
     params:
         arg: string to be converted
+        lineNb: line number
+        errData: error history
     returns:
         regKind: register
 */
-enum regKind strToReg(char *arg);
+enum regKind strToReg(char *arg, long lineNb, asm_error_t *errData);
 
 /*
     Checks if the filename ends by .aop or trows an error
