@@ -16,10 +16,10 @@ void runVTerminal(asm_error_t *errData){
         printf("vTerminal > ");
         gets(command);
         if(strcmp(command, "exit") == 0){
-            isExecuted = isRunning = false;
+            isRunning = false;
         }
         else{
-            runCmd(command, errData);
+            isRunning = runCmd(command, errData);
         }
     }
     free(command);
@@ -58,10 +58,13 @@ bool runCmd(char *command, asm_error_t *errData){
         int lastTime = 0;
         int latentTicks = 0;
         while(fgets(line, sizeof(line) + 1, file)) {
-            printf("Line: %s\n", line);
             setClock(time, lastTime, latentTicks);
 
             instruction_t inst = charBinToInst(line);
+            if(!run(inst, errData)){
+                fclose(file);
+                return false;
+            }
         }
         fclose(file);
     }

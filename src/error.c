@@ -464,3 +464,9 @@ void errorRuntime(char *details, asm_error_t *errData){
     sprintf(errDetails, "Details: %s", details);
     displayError(errType, errDetails, NULL, errorFile, errData);
 }
+
+void errorReadOnly(asm_error_t *errData){
+    char *errType = "Error: Runtime";
+    char *errDetails = "The register 3 is read-only";
+    displayError(errType, errDetails, NULL, errorFile, errData);
+}

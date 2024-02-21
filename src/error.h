@@ -367,6 +367,13 @@ void errorIntBinConversion(char *instName, long lineNb, asm_error_t *errData);
 */
 void errorRuntime(char *details, asm_error_t *errData);
 
+/*
+    Display error messages for read-only register
+    params:
+        errData: Error history
+*/
+void errorReadOnly(asm_error_t *errData);
+
 #ifdef __cplusplus
 }
 #endif

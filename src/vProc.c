@@ -69,6 +69,7 @@ instruction_t charBinToInst(char *bin){
 }
 
 bool run(instruction_t inst, asm_error_t *errData){
+    register_t *reg;
     switch(inst.inst){
         case 0: //mov
             return true;
@@ -81,27 +82,67 @@ bool run(instruction_t inst, asm_error_t *errData){
         case 4: //push
             return true;
         case 5: //xor
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opXor(reg, inst.arg, errData);
         case 6: //pop
             return true;
         case 7: //div
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opDiv(reg, inst.arg, errData);
         case 8: //add
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opAdd(reg, inst.arg, errData);
         case 9: //sub
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opSub(reg, inst.arg, errData);
         case 10: //mul
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opMul(reg, inst.arg, errData);
         case 11: //right shift
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opShr(reg, inst.arg, errData);
         case 12: //left shift
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opShl(reg, inst.arg, errData);
         case 13: //and
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opAnd(reg, inst.arg, errData);
         case 14: //or
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opOr(reg, inst.arg, errData);
         case 15: //not
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opNot(reg, inst.arg, errData);
         case 16: //use reg
             return true;
         case 17: //var
@@ -111,7 +152,11 @@ bool run(instruction_t inst, asm_error_t *errData){
         case 19: //var
             return true;
         case 21: //mod
-            return true;
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            return opMod(reg, inst.arg, errData);
         case 22: //ret
             return true;
         case 23: //mov from var
@@ -125,5 +170,149 @@ bool run(instruction_t inst, asm_error_t *errData){
         default:
             errorInstruction("Unknown instruction", 0, errData);
             return false;
+    }
+}
+
+register_t *getRegister(int reg){
+    switch(reg){
+        case 0:
+            return &rg0;
+        case 1:
+            return &rg1;
+        case 2:
+            return &rg2;
+        case 3:
+            return &rg3;
+        case 4:
+            return &rg4;
+        case 5:
+            return &rg5;
+        case 6:
+            return &rg6;
+        case 7:
+            return &rg7;
+        default:
+            return NULL;
+    }
+}
+
+bool opAdd(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value += arg;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
+    }
+}
+
+bool opSub(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value -= arg;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
+    }
+}
+
+bool opDiv(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value /= arg;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
+    }
+}
+
+bool opMul(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value *= arg;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
+    }
+}
+
+bool opMod(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value %= arg;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
+    }
+}
+
+bool opXor(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value ^= arg;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
+    }
+}
+
+bool opAnd(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value &= arg;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
+    }
+}
+
+bool opOr(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value |= arg;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
+    }
+}
+
+bool opNot(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value = ~reg->value;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
+    }
+}
+
+bool opShl(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value <<= arg;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
+    }
+}
+
+bool opShr(register_t *reg, unsigned int arg, asm_error_t *errData){
+    if(reg->writable){
+        reg->value >>= arg;
+        return true;
+    }
+    else{
+        errorReadOnly(errData);
+        return false;
     }
 }
