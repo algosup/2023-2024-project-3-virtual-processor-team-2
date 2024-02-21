@@ -359,6 +359,14 @@ void errorOpBinConversion(char *instName, long lineNb, asm_error_t *errData);
 */
 void errorIntBinConversion(char *instName, long lineNb, asm_error_t *errData);
 
+/*
+    Display error messages for runtime issues
+    params:
+        details: Details about the error
+        errData: Error history
+*/
+void errorRuntime(char *details, asm_error_t *errData);
+
 #ifdef __cplusplus
 }
 #endif

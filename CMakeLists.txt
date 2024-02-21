@@ -86,13 +86,9 @@ set_target_properties(2at2
 
 add_executable(vat2
     src/stringPlus.c
-    src/parser.c
-    src/builder.c
     src/debug.c
     src/error.c
-    src/binExporter.c
     src/vat2.c
-    src/ast.c
 )
 
 target_include_directories(vat2

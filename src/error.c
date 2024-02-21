@@ -457,3 +457,10 @@ void errorIntBinConversion(char *instName, long lineNb, asm_error_t *errData){
     sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
     displayError(errType, errDetails, errLocation, errorFile, errData);
 }
+
+void errorRuntime(char *details, asm_error_t *errData){
+    char *errType = "Error: Runtime";
+    char *errDetails = details;
+    sprintf(errDetails, "Details: %s", details);
+    displayError(errType, errDetails, NULL, errorFile, errData);
+}

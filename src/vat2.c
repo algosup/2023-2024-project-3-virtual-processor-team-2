@@ -268,13 +268,14 @@ register_t* attributeRegister(int *arg, register_t *rg0, register_t *rg1, regist
 
 
 void opCodeMov(int *arg, register_t *currentRegister){
-    switch () {
+    switch (false) {
     case true:
         break;
     case false:
-        tmp.value = arg[2];
+        // tmp.value = arg[2];
         break;
     default:
+        break;
     }
 }
 
