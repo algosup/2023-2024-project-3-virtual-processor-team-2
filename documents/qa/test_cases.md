@@ -13,6 +13,7 @@ The versions are:
     - 02 = the 2nd parser
     - 03 = the builder
     - 04 = the bin exporter
+    - 05 = the virtual processor
 - The last numbers are the number of the test -> 01/`001`
 
 **Date**<br>

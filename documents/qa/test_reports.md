@@ -6,7 +6,13 @@
 
 **ID**<br>
 The ID of the test case. It will follow a certain pattern: 
-- The first numbers are the version of the tested product -> `01`/001
+- The first numbers are the version of the tested product -> `01`/001<br>
+The versions are:
+    - 01 = the 1st parser
+    - 02 = the 2nd parser
+    - 03 = the builder
+    - 04 = the bin exporter
+    - 05 = the virtual processor
 - The last numbers are the number of the test -> 01/`001`
 
 **Date**<br>
