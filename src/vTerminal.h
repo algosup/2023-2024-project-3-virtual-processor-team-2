@@ -3,9 +3,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#ifndef V_TERMINAL_H
-#define V_TERMINAL_H
-
 #include "error.h"
 #include "vProc.h"
 #include "vMem.h"
@@ -35,6 +32,4 @@ bool runCmd(char *cmd, asm_error_t *errData);
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

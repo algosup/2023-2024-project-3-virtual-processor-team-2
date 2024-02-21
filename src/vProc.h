@@ -3,9 +3,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#ifndef V_PROC_H
-#define V_PROC_H
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -441,6 +438,4 @@ void intEnd(int *arg, register_t currentRegister); // 00010000
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

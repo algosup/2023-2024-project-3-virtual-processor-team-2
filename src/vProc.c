@@ -13,7 +13,10 @@
 #define LINE_MAX_BITS 16
 
 #define CACHE_SIZE 504
+#define CACHE_BLOCK_SIZE 8
+#define CACHE_DEFAULT_VALUE "00000000"
 
+#define CLOCK_TICKS 1/20
 
 // registers
 register_t rg0 = {true, 0};
@@ -25,17 +28,17 @@ register_t rg5 = {true, 0};
 register_t rg6 = {true, 0};
 register_t rg7 = {true, 0};
 
-char cache[CACHE_SIZE][8];
+char cache[CACHE_SIZE][CACHE_BLOCK_SIZE];
 
 void initCache(){
     // Cache memory
     for(int i=0; i<CACHE_SIZE; i++){
-        strcpy(cache[i], "00000000");
+        strcpy(cache[i], CACHE_DEFAULT_VALUE);
     }
 }
 
 void setClock(int time, int lastTime, int latentTicks){
-    sleep(1000/20);
+    sleep(CLOCK_TICKS);
         ++latentTicks;
         if(latentTicks >= 20) {
             latentTicks = latentTicks - 20;
@@ -45,7 +48,6 @@ void setClock(int time, int lastTime, int latentTicks){
         rg3.value += 1;
         if(lastTime != time) {
             lastTime = time;
-            printf("Time: %ds\n", time);
         }
 }
 

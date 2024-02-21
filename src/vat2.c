@@ -16,6 +16,7 @@ int main() {
     asm_error_t *errData = initErrorFile("errors.log", "test.log");
 
     runVTerminal(errData);
+    
     exit(EXIT_SUCCESS);
 }
 
