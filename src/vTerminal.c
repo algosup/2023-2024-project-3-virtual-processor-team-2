@@ -8,7 +8,6 @@
 
 #include "vTerminal.h"
 
-
 void runVTerminal(asm_error_t *errData){
     char *command = (char *)malloc(100 * sizeof(char));
     bool isRunning = true;
@@ -25,8 +24,8 @@ void runVTerminal(asm_error_t *errData){
     }
     free(command);
     if(!isExecuted){
-        // errorRuntime("Unknow runtime error", errData);
-        // printErrorSummary(errData); 
+        errorRuntime("Unknow runtime error", errData);
+        printErrorSummary(errData); 
         exit(EXIT_FAILURE); 
     }
     exit(EXIT_SUCCESS);
