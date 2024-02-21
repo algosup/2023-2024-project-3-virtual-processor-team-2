@@ -70,7 +70,7 @@ RACI colored spreadsheet easily readable can be found [HERE](https://docs.google
 
 # Work Breakdown Structure
 
-![](../images/management/workBreackingStructure.excalidraw.svg)
+![](../images/management/workBreakdownStructure.svg)
 
 # MoSCoW
 
