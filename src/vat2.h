@@ -4,10 +4,12 @@
 extern "C" {
 #endif
 
+// Define the structure of the cache
 typedef struct{
     char cache[504][8];
 } cache_t;
 
+// Define the structure of the ram
 typedef struct{
     char stack[2016][8];
     char processing[2016][8];
@@ -15,7 +17,7 @@ typedef struct{
     char graphic[4032][8];
 } ram_t;
 
-// Define the struct of the ram
+// Define the struct of the virtual processor
 typedef struct {
     ram_t;
     cache_t;
@@ -92,14 +94,14 @@ void printBinary(uint16_t value);
     char *data:
     uint8_t currentLine:
 */
-void readBinaryInstruction(char *line, char *operand, char *reg, char *data, uint8_t currentLine);
+int* readBinaryInstruction(char *line, char *operand, char *reg, char *data, uint8_t currentLine);
 
 /*
     Allocate operand
 */
 void attributeOperand(int *arg);
 
-register_t attributeRegister(int *arg);
+register_t attributeRegister(int *arg, register_t rg0, register_t rg1, register_t rg2, register_t rg3, register_t rg4, register_t rg5, register_t rg6, register_t rg7);
 
 //   OpCode Function               5bits    For each time use without instruction after
 void opCodeMov(int *arg);       // 00000                    4/4

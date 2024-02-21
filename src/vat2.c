@@ -25,7 +25,7 @@ register_t rg4 = {true, 0};
 register_t rg5 = {true, 0};
 register_t rg6 = {true, 0};
 register_t rg7 = {true, 0};
-
+virtualProcessor_t virtualProcessor;
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -40,14 +40,13 @@ int main(int argc, char *argv[]) {
     char data[9];
     uint16_t currentLine = 1;
 
-    virtualProcessor_t virtualProcessor;
-
     int time = 0;
     int lastTime = 0;
     int latentTicks = 0;
     while(fgets(line, sizeof(line) + 1, file)) {
         setClock(time, lastTime, latentTicks);
-        readBinaryInstruction(line, operand, reg, data, currentLine);
+        int *lineRead = readBinaryInstruction(line, operand, reg, data, currentLine);
+        attributeOperand(lineRead);
     }
 
     fclose(file);
@@ -123,10 +122,10 @@ int* parserBinaryFile(char *line, char *operand, char *reg, char *data, uint8_t 
 }
 
 
-void readBinaryInstruction(char *line, char *operand, char *reg, char *data, uint8_t currentLine){
+int* readBinaryInstruction(char *line, char *operand, char *reg, char *data, uint8_t currentLine){
     
     int *lineRead = parserBinaryFile(line, operand, reg, data, currentLine);
-    attributeOperand(lineRead);
+    return *lineRead;
 }
 
 void attributeOperand(int *arg){
@@ -234,7 +233,7 @@ void attributeOperand(int *arg){
     }
 }
 
-register_t attributeRegister(int *arg){
+register_t attributeRegister(int *arg, register_t rg0, register_t rg1, register_t rg2, register_t rg3, register_t rg4, register_t rg5, register_t rg6, register_t rg7){
     
     switch (arg[1]){
     // Define the register read in binary
@@ -271,7 +270,7 @@ void opCodeMov(int *arg){
     case true:
         break;
     case false:
-        register_t tmp = attributeRegister(arg);
+        register_t tmp = attributeRegister(arg, rg0, rg1, rg2, rg3, rg4, rg5, rg6, rg7);
         tmp.value = arg[2];
         break;
     default:
@@ -418,6 +417,9 @@ void opCodeMovFromVar(int *arg){}
 void opCodeMovToVar(int *arg){}                     
 void opCodeVarSize(int *arg){}                      
 void opCodeVarData(int *arg){}     
+
+
+
 
 int intNgr(){
     exit(EXIT_SUCCESS);
