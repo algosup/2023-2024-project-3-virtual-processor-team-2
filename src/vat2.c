@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <Windows.h> // we need to check what system is before implementing 
-#include "vProc.h"
+#include "vat2.h"
 
 #define LINE_MAX_BITS 16
 #define MAX_STACK_SIZE 2016 // LIFO Storage

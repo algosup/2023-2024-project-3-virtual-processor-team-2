@@ -90,7 +90,7 @@ add_executable(vat2
     src/builder.c
     src/debug.c
     src/binExporter.c
-    src/vProc.c
+    src/vat2.c
 )
 
 target_include_directories(vat2
