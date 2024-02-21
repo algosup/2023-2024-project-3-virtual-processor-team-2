@@ -58,10 +58,10 @@ bool runCmd(char *command, asm_error_t *errData){
         int lastTime = 0;
         int latentTicks = 0;
         while(fgets(line, sizeof(line) + 1, file)) {
+            printf("Line: %s\n", line);
             setClock(time, lastTime, latentTicks);
-            int *lineRead = readBinaryInstruction(line, operand, reg, data, currentLine);
-            register_t currentRegister = attributeRegister(lineRead);
-            attributeOperand(lineRead, currentRegister);
+
+            instruction_t inst = charBinToInst(line);
         }
         fclose(file);
     }
