@@ -40,34 +40,16 @@ int main(int argc, char *argv[]) {
     char data[9];
     uint16_t currentLine = 1;
 
-
-    MMU_t stack;
-    MMU_t processing;
-    MMU_t memory;
-    MMU_t graphic;
-    cache_t cache;
     virtualProcessor_t virtualProcessor;
-
-    stack.maxSize = MAX_STACK_SIZE;             // Max size of block of stack region
-    processing.maxSize = MAX_PROCESSING_SIZE;   // Max size of block of progessing region
-    memory.maxSize = MAX_MEMORY_SIZE;           // Max size of block of memory region
-    graphic.maxSize = MAX_GRAPHIC_MEMORY_SIZE;  // Max size of block of graphic region
-    virtualProcessor.maxSize = (stack.maxSize + processing.maxSize + memory.maxSize + graphic.maxSize);
-    virtualProcessor.cache = cache;
-
-    printf("%d kb Available\n", virtualProcessor.maxSize); // Just to avoid useless warning
 
     int time = 0;
     int lastTime = 0;
     int latentTicks = 0;
     while(fgets(line, sizeof(line) + 1, file)) {
-        
         setClock(time, lastTime, latentTicks);
-
-        readBinaryInstruction(&cache, line, operand, reg, data, currentLine, processing);
-           
-        
+        readBinaryInstruction(line, operand, reg, data, currentLine);
     }
+
     fclose(file);
     exit(EXIT_SUCCESS);
 }
@@ -82,6 +64,7 @@ FILE* readBinaryFile(char *filename) {
     }
     return file;
 }
+
 
 void setClock(int time, int lastTime, int latentTicks){
     Sleep(1000/20); // syntax of sleep depend of the system
@@ -140,12 +123,10 @@ int* parserBinaryFile(char *line, char *operand, char *reg, char *data, uint8_t 
 }
 
 
-void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine, MMU_t processing){
+void readBinaryInstruction(char *line, char *operand, char *reg, char *data, uint8_t currentLine){
     
     int *lineRead = parserBinaryFile(line, operand, reg, data, currentLine);
-
     attributeOperand(lineRead);
-    
 }
 
 void attributeOperand(int *arg){
@@ -284,70 +265,79 @@ register_t attributeRegister(int *arg){
     }
 }
 
+
 void opCodeMov(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value = arg[2];
+    switch (false) {
+    case true:
+        break;
+    case false:
+        register_t tmp = attributeRegister(arg);
+        tmp.value = arg[2];
+        break;
+    default:
+    }
 }
 
 void opCodeGoto(int *arg){}                                    
 void opCodeCall(int *arg){}   
-                     
+
+// Attribute the specific interaction depending the last 8bits 
 void opCodeInt(int *arg){
     int tmp = arg[2];
     switch(tmp) {
-        case 00000:
-            printf("Case 00000\n");
+        case 00000000:
+            intNgr();
             break;
-        case 00001:
-            printf("Case 00001\n");
+        case 00000001:
+            intDraw(arg);
             break;
-        case 00010:
-            printf("Case 00010\n");
+        case 00000010:
+            intOb1(arg);
             break;
-        case 00011:
-            printf("Case 00011\n");
+        case 00000011:
+            intIfOr(arg);
             break;
-        case 00100:
-            printf("Case 00100\n");
+        case 00000100:
+            intIfAnd(arg);
             break;
-        case 00101:
-            printf("Case 00101\n");
+        case 00000101:
+            intIfXor(arg);
             break;
-        case 00110:
-            printf("Case 00110\n");
+        case 00000110:
+            intIfLt(arg);
             break;
-        case 00111:
-            printf("Case 00111\n");
+        case 00000111:
+            intIfLte(arg);
             break;
-        case 01000:
-            printf("Case 01000\n");
+        case 00001000:
+            intIfGt(arg);
             break;
-        case 01001:
-            printf("Case 01001\n");
+        case 00001001:
+            intIfGte(arg);
             break;
-        case 01010:
-            printf("Case 01010\n");
+        case 00001010:
+            intIfEq(arg);
             break;
-        case 01011:
-            printf("Case 01011\n");
+        case 00001011:
+            intIfNeq(arg);
             break;
-        case 01100:
-            printf("Case 01100\n");
+        case 00001100:
+            intPusha(arg);
             break;
-        case 01101:
-            printf("Case 01101\n");
+        case 00001101:
+            intPopa(arg);
             break;
-        case 01110:
-            printf("Case 01110\n");
+        case 00001110:
+            intMovFReg(arg);
             break;
-        case 01111:
-            printf("Case 01111\n");
+        case 00001111:
+            intElse(arg);
             break;
-        case 10000:
-            printf("Case 10000\n");
+        case 00010000:
+            intEnd(arg);
             break;
-        default:
-            printf("Invalid input\n");
+        default: // Default don't find the second arg 
+            exit(EXIT_FAILURE);
             break;
     }
 }        
@@ -428,6 +418,88 @@ void opCodeMovFromVar(int *arg){}
 void opCodeMovToVar(int *arg){}                     
 void opCodeVarSize(int *arg){}                      
 void opCodeVarData(int *arg){}     
+
+int intNgr(){
+    exit(EXIT_SUCCESS);
+}
+
+void intDraw(int *arg){
+}
+
+void intOb1(int *arg){
+}
+
+void intIfOr(int *arg){
+}
+
+void intIfAnd(int *arg){
+}
+
+void intIfXor(int *arg){
+}
+
+void intIfLt(int *arg){
+}
+
+void intIfLte(int *arg){
+}
+
+void intIfGt(int *arg){
+}
+
+void intIfGte(int *arg){
+}
+
+void intIfEq(int *arg){
+}
+
+void intIfNeq(int *arg){
+}
+
+void intPusha(int *arg){
+}
+
+void intPopa(int *arg){
+}
+
+void intMovFReg(int *arg){
+}
+
+void intElse(int *arg){
+}
+
+void intEnd(int *arg){
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // start:                         ins   reg   value
 //     mov rg0, 5              -> 00000 000 0000 0101 00000 000 0000 0101 

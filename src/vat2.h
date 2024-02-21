@@ -4,26 +4,23 @@
 extern "C" {
 #endif
 
-// Define the structure of mmu
-typedef struct {
-    int address;
-    bool data[8];
-    int maxSize;
-} MMU_t;
-
-// Struct of cache's values
-typedef struct {
-    uint8_t callId;
-    uint16_t line;
-    uint8_t labelId;
+typedef struct{
+    char cache[504][8];
 } cache_t;
 
-// Define the structure of virtual processor
+typedef struct{
+    char stack[2016][8];
+    char processing[2016][8];
+    char memory[8320][8];
+    char graphic[4032][8];
+} ram_t;
+
+// Define the struct of the ram
 typedef struct {
-   MMU_t mmu;
-   cache_t cache;
-   int maxSize;
+    ram_t;
+    cache_t;
 } virtualProcessor_t;
+
     
 // Struct of register's values
 typedef struct {
@@ -95,7 +92,7 @@ void printBinary(uint16_t value);
     char *data:
     uint8_t currentLine:
 */
-void readBinaryInstruction(cache_t *cache, char *line, char *operand, char *reg, char *data, uint8_t currentLine, MMU_t processing);
+void readBinaryInstruction(char *line, char *operand, char *reg, char *data, uint8_t currentLine);
 
 /*
     Allocate operand
@@ -133,23 +130,23 @@ void opCodeMovToVar(int *arg);                     // 11000                    2
 void opCodeVarSize(int *arg);                      // 11001                    0/2 
 void opCodeVarData(int *arg);                      // 11010                    tricky/6
 
-void intNgr();
-void intDraw();
-void intOb1();
-void intIfOr();
-void intIfAnd();
-void intIfXor();
-void intIfLt();
-void intIfLte();
-void intIfGt();
-void intIfGte();
-void intIfEq();
-void intIfNeq();
-void intPusha();
-void intPopa();
-void intMovFReg();
-void intElse();
-void intEnd();
+int intNgr();          // 00000000                   
+void intDraw(int *arg);         // 00000001                 
+void intOb1(int *arg);          // 00000010                 
+void intIfOr(int *arg);         // 00000011                 
+void intIfAnd(int *arg);            // 00000100                    
+void intIfXor(int *arg);            // 00000101                    
+void intIfLt(int *arg);         // 00000110             
+void intIfLte(int *arg);            // 00000111                    
+void intIfGt(int *arg);         // 00001000             
+void intIfGte(int *arg);            // 00001001                    
+void intIfEq(int *arg);         // 00001010             
+void intIfNeq(int *arg);            // 00001011                    
+void intPusha(int *arg);            // 00001100                    
+void intPopa(int *arg);         // 00001101             
+void intMovFReg(int *arg);          // 00001110                  
+void intElse(int *arg);         // 00001111             
+void intEnd(int *arg);          // 00010000                  
 #ifdef __cplusplus
 }
 #endif
