@@ -53,13 +53,12 @@ char strToChar(char *arg) {
     return arg[1];
 }
 
-char *strToString(char *arg) {
+char *strToString(char *arg, asm_error_t *errData) {
     // Remove quotes at beginning and at the end of a string
     size_t size = strlen(arg);
     char *str = malloc((size - 1) * sizeof(char));
     if (!str) {
-        fprintf(stderr, "Memory allocation error\n");
-        exit(EXIT_FAILURE);
+        errorMemAlloc(errData);
     }
 
     strncpy(str, arg + 1, size - 2);
@@ -68,7 +67,7 @@ char *strToString(char *arg) {
     return str;
 }
 
-char *cleanString(char *str) {
+char *cleanString(char *str, asm_error_t *errData) {
     // Remove spaces and newline characters at the beginning and at the end of a string
     size_t size = strlen(str);
 
@@ -76,8 +75,7 @@ char *cleanString(char *str) {
     if (size == 0) {
         char *emptyString = malloc(1);
         if (!emptyString) {
-            fprintf(stderr, "Memory allocation error\n");
-            exit(EXIT_FAILURE);
+            errorMemAlloc(errData);
         }
         emptyString[0] = '\0';
         return emptyString;
@@ -102,8 +100,7 @@ char *cleanString(char *str) {
     // Allocate memory for the cleaned string
     char *cleaned = malloc((cleanedSize + 1) * sizeof(char));
     if (!cleaned) {
-        fprintf(stderr, "Memory allocation error\n");
-        exit(EXIT_FAILURE);
+        errorMemAlloc(errData);
     }
 
     // Copy the non-space, non-newline characters to the cleaned string

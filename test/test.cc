@@ -14,50 +14,51 @@
 #include "error.h"
 
 char * fileName = const_cast<char *>("test.cc");
+const char *testErrorFile = const_cast<char *>("error.log");
 
 /*
  *  parseArgs
  */
 
 TEST(parseArgs, help) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile(testErrorFile);
     // Test help flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-h")};
     int argc = sizeof(argv) / sizeof(argv[0]);
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
     ASSERT_TRUE(flags.help);
 }
 TEST(parseArgs, version) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile(testErrorFile);
     // Test version flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-v")};
     int argc = sizeof(argv) / sizeof(argv[0]);
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
     ASSERT_TRUE(flags.version);
 }
 TEST(parseArgs, verbose) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile(testErrorFile);
     // Test verbose flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-V")};
     int argc = sizeof(argv) / sizeof(argv[0]);
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
     ASSERT_TRUE(flags.verbose);
 }
 TEST(parseArgs, debug) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile(testErrorFile);
     // Test debug flag
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-d")};
     int argc = sizeof(argv) / sizeof(argv[0]);
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
     ASSERT_TRUE(flags.debug);
 }
 
 TEST(parseArgs, invalidFlag) {
-    asm_error_t *errData = initErrorFile("errors.log", fileName);
+    asm_error_t *errData = initErrorFile(testErrorFile);
     // Test false argv
     char *argv[] = {const_cast<char *>("test"), const_cast<char *>("-a")};
     int argc = sizeof(argv) / sizeof(argv[0]);
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
     ASSERT_FALSE(flags.help);
 }
 
@@ -66,16 +67,18 @@ TEST(parseArgs, invalidFlag) {
  */
 
 TEST(getInst, normal) {
+    asm_error_t *errData = initErrorFile(testErrorFile);
     char *line = const_cast<char *>("add r1, r2, r3\n");
 
-    char *inst = getInst(line);
+    char *inst = getInst(line, 1, errData);
     ASSERT_STREQ(inst, "add");
 }
 
 TEST(getInst, noInst) {
+    asm_error_t *errData = initErrorFile(testErrorFile);
     char *line = const_cast<char *>("r1, r2, r3\n");
 
-    char *inst = getInst(line);
+    char *inst = getInst(line, 1, errData);
     ASSERT_STREQ(inst, "r1,");
 }
 
@@ -84,10 +87,11 @@ TEST(getInst, noInst) {
  */
 
 TEST(getArgs, normal) {
+    asm_error_t *errData = initErrorFile(testErrorFile);
     // Test input line
     char *line = const_cast<char *>("add r1, r2");
     // Call the function under test
-    char **args = getInstArgs(line);
+    char **args = getInstArgs(line, 1, errData);
 
     // Check each argument
     ASSERT_STREQ(args[0], "r1");
@@ -101,11 +105,12 @@ TEST(getArgs, normal) {
 }
 
 TEST(getArgs, noComma) {
+    asm_error_t *errData = initErrorFile(testErrorFile);
     // Test input line
     char *line = const_cast<char *>("add r1 r2");
 
     // Call the function under test
-    char **args = getInstArgs(line);
+    char **args = getInstArgs(line, 1, errData);
 
     // Check each argument
     ASSERT_STREQ(args[0], "r1 r2");
@@ -119,11 +124,12 @@ TEST(getArgs, noComma) {
 }
 
 TEST(getArgs, noArgs) {
+    asm_error_t *errData = initErrorFile(testErrorFile);
     // Test input line
     char *line = const_cast<char *>("ret\n");
 
     // Call the function under test
-    char **args = getInstArgs(line);
+    char **args = getInstArgs(line, 1, errData);
 
     std::cout << args[0] << std::endl;
     std::cout << args[1] << std::endl;
@@ -144,10 +150,10 @@ TEST(getArgs, noArgs) {
  */
 
 TEST(isOp, add) {
-  asm_error_t *errData = initErrorFile("errors.log", fileName);
+  asm_error_t *errData = initErrorFile(testErrorFile);
   char *inst = const_cast<char *>("add");
 
-  instNode_t *newNode = createEmptyInstNode();
+  instNode_t *newNode = createEmptyInstNode(errData);
 
   varList_t *varList = createEmptyVarList();
   bool isThatKind = isOp(inst, newNode, varList, errData);

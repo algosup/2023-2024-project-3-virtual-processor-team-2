@@ -83,10 +83,12 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData);
     Get the register kind
     params:
         str: string to be checked
+        lineNb: line number
+        errData: pointer to the error struct
     returns:
         regKind: kind of the register
 */
-enum regKind getRegKind(char *str);
+enum regKind getRegKind(char *str, long lineNb, asm_error_t *errData);
 
 /*
     Get the data size of a variable in bytes

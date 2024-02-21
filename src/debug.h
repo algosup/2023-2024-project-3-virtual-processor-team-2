@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ast.h"
+#include "error.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -10,15 +11,17 @@ extern "C" {
     Print ast nodes data
     params:
         nodeList: pointer to the instruction list
+        errData: pointer to the error struct
 */
-void printAst(instList_t *nodeList);
+void printAst(instList_t *nodeList, asm_error_t *errData);
 
 /*
     Print the node data
     params:
         node: pointer to the instruction node
+        errData: pointer to the error struct
 */
-void printNodeData(instNode_t *node);
+void printNodeData(instNode_t *node, asm_error_t *errData);
 
 /*
     Return text corresponding to instruction kind
