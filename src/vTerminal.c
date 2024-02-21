@@ -45,7 +45,7 @@ bool runCmd(char *command, asm_error_t *errData){
         //Check if the file is present
         FILE *file = fopen(command, "rb");
         if(file == NULL){
-            errorfnf(command, NULL, errData);
+            errorfnf(command, errData);
         }
         // Run program
         char line[16];

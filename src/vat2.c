@@ -13,8 +13,7 @@
 
 
 int main() {
-    asm_error_t *errData = initErrorFile("errors.log", "test.log");
-
+    asm_error_t *errData = initErrorFile("test.txt");
     runVTerminal(errData);
 
     exit(EXIT_SUCCESS);
