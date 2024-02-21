@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
     parseFile(instList, argv[1], varList, errData);
 
     if(flags.debug){
-        printAst(instList);
+        printAst(instList, errData);
     }
 
     // Stop if there are errors
@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
     buildProgram(instList, varList, labelList, errData);
 
     if(flags.debug){
-        printAst(instList);
+        printAst(instList, errData);
     }
     
     // Stop if there are errors
