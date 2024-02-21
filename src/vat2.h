@@ -4,23 +4,10 @@
 extern "C" {
 #endif
 
-// Define the structure of the cache
-typedef struct{
-    char cache[504][8];
-} cache_t;
-
-// Define the structure of the ram
-typedef struct{
-    char stack[2016][8];
-    char processing[2016][8];
-    char memory[8320][8];
-    char graphic[4032][8];
-} ram_t;
-
 // Define the struct of the virtual processor
 typedef struct {
-    ram_t;
-    cache_t;
+    char ram[16384][8];
+    char cache[504][8];
 } virtualProcessor_t;
 
     
@@ -99,56 +86,56 @@ int* readBinaryInstruction(char *line, char *operand, char *reg, char *data, uin
 /*
     Allocate operand
 */
-void attributeOperand(int *arg);
+void attributeOperand(int *arg, register_t *currentRegister);
 
-register_t attributeRegister(int *arg, register_t rg0, register_t rg1, register_t rg2, register_t rg3, register_t rg4, register_t rg5, register_t rg6, register_t rg7);
+register_t* attributeRegister(int *arg, register_t *rg0, register_t *rg1, register_t *rg2, register_t *rg3, register_t *rg4, register_t *rg5, register_t *rg6, register_t *rg7);
 
 //   OpCode Function               5bits    For each time use without instruction after
-void opCodeMov(int *arg);       // 00000                    4/4
-void opCodeGoto(int *arg);                         // 00001                    1/1            
-void opCodeCall(int *arg);                         // 00010                    1/1
-void opCodeInt(int *arg);                          // 00011                    0/13             
-void opCodePush(int *arg);                         // 00100                    1/1
-void opCodeXor(int *arg);                          // 00101                    3/3
-void opCodePop(int *arg);                          // 00110                    1/1
-void opCodeDiv(int *arg);                          // 00111                    3/3
-void opCodeAdd(int *arg);                          // 01000                    3/3
-void opCodeSub(int *arg);                          // 01001                    3/3
-void opCodeMul(int *arg);                          // 01010                    3/3
-void opCodeRsh(int *arg);                          // 01011                    3/3
-void opCodeLsh(int *arg);                          // 01100                    
-void opCodeAnd(int *arg);                          // 01101                    3/3
-void opCodeOr(int *arg);                           // 01110                    3/3
-void opCodeNot(int *arg);                          // 01111                    3/3
-void opCodeUseReg(int *arg);                       // 10000                   
-void opCodeUseVar(int *arg);                       // 10001                   
-void opCodeLab(int *arg);                          // 10010                    1/1
-void opCodeVar(int *arg);                          // 10011                    0/2
-void opCodeNeg(int *arg);                          // 10100               
-void opCodeMod(int *arg);                          // 10101                    3/3
-void opCodeRet(int *arg);                          // 10110                    1/1              
-void opCodeMovFromVar(int *arg);                   // 10111                    0/13                       
-void opCodeMovToVar(int *arg);                     // 11000                    2/3                
-void opCodeVarSize(int *arg);                      // 11001                    0/2 
-void opCodeVarData(int *arg);                      // 11010                    tricky/6
+void opCodeMov(int *arg, register_t *currentRegister);       // 00000                    4/4
+void opCodeGoto(int *arg, register_t *currentRegister);                         // 00001                    1/1            
+void opCodeCall(int *arg, register_t *currentRegister);                         // 00010                    1/1
+void opCodeInt(int *arg, register_t *currentRegister);                          // 00011                    0/13             
+void opCodePush(int *arg, register_t *currentRegister);                         // 00100                    1/1
+void opCodeXor(int *arg, register_t *currentRegister);                          // 00101                    3/3
+void opCodePop(int *arg, register_t *currentRegister);                          // 00110                    1/1
+void opCodeDiv(int *arg, register_t *currentRegister);                          // 00111                    3/3
+void opCodeAdd(int *arg, register_t *currentRegister);                          // 01000                    3/3
+void opCodeSub(int *arg, register_t *currentRegister);                          // 01001                    3/3
+void opCodeMul(int *arg, register_t *currentRegister);                          // 01010                    3/3
+void opCodeRsh(int *arg, register_t *currentRegister);                          // 01011                    3/3
+void opCodeLsh(int *arg, register_t *currentRegister);                          // 01100                    
+void opCodeAnd(int *arg, register_t *currentRegister);                          // 01101                    3/3
+void opCodeOr(int *arg, register_t *currentRegister);                           // 01110                    3/3
+void opCodeNot(int *arg, register_t *currentRegister);                          // 01111                    3/3
+void opCodeUseReg(int *arg, register_t *currentRegister);                       // 10000                   
+void opCodeUseVar(int *arg, register_t *currentRegister);                       // 10001                   
+void opCodeLab(int *arg, register_t *currentRegister);                          // 10010                    1/1
+void opCodeVar(int *arg, register_t *currentRegister);                          // 10011                    0/2
+void opCodeNeg(int *arg, register_t *currentRegister);                          // 10100               
+void opCodeMod(int *arg, register_t *currentRegister);                          // 10101                    3/3
+void opCodeRet(int *arg, register_t *currentRegister);                          // 10110                    1/1              
+void opCodeMovFromVar(int *arg, register_t *currentRegister);                   // 10111                    0/13                       
+void opCodeMovToVar(int *arg, register_t *currentRegister);                     // 11000                    2/3                
+void opCodeVarSize(int *arg, register_t *currentRegister);                      // 11001                    0/2 
+void opCodeVarData(int *arg, register_t *currentRegister);                      // 11010                    tricky/6
 
 int intNgr();          // 00000000                   
-void intDraw(int *arg);         // 00000001                 
-void intOb1(int *arg);          // 00000010                 
-void intIfOr(int *arg);         // 00000011                 
-void intIfAnd(int *arg);            // 00000100                    
-void intIfXor(int *arg);            // 00000101                    
-void intIfLt(int *arg);         // 00000110             
-void intIfLte(int *arg);            // 00000111                    
-void intIfGt(int *arg);         // 00001000             
-void intIfGte(int *arg);            // 00001001                    
-void intIfEq(int *arg);         // 00001010             
-void intIfNeq(int *arg);            // 00001011                    
-void intPusha(int *arg);            // 00001100                    
-void intPopa(int *arg);         // 00001101             
-void intMovFReg(int *arg);          // 00001110                  
-void intElse(int *arg);         // 00001111             
-void intEnd(int *arg);          // 00010000                  
+void intDraw(int *arg, register_t *currentRegister);         // 00000001                 
+void intOb1(int *arg, register_t *currentRegister);          // 00000010                 
+void intIfOr(int *arg, register_t *currentRegister);         // 00000011                 
+void intIfAnd(int *arg, register_t *currentRegister);            // 00000100                    
+void intIfXor(int *arg, register_t *currentRegister);            // 00000101                    
+void intIfLt(int *arg, register_t *currentRegister);         // 00000110             
+void intIfLte(int *arg, register_t *currentRegister);            // 00000111                    
+void intIfGt(int *arg, register_t *currentRegister);         // 00001000             
+void intIfGte(int *arg, register_t *currentRegister);            // 00001001                    
+void intIfEq(int *arg, register_t *currentRegister);         // 00001010             
+void intIfNeq(int *arg, register_t *currentRegister);            // 00001011                    
+void intPusha(int *arg, register_t *currentRegister);            // 00001100                    
+void intPopa(int *arg, register_t *currentRegister);         // 00001101             
+void intMovFReg(int *arg, register_t *currentRegister);          // 00001110                  
+void intElse(int *arg, register_t *currentRegister);         // 00001111             
+void intEnd(int *arg, register_t *currentRegister);          // 00010000                  
 #ifdef __cplusplus
 }
 #endif

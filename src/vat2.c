@@ -46,7 +46,9 @@ int main(int argc, char *argv[]) {
     while(fgets(line, sizeof(line) + 1, file)) {
         setClock(time, lastTime, latentTicks);
         int *lineRead = readBinaryInstruction(line, operand, reg, data, currentLine);
-        attributeOperand(lineRead);
+        register_t *currentRegister = attributeRegister(lineRead, &rg0, &rg1, &rg2, &rg3, &rg4, &rg5, &rg6, &rg7);
+        attributeOperand(lineRead, currentRegister);
+
     }
 
     fclose(file);
@@ -128,90 +130,90 @@ int* readBinaryInstruction(char *line, char *operand, char *reg, char *data, uin
     return *lineRead;
 }
 
-void attributeOperand(int *arg){
+void attributeOperand(int *arg, register_t *currentRegister){
     
     switch (arg[0]){
     // Define the opCode read in binary
         case 00000:
-            opCodeMov(arg);
+            opCodeMov(arg, currentRegister);
             break;
         case 00001:
-            opCodeGoto(arg);
+            opCodeGoto(arg, currentRegister);
             break;
         case 00010:
-            opCodeCall(arg);
+            opCodeCall(arg, currentRegister);
             break;
         case 00011:
-            opCodeInt(arg);
+            opCodeInt(arg, currentRegister);
             break;
         case 00100:
-            opCodePush(arg);
+            opCodePush(arg, currentRegister);
             break;
         case 00101:
-            opCodeXor(arg);
+            opCodeXor(arg, currentRegister);
             break;
         case 00110:
-            opCodePop(arg);
+            opCodePop(arg, currentRegister);
             break;
         case 00111:
-            opCodeDiv(arg);
+            opCodeDiv(arg, currentRegister);
             break;
         case 01000:
-            opCodeAdd(arg);
+            opCodeAdd(arg, currentRegister);
             break;
         case 01001:
-            opCodeSub(arg);
+            opCodeSub(arg, currentRegister);
             break;
         case 01010:
-            opCodeMul(arg);
+            opCodeMul(arg, currentRegister);
             break;
         case 01011:
-            opCodeRsh(arg);
+            opCodeRsh(arg, currentRegister);
             break;
         case 01100:
-            opCodeLsh(arg);
+            opCodeLsh(arg, currentRegister);
             break;
         case 01101:
-            opCodeAnd(arg);
+            opCodeAnd(arg, currentRegister);
             break;
         case 01110:
-            opCodeOr(arg);
+            opCodeOr(arg, currentRegister);
             break;
         case 01111:
-            opCodeNot(arg);
+            opCodeNot(arg, currentRegister);
             break;
         case 10000:
-            opCodeUseReg(arg);
+            opCodeUseReg(arg, currentRegister);
             break;
         case 10001:
-            opCodeUseVar(arg);
+            opCodeUseVar(arg, currentRegister);
             break;
         case 10010:
-            opCodeLab(arg);
+            opCodeLab(arg, currentRegister);
             break;
         case 10011:
-            opCodeVar(arg);
+            opCodeVar(arg, currentRegister);
             break;
         case 10100:
-            opCodeNeg(arg);
+            opCodeNeg(arg, currentRegister);
             break;
         case 10101:
-            opCodeMod(arg);
+            opCodeMod(arg, currentRegister);
             break;
         case 10110:
-            opCodeRet(arg);
+            opCodeRet(arg, currentRegister);
             break;
         case 10111:
-            opCodeMovFromVar(arg);
+            opCodeMovFromVar(arg, currentRegister);
             break;
         case 11000:
-            opCodeMovToVar(arg);
+            opCodeMovToVar(arg, currentRegister);
             break;
         case 11001:
-            opCodeVarSize(arg);
+            opCodeVarSize(arg, currentRegister);
             break;
         case 11010:
-            opCodeVarData(arg);
+            opCodeVarData(arg, currentRegister);
             break;
         // case 11011:
             
@@ -233,7 +235,7 @@ void attributeOperand(int *arg){
     }
 }
 
-register_t attributeRegister(int *arg, register_t rg0, register_t rg1, register_t rg2, register_t rg3, register_t rg4, register_t rg5, register_t rg6, register_t rg7){
+register_t* attributeRegister(int *arg, register_t *rg0, register_t *rg1, register_t *rg2, register_t *rg3, register_t *rg4, register_t *rg5, register_t *rg6, register_t *rg7){
     
     switch (arg[1]){
     // Define the register read in binary
@@ -265,75 +267,74 @@ register_t attributeRegister(int *arg, register_t rg0, register_t rg1, register_
 }
 
 
-void opCodeMov(int *arg){
-    switch (false) {
+void opCodeMov(int *arg, register_t *currentRegister){
+    switch () {
     case true:
         break;
     case false:
-        register_t tmp = attributeRegister(arg, rg0, rg1, rg2, rg3, rg4, rg5, rg6, rg7);
         tmp.value = arg[2];
         break;
     default:
     }
 }
 
-void opCodeGoto(int *arg){}                                    
-void opCodeCall(int *arg){}   
+void opCodeGoto(int *arg, register_t *currentRegister){}                                    
+void opCodeCall(int *arg, register_t *currentRegister){}   
 
 // Attribute the specific interaction depending the last 8bits 
-void opCodeInt(int *arg){
+void opCodeInt(int *arg, register_t *currentRegister){
     int tmp = arg[2];
     switch(tmp) {
         case 00000000:
             intNgr();
             break;
         case 00000001:
-            intDraw(arg);
+            intDraw(arg, currentRegister);
             break;
         case 00000010:
-            intOb1(arg);
+            intOb1(arg, currentRegister);
             break;
         case 00000011:
-            intIfOr(arg);
+            intIfOr(arg, currentRegister);
             break;
         case 00000100:
-            intIfAnd(arg);
+            intIfAnd(arg, currentRegister);
             break;
         case 00000101:
-            intIfXor(arg);
+            intIfXor(arg, currentRegister);
             break;
         case 00000110:
-            intIfLt(arg);
+            intIfLt(arg, currentRegister);
             break;
         case 00000111:
-            intIfLte(arg);
+            intIfLte(arg, currentRegister);
             break;
         case 00001000:
-            intIfGt(arg);
+            intIfGt(arg, currentRegister);
             break;
         case 00001001:
-            intIfGte(arg);
+            intIfGte(arg, currentRegister);
             break;
         case 00001010:
-            intIfEq(arg);
+            intIfEq(arg, currentRegister);
             break;
         case 00001011:
-            intIfNeq(arg);
+            intIfNeq(arg, currentRegister);
             break;
         case 00001100:
-            intPusha(arg);
+            intPusha(arg, currentRegister);
             break;
         case 00001101:
-            intPopa(arg);
+            intPopa(arg, currentRegister);
             break;
         case 00001110:
-            intMovFReg(arg);
+            intMovFReg(arg, currentRegister);
             break;
         case 00001111:
-            intElse(arg);
+            intElse(arg, currentRegister);
             break;
         case 00010000:
-            intEnd(arg);
+            intEnd(arg, currentRegister);
             break;
         default: // Default don't find the second arg 
             exit(EXIT_FAILURE);
@@ -341,82 +342,72 @@ void opCodeInt(int *arg){
     }
 }        
                   
-void opCodePush(int *arg){}     
+void opCodePush(int *arg, register_t *currentRegister){}     
 
-void opCodeXor(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value = tmp.value ^ arg[2];
+void opCodeXor(int *arg, register_t *currentRegister){
+    
+    // tmp.value = tmp.value ^ arg[2];
 }       
 
-void opCodePop(int *arg){}  
+void opCodePop(int *arg, register_t *currentRegister){}  
 
-void opCodeDiv(int *arg){
-    register_t tmp = attributeRegister(arg);
-    uint16_t value = tmp.value;
-    tmp.value = value / arg[2];
+void opCodeDiv(int *arg, register_t *currentRegister){
+
+    // tmp.value = value / arg[2];
 }   
 
-void opCodeAdd(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value += arg[2];
+void opCodeAdd(int *arg, register_t *currentRegister){
+        // tmp.value += arg[2];
 }             
 
-void opCodeSub(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value -= arg[2];
+void opCodeSub(int *arg, register_t *currentRegister){
+        // tmp.value -= arg[2];
 }   
 
-void opCodeMul(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value *= arg[2];
+void opCodeMul(int *arg, register_t *currentRegister){
+        // tmp.value *= arg[2];
 }                          
 
-void opCodeRsh(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value = tmp.value >> arg[2];
+void opCodeRsh(int *arg, register_t *currentRegister){
+        // tmp.value = tmp.value >> arg[2];
 }        
 
-void opCodeLsh(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value = tmp.value << arg[2];
+void opCodeLsh(int *arg, register_t *currentRegister){
+        // tmp.value = tmp.value << arg[2];
 }                   
 
-void opCodeAnd(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value = tmp.value & arg[2];
+void opCodeAnd(int *arg, register_t *currentRegister){
+        // tmp.value = tmp.value & arg[2];
 } 
                         
-void opCodeOr(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value = tmp.value | arg[2];
+void opCodeOr(int *arg, register_t *currentRegister){
+        // tmp.value = tmp.value | arg[2];
 }      
 
-void opCodeNot(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value = ~tmp.value;
+void opCodeNot(int *arg, register_t *currentRegister){
+        // tmp.value = ~tmp.value;
 }
                           
-void opCodeUseReg(int *arg){}                       
-void opCodeUseVar(int *arg){}                       
+void opCodeUseReg(int *arg, register_t *currentRegister){}                       
+void opCodeUseVar(int *arg, register_t *currentRegister){}                       
 
-void opCodeLab(int *arg){
+void opCodeLab(int *arg, register_t *currentRegister){
     //get lab id end store it in processing
 
 }     
 
-void opCodeVar(int *arg){}                          
-void opCodeNeg(int *arg){}
+void opCodeVar(int *arg, register_t *currentRegister){}                          
+void opCodeNeg(int *arg, register_t *currentRegister){}
 
-void opCodeMod(int *arg){
-    register_t tmp = attributeRegister(arg);
-    tmp.value = tmp.value % arg[2];
+void opCodeMod(int *arg, register_t *currentRegister){
+        // tmp.value = tmp.value % arg[2];
 }  
                        
-void opCodeRet(int *arg){}                          
-void opCodeMovFromVar(int *arg){}                   
-void opCodeMovToVar(int *arg){}                     
-void opCodeVarSize(int *arg){}                      
-void opCodeVarData(int *arg){}     
+void opCodeRet(int *arg, register_t *currentRegister){}                          
+void opCodeMovFromVar(int *arg, register_t *currentRegister){}                   
+void opCodeMovToVar(int *arg, register_t *currentRegister){}                     
+void opCodeVarSize(int *arg, register_t *currentRegister){}                      
+void opCodeVarData(int *arg, register_t *currentRegister){}     
 
 
 
@@ -425,52 +416,52 @@ int intNgr(){
     exit(EXIT_SUCCESS);
 }
 
-void intDraw(int *arg){
+void intDraw(int *arg, register_t *currentRegister){
 }
 
-void intOb1(int *arg){
+void intOb1(int *arg, register_t *currentRegister){
 }
 
-void intIfOr(int *arg){
+void intIfOr(int *arg, register_t *currentRegister){
 }
 
-void intIfAnd(int *arg){
+void intIfAnd(int *arg, register_t *currentRegister){
 }
 
-void intIfXor(int *arg){
+void intIfXor(int *arg, register_t *currentRegister){
 }
 
-void intIfLt(int *arg){
+void intIfLt(int *arg, register_t *currentRegister){
 }
 
-void intIfLte(int *arg){
+void intIfLte(int *arg, register_t *currentRegister){
 }
 
-void intIfGt(int *arg){
+void intIfGt(int *arg, register_t *currentRegister){
 }
 
-void intIfGte(int *arg){
+void intIfGte(int *arg, register_t *currentRegister){
 }
 
-void intIfEq(int *arg){
+void intIfEq(int *arg, register_t *currentRegister){
 }
 
-void intIfNeq(int *arg){
+void intIfNeq(int *arg, register_t *currentRegister){
 }
 
-void intPusha(int *arg){
+void intPusha(int *arg, register_t *currentRegister){
 }
 
-void intPopa(int *arg){
+void intPopa(int *arg, register_t *currentRegister){
 }
 
-void intMovFReg(int *arg){
+void intMovFReg(int *arg, register_t *currentRegister){
 }
 
-void intElse(int *arg){
+void intElse(int *arg, register_t *currentRegister){
 }
 
-void intEnd(int *arg){
+void intEnd(int *arg, register_t *currentRegister){
 }
 
 
