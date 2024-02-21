@@ -173,7 +173,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             node->op = OP_INT;
             node->isInter = true;
             node->inter = INT_MOV_F_REG;
-            node->inputReg = getRegKind(node->arg1);
+            node->inputReg = getRegKind(node->arg1, node->lineNb, errData);
             node->arg0 = NULL;
             node->arg1 = NULL;
             node->isBuilt = true;
@@ -230,7 +230,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             node->op = OP_INT;
             node->isInter = true;
             node->inter = INT_MOV_F_REG;
-            node->inputReg = getRegKind(node->arg1);
+            node->inputReg = getRegKind(node->arg1, node->lineNb, errData);
             node->arg0 = NULL;
             node->arg1 = NULL;
             node->isBuilt = true;
@@ -377,7 +377,7 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
         node->op = OP_INT;
         node->isInter = true;
         node->inter = INT_MOV_F_REG;
-        node->inputReg = getRegKind(node->arg1);
+        node->inputReg = getRegKind(node->arg1, node->lineNb, errData);
         node->arg0 = NULL;
         node->arg1 = NULL;
         node->isBuilt = true;
@@ -425,10 +425,10 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
     return;
 }
 
-enum regKind getRegKind(char *str) {
+enum regKind getRegKind(char *str, long lineNb, asm_error_t *errData) {
     if (str == NULL || str[0] != 'r' || str[1] != 'g' || str[2] < '0' || str[2] > '7' || str[3] != '\0') {
-        fprintf(stderr, "Error: invalid register format\n");
-        exit(EXIT_FAILURE);
+        errorInvalidRegister(str, lineNb, errData);
+        return RG_0;
     }
 
     switch (str[2]) {
@@ -449,8 +449,8 @@ enum regKind getRegKind(char *str) {
     case '7':
         return RG_7;
     default:
-        fprintf(stderr, "Error: unknown register\n");
-        exit(EXIT_FAILURE);
+        errorInvalidRegister(str, lineNb, errData);
+        return RG_0;
     }
 }
 
