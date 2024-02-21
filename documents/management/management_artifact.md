@@ -3,6 +3,7 @@ This document contains the main management artifacts:
 - [Tasks \& schedules](#tasks--schedules)
 - [RACI matrix](#raci-matrix)
 - [Risks and Assumptions](#risks-and-assumptions)
+- [Work Breakdown Structure](#work-breakdown-structure)
 - [MoSCoW](#moscow)
 - [Key Performance Indicators](#key-performance-indicators)
 - [Appendix](#appendix)
@@ -66,6 +67,10 @@ RACI colored spreadsheet easily readable can be found [HERE](https://docs.google
 | 11  | Insufficient Backup and Recovery Mechanisms                                                         | Data loss due to inadequate backup and recovery mechanisms may result in setbacks and compromised project integrity. | High   | Medium     | Implement robust backup and recovery procedures to safeguard critical project data and ensure a quick recovery in case of data loss.          |
 | 12  | Network and Infrastructure Issues                                                                   | Unforeseen issues with the network or infrastructure may disrupt project activities and communication.               | Medium | Medium     | Implement redundancy in critical systems, regularly monitor network performance, and have contingency plans for infrastructure failures.      |
 | 13  | Team Member Burnout                                                                                 | Excessive workload and stress may lead to team member burnout, impacting productivity and morale.                    | High   | Medium     | Monitor team workload, encourage work-life balance, and provide support mechanisms to prevent and address burnout.                            |
+
+# Work Breakdown Structure
+
+![](../images/management/workBreackingStructure.excalidraw.svg)
 
 # MoSCoW
 
