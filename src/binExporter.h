@@ -47,11 +47,12 @@ char *interToBinCode(enum interruptKind inter);
     Convert a string to its binary code
     params:
         s: string to convert
+        errData: pointer to the error struct
     returns:
         binary code of the string
 
 */
-char *stringToBinary(char *s);
+char *stringToBinary(char *s, asm_error_t *errData);
 #ifdef __cplusplus
 }
 #endif

@@ -13,17 +13,23 @@
 #include "error.h"
 #include "binExporter.h"
 
-#define VERSION "0.2.0"
+#define VERSION "0.3.0"
 #define BIN_NAME "bin.2at2"
 
 int main(int argc, char *argv[]) {
     // Init error data history
-    asm_error_t *errData = initErrorFile("errors.log", argv[1]);
+    asm_error_t *errData = initErrorFile(argv[1]);
 
     // ---------- Parse arguments ----------
-
     // Parse program arguments and get flags
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
+
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        exit(EXIT_FAILURE);
+    }
 
     if (flags.help) {
         printHelp();
@@ -53,7 +59,7 @@ int main(int argc, char *argv[]) {
     parseFile(instList, argv[1], varList, errData);
 
     if(flags.debug){
-        printAst(instList);
+        printAst(instList, errData);
     }
 
     // Stop if there are errors
@@ -74,7 +80,7 @@ int main(int argc, char *argv[]) {
     buildProgram(instList, varList, labelList, errData);
 
     if(flags.debug){
-        printAst(instList);
+        printAst(instList, errData);
     }
     
     // Stop if there are errors

@@ -13,18 +13,18 @@
 
 const char *logFile = "2at2.log";
 
-void printAst(instList_t *nodeList){
+void printAst(instList_t *nodeList, asm_error_t *errData){
     instNode_t *node = nodeList->head;
     while(node != NULL){
-        printNodeData(node);
+        printNodeData(node, errData);
         node = node->next;
     }
 }
 
-void printNodeData(instNode_t *node){
+void printNodeData(instNode_t *node, asm_error_t *errData){
     FILE *file = fopen(logFile, "ab");
     if(file == NULL){
-        fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+        unknowError("File cannot be opened", errData);
         exit(EXIT_FAILURE);
     }
     // Get current time
