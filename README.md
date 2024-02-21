@@ -44,7 +44,7 @@ VAT2 stands for **V**irtual Processor for **A**ssembly **T**eam **2**, serving a
 
 ## 📦 What is IAT2 ?
 
-IAT2 stands for **I**ntegral **A**ssembler **T**eam **2**, its the name of the whole project (2AT2 + VAT2).
+IAT2 stands for **I**ntegral **A**ssembler **T**eam **2**, it's the name of the whole project (2AT2 + VAT2).
 
 ## 💾 Why did we choose .aop as extension ?
 
