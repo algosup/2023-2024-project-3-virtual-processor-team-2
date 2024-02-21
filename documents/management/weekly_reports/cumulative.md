@@ -19,8 +19,20 @@ Quick Access:
     - [Plans for next week](#plans-for-next-week)
     - [Conclusion](#conclusion-2)
   - [Weekly Report - Week 4](#weekly-report---week-4)
+    - [Accomplishments](#accomplishments-3)
+    - [Challenges](#challenges-3)
+    - [Plans for next week](#plans-for-next-week-1)
+    - [Conclusion](#conclusion-3)
   - [Weekly Report - Week 5](#weekly-report---week-5)
+    - [Accomplishments](#accomplishments-4)
+    - [Challenges](#challenges-4)
+    - [Plans for next week](#plans-for-next-week-2)
+    - [Conclusion](#conclusion-4)
   - [Weekly Report - Week 6](#weekly-report---week-6)
+    - [Accomplishments](#accomplishments-5)
+    - [Challenges](#challenges-5)
+    - [Plans for next week](#plans-for-next-week-3)
+    - [Conclusion](#conclusion-5)
   - [Weekly Report - Week 7](#weekly-report---week-7)
   - [Weekly Report - Week 8](#weekly-report---week-8)
 
@@ -144,19 +156,91 @@ The third week was focused on sharing all the information within the team, gathe
 The project is progressing forward; we've managed to catch up on our delay for the first two weeks, despite the absence of dedicated project time. Even though, the project has just started, and the satisfaction of our team is already below our expectations. We need to work on improving satisfaction and fostering a positive mood within the team.
 
 ## Weekly Report - Week 4
-[Detailed File (WIP)](week_4.md)
-(WIP)
+[Detailed File](week_4.md)
+
+### Accomplishments
+
+1. Completed Functional Specifications.
+2. Completed Tasks & Schedule.
+3. Successfully finalized the parser's code.
+4. Fully documented Risks & Assumptions.
+5. Completed builder's code.
+6. Initiated runner's code.
+   - Completed structure reading.
+7. Configured Git server.
+
+### Challenges
+
+1. Adhering to the deadline for the functional specifications.
+2. Maintaining a positive team atmosphere while ensuring focus and hard work.
+3. Identifying potential risks and formulating solutions for the project.
+
+### Plans for next week
+
+1. Finalize the Technical Specifications.
+2. Complete the test plan.
+3. Focus on improving team satisfaction.
+
+### Conclusion
+
+It was a challenging but productive management week. We made significant progresses, and if we maintain this momentum, we will be able to meet our expectations. To achieve this, our focus should be on improving team satisfaction.
 
 ## Weekly Report - Week 5
-[Detailed File (WIP)](week_5.md)
-(WIP)
+[Detailed File](week_5.md)
+
+### Accomplishments
+
+1. Release the pre-release v0.0.3.
+2. Release the pre-release v0.0.4.
+3. Update KPIs to align with our new goals.
+4. Completed the first unit-test.
+
+### Challenges
+
+1. Continued in our path by developing a binary converter throughout the week.
+2. Adhered to our deadline with only one project session at the beginning of the week.
+
+### Plans for next week
+
+1. Finalize the test plan.
+2. Deploy unit tests.
+3. Complete the assembler.
+4. Begin working on the Virtual Processor.
+
+### Conclusion
+
+Not much project time but a satisfying amount of work done, but too much overtime, deadlines were met.
+The team is tired due to the overcharge of work, it can be good to add more project session mainly the friday to debrief about the week with the entire team.
 
 ## Weekly Report - Week 6
-[Detailed File (WIP)](week_6.md)
-(WIP)
+[Detailed File](week_6.md)
+
+### Accomplishments
+
+1. Successful completion of the test plan.
+2. Successful rework of the parser.
+3. Successful rework of the builder.
+4. Successful setup of GitHub actions.
+
+### Challenges
+
+1. Overcoming challenges in reworking the assembler without unncessary time consumptions.
+2. Strategizing the appearance of the binary code and planning its structure.
+
+### Plans for next week
+
+1. Finalize the rework of the converter.
+2. Complete the development of each error message.
+3. Finalize the development of the virtual processor.
+4. Complete all our unit tests and make them succeed.
+5. Ensuring the precision and correctness of all project documents.
+
+### Conclusion
+
+This week saw substantial advancements in the project, notably in enhancing the assembler and completing the Test Plan, while addressing challenges such as efficient reworking and binary code visualization. Although the team is generally doing well, addressing recent concerns is crucial to prevent potential project impact.
 
 ## Weekly Report - Week 7
-[Detailed File](week_7.md)
+[Detailed File (WIP)](week_7.md)
 (WIP)
 
 ## Weekly Report - Week 8

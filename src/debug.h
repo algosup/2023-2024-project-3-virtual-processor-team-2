@@ -2,71 +2,42 @@
 
 #include "ast.h"
 
-/*
-    Print the instruction list to a file
-    params:
-        list: pointer to the instruction list
-        dest: destination file
-*/
-void printInstList(instList_t *list, char *dest);
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*
-    Print arguments of an instruction node
+    Print ast nodes data
+    params:
+        nodeList: pointer to the instruction list
+*/
+void printAst(instList_t *nodeList);
+
+/*
+    Print the node data
     params:
         node: pointer to the instruction node
+*/
+void printNodeData(instNode_t *node);
+
+/*
+    Return text corresponding to instruction kind
+    params:
+        kind: instruction kind
     returns:
-        char*: string with the arguments
+        char*: text corresponding to instruction kind
 */
-char *printArgs(instNode_t *node);
+char *getOpName(enum opKind kind);
 
 /*
-    Print the kind of an operation
+    Return text corresponding to interrupt kind
     params:
-        op: operation kind
+        kind: interrupt kind
     returns:
-        char*: string with the operation kind
+        char*: text corresponding to interrupt kind
 */
-char *printOPKind(enum opKind op);
+char *getInterName(enum interruptKind kind);
 
-/*
-    Print the kind of an action
-    params:
-        act: action kind
-    returns:
-        char*: string with the action kind
-*/
-char *printACTKind(enum actKind act);
-
-/*
-    Print details of comparison node
-    params:
-        node: pointer to the instruction node
-    returns:
-        char*: string with the comparison details
-*/
-char* printCMP(instNode_t *node);
-
-/*
-    Print the kind of a comparison
-    params:
-        cmp: comparison kind
-    returns:
-        char*: string with the comparison kind
-*/
-char *printCMPKind(enum cmpKind cmp);
-
-/*
-    Print variable list to a file
-    params:
-        list: pointer to the variable list
-        dest: destination file
-*/
-void printVarList(varList_t *list, char *dest);
-
-/*
-    Print label list to a file
-    params:
-        list: pointer to the label list
-        dest: destination file
-*/
-void printLabelList(labelList_t *list, char *dest);
+#ifdef __cplusplus
+}
+#endif

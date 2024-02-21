@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "ast.h"
+#include "error.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -8,71 +9,49 @@ extern "C" {
 /*
     Export the AST to a binary file
     params:
-        astNb *node: the root of the AST
-        varList_t *varList: the list of variables
-        labelList_t *labelList: the list of labels
-        char *filename: the name of the file to export
-    
+        nodeList: pointer to the instruction list
+        filename: name of the file
+        varList: pointer to the variable list
+        errData: pointer to the error struct    
 */
-void exportAST(instList_t *ast, varList_t *varList, labelList_t *labelList, char *filename);
+void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData);
 
 /*
-    Write variable list to file in json format
-    format exemple: 
-    {"size": 2,"list": [{"name": "var1","type": "int","value": 5},{"name": "var2","type": "float","value": 3.14}]}
+    Convert an operation to its binary code
     params:
-        varList_t *varList: the list of variables
-        FILE *file: the file to write to
+        op: operation to convert
+    returns:
+        binary code of the operation
 */
-void writeVarList(varList_t *varList, FILE *file);
+char *opToBinCode(enum opKind op);
 
 /*
-    Write label list to file in json format
-    format exemple: 
-    {"size": 2,"list": [{"name": "label1","nodeId": 5,"id": 1},{"name": "label2","nodeId": 10,"id": 2}]}
+    Convert a register to its binary code
     params:
-        labelList_t *labelList: the list of labels
-        FILE *file: the file to write to
+        reg: register to convert
+    returns:
+        binary code of the register
 */
-void writeLabelList(labelList_t *labelList, FILE *file);
+char *regToBinCode(enum regKind reg);
 
 /*
-    Write AST to file in json format
-    format exemple: 
-    [{"instKind": "ope", "nodeId": 4, "inst": "++", "args": [{"type": "float", "val": 3.14}, ..]}, {"instKind": "if", "inst": ">", "nodeId": 5, "args": [{"type": "int", "val": 5}, ..], "true": {"instKind": "ope", "inst": "++", "nodeId": 6, "args": [{"type": "float", "val": 3.14}, ..]
+    Convert an interrupt to its binary code
     params:
-        instList_t *ast: the AST
-        FILE *file: the file to write to
+        inter: interrupt to convert
+    returns:
+        binary code of the interrupt
 */
-void writeAST(instList_t *ast, FILE *file);
+char *interToBinCode(enum interruptKind inter);
 
 /*
-    Get the string representation of an operation kind
+    Convert a string to its binary code
     params:
-        enum opKind kind: the kind of operation
-    return:
-        char *: the string representation
-*/
-char *getOpkindStr(enum opKind kind);
+        s: string to convert
+    returns:
+        binary code of the string
 
-/*
-    Get the string representation of an action kind
-    params:
-        enum actKind kind: the kind of action
-    return:
-        char *: the string representation
 */
-char *getActkindStr(enum actKind kind);
-
-/*
-    Get the string representation of a comparison kind
-    params:
-        enum cmpKind kind: the kind of comparison
-    return:
-        char *: the string representation
-*/
-char *getCmpKindStr(enum cmpKind kind);
-
+char *stringToBinary(char *s);
 #ifdef __cplusplus
 }
 #endif

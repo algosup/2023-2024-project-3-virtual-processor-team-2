@@ -1,6 +1,7 @@
 /*
     This file is the builder of the project
-    It will read the instruction list and build the program
+    It will read the instruction list and optimize or change them
+    to make the program able to be translated to binary code
 */
 
 #include <stdio.h>
@@ -9,267 +10,459 @@
 #include <stdbool.h>
 
 #include "builder.h"
+#include "stringPlus.h"
 
-void build(instList_t *nodeList, labelList_t *labelList, varList_t *varList){
-    // init lifo for if/else statements
-    lifoCmpNode_t *lifoCmpNode = (lifoCmpNode_t *)malloc(sizeof(lifoCmpNode_t));
-    if(lifoCmpNode == NULL){
-        fprintf(stderr, "Error allocating memory\n");
-        exit(EXIT_FAILURE);
-    }
-    lifoCmpNode->list = NULL;
-    lifoCmpNode->size = 0;
+#define IMMEDIATE_VAL_SIZE 8
 
-    // read the list of instructions
-    instNode_t *currNode = nodeList->head;
-    instNode_t *prevNode = NULL;
-    while (currNode != NULL)
-    {
-        // Check if node is an action
-         if(currNode->inst == INST_ACT){
-            buildActNode(currNode, lifoCmpNode);
+void buildProgram(instList_t *nodeList, varList_t *varList, labelList_t *labeList, asm_error_t *errData) {
+    instNode_t *node = nodeList->head;
+    while(node != NULL){
+        buildNode(node, varList, labeList, errData);
+        node = node->next;
+        while(node != NULL && node->isBuilt){
+            node = node->next;
         }
-
-        // Check if node is a label
-        if(currNode->inst == INST_LABEL){
-            buildLabelNode(currNode, labelList);
-        }
-
-        // Check if node is a variable declaration
-        if(currNode->inst == INST_VAR){
-            addVar(varList, currNode);
-            // remove var declaration from list
-            if(prevNode == NULL){
-                nodeList->head = currNode->next;
-            }
-            else{
-                prevNode->next = currNode->next;
-            }
-        }
-
-        prevNode = currNode;
-        currNode = currNode->next;
     }
-
-    // Check if lifo is empty
-    if(lifoCmpNode->size != 0){
-        fprintf(stderr, "Error: Comparison Lifo is not empty\n");
-        exit(EXIT_FAILURE);
-    }
-    
 }
 
-void buildActNode(instNode_t *node, lifoCmpNode_t *lifo){
-    // Check if it's a comparison
-    if(node->nodeType.act->act == ACT_CMP){
-        buildCmpNode(node, lifo);
+void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_error_t *errData) {
+    switch(node->op){
+        case OP_MOV:
+            buildMov(node, varList, errData);
+            break;
+        case OP_GOTO:
+            buildGoto(node, labeList, errData);
+            break;
+        case OP_CALL:
+            buildCall(node, labeList, errData);
+            break;
+        case OP_VAR:
+            buildVar(node, varList, errData);
+            break;
+        case OP_LAB:
+            buildLabel(node, labeList, errData);
+            break;
+        case OP_B_XOR...OP_MOD:
+            buildOperation(node, varList, errData);
+            break;
+        default:
+            // TODO: transform to build error
+            // errorInstruction("unknown", node, NULL, errData);
+            node->isBuilt = true;
+            break;
     }
-
 }
 
-void buildCmpNode(instNode_t *node, lifoCmpNode_t *lifo){
-    // Check kind of statement
-    switch (node->nodeType.act->cmp->statem)
-    {
-    case CMP_IF:
-        // add to lifo
-        pushCmpLifo(lifo, node->nodeType.act->cmp);
-        break;
-    case CMP_ELSE:
-        // set else goto
-        lifo->list[0]->elseId = node->id;
-        break;
-    case CMP_END:
-        // set end goto
-        lifo->list[0]->endId = node->id;
-        // remove from lifo
-        popCmpLifo(lifo);
-        break;
+void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
+    // copy variable value
+    char *varData = (char *)malloc(sizeof(char) * (strlen(node->arg1) + 1));
+    strcpy(varData, node->arg1);
+;
+    int varId = isVarExist(varList, node->arg0);
+    if(varId == -1){
+        // TODO: throw error
+    }
+    // set arg0 as id
+    node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+    sprintf(node->arg0, "%d", varId);
+
+    node->arg1 = NULL;
+    node->isBuilt = true;
+
+    // get the datasize of the variable
+    int dataSize = getVarDatasize(varData);
+    if(dataSize > 1){
+        // add the null terminator
+        dataSize++;
+    }
+
+    // create a new node
+    instNode_t *newNode = createEmptyInstNode();
+    newNode->id = node->id;
+    newNode->lineNb = node->lineNb;
+    newNode->op = OP_VAR_SIZE;
+    newNode->inputReg = RG_0;
+
+    newNode->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+    sprintf(newNode->arg0, "%d", dataSize);
+
+    newNode->isBuilt = true;
+    newNode->next = node->next;
+    node->next = newNode;
+
+    if(dataSize == 1){
+        // create a new node
+        instNode_t *dataNode = createEmptyInstNode();
+        dataNode->id = node->id;
+        dataNode->lineNb = node->lineNb;
+        dataNode->op = OP_VAR_DATA;
+        dataNode->inputReg = RG_0;
+
+        dataNode->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+        sprintf(dataNode->arg0, "%s", varData);
+
+        dataNode->isBuilt = true;
+        dataNode->next = newNode->next;
+        newNode->next = dataNode;
+
+        return;
+    }
+    else{
+        // add the null terminator
+        // create a new node
+        instNode_t *nullNode = createEmptyInstNode();
+        nullNode->id = node->id;
+        nullNode->lineNb = node->lineNb;
+        nullNode->op = OP_VAR_DATA;
+        nullNode->inputReg = RG_0;
+
+        nullNode->arg0 = malloc(IMMEDIATE_VAL_SIZE + 1 * sizeof(char));
+        sprintf(nullNode->arg0, "%c", '\0');
+
+        nullNode->isBuilt = true;
+        nullNode->next = newNode->next;
+        newNode->next = nullNode;
+
+        // Reverse iteration over varData to create nodes
+        for (int i = dataSize - 1; i >= 0; i--) {
+            // create a new node
+            instNode_t *dataNode = createEmptyInstNode();
+            dataNode->id = node->id;
+            dataNode->lineNb = node->lineNb;
+            dataNode->op = OP_VAR_DATA;
+            dataNode->inputReg = RG_0;
+
+            dataNode->arg0 = malloc(IMMEDIATE_VAL_SIZE + 1 * sizeof(char));
+            sprintf(dataNode->arg0, "%c", varData[i]);
+
+            dataNode->isBuilt = true;
+            dataNode->next = newNode->next;
+            newNode->next = dataNode;
+        }
+    }
+}
+
+void buildLabel(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
+    // try to add the label to the list
+    int labId = addLabel(labelList, node->arg0, node->id);
+    if(labId == -1){
+        // TODO: throw error
+    }
+
+    // set arg0 as id
+    node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+    sprintf(node->arg0, "%d", labId);
+
+    node->isBuilt = true;
+}
+
+void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
+    // check if it's mov to reg
+    if(node->arg0 == NULL){
+        // check if it's val -> reg
+        if(isUnsignedInt(node->arg1)){
+            node->arg0 = node->arg1;
+            node->arg1 = NULL;
+            return;
+        }
+        // check if it's reg -> reg
+        if (isFromReg(node->arg1)){
+            // Create a new node
+            instNode_t *newNode = copyInstNode(node);
+            
+            // set the node
+            node->op = OP_INT;
+            node->isInter = true;
+            node->inter = INT_MOV_F_REG;
+            node->inputReg = getRegKind(node->arg1);
+            node->arg0 = NULL;
+            node->arg1 = NULL;
+            node->isBuilt = true;
+            node->next = newNode;
+
+            // set the new node
+            newNode->arg0 = NULL;
+            newNode->arg1 = NULL;
+            newNode->isBuilt = true;
+
+            return;
+        }
+        // if it's var -> reg
+        else{
+            // check if the variable is in the list
+            int varId = isVarExist(varList, node->arg1);
+            if(varId == -1){
+                // TODO: throw error
+            }
+
+            // Create a new node
+            instNode_t *newNode = copyInstNode(node);
+            
+            // set the node
+            node->op = OP_MOV_F_VAR;
+            node->isInter = false;
+            node->inputReg = RG_0;
+            node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+            sprintf(node->arg0, "%d", varId);
+            node->arg1 = NULL;
+            node->isBuilt = true;
+            node->next = newNode;
+
+            // set the new node
+            newNode->arg0 = NULL;
+            newNode->arg1 = NULL;
+            newNode->isBuilt = true;
+
+            return;
+        }
+    }
+    else{
+        // check if it's reg -> var
+        if(node->arg1 != NULL && isFromReg(node->arg1)){
+            // check if the variable is in the list
+            int varId = isVarExist(varList, node->arg0);
+            if(varId == -1){
+                // TODO: throw error
+            }
+            // Create a new node
+            instNode_t *newNode = copyInstNode(node);
+            
+            // set the node
+            node->op = OP_INT;
+            node->isInter = true;
+            node->inter = INT_MOV_F_REG;
+            node->inputReg = getRegKind(node->arg1);
+            node->arg0 = NULL;
+            node->arg1 = NULL;
+            node->isBuilt = true;
+            node->next = newNode;
+
+            // set the new node
+            newNode->op = OP_MOV_T_VAR;
+            newNode->isInter = false;
+            newNode->inputReg = RG_0;
+
+            newNode->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+            sprintf(newNode->arg0, "%d", varId);
+
+            newNode->arg1 = NULL;
+            newNode->isBuilt = true;
+
+            return;
+        }
+        // check if it's value -> var
+        else if(isUnsignedInt(node->arg1)){
+            // check if the variable is in the list
+            int varId = isVarExist(varList, node->arg0);
+            if(varId == -1){
+                // TODO: throw error
+            }
+
+            // Create a new node
+            instNode_t *newNode = copyInstNode(node);
+            
+            // set the node
+            node->op = OP_MOV_T_VAR;
+            node->isInter = false;
+            node->inputReg = RG_0;
+
+            node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+            sprintf(node->arg0, "%d", varId);
+
+            node->arg1 = NULL;
+            node->isBuilt = true;
+            node->next = newNode;
+
+            // set the new node
+            newNode->op = OP_MOV;
+            newNode->inputReg = RG_0;
+            newNode->arg0 = newNode->arg1;
+            newNode->arg1 = NULL;
+            newNode->isBuilt = true;
+            return;
+        }
+        // check if it's var -> var
+        else{
+            // Create a new node
+            instNode_t *newNode = copyInstNode(node);
+
+            // set the new node
+            // check if the variable is in the list
+            int varId = isVarExist(varList, node->arg0);
+            if(varId == -1){
+                // TODO: throw error
+            }
+            newNode->op = OP_MOV_T_VAR;
+            newNode->isInter = false;
+            newNode->inputReg = RG_0;
+
+            newNode->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+            sprintf(newNode->arg0, "%d", varId);
+
+            newNode->arg1 = NULL;
+            newNode->isBuilt = true;
+            
+            // set the node
+            // check if the variable is in the list
+            varId = isVarExist(varList, node->arg1);
+            if(varId == -1){
+                // TODO: throw error
+            }
+
+            node->op = OP_MOV_F_VAR;
+            node->isInter = false;
+            node->inputReg = RG_0;
+
+            node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+            sprintf(node->arg0, "%d", varId);
+
+            node->arg1 = NULL;
+            node->isBuilt = true;
+            node->next = newNode;
+            return;
+        }
+    }
+    // TODO: throw error
+
+    return;
+}
+
+void buildGoto(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
+    // check if the label is in the list
+    int labId = isLabelExist(labelList, node->arg0);
+    if(labId == -1){
+        // TODO: throw error
+        return;
+    }
+
+    // change arg0 to id
+    node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+    sprintf(node->arg0, "%d", labId);
+
+    node->arg1 = NULL;
+    node->isBuilt = true;
+    return;
+}
+
+void buildCall(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
+    // check if the label is in the list
+    int labId = isLabelExist(labelList, node->arg0);
+    if(labId == -1){
+        // TODO: throw error
+        return;
+    }
+
+    // change arg0 to id
+    node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+    sprintf(node->arg0, "%d", labId);
+
+    node->arg1 = NULL;
+    node->isBuilt = true;
+
+    return;
+}
+
+void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
+    // check if the second argument is an unsigned int
+    if(node->arg1 != NULL && isUnsignedInt(node->arg1)){
+        // pass argument 1 to arg0
+        node->arg0 = node->arg1;
+        node->arg1 = NULL;
+        return;
+    }
+    // check if the second argument is a register
+    else if(node->arg1 != NULL && isFromReg(node->arg1)){
+        // Create a new node
+        instNode_t *newNode = copyInstNode(node);
+        
+        // set the node
+        node->op = OP_INT;
+        node->isInter = true;
+        node->inter = INT_MOV_F_REG;
+        node->inputReg = getRegKind(node->arg1);
+        node->arg0 = NULL;
+        node->arg1 = NULL;
+        node->isBuilt = true;
+        node->next = newNode;
+
+        // set the new node
+        newNode->arg0 = NULL;
+        newNode->arg1 = NULL;
+        newNode->isBuilt = true;
+
+        return;
+
+    }
+    // check if the second argument is a variable
+    else if(node->arg1 != NULL){
+        // check if the variable is in the list
+        int varId = isVarExist(varList, node->arg1);
+        if(varId == -1){
+            // TODO: throw error
+        }
+
+        // Create a new node
+        instNode_t *newNode = copyInstNode(node);
+
+        // set the node
+        node->op = OP_MOV_F_VAR;
+        node->isInter = false;
+        node->inputReg = RG_0;
+
+        node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
+        sprintf(node->arg0, "%d", varId);
+
+        node->arg1 = NULL;
+        node->isBuilt = true;
+        node->next = newNode;
+
+        // set the new node
+        newNode->arg0 = NULL;
+        newNode->arg1 = NULL;
+        newNode->isBuilt = true;
+
+        return;
+    }
+
+    // TODO: throw error
+    return;
+}
+
+enum regKind getRegKind(char *str) {
+    if (str == NULL || str[0] != 'r' || str[1] != 'g' || str[2] < '0' || str[2] > '7' || str[3] != '\0') {
+        fprintf(stderr, "Error: invalid register format\n");
+        exit(EXIT_FAILURE);
+    }
+
+    switch (str[2]) {
+    case '0':
+        return RG_0;
+    case '1':
+        return RG_1;
+    case '2':
+        return RG_2;
+    case '3':
+        return RG_3;
+    case '4':
+        return RG_4;
+    case '5':
+        return RG_5;
+    case '6':
+        return RG_6;
+    case '7':
+        return RG_7;
     default:
-        fprintf(stderr, "Error: Unknown comparison statement\n");
-        exit(EXIT_FAILURE);
-        break;
-    }
-}
-
-void buildLabelNode(instNode_t *node, labelList_t *labelList){
-    // Check if label is already in the list
-    for(size_t i = 0; i < labelList->size; i++){
-        if(labelList->list[i].name == NULL){
-            continue;
-        }
-        else if(strcmp(labelList->list[i].name, node->arg0.target) == 0){
-            fprintf(stderr, "Label %s already declared\n", node->arg0.target);
-            exit(EXIT_FAILURE);
-        }
-    }
-    // Add label to the list
-    addLabel(labelList, node->arg0.target, node->id);
-}
-
-void addLabel(labelList_t *list, char *name, long nodeId){
-    // Check if list is full
-    bool full = true;
-    for(size_t i = 0; i < list->size; i++){
-        if(list->list[i].name == NULL){
-            full = false;
-            break;
-        }
-    }
-    if(full){
-        // Increase list size
-        incLabelList(list);
-    }
-
-    // Add label to the list
-    for(size_t i = 0; i < list->size; i++){
-        if(list->list[i].name == NULL){
-            list->list[i].name = name;
-            list->list[i].nodeId = nodeId;
-            list->list[i].id = (long)i;
-            break;
-        }
-    }
-}
-
-void incLabelList(labelList_t *list){
-    // Increase list size
-    list->size *= 2;
-    list->list = (label_t *)realloc(list->list, sizeof(label_t) * list->size);
-    if(list->list == NULL){
-        fprintf(stderr, "Error reallocating memory\n");
+        fprintf(stderr, "Error: unknown register\n");
         exit(EXIT_FAILURE);
     }
-
-    // Init new memory
-    for(size_t i = list->size / 2; i < list->size; i++){
-        list->list[i].name = NULL;
-    }
 }
 
-labelList_t* initLabelList(){
-    labelList_t *labelList = malloc(sizeof(labelList_t));
-    labelList->size = 10;
-    labelList->list = malloc(sizeof(label_t) * labelList->size);
-    for(size_t i = 0; i < labelList->size; i++){
-        labelList->list[i].name = NULL;
-        labelList->list[i].nodeId = -1;
-        labelList->list[i].id = -1;
+int getVarDatasize(char *str){
+    // check if the string is a number
+    if(isUnsignedInt(str)){
+        return 1;
     }
-    return labelList;
-}
-
-void pushCmpLifo(lifoCmpNode_t *lifo, cmpNode_t *node){
-    // resize lifo to add new node
-    lifo->size++;
-    // realloc lifo with node as new head
-    cmpNode_t **newLifo = (cmpNode_t **)malloc(sizeof(cmpNode_t *) * lifo->size);
-    if(newLifo == NULL){
-        fprintf(stderr, "Error allocating memory\n");
-        exit(EXIT_FAILURE);
+    else{
+        return (int)strlen(str);
     }
-    newLifo[0] = node;
-    for(size_t i = 1; i < lifo->size; i++){
-        newLifo[i] = lifo->list[i - 1];
-    }
-    free(lifo->list);
-    lifo->list = newLifo;
-}
-
-cmpNode_t *popCmpLifo(lifoCmpNode_t *lifo){
-    // Check if lifo is empty
-    if(lifo->size == 0){
-        fprintf(stderr, "Error: Lifo is empty\n");
-        exit(EXIT_FAILURE);
-    }
-
-    // resize lifo to remove node
-    lifo->size--;
-    // realloc lifo without node as new head
-    cmpNode_t **newLifo = (cmpNode_t **)malloc(sizeof(cmpNode_t *) * lifo->size);
-    if(newLifo == NULL){
-        fprintf(stderr, "Error allocating memory\n");
-        exit(EXIT_FAILURE);
-    }
-    cmpNode_t *node = lifo->list[0];
-    for(size_t i = 0; i < lifo->size; i++){
-        newLifo[i] = lifo->list[i + 1];
-    }
-    free(lifo->list);
-    lifo->list = newLifo;
-
-    return node;
-}
-
-void addVar(varList_t *list, instNode_t *node){
-    // Check if list is full
-    bool full = true;
-    for(size_t i = 0; i < list->size; i++){
-        if(list->list[i].name == NULL){
-            full = false;
-            break;
-        }
-    }
-    if(full){
-        // Increase list size
-        incVarList(list);
-    }
-
-    // Add var to the list
-    for(size_t i = 0; i < list->size; i++){
-        if(list->list[i].name == NULL){
-            list->list[i].name = node->arg0.target;
-            list->list[i].type = node->arg1Type;
-            switch (node->arg1Type)
-            {
-            case VAR_INT:
-                list->list[i].value.i_value = node->arg1.i_value;
-                break;
-            case VAR_FLOAT:
-                list->list[i].value.f_value = node->arg1.f_value;
-                break;
-            case VAR_CHAR:
-                list->list[i].value.c_value = node->arg1.c_value;
-                break;
-            case VAR_STRING:
-                list->list[i].value.s_value = node->arg1.s_value;
-                break;
-            default:
-                fprintf(stderr, "Error: Unknown variable type\n");
-                exit(EXIT_FAILURE);
-                break;
-            }
-            break;
-        }
-        else if(strcmp(list->list[i].name, node->arg0.target) == 0){
-            fprintf(stderr, "Variable %s already declared\n", node->arg0.target);
-            exit(EXIT_FAILURE);
-        }
-    }
-}
-
-void incVarList(varList_t *list){
-    // Increase list size
-    list->size *= 2;
-    list->list = (var_t *)realloc(list->list, sizeof(var_t) * list->size);
-    if(list->list == NULL){
-        fprintf(stderr, "Error reallocating memory\n");
-        exit(EXIT_FAILURE);
-    }
-
-    // Init new memory
-    for(size_t i = list->size / 2; i < list->size; i++){
-        list->list[i].name = NULL;
-    }
-}
-
-varList_t *initVarList(){
-    varList_t* varList = malloc(sizeof(varList_t));
-    varList->size = 10;
-    varList->list = malloc(sizeof(var_t) * varList->size);
-    // Init variables list
-    for(size_t i = 0; i < varList->size; i++){
-        varList->list[i].name = NULL;
-    }
-    return varList;
 }
