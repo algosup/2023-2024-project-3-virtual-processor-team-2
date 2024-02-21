@@ -103,6 +103,7 @@ bool addVar(varList_t *varList, char *name, char *value, long lineNb, asm_error_
         }
     }
     unknowError("On variable declaration", errData);
+    return false;
 }
 
 int isVarExist(varList_t *varList, char *name){

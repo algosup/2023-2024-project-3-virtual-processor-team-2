@@ -13,10 +13,11 @@
 
 const char* errorFile= "errors.log";
 
-asm_error_t *initErrorFile(char *inputFile){
+asm_error_t *initErrorFile(const char *inputFile){
     asm_error_t *errData = malloc(sizeof(asm_error_t));
     errData->errors = 0;
-    errData->inputFile = inputFile;
+    errData->inputFile = malloc(strlen(inputFile) + 1);
+    strcpy(errData->inputFile, inputFile);
     if(errorFile != NULL){
         FILE *file = fopen(errorFile, "wb");
         if(file == NULL){
@@ -434,7 +435,7 @@ void errorIntCodeNotSupported(long code, asm_error_t *errData){
     displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
-void unknowError(const char *details, asm_error_t *errData){
+void unknowError(char *details, asm_error_t *errData){
     char *errType = "Unknown Error";
     displayError(errType, details, NULL, errorFile, errData);
 }

@@ -16,7 +16,7 @@ typedef struct errorData{
     returns:
         error_t: Error history
 */
-asm_error_t *initErrorFile(char *inputFile);
+asm_error_t *initErrorFile(const char *inputFile);
 
 /*
     Print error summary
@@ -339,7 +339,7 @@ void errorIntCodeNotSupported(long code, asm_error_t *errData);
         details: Details about the error
         errData: Error history
 */
-void unknowError(const char *details, asm_error_t *errData);
+void unknowError(char *details, asm_error_t *errData);
 
 #ifdef __cplusplus
 }
