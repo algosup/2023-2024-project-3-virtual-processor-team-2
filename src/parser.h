@@ -21,18 +21,20 @@ typedef struct {
     params:
         argc: number of arguments
         argv: array of arguments
+        errData: error history
     returns:
         flags_t: struct with the flags
 */ 
-flags_t parseArgs(int argc, char *argv[]);
+flags_t parseArgs(int argc, char *argv[], asm_error_t *errData);
 
 /*
     Read the flag and set the flag struct
     params:
         flag: flag to be read
         flags: pointer to the flags struct
+        errData: error history
 */
-void flagsSet(char *flag, flags_t *flags);
+void flagsSet(char *flag, flags_t *flags, asm_error_t *errData);
 
 /*
     Read the file and parse it line by line
@@ -40,26 +42,32 @@ void flagsSet(char *flag, flags_t *flags);
         nodeList: pointer to the instruction list
         filename: name of the file to be parsed
 */
-void parseFile(instList_t *nodeList, char *filename, asm_error_t *errData);
+void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData);
 
 /*
     Parse a line and return an instruction node
     params:
         line: line to be parsed
+        nodeId: id of the node
+        lineNb: number of the line
+        varList: variable list
+        errData: error history
     returns:
         instNode_t: instruction node
 */
-instNode_t *parseLine(char *line, long nodeId, long lineNb, asm_error_t *errData);
+instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, asm_error_t *errData);
 
 /*
     Read the line and check if it is an operation
     params:
         char*: instruction to be checked
         instNode_t*: pointer to the instruction node
+        varList_t: variable list
+        error_t*: error history
     returns:
         bool: true if it is an operation
 */
-bool isOp(char *inst, instNode_t *newNode, asm_error_t *errData);
+bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errData);
 
 
 /*
@@ -69,24 +77,26 @@ bool isOp(char *inst, instNode_t *newNode, asm_error_t *errData);
     returns:
         char*: instruction
 */
-char* getInst(char *line);
+char* getInst(char *line, long lineNb, asm_error_t *errData);
 
 /*
     Get arguments from an instruction line
     params:
         line: line to be parsed
+        lineNb: number of the line
+        errData: error history
     returns:
         char**: array of strings (no more than 2)
 */
-char** getInstArgs(char *line);
-
+char **getInstArgs(char *line, long lineNb, asm_error_t *errData);
 /*
     Set the arguments of an instruction node
     params:
         node: pointer to the instruction node
         args: array of strings (no more than 2)
+        errData: error history
 */
-void setArgs(instNode_t *node, char **args);
+void setArgs(instNode_t *node, char **args, asm_error_t *errData);
 
 /*
     Check if the argument is a register
@@ -101,10 +111,12 @@ bool isReg(char *arg);
     Convert a string to a register
     params:
         arg: string to be converted
+        lineNb: line number
+        errData: error history
     returns:
         regKind: register
 */
-enum regKind strToReg(char *arg);
+enum regKind strToReg(char *arg, long lineNb, asm_error_t *errData);
 
 /*
     Checks if the filename ends by .aop or trows an error

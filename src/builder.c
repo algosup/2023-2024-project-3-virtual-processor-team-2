@@ -42,12 +42,11 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_
         case OP_LAB:
             buildLabel(node, labeList, errData);
             break;
-        case OP_B_XOR...OP_MOD:
+        case OP_B_XOR: case OP_DIV: case OP_ADD: case OP_SUB: case OP_MUL: case OP_R_SHIFT: case OP_L_SHIFT: case OP_B_AND: case OP_B_OR: case OP_B_NOT: case OP_MOD:
             buildOperation(node, varList, errData);
             break;
         default:
-            // TODO: transform to build error
-            // errorInstruction("unknown", node, NULL, errData);
+            unknowError("Operation code not found during build", errData);
             node->isBuilt = true;
             break;
     }
@@ -57,12 +56,10 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
     // copy variable value
     char *varData = (char *)malloc(sizeof(char) * (strlen(node->arg1) + 1));
     strcpy(varData, node->arg1);
-
-    // try to add the variable to the list
-    addVar(varList, node->arg0, node->arg1);
+;
     int varId = isVarExist(varList, node->arg0);
     if(varId == -1){
-        // TODO: throw error
+        errorVarNotExist(node->lineNb, node->arg0, errData);
     }
     // set arg0 as id
     node->arg0 = malloc(IMMEDIATE_VAL_SIZE+1 * sizeof(char));
@@ -79,7 +76,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
     }
 
     // create a new node
-    instNode_t *newNode = createEmptyInstNode();
+    instNode_t *newNode = createEmptyInstNode(errData);
     newNode->id = node->id;
     newNode->lineNb = node->lineNb;
     newNode->op = OP_VAR_SIZE;
@@ -94,7 +91,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
 
     if(dataSize == 1){
         // create a new node
-        instNode_t *dataNode = createEmptyInstNode();
+        instNode_t *dataNode = createEmptyInstNode(errData);
         dataNode->id = node->id;
         dataNode->lineNb = node->lineNb;
         dataNode->op = OP_VAR_DATA;
@@ -112,7 +109,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
     else{
         // add the null terminator
         // create a new node
-        instNode_t *nullNode = createEmptyInstNode();
+        instNode_t *nullNode = createEmptyInstNode(errData);
         nullNode->id = node->id;
         nullNode->lineNb = node->lineNb;
         nullNode->op = OP_VAR_DATA;
@@ -128,7 +125,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
         // Reverse iteration over varData to create nodes
         for (int i = dataSize - 1; i >= 0; i--) {
             // create a new node
-            instNode_t *dataNode = createEmptyInstNode();
+            instNode_t *dataNode = createEmptyInstNode(errData);
             dataNode->id = node->id;
             dataNode->lineNb = node->lineNb;
             dataNode->op = OP_VAR_DATA;
@@ -146,9 +143,9 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
 
 void buildLabel(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // try to add the label to the list
-    int labId = addLabel(labelList, node->arg0, node->id);
+    int labId = addLabel(labelList, node->arg0, node->id, node->lineNb, errData);
     if(labId == -1){
-        // TODO: throw error
+        errorLabelNotFound(node->lineNb, node->arg0, errData);
     }
 
     // set arg0 as id
@@ -170,13 +167,13 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
         // check if it's reg -> reg
         if (isFromReg(node->arg1)){
             // Create a new node
-            instNode_t *newNode = copyInstNode(node);
+            instNode_t *newNode = copyInstNode(node, errData);
             
             // set the node
             node->op = OP_INT;
             node->isInter = true;
             node->inter = INT_MOV_F_REG;
-            node->inputReg = getRegKind(node->arg1);
+            node->inputReg = getRegKind(node->arg1, node->lineNb, errData);
             node->arg0 = NULL;
             node->arg1 = NULL;
             node->isBuilt = true;
@@ -194,11 +191,11 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             // check if the variable is in the list
             int varId = isVarExist(varList, node->arg1);
             if(varId == -1){
-                // TODO: throw error
+                errorVarNotExist(node->lineNb, node->arg1, errData);
             }
 
             // Create a new node
-            instNode_t *newNode = copyInstNode(node);
+            instNode_t *newNode = copyInstNode(node, errData);
             
             // set the node
             node->op = OP_MOV_F_VAR;
@@ -224,16 +221,16 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             // check if the variable is in the list
             int varId = isVarExist(varList, node->arg0);
             if(varId == -1){
-                // TODO: throw error
+                errorVarNotExist(node->lineNb, node->arg0, errData);
             }
             // Create a new node
-            instNode_t *newNode = copyInstNode(node);
+            instNode_t *newNode = copyInstNode(node, errData);
             
             // set the node
             node->op = OP_INT;
             node->isInter = true;
             node->inter = INT_MOV_F_REG;
-            node->inputReg = getRegKind(node->arg1);
+            node->inputReg = getRegKind(node->arg1, node->lineNb, errData);
             node->arg0 = NULL;
             node->arg1 = NULL;
             node->isBuilt = true;
@@ -257,11 +254,11 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             // check if the variable is in the list
             int varId = isVarExist(varList, node->arg0);
             if(varId == -1){
-                // TODO: throw error
+                errorVarNotExist(node->lineNb, node->arg0, errData);
             }
 
             // Create a new node
-            instNode_t *newNode = copyInstNode(node);
+            instNode_t *newNode = copyInstNode(node, errData);
             
             // set the node
             node->op = OP_MOV_T_VAR;
@@ -286,13 +283,13 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
         // check if it's var -> var
         else{
             // Create a new node
-            instNode_t *newNode = copyInstNode(node);
+            instNode_t *newNode = copyInstNode(node, errData);
 
             // set the new node
             // check if the variable is in the list
             int varId = isVarExist(varList, node->arg0);
             if(varId == -1){
-                // TODO: throw error
+                errorVarNotExist(node->lineNb, node->arg0, errData);
             }
             newNode->op = OP_MOV_T_VAR;
             newNode->isInter = false;
@@ -308,7 +305,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             // check if the variable is in the list
             varId = isVarExist(varList, node->arg1);
             if(varId == -1){
-                // TODO: throw error
+                errorVarNotExist(node->lineNb, node->arg1, errData);
             }
 
             node->op = OP_MOV_F_VAR;
@@ -324,7 +321,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             return;
         }
     }
-    // TODO: throw error
+    unknowError("Mov build is failed", errData);
 
     return;
 }
@@ -333,8 +330,7 @@ void buildGoto(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // check if the label is in the list
     int labId = isLabelExist(labelList, node->arg0);
     if(labId == -1){
-        // TODO: throw error
-        return;
+        errorLabelNotFound(node->lineNb, node->arg0, errData);
     }
 
     // change arg0 to id
@@ -350,7 +346,7 @@ void buildCall(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // check if the label is in the list
     int labId = isLabelExist(labelList, node->arg0);
     if(labId == -1){
-        // TODO: throw error
+        errorLabelNotFound(node->lineNb, node->arg0, errData);
         return;
     }
 
@@ -375,13 +371,13 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
     // check if the second argument is a register
     else if(node->arg1 != NULL && isFromReg(node->arg1)){
         // Create a new node
-        instNode_t *newNode = copyInstNode(node);
+        instNode_t *newNode = copyInstNode(node, errData);
         
         // set the node
         node->op = OP_INT;
         node->isInter = true;
         node->inter = INT_MOV_F_REG;
-        node->inputReg = getRegKind(node->arg1);
+        node->inputReg = getRegKind(node->arg1, node->lineNb, errData);
         node->arg0 = NULL;
         node->arg1 = NULL;
         node->isBuilt = true;
@@ -400,11 +396,11 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
         // check if the variable is in the list
         int varId = isVarExist(varList, node->arg1);
         if(varId == -1){
-            // TODO: throw error
+            errorVarNotExist(node->lineNb, node->arg1, errData);
         }
 
         // Create a new node
-        instNode_t *newNode = copyInstNode(node);
+        instNode_t *newNode = copyInstNode(node, errData);
 
         // set the node
         node->op = OP_MOV_F_VAR;
@@ -425,15 +421,14 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
 
         return;
     }
-
-    // TODO: throw error
+    unknowError("Operation connot be built", errData);
     return;
 }
 
-enum regKind getRegKind(char *str) {
+enum regKind getRegKind(char *str, long lineNb, asm_error_t *errData) {
     if (str == NULL || str[0] != 'r' || str[1] != 'g' || str[2] < '0' || str[2] > '7' || str[3] != '\0') {
-        fprintf(stderr, "Error: invalid register format\n");
-        exit(EXIT_FAILURE);
+        errorInvalidRegister(str, lineNb, errData);
+        return RG_0;
     }
 
     switch (str[2]) {
@@ -454,8 +449,8 @@ enum regKind getRegKind(char *str) {
     case '7':
         return RG_7;
     default:
-        fprintf(stderr, "Error: unknown register\n");
-        exit(EXIT_FAILURE);
+        errorInvalidRegister(str, lineNb, errData);
+        return RG_0;
     }
 }
 
