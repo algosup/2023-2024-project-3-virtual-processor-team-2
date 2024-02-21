@@ -57,9 +57,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
     // copy variable value
     char *varData = (char *)malloc(sizeof(char) * (strlen(node->arg1) + 1));
     strcpy(varData, node->arg1);
-
-    // try to add the variable to the list
-    addVar(varList, node->arg0, node->arg1);
+;
     int varId = isVarExist(varList, node->arg0);
     if(varId == -1){
         // TODO: throw error

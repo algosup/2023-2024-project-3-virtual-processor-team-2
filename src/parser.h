@@ -40,26 +40,32 @@ void flagsSet(char *flag, flags_t *flags);
         nodeList: pointer to the instruction list
         filename: name of the file to be parsed
 */
-void parseFile(instList_t *nodeList, char *filename, asm_error_t *errData);
+void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData);
 
 /*
     Parse a line and return an instruction node
     params:
         line: line to be parsed
+        nodeId: id of the node
+        lineNb: number of the line
+        varList: variable list
+        errData: error history
     returns:
         instNode_t: instruction node
 */
-instNode_t *parseLine(char *line, long nodeId, long lineNb, asm_error_t *errData);
+instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, asm_error_t *errData);
 
 /*
     Read the line and check if it is an operation
     params:
         char*: instruction to be checked
         instNode_t*: pointer to the instruction node
+        varList_t: variable list
+        error_t*: error history
     returns:
         bool: true if it is an operation
 */
-bool isOp(char *inst, instNode_t *newNode, asm_error_t *errData);
+bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errData);
 
 
 /*

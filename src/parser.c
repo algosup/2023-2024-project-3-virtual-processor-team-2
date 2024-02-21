@@ -65,7 +65,7 @@ void flagsSet(char *flag, flags_t *flags){
     }
 }
 
-void parseFile(instList_t *nodeList, char *filename, asm_error_t *errData){
+void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData){
     // check if the file exists
     FILE *file = fopen(filename, "r");
     if(file == NULL){
@@ -88,7 +88,7 @@ void parseFile(instList_t *nodeList, char *filename, asm_error_t *errData){
         }
 
         // parse the line
-        instNode_t *node = parseLine(line, nodeId, lineNb, errData);
+        instNode_t *node = parseLine(line, nodeId, lineNb, varList, errData);
         // continue if the line is empty
         if(node == NULL){
             ++ lineNb;
@@ -110,7 +110,7 @@ void parseFile(instList_t *nodeList, char *filename, asm_error_t *errData){
     fclose(file);
 }
 
-instNode_t *parseLine(char *line, long nodeId, long lineNb, asm_error_t *errData){
+instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, asm_error_t *errData){
     // check if the line is empty or a comment
     if(line[0] == '\n' || strncmp(cleanString(line), "//", 2) == 0){
         return NULL;
@@ -134,7 +134,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, asm_error_t *errData
         
     bool isThatKind = false;
     // Set the instruction
-    isThatKind = isOp(inst, newNode, errData);
+    isThatKind = isOp(inst, newNode, varList, errData);
     if(isThatKind){
         return newNode;
     }
@@ -144,7 +144,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, asm_error_t *errData
     return newNode;
 }
 
-bool isOp(char *inst, instNode_t *newNode, asm_error_t *errData){
+bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errData){
     if(strcmp(inst, "mov") == 0){
         newNode->op = OP_MOV;
     }
@@ -256,6 +256,8 @@ bool isOp(char *inst, instNode_t *newNode, asm_error_t *errData){
     }
     else if(strcmp(inst, "var") == 0){
         newNode->op = OP_VAR;
+        // add var to varList
+        addVar(varList, newNode->arg0, newNode->arg1);
     }
     else if(strcmp(inst, "mod") == 0 || strcmp(inst, "%") == 0){
         newNode->op = OP_MOD;
@@ -345,7 +347,6 @@ bool isOp(char *inst, instNode_t *newNode, asm_error_t *errData){
     }
     return true;
 }
-
 
 char *getInst(char *line) {
     char *buffer = malloc((strlen(line) + 1) * sizeof(char));
