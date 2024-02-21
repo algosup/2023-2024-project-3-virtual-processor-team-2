@@ -284,7 +284,7 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
         newNode->isInter = true;
         newNode->arg0 = "2";
     }
-    else if(strcmp(inst, "or") == 0){
+    else if(strcmp(inst, "if_or") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
         newNode->arg0 = "3";
