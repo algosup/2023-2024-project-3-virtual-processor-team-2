@@ -10,7 +10,8 @@
 
 #include "ast.h"
 
-char *getIntCode(enum interruptKind kind){
+
+char *getIntCode(enum interruptKind kind, asm_error_t *errData){
     switch(kind){
         case INT_EXIT:
             return "0";
@@ -47,8 +48,8 @@ char *getIntCode(enum interruptKind kind){
         case INT_END:
             return "16";
         default:
-            // TODO: transform to error
-            exit(EXIT_FAILURE);
+            errorIntCodeNotSupported(kind, errData);
+            return NULL;
     }
 }
 
@@ -64,14 +65,14 @@ varList_t *createEmptyVarList(){
     return varList;
 }
 
-bool addVar(varList_t *varList, char *name, char *value){
+bool addVar(varList_t *varList, char *name, char *value, long lineNb, asm_error_t *errData){
     // check if the variable already exists
     for(size_t i = 0; i < varList->size; i++){
         if (varList->list[i].name == NULL){
             continue;
         }
         if(strcmp(varList->list[i].name, name) == 0){
-            // TODO: add error variable already exists
+            errorVarAlreadyExist(name, lineNb, errData);
             return false;
         }
     }
@@ -101,8 +102,8 @@ bool addVar(varList_t *varList, char *name, char *value){
             return true;
         }
     }
-    // TODO: throw error
-    exit(EXIT_FAILURE);
+    unknowError("On variable declaration", errData);
+    return false;
 }
 
 int isVarExist(varList_t *varList, char *name){
@@ -123,11 +124,10 @@ instList_t *createEmptyInstList(){
     return instList;
 }
 
-instNode_t *copyInstNode(instNode_t *node){
+instNode_t *copyInstNode(instNode_t *node, asm_error_t *errData){
     instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
     if(newNode == NULL){
-        // TODO: thorw memory alloc error
-        exit(EXIT_FAILURE);
+        errorMemAlloc(errData);
     }
     newNode->id = node->id;
     newNode->lineNb = node->lineNb;
@@ -141,11 +141,10 @@ instNode_t *copyInstNode(instNode_t *node){
     return newNode;
 }
 
-instNode_t *createEmptyInstNode() {
+instNode_t *createEmptyInstNode(asm_error_t *errData) {
     instNode_t *newNode = (instNode_t *)malloc(sizeof(instNode_t));
     if (newNode == NULL) {
-        fprintf(stderr, "Memory allocation error\n");
-        exit(EXIT_FAILURE);
+        errorMemAlloc(errData);
     }
     newNode->id = -1;
     newNode->lineNb = -1;
@@ -169,15 +168,14 @@ labelList_t *createEmptyLabelList(){
     return labelList;
 }
 
-int addLabel(labelList_t *labelList, char *name, long nodeId){
+int addLabel(labelList_t *labelList, char *name, long nodeId, long lineNb, asm_error_t *errData){
     // check if the label already exists
     for(size_t i = 0; i < labelList->size; i++){
         if (labelList->list[i].name == NULL){
             continue;
         }
         if(strcmp(labelList->list[i].name, name) == 0){
-            // TODO: add error label already exists
-            return -1;
+            errorLabelDeclaration(lineNb, name, errData);
         }
     }
 
@@ -208,7 +206,7 @@ int addLabel(labelList_t *labelList, char *name, long nodeId){
         }
     }
 
-    // TODO: throw error
+    unknowError("On label declaration", errData);
     return -1;
 }
 

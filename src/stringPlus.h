@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include "error.h"
 
 /*
     Convert a string to binary
@@ -40,19 +41,21 @@ char strToChar(char *arg);
     Remove quotes at beginning and at the end of a string
     params:
         arg: string to be converted
+        errData: error history
     returns:
         char*: string
 */
-char *strToString(char *arg);
+char *strToString(char *arg, asm_error_t *errData);
 
 /*
     Remove spaces and back line at the beginning and at the end of a string
     params:
         str: string to be cleaned
+        errData: error history
     returns:
         char*: cleaned string
 */
-char *cleanString(char *str);
+char *cleanString(char *str, asm_error_t *errData);
 
 /*
     Check if the string is an unsigned int

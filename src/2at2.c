@@ -11,17 +11,25 @@
 #include "2at2.h"
 #include "debug.h"
 #include "error.h"
+#include "binExporter.h"
 
-#define VERSION "0.1.1"
+#define VERSION "0.3.0"
+#define BIN_NAME "bin.2at2"
 
 int main(int argc, char *argv[]) {
     // Init error data history
-    asm_error_t *errData = initErrorFile("errors.log", argv[1]);
+    asm_error_t *errData = initErrorFile(argv[1]);
 
     // ---------- Parse arguments ----------
-
     // Parse program arguments and get flags
-    flags_t flags = parseArgs(argc, argv);
+    flags_t flags = parseArgs(argc, argv, errData);
+
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        exit(EXIT_FAILURE);
+    }
 
     if (flags.help) {
         printHelp();
@@ -48,10 +56,20 @@ int main(int argc, char *argv[]) {
     // ---------- Parse ----------
 
     // run parser
-    parseFile(instList, argv[1], errData);
+    parseFile(instList, argv[1], varList, errData);
 
     if(flags.debug){
-        printAst(instList);
+        printAst(instList, errData);
+    }
+
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        free(varList);
+        free(labelList);
+        free(instList);
+        exit(EXIT_FAILURE);
     }
 
     fprintf(stderr, "[\t45%%\t] File parsed successfully\n");
@@ -61,16 +79,37 @@ int main(int argc, char *argv[]) {
     // run builder
     buildProgram(instList, varList, labelList, errData);
 
+    if(flags.debug){
+        printAst(instList, errData);
+    }
+    
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        free(varList);
+        free(labelList);
+        free(instList);
+        exit(EXIT_FAILURE);
+    }
+
     fprintf(stderr, "[\t70%%\t] File built successfully\n");
 
-    if(flags.debug){
-        printAst(instList);
-    }
 
     // ---------- Assemble ----------
 
     // run exporter
-    // TODO: make the function export to binary
+    exportToBin(instList, BIN_NAME, varList, errData);
+
+    // Stop if there are errors
+    if(errData->errors > 0){
+        printErrorSummary(errData);
+        free(errData);
+        free(varList);
+        free(labelList);
+        free(instList);
+        exit(EXIT_FAILURE);
+    }
 
     fprintf(stderr, "[\t95%%\t] File assembled successfully\n");
 
