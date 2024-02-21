@@ -46,7 +46,7 @@ VAT2 stands for **V**Virtual Processor for **A**ssembly **T**eam **2**, serving 
 
 IAT2 stands for **I**ntegral **A**ssembler **T**eam **2**, is the name of the whole project (2AT2 + VAT2).
 
-## 💾 Why we choose .aop as extension ?
+## 💾 Why did we choose .aop as extension ?
 
 We selected the `.aop` extension to signify **A**op **O**riginal **P**rogram, embodying an infinite recursive loop inspired by [ZWEI](https://en.wikipedia.org/wiki/EINE_and_ZWEI#Naming)'s name.
 
