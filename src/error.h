@@ -341,6 +341,24 @@ void errorIntCodeNotSupported(long code, asm_error_t *errData);
 */
 void unknowError(char *details, asm_error_t *errData);
 
+/*
+    Display error messages for binary conversion issues
+    params:
+        instName: Name of the instruction
+        lineNb: Line number
+        errData: Error history
+*/
+void errorOpBinConversion(char *instName, long lineNb, asm_error_t *errData);
+
+/*
+    Display error messages for binary conversion issues
+    params:
+        instName: Name of the instruction
+        lineNb: Line number
+        errData: Error history
+*/
+void errorIntBinConversion(char *instName, long lineNb, asm_error_t *errData);
+
 #ifdef __cplusplus
 }
 #endif

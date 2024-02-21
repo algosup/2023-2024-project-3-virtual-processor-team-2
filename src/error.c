@@ -439,3 +439,21 @@ void unknowError(char *details, asm_error_t *errData){
     char *errType = "Unknown Error";
     displayError(errType, details, NULL, errorFile, errData);
 }
+
+void errorOpBinConversion(char *instName, long lineNb, asm_error_t *errData){
+    char *errType = "Operation Binary Conversion Error";
+    char errDetails[64];
+    char errLocation[64];
+    sprintf(errDetails, "Could not convert operation '%s' to binary code", instName);
+    sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
+}
+
+void errorIntBinConversion(char *instName, long lineNb, asm_error_t *errData){
+    char *errType = "Interrupt Binary Conversion Error";
+    char errDetails[64];
+    char errLocation[64];
+    sprintf(errDetails, "Could not convert interrupt '%s' to binary code", instName);
+    sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
+}

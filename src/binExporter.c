@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "binExporter.h"
+#include "error.h"
+#include "debug.h"
 
 void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData){
     // Open the file
@@ -15,7 +17,7 @@ void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_e
 
     // Check if the file was opened
     if(file == NULL){
-        fprintf(stderr, "Error: could not open file %s\n", filename);
+        unknowError("File cannot be opened", errData);
         return;
     }
     instNode_t *node = nodeList->head;
@@ -23,7 +25,7 @@ void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_e
         // Write the operation
         char *opCode = opToBinCode(node->op);
         if(opCode == NULL){
-            fprintf(stderr, "Error: could not convert operation to binary code\n");
+            errorOpBinConversion(getOpName(node->op), node->lineNb, errData);
             return;
         }
         fwrite(opCode, 1, 5, file);
@@ -37,7 +39,7 @@ void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_e
             // write the interrupt
             char *interCode = interToBinCode(node->inter);
             if(interCode == NULL){
-                fprintf(stderr, "Error: could not convert interrupt to binary code\n");
+                errorIntBinConversion(getInterName(node->inter), node->lineNb, errData);
                 return;
             }
             fwrite(interCode, 1, 8, file);
