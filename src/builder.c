@@ -36,6 +36,15 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_
         case OP_CALL:
             buildCall(node, labeList, errData);
             break;
+        case OP_INT:
+            node->isBuilt = true;
+            break;
+        case OP_B_XOR: case OP_DIV: case OP_ADD: case OP_SUB: case OP_MUL: case OP_R_SHIFT: case OP_L_SHIFT: case OP_B_AND: case OP_B_OR: case OP_B_NOT: case OP_MOD:
+            buildOperation(node, varList, errData);
+            break;
+        case OP_PUSH:
+            node->isBuilt = true;
+            break;
         case OP_RET:
             node->isBuilt = true;
             break;
@@ -44,9 +53,9 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_
             break;
         case OP_LAB:
             buildLabel(node, labeList, errData);
-            break;
-        case OP_B_XOR: case OP_DIV: case OP_ADD: case OP_SUB: case OP_MUL: case OP_R_SHIFT: case OP_L_SHIFT: case OP_B_AND: case OP_B_OR: case OP_B_NOT: case OP_MOD:
-            buildOperation(node, varList, errData);
+            break;       
+        case OP_POP:
+            node->isBuilt = true;
             break;
         default:
             unknowError("Operation code not found during build", errData);
@@ -146,7 +155,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
 
 void buildLabel(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // try to add the label to the list
-    int labId = addLabel(labelList, node->arg0, node->id, node->lineNb, errData);
+    int labId = isLabelExist(labelList, node->arg0);
     if(labId == -1){
         errorLabelNotFound(node->lineNb, node->arg0, errData);
     }
