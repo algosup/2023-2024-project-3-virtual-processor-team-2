@@ -545,22 +545,6 @@ TEST(isOp, popa) {
   ASSERT_TRUE(newNode->op == OP_INT);
 }
 
-TEST(parseFile, Parsing) {
-  asm_error_t *errData = initErrorFile(fileName);
-  varList_t *varList = createEmptyVarList();  
-  instList_t *nodeList = createEmptyInstList();
-  char *fileName = const_cast<char *>("../test/test.aop");
-  bool parsing = false;
-  parseFile(nodeList, fileName, varList, errData);
-  if (nodeList->head != NULL) {
-    parsing = true;
-  }
-  ASSERT_TRUE(parsing == true);
-  ASSERT_TRUE(nodeList->head->op == OP_MOV);
-  ASSERT_TRUE(nodeList->head->inputReg == RG_0);
-  ASSERT_STREQ(nodeList->head->arg1, "2");
-}
-
 // =========================================================================
 // =============================  BUILDER  =================================
 // =========================================================================
@@ -595,6 +579,45 @@ TEST(getRegKind, r3) {
 
   ASSERT_FALSE(newNode->inputReg == RG_3);
 }
+
+
+// ==============================================================================
+// =========================  PARSE AND BUILD A FILE  ===========================
+// ==============================================================================
+
+
+TEST(buildProgram, ParsingAndBuilding) {
+  asm_error_t *errData = initErrorFile(fileName);
+  varList_t *varList = createEmptyVarList();  
+  instList_t *nodeList = createEmptyInstList();
+  labelList_t *labelList = createEmptyLabelList();
+  char *fileName = const_cast<char *>("../test/test.aop");
+  bool parsing = false;
+  parseFile(nodeList, fileName, varList, errData);
+  if (nodeList->head != NULL) {
+    parsing = true;
+  }
+  ASSERT_TRUE(parsing == true);
+  ASSERT_TRUE(nodeList->head->op == OP_MOV);
+  ASSERT_TRUE(nodeList->head->inputReg == RG_0);
+  ASSERT_STREQ(nodeList->head->arg1, "2");
+  bool building = false;
+  bool built;
+  if (nodeList->head != NULL) {
+    building = true;
+  }
+  buildProgram(nodeList, varList, labelList, errData);
+  if (nodeList->head == NULL) {
+    built = true;
+  }
+  ASSERT_TRUE(building == true);
+  ASSERT_TRUE(nodeList->head->op == OP_MOV);
+  ASSERT_TRUE(nodeList->head->inputReg == RG_0);
+  ASSERT_TRUE(built == true);
+}
+
+
+
 
 
 int main(int argc, char *argv[]) {
