@@ -1,0 +1,16 @@
+// Test mul implementation (ASSERT_TRUE)
+
+// Test mul with register <- immediate value
+mov rg0, 5
+mul rg0, 10
+// rg0 == 50
+
+// Test mul with register <- register
+mov rg1, 2
+mul rg1, rg0
+// rg1 == 100
+
+// Test mul with register <- variable
+var var1, 2
+mul rg1, var1
+// rg1 == 200

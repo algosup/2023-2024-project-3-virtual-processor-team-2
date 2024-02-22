@@ -1,0 +1,16 @@
+// Test mod implementation (ASSERT_TRUE)
+
+// Test mod with register <- immediate value
+mov rg0, 243
+mod rg0, 123
+// rg0 == 120
+
+// Test mod with register <- register
+mov rg1, 200
+mod rg1, rg0
+// rg1 == 20
+
+// Test mod with register <- variable
+var var1, 8
+mod rg1, var1
+// rg1 == 4
