@@ -1,0 +1,66 @@
+// Test mov implementation (ASSERT_TRUE)
+
+// Test mov with numbers
+mov rg0, 10
+// rg0 == 10
+
+mov rg1, rg0
+// rg1 == 10
+
+var var1, 20
+mov rg0, var1
+// rg0 == 20
+
+mov var1, rg0
+// var1 == 10
+
+var var2, 100
+mov var1, var2
+// var1 == 100
+
+mov var2, 50
+// var2 == 50
+
+
+// Test mov with strings
+mov rg0, "Ten"
+// rg0 == "Ten"
+
+mov rg1, rg0
+// rg1 == "Ten"
+
+var var1, "Twenty"
+mov rg0, var1
+// rg0 == "Twenty"
+
+mov var1, rg0
+// var1 == "Ten"
+
+var var2, "One-hundred"
+mov var1, var2
+// var1 == "One-hundred"
+
+mov var2, "Fifty"
+// var2 == "Fifty"
+
+
+// Test mov with charater
+mov rg0, 'A'
+// rg0 == 'A'
+
+mov rg1, rg0
+// rg1 == 'A'
+
+var var1, 'T'
+mov rg0, var1
+// rg0 == 'T'
+
+mov var1, rg0
+// var1 == 'A'
+
+var var2, '2'
+mov var1, var2
+// var1 == '2'
+
+mov var2, 'o'
+// var2 == 'o'

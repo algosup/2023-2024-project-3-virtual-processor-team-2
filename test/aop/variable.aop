@@ -1,0 +1,16 @@
+// Test variable implementation (ASSERT_TRUE)
+
+// Test variable with strings
+var var1, "Nice variable"
+
+// Test variable with numbers
+var var2, 100
+
+// Test variable with charater
+var var3, 'C'
+
+// Test variable with hexadecimal
+var var4, 0xFFF
+
+// Test variable with binary
+var var5, 0b1111

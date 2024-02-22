@@ -1,0 +1,21 @@
+// Test draw implementation (ASSERT_TRUE)
+
+// Test draw with string
+mov rg0, "AT2 is amazing!"
+draw rg0
+
+// Test draw with charater
+mov rg0, 'C'
+draw rg0
+
+// Test draw with hexadecimal
+mov rg0, 0xFFF 
+draw rg0
+
+// Test draw with binary
+mov rg0, 0b1111
+draw rg0
+
+// Test draw with numbers
+mov rg0, 10
+draw rg0
