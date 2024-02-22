@@ -155,7 +155,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
 
 void buildLabel(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // try to add the label to the list
-    int labId = addLabel(labelList, node->arg0, node->id, node->lineNb, errData);
+    int labId = isLabelExist(labelList, node->arg0);
     if(labId == -1){
         errorLabelNotFound(node->lineNb, node->arg0, errData);
     }

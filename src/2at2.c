@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     // ---------- Parse ----------
 
     // run parser
-    parseFile(instList, argv[1], varList, errData);
+    parseFile(instList, argv[1], varList, labelList, errData);
 
     if(flags.debug){
         printAst(instList, errData);
