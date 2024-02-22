@@ -1,0 +1,8 @@
+// Test mov implementation (TRUE)
+var variable, 0
+mov rg0, 10
+mov rg1, rg3
+mov variable, rg2
+mov rg4, variable
+mov rg5, 0xFFF
+mov rg6, 0b1111
