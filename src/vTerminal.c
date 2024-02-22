@@ -45,30 +45,7 @@ bool runCmd(char *command, asm_error_t *errData){
         system("clear");
     }
     else{
-        //Check if the file is present
-        FILE *file = fopen(command, "rb");
-        if(file == NULL){
-            errorfnf(command, errData);
-        }
-        // Run program
-        char line[LINE_MAX_BITS];
-        
-        // Set as carry for action on next instruction
-        carry_t carry = {0, false};
-
-        int time = 0;
-        int lastTime = 0;
-        int latentTicks = 0;
-        while(fgets(line, sizeof(line) + 1, file)) {
-            setClock(time, lastTime, latentTicks);
-
-            instruction_t inst = charBinToInst(line);
-            if(!run(inst, &carry, errData)){
-                fclose(file);
-                return false;
-            }
-        }
-        fclose(file);
+        readFile(command, errData);
     }
     return true;
 }

@@ -2,7 +2,6 @@
     This file is part of VAT2.
     This file contains the implementation of the virtual processor.
 */
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -28,6 +27,33 @@ vRegister_t rg5 = {true, 0};
 vRegister_t rg6 = {true, 0};
 vRegister_t rg7 = {true, 0};
 
+bool readFile(char *filename, asm_error_t *errData){
+    //Check if the file is present
+        FILE *file = fopen(filename, "rb");
+        if(file == NULL){
+            errorfnf(filename, errData);
+        }
+        // Run program
+        char line[LINE_MAX_BITS];
+        
+        // Set as carry for action on next instruction
+        carry_t carry = {0, false};
+
+        int time = 0;
+        int lastTime = 0;
+        int latentTicks = 0;
+        while(fgets(line, LINE_MAX_BITS + 1, file)) {
+            setClock(time, lastTime, latentTicks);
+            instruction_t inst = charBinToInst(line);
+            if(!run(inst, &carry, file, filename, errData)){
+                fclose(file);
+                return false;
+            }
+        }
+        fclose(file);
+        return true;
+}
+
 void setClock(int time, int lastTime, int latentTicks){
     sleep(CLOCK_TICKS);
         ++latentTicks;
@@ -47,9 +73,9 @@ instruction_t charBinToInst(char *bin){
     instruction_t instruction = {0, 0, 0};
 
     // Define masks for each field
-    unsigned int instMask = 0b11111;
-    unsigned int regMask = 0b111;
-    unsigned int argMask = 0b0000000011111111;
+    unsigned int instMask = 31; // 0b11111
+    unsigned int regMask = 7; // 0b111
+    unsigned int argMask = 255; // 0b0000000011111111
 
     // Extract each field using bitwise AND and shift operations
     instruction.inst = (inst >> 11) & instMask;
@@ -59,7 +85,7 @@ instruction_t charBinToInst(char *bin){
     return instruction;
 }
 
-bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
+bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_error_t *errData){
     vRegister_t *reg;
     // check if there is a carry
     if(carry->isUsed && inst.inst != 24){
@@ -75,6 +101,11 @@ bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
             reg->value = inst.arg;
             return true;
         case 1: //goto
+            fpos_t pos = searchLabel(inst.arg, filename, errData);
+            if(pos == -1){
+                return false;
+            }
+            fsetpos(file, &pos);
             return true;
         case 2: //call
             return true;
@@ -291,6 +322,35 @@ vRegister_t *getRegister(int reg){
             return NULL;
     }
 }
+
+fpos_t searchLabel(int labId, char *filename, asm_error_t *errData){
+    FILE *file = fopen(filename, "rb");
+    if(file == NULL){
+        errorfnf(filename, errData);
+        return 0;
+    }
+    char line[LINE_MAX_BITS];
+    fpos_t pos;
+    while(fgets(line, LINE_MAX_BITS + 1, file)) {
+        if(line[0] == '1'){
+            int inst = (int)strtoul(line, NULL, 2);
+            unsigned int instMask = 31; // 0b11111
+            unsigned int argMask = 255; // 0b0000000011111111
+            
+            int instId = (inst >> 11) & instMask;
+            int arg = inst & argMask;
+
+            if(instId == 18 && arg == labId){
+                fgetpos(file, &pos);
+                fclose(file);
+                return pos;
+            }
+        }
+    }
+    fclose(file);
+    return -1;
+}
+
 
 bool opAdd(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
