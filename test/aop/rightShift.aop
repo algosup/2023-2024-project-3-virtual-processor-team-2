@@ -10,7 +10,7 @@ mov rg1, 3
 rsh rg0, rg1
 // rg0 == 151
 
-// Test rsh with register <- variable
+// Test rsh with register <- variabled
 var var1, 3
 rsh rg0, var1
 // rg0 == 18

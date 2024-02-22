@@ -1,21 +1,26 @@
 // Test draw implementation (ASSERT_TRUE)
 
 // Test draw with string
-mov rg0, "AT2 is amazing!"
+var var1, "AT2 is amazing!"
+mov rg0, var1
 draw rg0
 
-// Test draw with charater
-mov rg0, 'C'
+// Test draw with character
+var var2, 'C'
+mov rg0, var2
 draw rg0
 
 // Test draw with hexadecimal
-mov rg0, 0xFFF 
+var var3, 0xFFF
+mov rg0, var3 
 draw rg0
 
 // Test draw with binary
-mov rg0, 0b1111
+var var4, 0b1111
+mov rg0, var4
 draw rg0
 
 // Test draw with numbers
-mov rg0, 10
+var var5, 10
+mov rg0, var5
 draw rg0
