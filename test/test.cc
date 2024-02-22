@@ -549,7 +549,7 @@ TEST(parseFile, Parsing) {
   asm_error_t *errData = initErrorFile(fileName);
   varList_t *varList = createEmptyVarList();  
   instList_t *nodeList = createEmptyInstList();
-  char *fileName = const_cast<char *>("../test/test.aop");
+  char *fileName = const_cast<char *>("../test/aop/test.aop");
   bool parsing = false;
   parseFile(nodeList, fileName, varList, errData);
   if (nodeList->head != NULL) {

@@ -1,0 +1,11 @@
+// Test draw implementation (TRUE)
+mov rg0, "Hello, World!"
+draw rg0
+mov rg0, 'C'
+draw rg0
+mov rg0, 0xFFF 
+draw rg0
+mov rg0, 0b1111
+draw rg0
+mov rg0, 10
+draw rg0
