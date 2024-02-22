@@ -9,6 +9,7 @@
 #include <time.h>
 
 #include "ast.h"
+#include "stringPlus.h"
 
 
 char *getIntCode(enum interruptKind kind, asm_error_t *errData){
@@ -98,7 +99,7 @@ bool addVar(varList_t *varList, char *name, char *value, long lineNb, asm_error_
             // create id
             varList->list[i].id = i;
             varList->list[i].name = name;
-            varList->list[i].value = value;
+            varList->list[i].value = cleanString(value, errData);
             return true;
         }
     }
