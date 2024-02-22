@@ -15,22 +15,24 @@ typedef struct {
     uint16_t value;
 } register_t;
 
+// Struct of instruction's values
 typedef struct{
     unsigned int inst;
     unsigned int reg;
     unsigned int arg;
 } instruction_t;
 
+// Struct of carry's values
 typedef struct{
     unsigned int nextArg;
     bool isUsed;
 } carry_t;
 
+// Struct of variable's values
 typedef struct {
     int size;
     int *data;
 } vProcVar_t;
-
 
 
 /*

@@ -70,6 +70,5 @@ bool runCmd(char *command, asm_error_t *errData){
         }
         fclose(file);
     }
-    printVar(0);
     return true;
 }

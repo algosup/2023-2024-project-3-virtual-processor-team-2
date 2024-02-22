@@ -62,12 +62,17 @@ instruction_t charBinToInst(char *bin){
 bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
     register_t *reg;
     // check if there is a carry
-    if(carry->isUsed){
+    if(carry->isUsed && inst.inst != 24){
         inst.arg = carry->nextArg;
         carry->isUsed = false;
     }
     switch(inst.inst){
         case 0: //mov
+            reg = getRegister(inst.reg);
+            if(reg == NULL){
+                return false;
+            }
+            reg->value = inst.arg;
             return true;
         case 1: //goto
             return true;
@@ -175,6 +180,25 @@ bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
             carry->isUsed = true;
             return true;
         case 24: //mov to var
+            // set datas to 0
+            if(vProcVars[inst.arg].data == NULL){
+                vProcVars[inst.arg].data = malloc(sizeof(int)*inst.arg);
+                for(unsigned int i = 0; i < inst.arg; i++){
+                    vProcVars[inst.arg].data[i] = 0;
+                }
+            }
+            // mov arg to target var
+            if(vProcVars[inst.arg].size > 1){
+                vProcVars[inst.arg].data[1] = carry->nextArg >> 8;
+                vProcVars[inst.arg].data[0] = carry->nextArg;
+                // reset size
+                vProcVars[inst.arg].size = 2;
+            }
+            else{
+                vProcVars[inst.arg].data[0] = carry->nextArg;
+            }
+            // disable carry
+            carry->isUsed = false;
             return true;
         case 25: //var size
             vProcVars[lastVarIdx].size = inst.arg;
@@ -202,7 +226,7 @@ bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
 bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData){
     switch(inst.arg){
         case 0: //nigeru
-            return true;
+            return false;
         case 1: // draw
             // print reg 0
             printf("%d\n", rg0.value);
