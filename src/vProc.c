@@ -163,6 +163,16 @@ bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
         case 22: //ret
             return true;
         case 23: //mov from var
+            // set carry to var data
+            if(vProcVars[inst.arg].size > 1){
+                carry->nextArg = vProcVars[inst.arg].data[1];
+                carry->nextArg <<= 8;
+                carry->nextArg |= vProcVars[inst.arg].data[0];
+            }
+            else{
+                carry->nextArg = vProcVars[inst.arg].data[0];
+            }
+            carry->isUsed = true;
             return true;
         case 24: //mov to var
             return true;
@@ -194,6 +204,8 @@ bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData){
         case 0: //nigeru
             return true;
         case 1: // draw
+            // print reg 0
+            printf("%d\n", rg0.value);
             return true;
         case 2: // ob1
             return true;
