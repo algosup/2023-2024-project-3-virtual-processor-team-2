@@ -9,6 +9,7 @@ This document contains the main management artifacts:
 - [Appendix](#appendix)
     - [1. Product Logo](#1-product-logo)
     - [2. Management Tools](#2-management-tools)
+    - [3. Statement of Work](#3-statement-of-work)
 
 You can also take a look at [cumulative weekly reports](weekly_reports/cumulative.md) file.
 
@@ -88,8 +89,13 @@ The spreadsheet for the KPI's data and graphs can be found [HERE](https://docs.g
 
 &emsp; For our product logo, we chose to give the team the opportunity to vote for their favorite design.
 <br>&emsp; You can see the results [HERE](https://docs.google.com/spreadsheets/d/13H7NKF3Axvht02Pguh0YWgaVgjaN4GnWWcN4PkJFUns/edit?usp=sharing).
-<br>&emsp; *(Feel free to change these logo to fit to your company/projects)*
 
 ### 2. Management Tools
 
 To manage efficiently the team I created a dedicated internal spreadsheets you can take a look [HERE](https://docs.google.com/spreadsheets/d/1jLRtSmWg94Tbuk7_OjGEhZ1jr0yF2lB5bi-84bGERh0/edit).
+
+### 3. Statement of Work
+
+A statement of work (SOW) is a document which is the narrative description of a project's work requirement. It defines project-specific activities, deliverables and timelines for a vendor providing services to the client. The SOW typically also includes detailed requirements and pricing, with standard regulatory and governance terms and conditions.
+
+You can take a look on this document [HERE](sow.md)
