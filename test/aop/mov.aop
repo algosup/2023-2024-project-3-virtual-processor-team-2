@@ -44,7 +44,7 @@ mov var2, "Fifty"
 // var2 == "Fifty"
 
 
-// Test mov with charaterc
+// Test mov with charater
 mov rg0, 'A'
 // rg0 == 'A'
 
