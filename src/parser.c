@@ -235,19 +235,15 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, labelList_t *labe
     }
     else if(strcmp(inst, "inc") == 0 || strcmp(inst, "++") == 0){
         newNode->op = OP_ADD;
-        // check if first argument is null
-        newNode->arg1 = "1";
-        if(newNode->arg1 == NULL){
-            errorNoArg(newNode->lineNb, errData);
-        }
+        newNode->arg1 = malloc(2);
+        strcpy(newNode->arg1, "1");
+
     }
     else if(strcmp(inst, "dec") == 0 || strcmp(inst, "--") == 0){
         newNode->op = OP_SUB;
-        newNode->arg1 = "1";
-        // check if first argument is null
-        if(newNode->arg1 == NULL){
-            errorNoArg(newNode->lineNb, errData);
-        }
+        newNode->arg1 = malloc(2);
+        strcpy(newNode->arg1, "1");
+
     }
     else if(strcmp(inst, "lab") == 0){
         newNode->op = OP_LAB;
