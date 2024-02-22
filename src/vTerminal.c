@@ -53,6 +53,9 @@ bool runCmd(char *command, asm_error_t *errData){
         char reg[4];
         char data[9];
         uint16_t currentLine = 1;
+        
+        // Set as carry for action on next instruction
+        carry_t carry = {0, false};
 
         int time = 0;
         int lastTime = 0;
@@ -61,7 +64,7 @@ bool runCmd(char *command, asm_error_t *errData){
             setClock(time, lastTime, latentTicks);
 
             instruction_t inst = charBinToInst(line);
-            if(!run(inst, errData)){
+            if(!run(inst, &carry, errData)){
                 fclose(file);
                 return false;
             }

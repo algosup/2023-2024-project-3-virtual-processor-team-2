@@ -21,6 +21,11 @@ typedef struct{
     unsigned int arg;
 } instruction_t;
 
+typedef struct{
+    unsigned int nextArg;
+    bool isUsed;
+} carry_t;
+
 
 /*
     Initialize the cache
@@ -52,11 +57,23 @@ instruction_t charBinToInst(char *bin);
     Run an instruction
     params:
         instruction_t inst: the instruction to redirect to
+        carry_t *carry: Carry for action on next instruction
         asm_error_t *errData: Error history
     returns:
         bool: if the instructions have been run
 */
-bool run(instruction_t inst, asm_error_t *errData);
+bool run(instruction_t inst, carry_t *carry, asm_error_t *errData);
+
+/*
+    Run interrupt operation
+    params:
+        instruction_t inst: the instruction to redirect to
+        carry_t *carry: Carry for action on next instruction
+        asm_error_t *errData: Error history
+    returns:
+        bool: if the instructions have been run
+*/
+bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData);
 
 /*
     Get a register

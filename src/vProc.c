@@ -68,8 +68,13 @@ instruction_t charBinToInst(char *bin){
     return instruction;
 }
 
-bool run(instruction_t inst, asm_error_t *errData){
+bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
     register_t *reg;
+    // check if there is a carry
+    if(carry->isUsed){
+        inst.arg = carry->nextArg;
+        carry->isUsed = false;
+    }
     switch(inst.inst){
         case 0: //mov
             return true;
@@ -78,7 +83,7 @@ bool run(instruction_t inst, asm_error_t *errData){
         case 2: //call
             return true;
         case 3: //int
-            return true;
+            return runInt(inst, carry, errData);
         case 4: //push
             return true;
         case 5: //xor
@@ -168,8 +173,51 @@ bool run(instruction_t inst, asm_error_t *errData){
         case 26: //var data
             return true;
         default:
-            errorInstruction("Unknown instruction", 0, errData);
-            return false;
+            exit(EXIT_FAILURE);
+    }
+}
+
+bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData){
+    switch(inst.arg){
+        case 0: //nigeru
+            return true;
+        case 1: // draw
+            return true;
+        case 2: // ob1
+            return true;
+        case 3: // cmp or
+            return true;
+        case 4: // cmp and
+            return true;
+        case 5: // cmp xor
+            return true;
+        case 6: // cmp less than
+            return true;
+        case 7: // cmp less than or equal
+            return true;
+        case 8: // cmp greater than
+            return true;
+        case 9: // cmp greater than or equal
+            return true;
+        case 10: // cmp equal
+            return true;
+        case 11: // cmp not equal
+            return true;
+        case 12: // pusha
+            return true;
+        case 13: // popa
+            return true;
+        case 14: // mov from reg
+            // set carry
+            carry->nextArg = getRegister(inst.reg)->value;
+            carry->isUsed = true;
+            return true;
+        case 15: // else
+            return true;
+        case 16: // end
+            return true;
+        default:
+            exit(EXIT_FAILURE);
     }
 }
 
