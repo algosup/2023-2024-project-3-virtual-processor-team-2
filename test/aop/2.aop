@@ -1,0 +1,6 @@
+// Test variable implementation (TRUE)
+var var1, "string"
+var var2, 100
+var var3, 'C'
+var var4, 0xFFF
+var var5, 0b1111
