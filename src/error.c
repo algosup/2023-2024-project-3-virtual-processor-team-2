@@ -459,14 +459,20 @@ void errorIntBinConversion(char *instName, long lineNb, asm_error_t *errData){
 }
 
 void errorRuntime(char *details, asm_error_t *errData){
-    char *errType = "Error: Runtime";
+    char *errType = "Runtime";
     char *errDetails = details;
     sprintf(errDetails, "Details: %s", details);
     displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
 void errorReadOnly(asm_error_t *errData){
-    char *errType = "Error: Runtime";
+    char *errType = "Runtime";
     char *errDetails = "The register 3 is read-only";
+    displayError(errType, errDetails, NULL, errorFile, errData);
+}
+
+void errorOverflow(asm_error_t *errData){
+    char *errType = "Overflow";
+    char *errDetails = "The value is too large";
     displayError(errType, errDetails, NULL, errorFile, errData);
 }

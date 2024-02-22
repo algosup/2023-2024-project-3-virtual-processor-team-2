@@ -374,6 +374,13 @@ void errorRuntime(char *details, asm_error_t *errData);
 */
 void errorReadOnly(asm_error_t *errData);
 
+/*
+    Display error messages for overflow issues
+    params:
+        errData: Error history
+*/
+void errorOverflow(asm_error_t *errData);
+
 #ifdef __cplusplus
 }
 #endif

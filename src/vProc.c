@@ -8,15 +8,15 @@
 #include <unistd.h>
 
 #include "vProc.h"
-#include "vMem.h"
 
 #define LINE_MAX_BITS 16
-
-#define CACHE_SIZE 504
-#define CACHE_BLOCK_SIZE 8
-#define CACHE_DEFAULT_VALUE "00000000"
-
+#define VAR_LIST_SIZE 256
 #define CLOCK_TICKS 1/20
+
+// variables
+vProcVar_t vProcVars[VAR_LIST_SIZE];
+
+int lastVarIdx = 0;
 
 // registers
 register_t rg0 = {true, 0};
@@ -27,15 +27,6 @@ register_t rg4 = {true, 0};
 register_t rg5 = {true, 0};
 register_t rg6 = {true, 0};
 register_t rg7 = {true, 0};
-
-char cache[CACHE_SIZE][CACHE_BLOCK_SIZE];
-
-void initCache(){
-    // Cache memory
-    for(int i=0; i<CACHE_SIZE; i++){
-        strcpy(cache[i], CACHE_DEFAULT_VALUE);
-    }
-}
 
 void setClock(int time, int lastTime, int latentTicks){
     sleep(CLOCK_TICKS);
@@ -147,7 +138,7 @@ bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
             if(reg == NULL){
                 return false;
             }
-            return opNot(reg, inst.arg, errData);
+            return opNot(reg, errData);
         case 16: //use reg
             return true;
         case 17: //var
@@ -155,6 +146,13 @@ bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
         case 18: //label
             return true;
         case 19: //var
+            if(lastVarIdx >= VAR_LIST_SIZE){
+                errorOverflow(errData);
+                return false;
+            }
+            // set var
+            vProcVars[inst.arg].data = NULL;
+            lastVarIdx = inst.arg; 
             return true;
         case 21: //mod
             reg = getRegister(inst.reg);
@@ -169,9 +167,23 @@ bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
         case 24: //mov to var
             return true;
         case 25: //var size
+            vProcVars[lastVarIdx].size = inst.arg;
+            vProcVars[lastVarIdx].data = malloc(sizeof(int)*inst.arg);
+            // set all data to 0
+            for(unsigned int i = 0; i < inst.arg; i++){
+                vProcVars[lastVarIdx].data[i] = 0;
+            }
             return true;
         case 26: //var data
-            return true;
+            // add data to var at fist free position
+            for(int i = 0; i < vProcVars[lastVarIdx].size; i++){
+                if(vProcVars[lastVarIdx].data[i] == 0){
+                    vProcVars[lastVarIdx].data[i] = inst.arg;
+                    return true;
+                }
+            }
+            errorOverflow(errData);
+            return false;
         default:
             exit(EXIT_FAILURE);
     }
@@ -332,7 +344,7 @@ bool opOr(register_t *reg, unsigned int arg, asm_error_t *errData){
     }
 }
 
-bool opNot(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opNot(register_t *reg, asm_error_t *errData){
     if(reg->writable){
         reg->value = ~reg->value;
         return true;
@@ -363,4 +375,12 @@ bool opShr(register_t *reg, unsigned int arg, asm_error_t *errData){
         errorReadOnly(errData);
         return false;
     }
+}
+
+void printVar(int idx){
+    printf("Var %d: ", idx);
+    for(int i = 0; i < vProcVars[idx].size; i++){
+        printf("%d ", vProcVars[idx].data[i]);
+    }
+    printf("\n");
 }

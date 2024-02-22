@@ -26,13 +26,12 @@ typedef struct{
     bool isUsed;
 } carry_t;
 
+typedef struct {
+    int size;
+    int *data;
+} vProcVar_t;
 
-/*
-    Initialize the cache
-    params:
-        None
-*/
-void initCache();
+
 
 /*
     Set the speed of the clock based on ticks
@@ -176,12 +175,11 @@ bool opOr(register_t *reg, unsigned int arg, asm_error_t *errData);
     NOT a value to a register
     params:
         register_t *reg: the register to NOT the value to
-        unsigned int arg: the value to NOT
         asm_error_t *errData: Error history
     returns:
         bool: if the value have been NOTed
 */
-bool opNot(register_t *reg, unsigned int arg, asm_error_t *errData);
+bool opNot(register_t *reg, asm_error_t *errData);
 
 /*
     Shift left a value to a register
@@ -204,6 +202,13 @@ bool opShl(register_t *reg, unsigned int arg, asm_error_t *errData);
         bool: if the value have been shifted right
 */
 bool opShr(register_t *reg, unsigned int arg, asm_error_t *errData);
+
+/*
+    print a variable data
+    params:
+        int idx: the index of the variable
+*/
+void printVar(int idx);
 
 #ifdef __cplusplus
 }

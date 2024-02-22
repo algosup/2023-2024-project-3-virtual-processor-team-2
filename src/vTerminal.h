@@ -5,7 +5,6 @@
 
 #include "error.h"
 #include "vProc.h"
-#include "vMem.h"
 
 #ifdef __cplusplus
 extern "C" {

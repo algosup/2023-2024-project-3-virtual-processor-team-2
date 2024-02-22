@@ -90,7 +90,6 @@ add_executable(vat2
     src/error.c
     src/vat2.c
     src/vProc.c
-    src/vMem.c
     src/vTerminal.c
 )
 

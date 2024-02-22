@@ -8,13 +8,16 @@
 
 #include "vTerminal.h"
 
+#define LINE_MAX_BITS 16
+
 void runVTerminal(asm_error_t *errData){
     char *command = (char *)malloc(100 * sizeof(char));
     bool isRunning = true;
     bool isExecuted = false;
     while(isRunning){
         printf("vTerminal > ");
-        gets(command);
+        fgets(command, 64, stdin);
+        command[strcspn(command, "\n")] = 0;
         if(strcmp(command, "exit") == 0){
             isRunning = false;
         }
@@ -48,11 +51,7 @@ bool runCmd(char *command, asm_error_t *errData){
             errorfnf(command, errData);
         }
         // Run program
-        char line[16];
-        char operand[6];
-        char reg[4];
-        char data[9];
-        uint16_t currentLine = 1;
+        char line[LINE_MAX_BITS];
         
         // Set as carry for action on next instruction
         carry_t carry = {0, false};
