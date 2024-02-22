@@ -19,14 +19,14 @@ vProcVar_t vProcVars[VAR_LIST_SIZE];
 int lastVarIdx = 0;
 
 // registers
-register_t rg0 = {true, 0};
-register_t rg1 = {true, 0};
-register_t rg2 = {true, 0};
-register_t rg3 = {false, 0};
-register_t rg4 = {true, 0};
-register_t rg5 = {true, 0};
-register_t rg6 = {true, 0};
-register_t rg7 = {true, 0};
+vRegister_t rg0 = {true, 0};
+vRegister_t rg1 = {true, 0};
+vRegister_t rg2 = {true, 0};
+vRegister_t rg3 = {false, 0};
+vRegister_t rg4 = {true, 0};
+vRegister_t rg5 = {true, 0};
+vRegister_t rg6 = {true, 0};
+vRegister_t rg7 = {true, 0};
 
 void setClock(int time, int lastTime, int latentTicks){
     sleep(CLOCK_TICKS);
@@ -60,7 +60,7 @@ instruction_t charBinToInst(char *bin){
 }
 
 bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
-    register_t *reg;
+    vRegister_t *reg;
     // check if there is a carry
     if(carry->isUsed && inst.inst != 24){
         inst.arg = carry->nextArg;
@@ -269,7 +269,7 @@ bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData){
     }
 }
 
-register_t *getRegister(int reg){
+vRegister_t *getRegister(int reg){
     switch(reg){
         case 0:
             return &rg0;
@@ -292,7 +292,7 @@ register_t *getRegister(int reg){
     }
 }
 
-bool opAdd(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opAdd(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
         reg->value += arg;
         return true;
@@ -303,7 +303,7 @@ bool opAdd(register_t *reg, unsigned int arg, asm_error_t *errData){
     }
 }
 
-bool opSub(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opSub(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
         reg->value -= arg;
         return true;
@@ -314,7 +314,7 @@ bool opSub(register_t *reg, unsigned int arg, asm_error_t *errData){
     }
 }
 
-bool opDiv(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opDiv(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
         reg->value /= arg;
         return true;
@@ -325,7 +325,7 @@ bool opDiv(register_t *reg, unsigned int arg, asm_error_t *errData){
     }
 }
 
-bool opMul(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opMul(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
         reg->value *= arg;
         return true;
@@ -336,7 +336,7 @@ bool opMul(register_t *reg, unsigned int arg, asm_error_t *errData){
     }
 }
 
-bool opMod(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opMod(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
         reg->value %= arg;
         return true;
@@ -347,7 +347,7 @@ bool opMod(register_t *reg, unsigned int arg, asm_error_t *errData){
     }
 }
 
-bool opXor(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opXor(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
         reg->value ^= arg;
         return true;
@@ -358,7 +358,7 @@ bool opXor(register_t *reg, unsigned int arg, asm_error_t *errData){
     }
 }
 
-bool opAnd(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opAnd(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
         reg->value &= arg;
         return true;
@@ -369,7 +369,7 @@ bool opAnd(register_t *reg, unsigned int arg, asm_error_t *errData){
     }
 }
 
-bool opOr(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opOr(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
         reg->value |= arg;
         return true;
@@ -380,7 +380,7 @@ bool opOr(register_t *reg, unsigned int arg, asm_error_t *errData){
     }
 }
 
-bool opNot(register_t *reg, asm_error_t *errData){
+bool opNot(vRegister_t *reg, asm_error_t *errData){
     if(reg->writable){
         reg->value = ~reg->value;
         return true;
@@ -391,7 +391,7 @@ bool opNot(register_t *reg, asm_error_t *errData){
     }
 }
 
-bool opShl(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opShl(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
         reg->value <<= arg;
         return true;
@@ -402,7 +402,7 @@ bool opShl(register_t *reg, unsigned int arg, asm_error_t *errData){
     }
 }
 
-bool opShr(register_t *reg, unsigned int arg, asm_error_t *errData){
+bool opShr(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
         reg->value >>= arg;
         return true;

@@ -13,7 +13,7 @@
 #include "error.h"
 #include "binExporter.h"
 
-#define VERSION "0.3.0"
+#define VERSION "0.5.0"
 #define BIN_NAME "bin.2at2"
 
 int main(int argc, char *argv[]) {
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     // ---------- Parse ----------
 
     // run parser
-    parseFile(instList, argv[1], varList, errData);
+    parseFile(instList, argv[1], varList, labelList, errData);
 
     if(flags.debug){
         printAst(instList, errData);
