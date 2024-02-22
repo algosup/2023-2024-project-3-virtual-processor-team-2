@@ -100,7 +100,7 @@ If you want to contribute please take a look to [CONTRIBUTING.md](CONTRIBUTING.m
 
 ## 🗃️ Versions
 - **Latest :** ---
-- **Current :** 0.3.0
+- **Current :** 0.4.0
 - Versions List : [Cliquer pour afficher](https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/tags)
 
 ## ⚖️ License
