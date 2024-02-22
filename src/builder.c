@@ -36,6 +36,9 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_
         case OP_CALL:
             buildCall(node, labeList, errData);
             break;
+        case OP_RET:
+            node->isBuilt = true;
+            break;
         case OP_VAR:
             buildVar(node, varList, errData);
             break;
