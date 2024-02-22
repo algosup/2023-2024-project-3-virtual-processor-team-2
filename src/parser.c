@@ -80,7 +80,7 @@ void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_err
 
     // read the file line by line
     while(fgets(line, LINE_MAX_SIZE, file)){
-            // Check if one of the file's line doesn't exceed 64 characters
+        // Check if one of the file's line doesn't exceed 64 characters
         if (!checkLineSize(line, file)){
             errorLineSize(lineNb, errData);
         }
@@ -117,6 +117,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, 
     instNode_t *newNode = createEmptyInstNode(errData);
     newNode->id = nodeId;
     newNode->lineNb = lineNb;
+    newNode->inputReg = RG_0;
 
     // Get the instruction
     char *inst = getInst(line, lineNb, errData);
@@ -389,7 +390,6 @@ char **getInstArgs(char *line, long lineNb, asm_error_t *errData){
         token = strtok(NULL, ",");
         if (!token) {
             if (i == 0) {
-                errorNoArg(lineNb, errData);
                 return args;
             }
             args[i] = NULL;
