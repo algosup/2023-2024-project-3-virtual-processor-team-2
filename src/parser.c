@@ -273,72 +273,82 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
     else if(strcmp(inst, "ngr") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "0";
+        newNode->inter = INT_EXIT;
     }
     else if(strcmp(inst, "draw") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "1";
+        newNode->inter = INT_DRAW;
     }
     else if(strcmp(inst, "ob1") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "2";
+        newNode->inter = INT_OB1;
     }
     else if(strcmp(inst, "if_or") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "3";
+        newNode->inter = INT_OR;
     }
     else if(strcmp(inst, "if_and") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "4";
+        newNode->inter = INT_AND;
     }
     else if(strcmp(inst, "if_xor") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "5";
+        newNode->inter = INT_XOR;
     }
     else if(strcmp(inst, "if_lt") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "6";
+        newNode->inter = INT_LT;
     }
     else if(strcmp(inst, "if_lte") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "7";
+        newNode->inter = INT_LTE;
     }
     else if(strcmp(inst, "if_gt") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "8";
+        newNode->inter = INT_GT;
     }
     else if(strcmp(inst, "if_gte") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "9";
+        newNode->inter = INT_GTE;
     }
     else if(strcmp(inst, "if_eq") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "10";
+        newNode->inter = INT_EQ;
     }
     else if(strcmp(inst, "if_neq") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "11";
+        newNode->inter = INT_NEQ;
     }
     else if(strcmp(inst, "pusha") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "12";
+        newNode->inter = INT_PUSHA;
     }
     else if(strcmp(inst, "popa") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "13";
+        newNode->inter = INT_POPA;
+    }
+    else if(strcmp(inst, "else") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->inter = INT_ELSE;
+    }
+    else if(strcmp(inst, "end") == 0){
+        newNode->op = OP_INT;
+        newNode->isInter = true;
+        newNode->inter = INT_END;
     }
     else{
         errorInstruction(inst, newNode->lineNb, errData);

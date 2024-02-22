@@ -36,6 +36,15 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_
         case OP_CALL:
             buildCall(node, labeList, errData);
             break;
+        case OP_INT:
+            node->isBuilt = true;
+            break;
+        case OP_B_XOR: case OP_DIV: case OP_ADD: case OP_SUB: case OP_MUL: case OP_R_SHIFT: case OP_L_SHIFT: case OP_B_AND: case OP_B_OR: case OP_B_NOT: case OP_MOD:
+            buildOperation(node, varList, errData);
+            break;
+        case OP_PUSH:
+            node->isBuilt = true;
+            break;
         case OP_RET:
             node->isBuilt = true;
             break;
@@ -44,9 +53,9 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_
             break;
         case OP_LAB:
             buildLabel(node, labeList, errData);
-            break;
-        case OP_B_XOR: case OP_DIV: case OP_ADD: case OP_SUB: case OP_MUL: case OP_R_SHIFT: case OP_L_SHIFT: case OP_B_AND: case OP_B_OR: case OP_B_NOT: case OP_MOD:
-            buildOperation(node, varList, errData);
+            break;       
+        case OP_POP:
+            node->isBuilt = true;
             break;
         default:
             unknowError("Operation code not found during build", errData);
