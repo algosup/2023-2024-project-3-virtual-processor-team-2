@@ -152,9 +152,11 @@ TEST(isOp, add) {
   char *inst = const_cast<char *>("add");
 
   instNode_t *newNode = createEmptyInstNode(errData);
+  newNode->arg1 = const_cast<char *>("rg1");
 
   varList_t *varList = createEmptyVarList();
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_ADD);
@@ -164,7 +166,10 @@ TEST(isOp, sub) {
   char *inst = const_cast<char *>("-");
   varList_t *varList = createEmptyVarList();
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_SUB);
@@ -174,7 +179,10 @@ TEST(isOp, mul) {
   char *inst = const_cast<char *>("*");
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_MUL);
@@ -185,29 +193,25 @@ TEST(isOp, div) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_DIV);
 }
-TEST(isOp, incOp) {
-  asm_error_t *errData = initErrorFile(fileName);
-  char *inst = const_cast<char *>("=");
 
-  varList_t *varList = createEmptyVarList();  
-  instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
-
-  ASSERT_FALSE(isThatKind);
-  ASSERT_FALSE(newNode->op == OP_ADD);
-}
 TEST(isOp, push) {
   asm_error_t *errData = initErrorFile(fileName);
   char *inst = const_cast<char *>("push");
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+ 
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_PUSH);
@@ -218,7 +222,10 @@ TEST(isOp, pop) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+ 
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_POP);
@@ -229,7 +236,8 @@ TEST(isOp, goto) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_GOTO);
@@ -240,7 +248,8 @@ TEST(isOp, call) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_CALL);
@@ -251,7 +260,10 @@ TEST(isOp, and) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+  
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_B_AND);
@@ -262,7 +274,10 @@ TEST(isOp, or) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+  
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_B_OR);
@@ -273,7 +288,10 @@ TEST(isOp, not) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+  
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_B_NOT);
@@ -284,7 +302,10 @@ TEST(isOp, xor) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+  
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_B_XOR);
@@ -295,7 +316,10 @@ TEST(isOp, mod) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+  
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_MOD);
@@ -306,7 +330,10 @@ TEST(isOp, shr) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+  
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_R_SHIFT);
@@ -317,7 +344,10 @@ TEST(isOp, shl) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg1 = const_cast<char *>("rg1");
+  
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_L_SHIFT);
@@ -328,7 +358,8 @@ TEST(isOp, inc) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_ADD);
@@ -339,7 +370,8 @@ TEST(isOp, dec) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_SUB);
@@ -350,29 +382,35 @@ TEST(isOp, lab) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
-
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_LAB);
 }
+
 TEST(isOp, var) {
   asm_error_t *errData = initErrorFile(fileName);
   char *inst = const_cast<char *>("var");
-
-  varList_t *varList = createEmptyVarList();  
+  varList_t *varList = createEmptyVarList();
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  newNode->arg0 = const_cast<char *>("new");
+  newNode->arg1 = const_cast<char *>("test");
+
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_VAR);
 }
+
 TEST(isOp, ret) {
   asm_error_t *errData = initErrorFile(fileName);
   char *inst = const_cast<char *>("ret");
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_RET);
@@ -383,7 +421,8 @@ TEST(isOp, int) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -394,7 +433,8 @@ TEST(isOp, ngr) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -405,7 +445,8 @@ TEST(isOp, draw) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -416,7 +457,8 @@ TEST(isOp, ob1) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -428,7 +470,8 @@ TEST(isOp, IntOR) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -440,7 +483,8 @@ TEST(isOp, IntIF_AND) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -451,7 +495,8 @@ TEST(isOp, IntIF_XOR) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -462,7 +507,8 @@ TEST(isOp, IntIF_LT) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -473,7 +519,8 @@ TEST(isOp, IntIF_LTE) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -484,7 +531,8 @@ TEST(isOp, IntIF_GT) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -495,7 +543,8 @@ TEST(isOp, IntIF_GTE) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -506,7 +555,8 @@ TEST(isOp, IntIF_EQ) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -517,7 +567,8 @@ TEST(isOp, IntIF_NEQ) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -528,7 +579,8 @@ TEST(isOp, pusha) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -539,7 +591,8 @@ TEST(isOp, popa) {
 
   varList_t *varList = createEmptyVarList();  
   instNode_t *newNode = createEmptyInstNode(errData);
-  bool isThatKind = isOp(inst, newNode, varList, errData);
+  labelList_t *labelList = createEmptyLabelList();
+  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
 
   ASSERT_TRUE(isThatKind);
   ASSERT_TRUE(newNode->op == OP_INT);
@@ -549,9 +602,11 @@ TEST(parseFile, Parsing) {
   asm_error_t *errData = initErrorFile(fileName);
   varList_t *varList = createEmptyVarList();  
   instList_t *nodeList = createEmptyInstList();
+  labelList_t *labelList = createEmptyLabelList();
+
   char *fileName = const_cast<char *>("../test/aop/test.aop");
   bool parsing = false;
-  parseFile(nodeList, fileName, varList, errData);
+  parseFile(nodeList, fileName, varList, labelList, errData);
   if (nodeList->head != NULL) {
     parsing = true;
   }
