@@ -46,10 +46,10 @@ void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_e
         } else {
             // write the argument
             if(node->arg0 != NULL){
-                fwrite(stringToBinary(node->arg0, errData), 1, strlen(node->arg0) * 8, file);
+                fwrite(stringToBinary(node->arg0, errData), 1, sizeof(char)* 8, file);
             }
             else if(node->arg1 != NULL){
-                fwrite(stringToBinary(node->arg1, errData), 1, strlen(node->arg1) * 8, file);
+                fwrite(stringToBinary(node->arg1, errData), 1, sizeof(char)* 8, file);
             }
             else {
                 fwrite("00000000", 1, 8, file);
@@ -204,7 +204,7 @@ char *stringToBinary(char *s, asm_error_t *errData) {
         for (int i = 7; i >= 0; i--) {
             bin[i] = (num >> (7 - i)) & 1 ? '1' : '0';
         }
-        bin[8] = '\0'; //
+        bin[8] = '\0';
         return bin;
     } else {
         // Convert char to byte
