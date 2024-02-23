@@ -133,11 +133,11 @@ As students who will work in internal of a school we will not get paid and the p
 
 ### Performance
 
-Our KPIs can be seen at on our spreadsheet [HERE](https://docs.google.com/spreadsheets/d/13n8fdWMEYFlJKhJ_OWILYcpX_c6CvLBpt4ebboLiU18/edit#gid=0)
+Our KPIs can be seen on our spreadsheet [HERE](https://docs.google.com/spreadsheets/d/13n8fdWMEYFlJKhJ_OWILYcpX_c6CvLBpt4ebboLiU18/edit#gid=0).
 
 ### Factors
 
-For the success of this project according to deadlines, we will need a lot of personal investment and to not lose project time replaced by classes, events, exams or just beeing deleted due to an unpredictable issue.
+For the success of this project according to deadlines, we will need a lot of personal commitment and we must ensure that project time is not compromised by classes, events, exams or just beeing deleted due to an unpredictable issue.
 
 #### CSF 1: Successful Parser Development
 
@@ -265,14 +265,14 @@ Key:
 | I      | Informed    | Those who are kept up-to-date on progress, often only on completion of the task or deliverable, and with whom there is just one-way communication |
 |        | -           | Not involved                                                                                                                                      |
 
-RACI colored spreadsheet easily readable can be found [HERE](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing).
+A readable and colored RACI spreadsheet can be found [HERE](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing).
 
 ## Context
 
 
 ### Present
 
-The actual work asked by [ALGOSUP](https://algosup.com) serve has C language practicing in the company conditions to train their students as real professional.
+The actual work asked by [ALGOSUP](https://algosup.com) serves as C language practicing in company conditions to train their students as real professionals.
 
 This project helped use to know how a computer works and lead us to a better knowledge of programming but also others roles related to the [IT](https://en.wikipedia.org/wiki/Information_technology) professional world.
 
