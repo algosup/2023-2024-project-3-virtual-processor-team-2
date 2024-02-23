@@ -137,7 +137,7 @@ Our KPIs can be seen on our spreadsheet [HERE](https://docs.google.com/spreadshe
 
 ### Factors
 
-For the success of this project according to deadlines, we will need a lot of personal investment and to not lose project time replaced by classes, events, exams or just beeing deleted due to an unpredictable issue.
+For the success of this project according to deadlines, we will need a lot of personal commitment and we must ensure that project time is not compromised by classes, events, exams or just beeing deleted due to an unpredictable issue.
 
 #### CSF 1: Successful Parser Development
 
