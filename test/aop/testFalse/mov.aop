@@ -1,0 +1,44 @@
+// Test mov implementation (ASSERT_FALSE)
+
+// Test mov with strings
+mov rg0, "Ten"
+// rg0 == "Ten"
+
+mov rg1, rg0
+// rg1 == "Ten"
+
+var var3, "Twenty"
+mov rg0, var3
+// rg0 == "Twenty"
+
+mov var3, rg0
+// var3 == "Ten"
+
+var var6, "One-hundred"
+mov var3, var6
+// var3 == "One-hundred"
+
+mov var6, "Fifty"
+// var6 == "Fifty"
+
+
+// Test mov with charater
+mov rg0, 'A'
+// rg0 == 'A'
+
+mov rg1, rg0
+// rg1 == 'A'
+
+var var4, 'T'
+mov rg0, var4
+// rg0 == 'T'
+
+mov var4, rg0
+// var4 == 'A'
+
+var var5, '2'
+mov var4, var5
+// var4 == '2'
+
+mov var5, 'o'
+// var5 == 'o'

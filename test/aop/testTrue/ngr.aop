@@ -1,0 +1,4 @@
+// Test ngr implementation (ASSERT_TRUE)
+
+mov rg0, 100
+ngr

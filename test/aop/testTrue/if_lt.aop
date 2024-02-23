@@ -1,0 +1,14 @@
+// Test if_lt implementation (ASSERT_TRUE)
+
+mov rg0, 100
+mov rg1, 200
+
+if_lt
+goto labelTrue
+
+lab labExit
+ngr
+
+lab labelTrue
+    add rg0, 1000
+    // rg0 == 1100

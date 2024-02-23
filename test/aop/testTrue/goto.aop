@@ -1,0 +1,14 @@
+// Test goto implementation (ASSERT_TRUE)
+
+lab labelName
+mov rg0, 100
+// rg0 == 100
+goto labExit
+
+lab labUseless
+mov rg1, 200
+// rg1 == 0
+
+lab labExit
+mov rg2, 300
+// rg2 == 300
