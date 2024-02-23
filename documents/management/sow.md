@@ -93,7 +93,7 @@ As students who will work in internal of a school we will not get paid and the p
 
 | O1 | Develop a Functional Parser for the Assembler |
 | --- | --- |
-| KR1 | Complete research on parsing techniques and tools by. |
+| KR1 | Complete research on parsing techniques and tools. |
 | KR2 | Implement a basic parser that successfully reads and interprets AT2 language syntax. |
 | KR3 |  Conduct internal testing to ensure the parser meets accuracy and efficiency standards. |
 | KR4 | Perform a code review to identify and address any potential issues or improvements in the parser. |
@@ -102,20 +102,20 @@ As students who will work in internal of a school we will not get paid and the p
 | O2 | Build a Robust Builder Module for the Assembler |
 |--|--|
 | KR1 | Research best practices for assembler construction and design. |
-| KR2 | Implement a builder module that translates parsed instructions into executable machine code throught the converter. |
+| KR2 | Implement a builder module that translates parsed instructions into executable machine code through the converter. |
 | KR3 | Conduct thorough testing to validate the accuracy and efficiency of the builder module. |
 
 | O3 |  Create a Converter Module |
 | --- | --- |
-| KR1 | Investigate converter module requirements for the assembler |
-| KR2 | Develop a converter module that transforms AT2 code into machine code suitable for the target architecture |
-| KR3 | Verify the compatibility and effectiveness of the converter module through extensive testing |
+| KR1 | Investigate converter module requirements for the assembler. |
+| KR2 | Develop a converter module that transforms AT2 code into machine code suitable for the target architecture. |
+| KR3 | Verify the compatibility and effectiveness of the converter module through extensive testing. |
 
 | O4 | Ensure Alignment with Project Timeline and Quality Standards |
 |--|--|
-| KR1 | Establish a timeline for the completion of assembler development with clear milestones |
-| KR2 | Regularly review progress against the established timeline and make adjustments as necessary |
-| KR3 | Ensure that the assembler meets quality standards and project requirements |
+| KR1 | Establish a timeline for the completion of assembler development with clear milestones. |
+| KR2 | Regularly review progress against the established timeline and make adjustments as necessary. |
+| KR3 | Ensure that the assembler meets quality standards and project requirements. |
 
 | O5 | Facilitate Knowledge Transfer and Documentation |
 |--|--|
@@ -125,11 +125,11 @@ As students who will work in internal of a school we will not get paid and the p
 
 | O6 | Initiate Development of the Virtual Processor |
 | -- | --|
-| KR1 | Define the key features and specifications for the virtual processor |
-| KR2 | Develop a prototype of the virtual processor with basic functionality |
-| KR3 |  Conduct internal testing on the prototype to identify and resolve any critical issues or bugs |
-| KR4 | Collaborate with team members to gather feedback on the virtual processor's initial performance and usability |
-| KR5 | Document the progress and challenges faced during the virtual processor development for future reference |
+| KR1 | Define the key features and specifications for the virtual processor. |
+| KR2 | Develop a prototype of the virtual processor with basic functionality. |
+| KR3 |  Conduct internal testing on the prototype to identify and resolve any critical issues or bugs. |
+| KR4 | Collaborate with team members to gather feedback on the virtual processor's initial performance and usability. |
+| KR5 | Document the progress and challenges faced during the virtual processor development for future reference. |
 
 ### Performance
 
