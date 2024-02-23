@@ -1,0 +1,12 @@
+// Test push and pop implementation (ASSERT_TRUE)
+
+mov rg0, 30
+draw
+
+push rg0
+
+mov rg0, 50
+
+draw
+pop rg0
+draw

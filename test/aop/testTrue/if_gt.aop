@@ -1,11 +1,11 @@
-// Test if_lt implementation (ASSERT_TRUE)
+// Test if_gt implementation (ASSERT_TRUE)
 
-    mov rg0, 0
+    mov rg0, 100
     mov rg1, 50
     goto start
 lab start
     draw
-    if_lt
+    if_gt
     goto labelTrue
     goto labExit
 
@@ -13,6 +13,6 @@ lab labExit
     ngr
 
 lab labelTrue
-    add rg0, 1
+    sub rg0, 1
     // rg0 == 50
     goto start

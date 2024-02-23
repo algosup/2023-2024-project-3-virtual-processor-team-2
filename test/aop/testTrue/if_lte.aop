@@ -1,11 +1,11 @@
-// Test if_lt implementation (ASSERT_TRUE)
+// Test if_lte implementation (ASSERT_TRUE)
 
     mov rg0, 0
     mov rg1, 50
     goto start
 lab start
     draw
-    if_lt
+    if_lte
     goto labelTrue
     goto labExit
 

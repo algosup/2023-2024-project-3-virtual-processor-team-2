@@ -3,20 +3,14 @@
 // Test add with register <- immediate value
 mov rg0, 0
 add rg0, 10
-call printRG0
-mov rg1, rg0
+// rg0 == 10
 
 // Test add with register <- register
-mov rg0, 20
-add rg0, rg1
-call printRG0
+mov rg1, 20
+add rg1, rg0
+// rg1 == 30
 
 // Test add with register <- variable
 var var1, 50
 add rg1, var1
-call printRG0
-ngr
-
-lab printRG0
-draw rg0
-ret
+// rg1 == 80
