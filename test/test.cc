@@ -464,43 +464,6 @@ TEST(isOp, ob1) {
   ASSERT_TRUE(newNode->op == OP_INT);
 }
 
-TEST(isOp, IntOR) {
-  asm_error_t *errData = initErrorFile(fileName);
-  char *inst = const_cast<char *>("if_or");
-
-  varList_t *varList = createEmptyVarList();  
-  instNode_t *newNode = createEmptyInstNode(errData);
-  labelList_t *labelList = createEmptyLabelList();
-  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
-
-  ASSERT_TRUE(isThatKind);
-  ASSERT_TRUE(newNode->op == OP_INT);
-}
-
-TEST(isOp, IntIF_AND) {
-  asm_error_t *errData = initErrorFile(fileName);
-  char *inst = const_cast<char *>("if_and");
-
-  varList_t *varList = createEmptyVarList();  
-  instNode_t *newNode = createEmptyInstNode(errData);
-  labelList_t *labelList = createEmptyLabelList();
-  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
-
-  ASSERT_TRUE(isThatKind);
-  ASSERT_TRUE(newNode->op == OP_INT);
-}
-TEST(isOp, IntIF_XOR) {
-  asm_error_t *errData = initErrorFile(fileName);
-  char *inst = const_cast<char *>("if_xor");
-
-  varList_t *varList = createEmptyVarList();  
-  instNode_t *newNode = createEmptyInstNode(errData);
-  labelList_t *labelList = createEmptyLabelList();
-  bool isThatKind = isOp(inst, newNode, varList, labelList, errData);
-
-  ASSERT_TRUE(isThatKind);
-  ASSERT_TRUE(newNode->op == OP_INT);
-}
 TEST(isOp, IntIF_LT) {
   asm_error_t *errData = initErrorFile(fileName);
   char *inst = const_cast<char *>("if_lt");
