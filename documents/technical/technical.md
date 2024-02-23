@@ -149,24 +149,50 @@ The folder structure for the project will be as follows:
 
 ```folder
 ├── 2023-2024-project-3-virtual-processor-team-2
+|   ├── .github/workflows
+|   |   ├── actions_dev.yml
 |   ├── documents
 |   |   ├── communications
 |   |   |   ├── minutes_of_meeting_01_16_2024.pdf
 |   |   ├── functional
-|   |   |   ├── 2023_2024_project_3_virtual_processor.pdf
 |   |   |   ├── at2_assembly_language_documentation.md
 |   |   |   ├── functional_specification_document_template.md
 |   |   ├── images
+|   |   |   ├── AOP
+|   |   |   |   ├── ico
+|   |   |   |   |   ├── aop_logo_256px.ico
+|   |   |   |   ├── png
+|   |   |   |   |   ├── aop_logo_256px.png
+|   |   |   ├── AT2
+|   |   |   |   ├── ico
+|   |   |   |   |   ├── AT2_logo_256px.ico
+|   |   |   |   ├── png
+|   |   |   |   |   ├── AT2_logo_256px.png
+|   |   |   ├── IAT2
+|   |   |   |   ├── ico
+|   |   |   |   |   ├── iat2_logo_256px.ico
+|   |   |   |   ├── png
+|   |   |   |   |   ├── iat2_logo_256px.png
 |   |   |   ├── functional_images
 |   |   |   |   ├── interpreter_mockup.png
 |   |   |   |   ├── virtual_terminal.png
+|   |   |   ├── management
+|   |   |   |   ├── algosup_light_blue.svg
+|   |   |   |   ├── algosup_orange.svg
+|   |   |   |   ├── github_dark_logo.png
+|   |   |   |   ├── github_light_logo.png
+|   |   |   |   ├── linkedin_logo.png
 |   |   |   ├── qa_images
+|   |   |   |   ├── progression_graph.png
 |   |   |   |   ├── test_case_pattern.png
 |   |   |   |   ├── test_report_pattern.png
 |   |   |   ├── technical_images
-|   |   |   |   ├── state_diagram_parser_c.jpg
-|   |   |   |   ├── archi_interpreter_diagram.jpg
+|   |   |   |   ├── Diagramming 101 (Community) (Copy) (2).png
+|   |   |   |   ├── State-Diagram-parserC.jpg
+|   |   |   |   ├── assembler.png
+|   |   |   |   ├── data_model.png
 |   |   |   |   ├── data_structure_diagram.jpg
+|   |   |   |   ├── v-mmu.png
 |   |   ├── management
 |   |   |   ├── weekly_reports
 |   |   |   |   ├── cumulative.md
@@ -182,19 +208,66 @@ The folder structure for the project will be as follows:
 |   |   ├── qa
 |   |   |   ├── code_documentation_template.md
 |   |   |   ├── meetings_reports.md
-|   |   |   ├── qa_collaboration.md
 |   |   |   ├── test_cases.md
 |   |   |   ├── test_plan.md
 |   |   |   ├── test_reports.md
 |   |   ├── technical
 |   |   |   ├── roadmap.md
 |   |   |   ├── technical.md
+|   ├── src
+|   |   ├── 2at2.c
+|   |   ├── 2at2.h
+|   |   ├── ast.c
+|   |   ├── ast.h
+|   |   ├── binExporter.c
+|   |   ├── binExporter.h
+|   |   ├── builder.c
+|   |   ├── builder.h
+|   |   ├── debug.c
+|   |   ├── debug.h
+|   |   ├── error.c
+|   |   ├── error.h
+|   |   ├── parser.c
+|   |   ├── parser.h
+|   |   ├── stringPlus.c
+|   |   ├── stringPlus.h
+|   |   ├── vProc.c
+|   |   ├── vProc.h
+|   |   ├── vTerminal.c
+|   |   ├── vTerminal.h
+|   |   ├── vat2.c
+|   ├── test
+|   |   ├── aop
+|   |   |   ├── add.aop
+|   |   |   ├── addSymbol.aop
+|   |   |   ├── and.aop
+|   |   |   ├── andSymbol.aop
+|   |   |   ├── comment.aop
+|   |   |   ├── div.aop
+|   |   |   ├── divSymbol.aop
+|   |   |   ├── draw.aop
+|   |   |   ├── leftShift.aop
+|   |   |   ├── mod.aop
+|   |   |   ├── modSymbol.aop
+|   |   |   ├── mov.aop
+|   |   |   ├── mul.aop
+|   |   |   ├── mulSymbol.aop
+|   |   |   ├── or.aop
+|   |   |   ├── orSymbol.aop
+|   |   |   ├── rightShift.aop
+|   |   |   ├── sub.aop
+|   |   |   ├── subSymbol.aop
+|   |   |   ├── test.aop
+|   |   |   ├── variable.aop
+|   |   |   ├── xor.aop
+|   |   |   ├── xorSymbol.aop
+|   |   ├── test.cc
 |   ├── .gitignore
+|   ├── CMakeLists.txt
 |   ├── CODE_OF_CONDUCT.md
 |   ├── CONTRIBUTING.md
 |   ├── LICENSE
 |   ├── README.md
-|   ├── SECURITY.md
 ```
 
 ## Conventions
