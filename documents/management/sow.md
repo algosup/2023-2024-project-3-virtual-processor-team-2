@@ -274,7 +274,7 @@ A readable and colored RACI spreadsheet can be found [HERE](https://docs.google.
 
 The actual work asked by [ALGOSUP](https://algosup.com) serves as C language practicing in company conditions to train their students as real professionals.
 
-This project helped use to know how a computer works and lead us to a better knowledge of programming but also others roles related to the [IT](https://en.wikipedia.org/wiki/Information_technology) professional world.
+This project helped us to know how a computer works and lead us to a better knowledge of programming but also other roles related to the [IT](https://en.wikipedia.org/wiki/Information_technology) professional world.
 
 
 ### Future
