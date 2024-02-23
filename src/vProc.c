@@ -10,12 +10,16 @@
 
 #define LINE_MAX_BITS 16
 #define VAR_LIST_SIZE 256
+#define MAX_CALL_STACK 256
 #define CLOCK_TICKS 1/20
 
 // variables
 vProcVar_t vProcVars[VAR_LIST_SIZE];
 
 int lastVarIdx = 0;
+
+fpos_t cursorPos[MAX_CALL_STACK];
+int callStackSize = 0;
 
 // registers
 vRegister_t rg0 = {true, 0};
@@ -105,9 +109,23 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
             if(pos == -1){
                 return false;
             }
+            // goto label
             fsetpos(file, &pos);
             return true;
         case 2: //call
+            // get call position
+            fpos_t callPos;
+            fgetpos(file, &callPos);
+            if(!addCallPos(callPos)){
+                return false;
+            }
+            // search label
+            fpos_t labelPos = searchLabel(inst.arg, filename, errData);
+            if(pos == -1){
+                return false;
+            }
+            // goto label
+            fsetpos(file, &labelPos);
             return true;
         case 3: //int
             return runInt(inst, carry, errData);
@@ -197,6 +215,13 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
             }
             return opMod(reg, inst.arg, errData);
         case 22: //ret
+            // get call next position
+            fpos_t callNextPos = cursorPos[0];
+            if(!removeCallPos()){
+                return false;
+            }
+            // go to new position
+            fsetpos(file, &callNextPos);
             return true;
         case 23: //mov from var
             // set carry to var data
@@ -471,6 +496,35 @@ bool opShr(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
         errorReadOnly(errData);
         return false;
     }
+}
+
+bool addCallPos(fpos_t pos) {
+    if (callStackSize >= MAX_CALL_STACK) {
+        fprintf(stderr, "Call stack overflow\n");
+        return false;
+    }
+
+    for (int i = callStackSize; i > 0; i--) {
+        cursorPos[i] = cursorPos[i - 1];
+    }
+
+    cursorPos[0] = pos;
+    ++callStackSize;
+    return true;
+}
+
+bool removeCallPos() {
+    if (callStackSize == 0) {
+        fprintf(stderr, "Call stack is empty\n");
+        return false;
+    }
+
+    for (int i = 0; i < callStackSize - 1; i++) {
+        cursorPos[i] = cursorPos[i + 1];
+    }
+
+    --callStackSize;
+    return true;
 }
 
 void printVar(int idx){

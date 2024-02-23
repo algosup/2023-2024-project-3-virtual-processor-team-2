@@ -231,6 +231,22 @@ bool opShl(vRegister_t *reg, unsigned int arg, asm_error_t *errData);
 bool opShr(vRegister_t *reg, unsigned int arg, asm_error_t *errData);
 
 /*
+    Add call position to the call stack
+    params:
+        fpos_t pos: the position to add
+    returns:
+        bool: if the position have been added
+*/
+bool addCallPos(fpos_t pos);
+
+/*
+    Remove first element from the call stack
+    returns:
+        bool: if the position have been removed
+*/
+bool removeCallPos();
+
+/*
     print a variable data
     params:
         int idx: the index of the variable
