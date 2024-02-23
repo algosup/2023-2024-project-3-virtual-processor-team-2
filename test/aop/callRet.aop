@@ -1,0 +1,13 @@
+// Test call and ret implementation (ASSERT_TRUE)
+
+lab label1
+    mov rg0, 100
+    call label2
+    goto labExit
+
+lab label2
+    sub rg0, 50
+    ret
+
+lab labExit
+// rg0 == 50
