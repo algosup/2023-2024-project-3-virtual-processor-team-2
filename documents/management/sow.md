@@ -65,24 +65,24 @@ A statement of work (SOW) is a document which is the narrative description of a 
 ### Abstract
 
 The goal is to design our own assembly language and to create the related assembler and its virtual processor.
-We started by thinking to an interpreter due to a misscomprehension of the call for tender we started to work in the wrong way until we discuss about it with the customer.
+We started by thinking to an interpreter due to a misscomprehension of the call for tender we started to work in the wrong way until a discussion with the customer.
 
 ### Value
 
-The project will costs around 600 hours of work but as an internal project it will not costs any manpower and material fees.
+The project will cost around 600 hours of work but as an internal project it will not cost any manpower and material fees.
 
 ### Scope
 
-For this project we chose to work the more closer possible as a real processor with our team of 6 person, including only 2 developers in non full-time due to annexe courses, reducing the amount of project time, we have 600 hours of work to do in 540 hours of project, it's will be short.
+For this project we chose to work the closer possible as a real processor with our team of 6 people, including only 2 developers in non full-time due to annexe courses, reducing the amount of project time, we have 600 hours of work to do in 540 hours of project, it will be short.
 
 ### Type
 
-This is a school project made to learn and pratice C and train ourself in difference team roles like in professional environnement.
+This is a school project made to learn and pratice C and train ourselves in difference team roles like in professional environment.
 
 
 ### Payment
 
-As students who will work in internal of a school we will not get pay and the project doesn't require any material to buy, no payment has planned and will not be planned for now.
+As students who will work in internal of a school we will not get paid and the project doesn't require any material to buy, no payment has been planned for now.
 
 ## Purpose
 
