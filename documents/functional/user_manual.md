@@ -31,6 +31,9 @@ Welcome to the User Manual for [IAT2](#iat2-id). This guide is designed to help 
 ### 2.1 Installation
 
 Follow these steps to install [IAT2](#iat2-id):
+*if you don't have git installed [CLICK HERE TO DOWNLOAD](https://git-scm.com/download/win).*
+*if you don't have gcc installed [CLICK HERE TO DOWNLOAD](https://www.devdungeon.com/content/install-gcc-compiler-windows-msys2-cc).*
+*if you don't have msys2 installed [CLICK HERE TO DOWNLOAD](https://www.msys2.org/).*
 
   1. Clone the repository: ``git clone https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2.git``
   2. Go at the project root
