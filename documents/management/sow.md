@@ -133,7 +133,7 @@ As students who will work in internal of a school we will not get paid and the p
 
 ### Performance
 
-Our KPIs can be seen at on our spreadsheet [HERE](https://docs.google.com/spreadsheets/d/13n8fdWMEYFlJKhJ_OWILYcpX_c6CvLBpt4ebboLiU18/edit#gid=0)
+Our KPIs can be seen on our spreadsheet [HERE](https://docs.google.com/spreadsheets/d/13n8fdWMEYFlJKhJ_OWILYcpX_c6CvLBpt4ebboLiU18/edit#gid=0).
 
 ### Factors
 
