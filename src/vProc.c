@@ -21,6 +21,8 @@ int lastVarIdx = 0;
 fpos_t cursorPos[MAX_CALL_STACK];
 int callStackSize = 0;
 
+bool allowGoto = true;
+
 // registers
 vRegister_t rg0 = {true, 0};
 vRegister_t rg1 = {true, 0};
@@ -106,6 +108,10 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
             reg->value = inst.arg;
             return true;
         case 1: //goto
+            if(!allowGoto){
+                allowGoto = true;
+                return true;
+            }
             pos = searchLabel(inst.arg, filename, errData);
             // goto label
             fsetpos(file, &pos);
@@ -283,23 +289,41 @@ bool runInt(instruction_t inst, carry_t *carry){
             return true;
         case 2: // ob1
             return true;
-        case 3: // cmp or
-            return true;
-        case 4: // cmp and
-            return true;
-        case 5: // cmp xor
-            return true;
         case 6: // cmp less than
+            if(!(rg0.value < rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 7: // cmp less than or equal
+            if(!(rg0.value <= rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 8: // cmp greater than
+            if(!(rg0.value > rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 9: // cmp greater than or equal
+            if(!(rg0.value >= rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 10: // cmp equal
+            if(!(rg0.value == rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 11: // cmp not equal
+            if(!(rg0.value != rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 12: // pusha
             return true;
@@ -309,10 +333,6 @@ bool runInt(instruction_t inst, carry_t *carry){
             // set carry
             carry->nextArg = getRegister(inst.reg)->value;
             carry->isUsed = true;
-            return true;
-        case 15: // else
-            return true;
-        case 16: // end
             return true;
         default:
             exit(EXIT_FAILURE);

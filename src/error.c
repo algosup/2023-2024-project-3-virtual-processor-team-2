@@ -476,3 +476,12 @@ void errorOverflow(asm_error_t *errData){
     char *errDetails = "The value is too large";
     displayError(errType, errDetails, NULL, errorFile, errData);
 }
+
+void errorIfInt(long lineNb, asm_error_t *errData){
+    char *errType = "Interrupt Error";
+    char errDetails[64];
+    char errLocation[64];
+    sprintf(errDetails, "If interrupt must be followed by goto instruction");
+    sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
+}

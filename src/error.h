@@ -381,6 +381,14 @@ void errorReadOnly(asm_error_t *errData);
 */
 void errorOverflow(asm_error_t *errData);
 
+/*
+    Display error messages for invalid if statement
+    params:
+        lineNb: Line number
+        errData: Error history
+*/
+void errorIfInt(long lineNb, asm_error_t *errData);
+
 #ifdef __cplusplus
 }
 #endif

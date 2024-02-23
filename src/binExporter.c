@@ -11,7 +11,7 @@
 #include "error.h"
 #include "debug.h"
 
-void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData){
+void exportToBin(instList_t *nodeList, char *filename, asm_error_t *errData){
     // Open the file
     FILE *file = fopen(filename, "wb");
 
@@ -158,12 +158,6 @@ char *interToBinCode(enum interruptKind inter){
         return "00000001";
     case INT_OB1:
         return "00000010";
-    case INT_OR:
-        return "00000011";
-    case INT_AND:
-        return "00000100";
-    case INT_XOR:
-        return "00000101";
     case INT_LT:
         return "00000110";
     case INT_LTE:
@@ -182,10 +176,6 @@ char *interToBinCode(enum interruptKind inter){
         return "00001101";
     case INT_MOV_F_REG:
         return "00001110";
-    case INT_ELSE:
-        return "00001111";
-    case INT_END:
-        return "00010000";
     default:
         return NULL;
     }

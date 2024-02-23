@@ -282,21 +282,6 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, labelList_t *labe
         newNode->isInter = true;
         newNode->inter = INT_OB1;
     }
-    else if(strcmp(inst, "if_or") == 0){
-        newNode->op = OP_INT;
-        newNode->isInter = true;
-        newNode->inter = INT_OR;
-    }
-    else if(strcmp(inst, "if_and") == 0){
-        newNode->op = OP_INT;
-        newNode->isInter = true;
-        newNode->inter = INT_AND;
-    }
-    else if(strcmp(inst, "if_xor") == 0){
-        newNode->op = OP_INT;
-        newNode->isInter = true;
-        newNode->inter = INT_XOR;
-    }
     else if(strcmp(inst, "if_lt") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
@@ -336,16 +321,6 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, labelList_t *labe
         newNode->op = OP_INT;
         newNode->isInter = true;
         newNode->inter = INT_POPA;
-    }
-    else if(strcmp(inst, "else") == 0){
-        newNode->op = OP_INT;
-        newNode->isInter = true;
-        newNode->inter = INT_ELSE;
-    }
-    else if(strcmp(inst, "end") == 0){
-        newNode->op = OP_INT;
-        newNode->isInter = true;
-        newNode->inter = INT_END;
     }
     else{
         errorInstruction(inst, newNode->lineNb, errData);
