@@ -13,7 +13,7 @@
 #include "error.h"
 #include "binExporter.h"
 
-#define VERSION "0.5.0"
+#define VERSION "1.1.1"
 #define BIN_NAME "bin.2at2"
 
 int main(int argc, char *argv[]) {
@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
     // ---------- Assemble ----------
 
     // run exporter
-    exportToBin(instList, BIN_NAME, varList, errData);
+    exportToBin(instList, BIN_NAME, errData);
 
     // Stop if there are errors
     if(errData->errors > 0){

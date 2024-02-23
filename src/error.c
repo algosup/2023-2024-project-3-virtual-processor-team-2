@@ -322,7 +322,7 @@ void errorFileIssues(const char *filename,  asm_error_t *errData){
     char *errType = "File Issues Error";
     char errDetails[64];
 
-    sprintf(errDetails, "Error: the targeted file '%s' contains errors and couldn't be converted properly", filename);
+    sprintf(errDetails, "Error: the targeted file '%s' contains errors", filename);
 
     displayError(errType, errDetails, NULL, errorFile, errData);
 }
@@ -475,4 +475,13 @@ void errorOverflow(asm_error_t *errData){
     char *errType = "Overflow";
     char *errDetails = "The value is too large";
     displayError(errType, errDetails, NULL, errorFile, errData);
+}
+
+void errorIfInt(long lineNb, asm_error_t *errData){
+    char *errType = "Interrupt Error";
+    char errDetails[64];
+    char errLocation[64];
+    sprintf(errDetails, "If interrupt must be followed by goto instruction");
+    sprintf(errLocation, "File %s, line %ld", errData->inputFile, lineNb);
+    displayError(errType, errDetails, errLocation, errorFile, errData);
 }

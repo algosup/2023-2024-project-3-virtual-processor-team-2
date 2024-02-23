@@ -8,7 +8,7 @@
 
 #include "vTerminal.h"
 
-#define LINE_MAX_BITS 16
+#define VERSION "1.1.0"
 
 void runVTerminal(asm_error_t *errData){
     char *command = (char *)malloc(100 * sizeof(char));
@@ -39,36 +39,17 @@ bool runCmd(char *command, asm_error_t *errData){
         printf("Commands:\n");
         printf("exit - to exit the terminal\n");
         printf("clear - to clear the terminal\n");
+        printf("version - to display the version\n");
         printf("help - to display the help\n");
     }
     else if(strcmp(command, "clear") == 0){
         system("clear");
     }
+    else if(strcmp(command, "version") == 0){
+        printf("Version: %s\n", VERSION);
+    }
     else{
-        //Check if the file is present
-        FILE *file = fopen(command, "rb");
-        if(file == NULL){
-            errorfnf(command, errData);
-        }
-        // Run program
-        char line[LINE_MAX_BITS];
-        
-        // Set as carry for action on next instruction
-        carry_t carry = {0, false};
-
-        int time = 0;
-        int lastTime = 0;
-        int latentTicks = 0;
-        while(fgets(line, sizeof(line) + 1, file)) {
-            setClock(time, lastTime, latentTicks);
-
-            instruction_t inst = charBinToInst(line);
-            if(!run(inst, &carry, errData)){
-                fclose(file);
-                return false;
-            }
-        }
-        fclose(file);
+        readFile(command, errData);
     }
     return true;
 }

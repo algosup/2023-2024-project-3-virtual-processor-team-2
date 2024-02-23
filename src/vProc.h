@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -36,6 +37,17 @@ typedef struct {
 
 
 /*
+    Read a file
+    params:
+        char *filename: the file to read
+        asm_error_t *errData: Error history
+    returns:
+        bool: if the file have been read
+*/
+bool readFile(char *filename, asm_error_t *errData);
+
+
+/*
     Set the speed of the clock based on ticks
     params:
         int time: Time passed when the application is running
@@ -59,22 +71,23 @@ instruction_t charBinToInst(char *bin);
     params:
         instruction_t inst: the instruction to redirect to
         carry_t *carry: Carry for action on next instruction
+        FILE *file: File to write the output
+        char *filename: the filename of the file
         asm_error_t *errData: Error history
     returns:
         bool: if the instructions have been run
 */
-bool run(instruction_t inst, carry_t *carry, asm_error_t *errData);
+bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_error_t *errData);
 
 /*
     Run interrupt operation
     params:
         instruction_t inst: the instruction to redirect to
         carry_t *carry: Carry for action on next instruction
-        asm_error_t *errData: Error history
     returns:
         bool: if the instructions have been run
 */
-bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData);
+bool runInt(instruction_t inst, carry_t *carry);
 
 /*
     Get a register
@@ -84,6 +97,17 @@ bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData);
         vRegister_t *: the register
 */
 vRegister_t *getRegister(int reg);
+
+/*
+    Search label position in a file
+    params:
+        int labId: the label to search
+        char *filename: the filename of the file
+        asm_error_t *errData: Error history
+    returns:
+        fpos_t: the position of the label
+*/
+fpos_t searchLabel(int labId, char *filename, asm_error_t *errData);
 
 /*
     Add a value to a register
@@ -204,6 +228,22 @@ bool opShl(vRegister_t *reg, unsigned int arg, asm_error_t *errData);
         bool: if the value have been shifted right
 */
 bool opShr(vRegister_t *reg, unsigned int arg, asm_error_t *errData);
+
+/*
+    Add call position to the call stack
+    params:
+        fpos_t pos: the position to add
+    returns:
+        bool: if the position have been added
+*/
+bool addCallPos(fpos_t pos);
+
+/*
+    Remove first element from the call stack
+    returns:
+        bool: if the position have been removed
+*/
+bool removeCallPos();
 
 /*
     print a variable data

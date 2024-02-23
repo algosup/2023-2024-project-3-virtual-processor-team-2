@@ -2,7 +2,6 @@
     This file is part of VAT2.
     This file contains the implementation of the virtual processor.
 */
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -11,12 +10,18 @@
 
 #define LINE_MAX_BITS 16
 #define VAR_LIST_SIZE 256
+#define MAX_CALL_STACK 256
 #define CLOCK_TICKS 1/20
 
 // variables
 vProcVar_t vProcVars[VAR_LIST_SIZE];
 
 int lastVarIdx = 0;
+
+fpos_t cursorPos[MAX_CALL_STACK];
+int callStackSize = 0;
+
+bool allowGoto = true;
 
 // registers
 vRegister_t rg0 = {true, 0};
@@ -27,6 +32,33 @@ vRegister_t rg4 = {true, 0};
 vRegister_t rg5 = {true, 0};
 vRegister_t rg6 = {true, 0};
 vRegister_t rg7 = {true, 0};
+
+bool readFile(char *filename, asm_error_t *errData){
+    //Check if the file is present
+        FILE *file = fopen(filename, "rb");
+        if(file == NULL){
+            errorfnf(filename, errData);
+        }
+        // Run program
+        char line[LINE_MAX_BITS];
+        
+        // Set as carry for action on next instruction
+        carry_t carry = {0, false};
+
+        int time = 0;
+        int lastTime = 0;
+        int latentTicks = 0;
+        while(fgets(line, LINE_MAX_BITS + 1, file)) {
+            setClock(time, lastTime, latentTicks);
+            instruction_t inst = charBinToInst(line);
+            if(!run(inst, &carry, file, filename, errData)){
+                fclose(file);
+                return false;
+            }
+        }
+        fclose(file);
+        return true;
+}
 
 void setClock(int time, int lastTime, int latentTicks){
     sleep(CLOCK_TICKS);
@@ -47,9 +79,9 @@ instruction_t charBinToInst(char *bin){
     instruction_t instruction = {0, 0, 0};
 
     // Define masks for each field
-    unsigned int instMask = 0b11111;
-    unsigned int regMask = 0b111;
-    unsigned int argMask = 0b0000000011111111;
+    unsigned int instMask = 31; // 0b11111
+    unsigned int regMask = 7; // 0b111
+    unsigned int argMask = 255; // 0b0000000011111111
 
     // Extract each field using bitwise AND and shift operations
     instruction.inst = (inst >> 11) & instMask;
@@ -59,8 +91,9 @@ instruction_t charBinToInst(char *bin){
     return instruction;
 }
 
-bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
+bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_error_t *errData){
     vRegister_t *reg;
+    fpos_t pos;
     // check if there is a carry
     if(carry->isUsed && inst.inst != 24){
         inst.arg = carry->nextArg;
@@ -75,11 +108,27 @@ bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
             reg->value = inst.arg;
             return true;
         case 1: //goto
+            if(!allowGoto){
+                allowGoto = true;
+                return true;
+            }
+            pos = searchLabel(inst.arg, filename, errData);
+            // goto label
+            fsetpos(file, &pos);
             return true;
         case 2: //call
+            // get call position
+            fgetpos(file, &pos);
+            if(!addCallPos(pos)){
+                return false;
+            }
+            // search label
+            pos = searchLabel(inst.arg, filename, errData);
+            // goto label
+            fsetpos(file, &pos);
             return true;
         case 3: //int
-            return runInt(inst, carry, errData);
+            return runInt(inst, carry);
         case 4: //push
             return true;
         case 5: //xor
@@ -166,6 +215,13 @@ bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
             }
             return opMod(reg, inst.arg, errData);
         case 22: //ret
+            // get call next position
+            pos = cursorPos[0];
+            if(!removeCallPos()){
+                return false;
+            }
+            // go to new position
+            fsetpos(file, &pos);
             return true;
         case 23: //mov from var
             // set carry to var data
@@ -223,7 +279,7 @@ bool run(instruction_t inst, carry_t *carry, asm_error_t *errData){
     }
 }
 
-bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData){
+bool runInt(instruction_t inst, carry_t *carry){
     switch(inst.arg){
         case 0: //nigeru
             return false;
@@ -233,23 +289,41 @@ bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData){
             return true;
         case 2: // ob1
             return true;
-        case 3: // cmp or
-            return true;
-        case 4: // cmp and
-            return true;
-        case 5: // cmp xor
-            return true;
         case 6: // cmp less than
+            if(!(rg0.value < rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 7: // cmp less than or equal
+            if(!(rg0.value <= rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 8: // cmp greater than
+            if(!(rg0.value > rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 9: // cmp greater than or equal
+            if(!(rg0.value >= rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 10: // cmp equal
+            if(!(rg0.value == rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 11: // cmp not equal
+            if(!(rg0.value != rg1.value))
+            {
+                allowGoto = false;
+            }
             return true;
         case 12: // pusha
             return true;
@@ -259,10 +333,6 @@ bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData){
             // set carry
             carry->nextArg = getRegister(inst.reg)->value;
             carry->isUsed = true;
-            return true;
-        case 15: // else
-            return true;
-        case 16: // end
             return true;
         default:
             exit(EXIT_FAILURE);
@@ -291,6 +361,35 @@ vRegister_t *getRegister(int reg){
             return NULL;
     }
 }
+
+fpos_t searchLabel(int labId, char *filename, asm_error_t *errData){
+    FILE *file = fopen(filename, "rb");
+    if(file == NULL){
+        errorfnf(filename, errData);
+        exit(EXIT_FAILURE);
+    }
+    char line[LINE_MAX_BITS];
+    fpos_t pos;
+    while(fgets(line, LINE_MAX_BITS + 1, file)) {
+        if(line[0] == '1'){
+            int inst = (int)strtoul(line, NULL, 2);
+            unsigned int instMask = 31; // 0b11111
+            unsigned int argMask = 255; // 0b0000000011111111
+            
+            int instId = (inst >> 11) & instMask;
+            int arg = inst & argMask;
+
+            if(instId == 18 && arg == labId){
+                fgetpos(file, &pos);
+                fclose(file);
+                return pos;
+            }
+        }
+    }
+    fclose(file);
+    exit(EXIT_FAILURE);
+}
+
 
 bool opAdd(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
     if(reg->writable){
@@ -411,6 +510,35 @@ bool opShr(vRegister_t *reg, unsigned int arg, asm_error_t *errData){
         errorReadOnly(errData);
         return false;
     }
+}
+
+bool addCallPos(fpos_t pos) {
+    if (callStackSize >= MAX_CALL_STACK) {
+        fprintf(stderr, "Call stack overflow\n");
+        return false;
+    }
+
+    for (int i = callStackSize; i > 0; i--) {
+        cursorPos[i] = cursorPos[i - 1];
+    }
+
+    cursorPos[0] = pos;
+    ++callStackSize;
+    return true;
+}
+
+bool removeCallPos() {
+    if (callStackSize == 0) {
+        fprintf(stderr, "Call stack is empty\n");
+        return false;
+    }
+
+    for (int i = 0; i < callStackSize - 1; i++) {
+        cursorPos[i] = cursorPos[i + 1];
+    }
+
+    --callStackSize;
+    return true;
 }
 
 void printVar(int idx){

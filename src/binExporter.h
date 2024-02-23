@@ -11,10 +11,9 @@ extern "C" {
     params:
         nodeList: pointer to the instruction list
         filename: name of the file
-        varList: pointer to the variable list
         errData: pointer to the error struct    
 */
-void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData);
+void exportToBin(instList_t *nodeList, char *filename, asm_error_t *errData);
 
 /*
     Convert an operation to its binary code

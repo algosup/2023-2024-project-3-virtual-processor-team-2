@@ -46,9 +46,6 @@ enum interruptKind{
     INT_EXIT,
     INT_DRAW,
     INT_OB1,
-    INT_OR,
-    INT_AND,
-    INT_XOR,
     INT_LT,
     INT_LTE,
     INT_GT,
@@ -58,8 +55,6 @@ enum interruptKind{
     INT_PUSHA,
     INT_POPA,
     INT_MOV_F_REG,
-    INT_ELSE,
-    INT_END,
 };
 
 // Register names
