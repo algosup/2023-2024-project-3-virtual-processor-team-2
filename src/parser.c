@@ -228,10 +228,6 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, labelList_t *labe
     }
     else if(strcmp(inst, "not") == 0 || strcmp(inst, "!") == 0){
         newNode->op = OP_B_NOT;
-        // check if first argument is null
-        if(newNode->arg1 == NULL){
-            errorNoArg(newNode->lineNb, errData);
-        }
     }
     else if(strcmp(inst, "inc") == 0 || strcmp(inst, "++") == 0){
         newNode->op = OP_ADD;
