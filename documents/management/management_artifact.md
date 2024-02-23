@@ -9,7 +9,7 @@ This document contains the main management artifacts:
 - [Appendix](#appendix)
     - [1. Product Logo](#1-product-logo)
     - [2. Management Tools](#2-management-tools)
-    - [3. Statement of Work](#3-statement-of-work)
+    - [3. Statement Of Work](#3-statement-of-work)
 
 You can also take a look at [cumulative weekly reports](weekly_reports/cumulative.md) file.
 
@@ -17,7 +17,7 @@ As a new student, I chose to use a familiar environment for management and focus
 
 # Project Charter
 
-For this project, the meeting we had with the client on 01/16/2024 served as the project charter. You can consult the summary of the meeting [HERE](../communications/minutes_of_meeting_01_16_2024.pdf).
+For this project, the meeting we had with the client on 01/16/2024 served as the project charter. The summary of the meeting can be consulted [HERE](../communications/minutes_of_meeting_01_16_2024.pdf).
 
 # Tasks & schedules
 
@@ -55,8 +55,8 @@ A readable and colored RACI spreadsheet can be found [HERE](https://docs.google.
 
 | ID  | Description                                                                                         | Risks                                                                                                                | Impact | Likelihood | Solution                                                                                                                                      |
 | --- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Create our own assembly language and its Interpreter is an exhausting work.                         | We may not finish on time, miss understood the client requirements.                                                  | High   | Medium     | Start with the most simple and fundamental tasks and go to more detailed ones.                                                                |
-| 2   | The new team highlights the possible issue of having different conventions within the team members. | The communication may suffer from  having different coding of documentation styles.                                  | Medium | Medium     | We will define precise specifications to ensure this does not happen.                                                                         |
+| 1   | Create our own assembly language and its Interpreter is an exhausting work.                         | We may not finish on time, misunderstood the client requirements.                                                  | High   | Medium     | Start with the most simple and fundamental tasks and go to more detailed ones.                                                                |
+| 2   | The new team highlights the possible issue of having different conventions within the team members. | The communication may suffer from  having different coding or documentation styles.                                  | Medium | Medium     | We will define precise specifications to ensure this does not happen.                                                                         |
 | 3   | Compatibility between different hardwares is hardly possible.                                       | If the client decides to use our language and our interpreter on real hardware, our program may not work.            | Medium | Low        | We will endeavor to make it cross-platform.                                                                                                   |
 | 4   | The client may decide to change the requirements of the project.                                    | We would reconsider a new path to take, possibly delaying us if we were already done.                                | Medium | Medium     | We will often communicate with the client to ensure the current specifications are relatable.                                                 |
 | 5   | Winter is here, sicknesses and transport issues could come up easier.                               | Team members may be late or even missing, possibly for multiple days.                                                | Medium | High       | The work of absent members will either be shared to others, done later, or done remotely.                                                     |
@@ -92,9 +92,9 @@ The spreadsheet for the KPI's data and graphs can be found [HERE](https://docs.g
 
 ### 2. Management Tools
 
-To manage efficiently the team I created a dedicated internal spreadsheets you can take a look [HERE](https://docs.google.com/spreadsheets/d/1jLRtSmWg94Tbuk7_OjGEhZ1jr0yF2lB5bi-84bGERh0/edit).
+To efficiently manage the team I created a dedicated internal spreadsheets you can take a look [HERE](https://docs.google.com/spreadsheets/d/1jLRtSmWg94Tbuk7_OjGEhZ1jr0yF2lB5bi-84bGERh0/edit).
 
-### 3. Statement of Work
+### 3. Statement Of Work
 
 A statement of work (SOW) is a document which is the narrative description of a project's work requirement. It defines project-specific activities, deliverables and timelines for a vendor providing services to the client. The SOW typically also includes detailed requirements and pricing, with standard regulatory and governance terms and conditions.
 

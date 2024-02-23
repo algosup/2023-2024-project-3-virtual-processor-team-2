@@ -102,13 +102,13 @@ You can also refer to [GitHub Issues](https://github.com/algosup/2023-2024-proje
 ### 4.2 FAQs
 
 #### Can I use negative numbers ?
-- **No**, unfortunatly negative number are not handle yet, but planned for the V2.
+- **No**, unfortunately negative numbers are not handle yet, but planned for the V2.
 
 #### Can I use [VAT2](#vat2-id) to execute my own binary file ?
 - **Yes and No**, You can only if you use the same binary syntax as [2AT2](#2at2-id).
 
 #### Can I execute [2AT2](#2at2-id)'s binary on real hardware ?
-- **Probably No**, unless you find a real hardware using the same syntax *(If you found tell it to us)*
+- **Probably No**, unless you find a real hardware using the same syntax *(If you find it, tell us)*
 
 ## 5. Appendix
 
