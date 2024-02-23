@@ -11,8 +11,8 @@
 </div>
 <div align="center">
 
-  ![](./documents\images\IAT2\png\iat2_logo_256px.png)
-  
+  <img style="width:200px; display: block; margin: auto;"  src="documents\images\IAT2\png\iat2_logo_256px.png" alt="Assembly Team 2">
+
 </div>
 
 
