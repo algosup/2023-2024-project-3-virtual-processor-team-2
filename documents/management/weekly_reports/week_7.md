@@ -48,10 +48,10 @@
 
 Average team mood rating: 7/10
 
-The team is currently positive and statisfied by the amount of work done but the team is very tired by the hardwork done until now, they really need holydays.
+The team is currently positive and statisfied by the amount of work done but the team is very tired by the hardwork done until now, they really need holidays.
 
 ## Conclusion
 
 This week marked significant strides in our project, with successful completion of the assembler and Virtual Processor development. The team efficiently tackled challenges, ensuring adherence to project deadlines.
 
-The team is currently positive and statisfied by the amount of work done but the team is very tired.
+The team is currently positive and statisfied by the amount of work done, although the team is very tired.
