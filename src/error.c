@@ -322,7 +322,7 @@ void errorFileIssues(const char *filename,  asm_error_t *errData){
     char *errType = "File Issues Error";
     char errDetails[64];
 
-    sprintf(errDetails, "Error: the targeted file '%s' contains errors and couldn't be converted properly", filename);
+    sprintf(errDetails, "Error: the targeted file '%s' contains errors", filename);
 
     displayError(errType, errDetails, NULL, errorFile, errData);
 }
