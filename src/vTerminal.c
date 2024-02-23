@@ -8,7 +8,7 @@
 
 #include "vTerminal.h"
 
-#define LINE_MAX_BITS 16
+#define VERSION "1.0.0"
 
 void runVTerminal(asm_error_t *errData){
     char *command = (char *)malloc(100 * sizeof(char));
@@ -39,10 +39,14 @@ bool runCmd(char *command, asm_error_t *errData){
         printf("Commands:\n");
         printf("exit - to exit the terminal\n");
         printf("clear - to clear the terminal\n");
+        printf("version - to display the version\n");
         printf("help - to display the help\n");
     }
     else if(strcmp(command, "clear") == 0){
         system("clear");
+    }
+    else if(strcmp(command, "version") == 0){
+        printf("Version: %s\n", VERSION);
     }
     else{
         readFile(command, errData);
