@@ -54,7 +54,7 @@ Contents:
 
 ## Introduction
 
-A statement of work (SOW) is a document which is the narrative description of a project's work requirement. It defines project-specific activities, deliverables and timelines for a vendor providing services to the client. The SOW typically also includes detailed requirements and pricing, with standard regulatory and governance terms and conditions.
+A statement of work (SOW) is a document which is the narrative description of a project's work requirement. It defines project-specific activities, deliverables and timelines for a vendor providing services to the client. Moreove, The SOW typically also includes detailed requirements and pricing, with standard regulatory and governance terms and conditions.
 
 ## Statement of work
 
@@ -64,8 +64,8 @@ A statement of work (SOW) is a document which is the narrative description of a 
 
 ### Abstract
 
-The goal is to design our own assembly language and to create the related assembler and his virtual processor.
-We started by thinking to an interpreter due to a misscomprehension of the call for tenders we started to work in the wrong way until we discuss about it with the customer.
+The goal is to design our own assembly language and to create the related assembler and its virtual processor.
+We started by thinking to an interpreter due to a misscomprehension of the call for tender we started to work in the wrong way until we discuss about it with the customer.
 
 ### Value
 
