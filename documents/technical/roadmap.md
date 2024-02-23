@@ -1,5 +1,5 @@
 # RoadMap for technical definition
-This document aim to give to the tech lead a kind of template or at least a list of things to think about when defining the technical aspects of the project. It mostly based on previous projects and [this article on stack overflow](https://stackoverflow.blog/2020/04/06/a-practical-guide-to-writing-technical-specs/).
+This document aims to give to the Tech Lead a series of leads to consider or at least a list of things to think about when defining the technical aspects of the project. It is mostly based on previous projects and [this article on stack overflow](https://stackoverflow.blog/2020/04/06/a-practical-guide-to-writing-technical-specs/).
 
 
 ## Existing solutions and alternatives

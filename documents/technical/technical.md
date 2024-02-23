@@ -112,7 +112,7 @@ The objective of this project is to create a virtual processor that runs customi
 
 ## Context
 
-As it's written above, the context of this project is an educational purpose. After asking for the reason why we are doing this project, the stakeholder answered that it was for educational purpose only. So there is no money involved, there is no real company goal as it's just for us to gain experience by working on it, as well as there is no real problem to solve here, apart of knowing how do create a virtual processor and an interpreter from scratch. Nevertheless, our solution will fit into the overall product roadmap as well as the technical strategy, and as it will be on a public GitHub rpository, there may be chances of people using it for real problem solving. But we will dive into that later.
+As it's written above, the context of this project is an educational purpose. After asking for the reason why we are doing this project, the stakeholder answered that it was for educational purpose only. So there is no money involved, there is no real company goal as it's just for us to gain experience by working on it, as well as there is no real problem to solve here, apart of knowing how do create a virtual processor and an interpreter from scratch. Nevertheless, our solution will fit into the overall product roadmap as well as the technical strategy, and as it will be on a public GitHub repository, there may be chances of people using it for real problem solving. But we will dive into that later.
 
 # Goals
 
@@ -302,7 +302,7 @@ Variable and functions names will be written in `camelCase`.
 
 ```
 Error Type: [Kind of Error]
-Details: [Provide detailed information about the error, varying the level of detail as needed]  
+Details: [Provides detailed information about the error, varying the level of detail as needed]  
 Line Number: [Line number where the error occurred]  
 File Name: [Name of the file in which the error occurred]
 ```
