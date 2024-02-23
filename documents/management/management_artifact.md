@@ -3,10 +3,13 @@ This document contains the main management artifacts:
 - [Tasks \& schedules](#tasks--schedules)
 - [RACI matrix](#raci-matrix)
 - [Risks and Assumptions](#risks-and-assumptions)
+- [Work Breakdown Structure](#work-breakdown-structure)
 - [MoSCoW](#moscow)
 - [Key Performance Indicators](#key-performance-indicators)
 - [Appendix](#appendix)
     - [1. Product Logo](#1-product-logo)
+    - [2. Management Tools](#2-management-tools)
+    - [3. Statement Of Work](#3-statement-of-work)
 
 You can also take a look at [cumulative weekly reports](weekly_reports/cumulative.md) file.
 
@@ -14,7 +17,7 @@ As a new student, I chose to use a familiar environment for management and focus
 
 # Project Charter
 
-For this project, the meeting we had with the client on 01/16/2024 served as the project charter. You can consult the summary of the meeting [HERE](../communications/minutes_of_meeting_01_16_2024.pdf).
+For this project, the meeting we had with the client on 01/16/2024 served as the project charter. The summary of the meeting can be consulted [HERE](../communications/minutes_of_meeting_01_16_2024.pdf).
 
 # Tasks & schedules
 
@@ -46,14 +49,14 @@ Key:
 | I      | Informed    | Those who are kept up-to-date on progress, often only on completion of the task or deliverable, and with whom there is just one-way communication |
 |        | -           | Not involved                                                                                                                                      |
 
-RACI colored spreadsheet easily readable can be found [HERE](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing).
+A readable and colored RACI spreadsheet can be found [HERE](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing).
 
 # Risks and Assumptions
 
 | ID  | Description                                                                                         | Risks                                                                                                                | Impact | Likelihood | Solution                                                                                                                                      |
 | --- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Create our own assembly language and its Interpreter is an exhausting work.                         | We may not finish on time, miss understood the client requirements.                                                  | High   | Medium     | Start with the most simple and fundamental tasks and go to more detailed ones.                                                                |
-| 2   | The new team highlights the possible issue of having different conventions within the team members. | The communication may suffer from  having different coding of documentation styles.                                  | Medium | Medium     | We will define precise specifications to ensure this does not happen.                                                                         |
+| 1   | Create our own assembly language and its Interpreter is an exhausting work.                         | We may not finish on time, misunderstood the client requirements.                                                  | High   | Medium     | Start with the most simple and fundamental tasks and go to more detailed ones.                                                                |
+| 2   | The new team highlights the possible issue of having different conventions within the team members. | The communication may suffer from  having different coding or documentation styles.                                  | Medium | Medium     | We will define precise specifications to ensure this does not happen.                                                                         |
 | 3   | Compatibility between different hardwares is hardly possible.                                       | If the client decides to use our language and our interpreter on real hardware, our program may not work.            | Medium | Low        | We will endeavor to make it cross-platform.                                                                                                   |
 | 4   | The client may decide to change the requirements of the project.                                    | We would reconsider a new path to take, possibly delaying us if we were already done.                                | Medium | Medium     | We will often communicate with the client to ensure the current specifications are relatable.                                                 |
 | 5   | Winter is here, sicknesses and transport issues could come up easier.                               | Team members may be late or even missing, possibly for multiple days.                                                | Medium | High       | The work of absent members will either be shared to others, done later, or done remotely.                                                     |
@@ -65,6 +68,10 @@ RACI colored spreadsheet easily readable can be found [HERE](https://docs.google
 | 11  | Insufficient Backup and Recovery Mechanisms                                                         | Data loss due to inadequate backup and recovery mechanisms may result in setbacks and compromised project integrity. | High   | Medium     | Implement robust backup and recovery procedures to safeguard critical project data and ensure a quick recovery in case of data loss.          |
 | 12  | Network and Infrastructure Issues                                                                   | Unforeseen issues with the network or infrastructure may disrupt project activities and communication.               | Medium | Medium     | Implement redundancy in critical systems, regularly monitor network performance, and have contingency plans for infrastructure failures.      |
 | 13  | Team Member Burnout                                                                                 | Excessive workload and stress may lead to team member burnout, impacting productivity and morale.                    | High   | Medium     | Monitor team workload, encourage work-life balance, and provide support mechanisms to prevent and address burnout.                            |
+
+# Work Breakdown Structure
+
+![](../images/management/workBreakdownStructure.svg)
 
 # MoSCoW
 
@@ -82,5 +89,13 @@ The spreadsheet for the KPI's data and graphs can be found [HERE](https://docs.g
 
 &emsp; For our product logo, we chose to give the team the opportunity to vote for their favorite design.
 <br>&emsp; You can see the results [HERE](https://docs.google.com/spreadsheets/d/13H7NKF3Axvht02Pguh0YWgaVgjaN4GnWWcN4PkJFUns/edit?usp=sharing).
-<br>&emsp; *(Feel free to change these logo to fit to your company/projects)*
 
+### 2. Management Tools
+
+To efficiently manage the team I created a dedicated internal spreadsheets you can take a look [HERE](https://docs.google.com/spreadsheets/d/1jLRtSmWg94Tbuk7_OjGEhZ1jr0yF2lB5bi-84bGERh0/edit).
+
+### 3. Statement Of Work
+
+A statement of work (SOW) is a document which is the narrative description of a project's work requirement. It defines project-specific activities, deliverables and timelines for a vendor providing services to the client. The SOW typically also includes detailed requirements and pricing, with standard regulatory and governance terms and conditions.
+
+You can take a look on this document [HERE](sow.md)

@@ -16,24 +16,28 @@ Quick Access:
   - [Weekly Report - Week 3](#weekly-report---week-3)
     - [Accomplishments](#accomplishments-2)
     - [Challenges](#challenges-2)
-    - [Plans for next week](#plans-for-next-week)
+    - [Plans for Next week](#plans-for-next-week)
     - [Conclusion](#conclusion-2)
   - [Weekly Report - Week 4](#weekly-report---week-4)
     - [Accomplishments](#accomplishments-3)
     - [Challenges](#challenges-3)
-    - [Plans for next week](#plans-for-next-week-1)
+    - [Plans for Next week](#plans-for-next-week-1)
     - [Conclusion](#conclusion-3)
   - [Weekly Report - Week 5](#weekly-report---week-5)
     - [Accomplishments](#accomplishments-4)
     - [Challenges](#challenges-4)
-    - [Plans for next week](#plans-for-next-week-2)
+    - [Plans for Next week](#plans-for-next-week-2)
     - [Conclusion](#conclusion-4)
   - [Weekly Report - Week 6](#weekly-report---week-6)
     - [Accomplishments](#accomplishments-5)
     - [Challenges](#challenges-5)
-    - [Plans for next week](#plans-for-next-week-3)
+    - [Plans for Next week](#plans-for-next-week-3)
     - [Conclusion](#conclusion-5)
   - [Weekly Report - Week 7](#weekly-report---week-7)
+    - [Accomplishments](#accomplishments-6)
+    - [Challenges](#challenges-6)
+    - [Plans for Next week](#plans-for-next-week-4)
+    - [Conclusion](#conclusion-6)
   - [Weekly Report - Week 8](#weekly-report---week-8)
 
 ## Weekly Report - Week 1
@@ -107,7 +111,7 @@ The second week was focused on clarifying project requirements and conducting re
 ### Challenges
 
 1. Scheduling a meeting with the client as soon as possible to clarify some unclear points and enable a prompt project start.
-2. Find working time out of class to share our ideas and brainstorm about it
+2. Finding time outside of class to share our ideas and brainstorm.
   
 ### Plan for Next Week
 
@@ -139,11 +143,11 @@ The third week was focused on sharing all the information within the team, gathe
 
 ### Challenges
 
-1. Choose the target for our product, which isn't too easy but not unfeasable within this time frame.
+1. Choose the target for our product, which isn't too easy but not unfeasible within this time frame.
 2. Clearly understand what the client means by "interpreter".
 3. Gather enough detailed information to start writing the technical specifications.
 
-### Plans for next week
+### Plans for Next week
 
 1. Complete the parser coding.
 2. Complete the builder coding.
@@ -175,7 +179,7 @@ The project is progressing forward; we've managed to catch up on our delay for t
 2. Maintaining a positive team atmosphere while ensuring focus and hard work.
 3. Identifying potential risks and formulating solutions for the project.
 
-### Plans for next week
+### Plans for Next week
 
 1. Finalize the Technical Specifications.
 2. Complete the test plan.
@@ -197,10 +201,10 @@ It was a challenging but productive management week. We made significant progres
 
 ### Challenges
 
-1. Continued in our path by developing a binary converter throughout the week.
+1. We continued on our path, focusing on developing a binary converter throughout the week.
 2. Adhered to our deadline with only one project session at the beginning of the week.
 
-### Plans for next week
+### Plans for Next week
 
 1. Finalize the test plan.
 2. Deploy unit tests.
@@ -227,7 +231,7 @@ The team is tired due to the overcharge of work, it can be good to add more proj
 1. Overcoming challenges in reworking the assembler without unncessary time consumptions.
 2. Strategizing the appearance of the binary code and planning its structure.
 
-### Plans for next week
+### Plans for Next week
 
 1. Finalize the rework of the converter.
 2. Complete the development of each error message.
@@ -240,8 +244,30 @@ The team is tired due to the overcharge of work, it can be good to add more proj
 This week saw substantial advancements in the project, notably in enhancing the assembler and completing the Test Plan, while addressing challenges such as efficient reworking and binary code visualization. Although the team is generally doing well, addressing recent concerns is crucial to prevent potential project impact.
 
 ## Weekly Report - Week 7
-[Detailed File (WIP)](week_7.md)
-(WIP)
+[Detailed File](week_7.md)
+
+### Accomplishments
+
+1. Completed the development of assembler and virtual processor.
+2. Executed and completed unit tests.
+3. Introduced a helpful `--help` command displaying the entire command list.
+4. Created a comprehensive user manual for user guidance.
+
+
+### Challenges
+
+1. Successfully navigated challenges to adhere to the project deadline.
+
+### Plans for Next week
+
+1. Create a engaging and informative presentation.
+2. Outline the key points and allocate roles for each team member.
+3. Conduct rehearsals to ensure a smooth and confident delivery.
+4. Present the project to the client, highlighting achievements and addressing queries.
+
+### Conclusion
+
+This week marked significant strides in our project, with successful completion of the assembler and Virtual Processor development. The team efficiently tackled challenges, ensuring adherence to project deadlines.
 
 ## Weekly Report - Week 8
 [Detailed File (WIP)](week_8.md)
