@@ -91,6 +91,7 @@ instruction_t charBinToInst(char *bin){
 
 bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_error_t *errData){
     vRegister_t *reg;
+    fpos_t pos;
     // check if there is a carry
     if(carry->isUsed && inst.inst != 24){
         inst.arg = carry->nextArg;
@@ -105,7 +106,7 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
             reg->value = inst.arg;
             return true;
         case 1: //goto
-            fpos_t pos = searchLabel(inst.arg, filename, errData);
+            pos = searchLabel(inst.arg, filename, errData);
             if(pos == -1){
                 return false;
             }
@@ -114,18 +115,17 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
             return true;
         case 2: //call
             // get call position
-            fpos_t callPos;
-            fgetpos(file, &callPos);
-            if(!addCallPos(callPos)){
+            fgetpos(file, &pos);
+            if(!addCallPos(pos)){
                 return false;
             }
             // search label
-            fpos_t labelPos = searchLabel(inst.arg, filename, errData);
+            pos = searchLabel(inst.arg, filename, errData);
             if(pos == -1){
                 return false;
             }
             // goto label
-            fsetpos(file, &labelPos);
+            fsetpos(file, &pos);
             return true;
         case 3: //int
             return runInt(inst, carry, errData);
@@ -216,12 +216,12 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
             return opMod(reg, inst.arg, errData);
         case 22: //ret
             // get call next position
-            fpos_t callNextPos = cursorPos[0];
+            pos = cursorPos[0];
             if(!removeCallPos()){
                 return false;
             }
             // go to new position
-            fsetpos(file, &callNextPos);
+            fsetpos(file, &pos);
             return true;
         case 23: //mov from var
             // set carry to var data
