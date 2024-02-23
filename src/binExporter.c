@@ -158,12 +158,6 @@ char *interToBinCode(enum interruptKind inter){
         return "00000001";
     case INT_OB1:
         return "00000010";
-    case INT_OR:
-        return "00000011";
-    case INT_AND:
-        return "00000100";
-    case INT_XOR:
-        return "00000101";
     case INT_LT:
         return "00000110";
     case INT_LTE:

@@ -479,7 +479,7 @@ int getVarDatasize(char *str){
 bool buildIntOpe(instNode_t *node, asm_error_t *errData){
     switch (node->inter)
     {
-    case INT_OR: case INT_AND: case INT_XOR: case INT_LT: case INT_GT: case INT_LTE: case INT_GTE: case INT_EQ: case INT_NEQ:
+    case INT_LT: case INT_GT: case INT_LTE: case INT_GTE: case INT_EQ: case INT_NEQ:
         // check if next node is a goto
         if(node->next == NULL || node->next->op != OP_GOTO){
             errorIfInt(node->lineNb, errData);
