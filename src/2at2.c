@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
     // ---------- Assemble ----------
 
     // run exporter
-    exportToBin(instList, BIN_NAME, varList, errData);
+    exportToBin(instList, BIN_NAME, errData);
 
     // Stop if there are errors
     if(errData->errors > 0){

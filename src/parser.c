@@ -337,16 +337,6 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, labelList_t *labe
         newNode->isInter = true;
         newNode->inter = INT_POPA;
     }
-    else if(strcmp(inst, "else") == 0){
-        newNode->op = OP_INT;
-        newNode->isInter = true;
-        newNode->inter = INT_ELSE;
-    }
-    else if(strcmp(inst, "end") == 0){
-        newNode->op = OP_INT;
-        newNode->isInter = true;
-        newNode->inter = INT_END;
-    }
     else{
         errorInstruction(inst, newNode->lineNb, errData);
         return false;

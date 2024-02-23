@@ -11,7 +11,7 @@
 #include "error.h"
 #include "debug.h"
 
-void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData){
+void exportToBin(instList_t *nodeList, char *filename, asm_error_t *errData){
     // Open the file
     FILE *file = fopen(filename, "wb");
 

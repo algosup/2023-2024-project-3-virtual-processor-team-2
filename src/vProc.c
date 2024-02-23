@@ -316,10 +316,6 @@ bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData){
             carry->nextArg = getRegister(inst.reg)->value;
             carry->isUsed = true;
             return true;
-        case 15: // else
-            return true;
-        case 16: // end
-            return true;
         default:
             exit(EXIT_FAILURE);
     }

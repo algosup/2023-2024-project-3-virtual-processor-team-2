@@ -27,6 +27,8 @@ add_executable(tests
   src/debug.c
   src/error.c
   src/binExporter.c
+  src/vProc.c
+  src/vTerminal.c
   test/test.cc
   src/ast.c
   googletest/googletest/src/gtest-all.cc
