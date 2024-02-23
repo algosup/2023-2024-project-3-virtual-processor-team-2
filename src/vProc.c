@@ -107,9 +107,6 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
             return true;
         case 1: //goto
             pos = searchLabel(inst.arg, filename, errData);
-            if(pos == -1){
-                return false;
-            }
             // goto label
             fsetpos(file, &pos);
             return true;
@@ -121,9 +118,6 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
             }
             // search label
             pos = searchLabel(inst.arg, filename, errData);
-            if(pos == -1){
-                return false;
-            }
             // goto label
             fsetpos(file, &pos);
             return true;
@@ -352,7 +346,7 @@ fpos_t searchLabel(int labId, char *filename, asm_error_t *errData){
     FILE *file = fopen(filename, "rb");
     if(file == NULL){
         errorfnf(filename, errData);
-        return 0;
+        exit(EXIT_FAILURE);
     }
     char line[LINE_MAX_BITS];
     fpos_t pos;
@@ -373,7 +367,7 @@ fpos_t searchLabel(int labId, char *filename, asm_error_t *errData){
         }
     }
     fclose(file);
-    return (fpos_t)-1;
+    exit(EXIT_FAILURE);
 }
 
 
