@@ -1,0 +1,16 @@
+// Test xor implementation (ASSERT_TRUE)
+
+// Test xor with register <- immediate value
+mov rg0, 1234
+xor rg0, 1233
+// rg0 == 3
+
+// Test xor with register <- register
+mov rg1, 200
+xor rg1, rg0
+// rg1 == 203
+
+// Test xor with register <- variable
+var var1, 50
+xor rg1, var1
+// rg1 == 249

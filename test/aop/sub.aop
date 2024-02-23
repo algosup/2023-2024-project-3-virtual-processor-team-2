@@ -1,0 +1,16 @@
+// Test sub implementation (ASSERT_TRUE)
+
+// Test sub with register <- immediate value
+mov rg0, 200
+sub rg0, 10
+// rg0 == 190
+
+// Test sub with register <- register
+mov rg1, 200
+sub rg1, rg0
+// rg1 == 10
+
+// Test sub with register <- variable
+var var1, 50
+sub rg0, var1
+// rg0 == 140
