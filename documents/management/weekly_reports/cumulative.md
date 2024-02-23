@@ -248,8 +248,8 @@ This week saw substantial advancements in the project, notably in enhancing the 
 
 ### Accomplishments
 
-1. Completed the development of assembler and virtual processor
-2. Executed and completed unit tests
+1. Completed the development of assembler and virtual processor.
+2. Executed and completed unit tests.
 3. Introduced a helpful `--help` command displaying the entire command list.
 4. Created a comprehensive user manual for user guidance.
 
