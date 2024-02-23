@@ -84,11 +84,10 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
     params:
         instruction_t inst: the instruction to redirect to
         carry_t *carry: Carry for action on next instruction
-        asm_error_t *errData: Error history
     returns:
         bool: if the instructions have been run
 */
-bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData);
+bool runInt(instruction_t inst, carry_t *carry);
 
 /*
     Get a register
