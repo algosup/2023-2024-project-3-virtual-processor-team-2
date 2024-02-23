@@ -459,7 +459,7 @@ In the future the project can be used by [ALGOSUP](https://algosup.com) to propo
 
 ### Project management control procedures
 
-The developement team will send regularly an email to the client to keep it inform of the project progression, gather is question or modification request and ask him our questions.
+The development team will send regularly an email to the client to keep him informed of the project progression, gather his questions or modification requests and ask him our questions.
 
 ### Change management procedures
 
@@ -566,18 +566,18 @@ By fulfilling these obligations, the Contractor contributes to the smooth and su
 
 In alignment with the contractual terms, the work is expected to be completed under the following conditions:
 
-*Due to existing workload and deadlines, all personnel assigned to any Contract must be ready to work in close and frequent contact with the Client's personnel. The primary work location will be at the Contractor's facility.*
+*Due to existing workload and deadlines, all personnel assigned to any Contract must be ready to work in close and frequent contact with the Client's personnel. The primary work location will be the Contractor's facility.*
 
 This arrangement ensures effective collaboration and communication between the Contractor's team and the Client's personnel, facilitating the successful execution of the project.
 
 
 ### Language of work
 
-All our interaction with and client, stakeholders and among the team will be done in **English**.
+All our interaction with the client, stakeholders and within the team will be done in **English**.
 
 ### Security requirements
 
-Non special security requirements.
+No special security requirements.
 
 ## Schedule
 
@@ -597,8 +597,8 @@ The schedule can be seen on the tasks detail [HERE](https://docs.google.com/spre
 | Word | Definition |
 |---| --- |
 | SOW | Statement Of Work |
-| SOO | Statement Of Objectives
-| OKR | Objective and Key Result |
+| SOO | Statement Of Objectives |
+| OKR | Objective and Key Results |
 | WBS | Work Breakdown Structure |
 | KPIs | Key Performance Indicators |
 | PWS | Performance Work Statement |
