@@ -107,8 +107,8 @@ It will generate a bin folder containing our runners to use it refers to [How do
 If you want to contribute please take a look to [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## 🗃️ Versions
-- **Latest :** 1.0.0
-- **Current :** 1.0.0
+- **Latest :** 1.1.0
+- **Current :** 1.1.0
 - Versions List : [Cliquer pour afficher](https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/tags)
 
 ## ⚖️ License
