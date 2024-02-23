@@ -128,7 +128,7 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
             fsetpos(file, &pos);
             return true;
         case 3: //int
-            return runInt(inst, carry, errData);
+            return runInt(inst, carry);
         case 4: //push
             return true;
         case 5: //xor
@@ -279,7 +279,7 @@ bool run(instruction_t inst, carry_t *carry, FILE *file, char *filename, asm_err
     }
 }
 
-bool runInt(instruction_t inst, carry_t *carry, asm_error_t *errData){
+bool runInt(instruction_t inst, carry_t *carry){
     switch(inst.arg){
         case 0: //nigeru
             return false;
@@ -373,7 +373,7 @@ fpos_t searchLabel(int labId, char *filename, asm_error_t *errData){
         }
     }
     fclose(file);
-    return -1;
+    return (fpos_t)-1;
 }
 
 
