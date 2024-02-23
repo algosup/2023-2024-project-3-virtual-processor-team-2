@@ -1,0 +1,16 @@
+// Test not implementation (ASSERT_TRUE)
+
+// Test not with register <- immediate value
+mov rg0, 5
+not rg0
+// rg0 == 65530
+
+// Test not with register <- register
+mov rg1, 1000
+not rg1, rg0
+// rg1 == 64535
+
+// Test not with register <- variable
+var var1, 666
+not rg1, var1
+// rg1 == 64869

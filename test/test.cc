@@ -646,7 +646,7 @@ TEST(buildProgram, ParsingAndBuilding) {
   labelList_t *labelList = createEmptyLabelList();
   char *fileName = const_cast<char *>("../test/test.aop");
   bool parsing = false;
-  parseFile(nodeList, fileName, varList, errData);
+  parseFile(nodeList, fileName, varList, labelList, errData);
   if (nodeList->head != NULL) {
     parsing = true;
   }

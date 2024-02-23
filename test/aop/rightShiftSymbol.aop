@@ -1,0 +1,16 @@
+// Test >> implementation (ASSERT_TRUE)
+
+// Test >> with register <- immediate value
+mov rg0, 19394
+>> rg0, 4
+// rg0 == 1212
+
+// Test >> with register <- register
+mov rg1, 3
+>> rg0, rg1
+// rg0 == 151
+
+// Test >> with register <- variable
+var var1, 3
+>> rg0, var1
+// rg0 == 18
