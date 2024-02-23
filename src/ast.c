@@ -20,12 +20,6 @@ char *getIntCode(enum interruptKind kind, asm_error_t *errData){
             return "1";
         case INT_OB1:
             return "2";
-        case INT_OR:
-            return "3";
-        case INT_AND:
-            return "4";
-        case INT_XOR:
-            return "5";
         case INT_LT:
             return "6";
         case INT_LTE:
