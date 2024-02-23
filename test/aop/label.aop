@@ -1,0 +1,5 @@
+// Test label implementation (ASSERT_TRUE)
+
+lab labelName
+mov rg0, 100
+// rg0 == 100

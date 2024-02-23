@@ -1,0 +1,18 @@
+// Test if_eq implementation (ASSERT_TRUE)
+
+mov rg0, 0
+mov rg1, 255
+
+lab labIf
+    if_eq
+    goto labelTrue
+    goto labExit
+
+lab labelTrue
+    ngr
+
+lab labExit
+    draw
+    add rg0, 1
+    draw
+    goto labIf
