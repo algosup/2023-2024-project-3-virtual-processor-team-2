@@ -44,10 +44,6 @@ char *getIntCode(enum interruptKind kind, asm_error_t *errData){
             return "13";
         case INT_MOV_F_REG:
             return "14";
-        case INT_ELSE:
-            return "15";
-        case INT_END:
-            return "16";
         default:
             errorIntCodeNotSupported(kind, errData);
             return NULL;

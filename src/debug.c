@@ -137,10 +137,6 @@ char *getInterName(enum interruptKind kind){
             return "POPA";
         case INT_MOV_F_REG:
             return "MOV_F_REG";
-        case INT_ELSE:
-            return "ELSE";
-        case INT_END:
-            return "END";
         default:
             return "UNKNOWN";
     }

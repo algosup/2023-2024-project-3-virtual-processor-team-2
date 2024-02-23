@@ -182,10 +182,6 @@ char *interToBinCode(enum interruptKind inter){
         return "00001101";
     case INT_MOV_F_REG:
         return "00001110";
-    case INT_ELSE:
-        return "00001111";
-    case INT_END:
-        return "00010000";
     default:
         return NULL;
     }
