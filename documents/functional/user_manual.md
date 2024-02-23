@@ -29,18 +29,33 @@ Welcome to the User Manual for [IAT2](#iat2-id). This guide is designed to help 
 ## 2. Getting Started
 
 ### 2.1 Installation
+Requirements:
+- Git
+- CMake
+- g++ (latest version)
+- gcc (latest version)
+
+*if you don't have git installed [CLICK HERE TO DOWNLOAD](https://git-scm.com/download/win).*  
+*if you don't have cmake installed [CLICK HERE TO DOWNLOAD](https://cmake.org/download/).*  
+*if you don't have gcc installed [CLICK HERE TO DOWNLOAD](https://www.devdungeon.com/content/install-gcc-compiler-windows-msys2-cc).*  
+*if you don't have msys2 installed [CLICK HERE TO DOWNLOAD](https://www.msys2.org/).*
 
 Follow these steps to install [IAT2](#iat2-id):
-
   1. Clone the repository: ``git clone https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2.git``
   2. Go at the project root
-  3. Build the project
+  3. Create an empty directory named "bin" at the project root
+  4. Go at the project root
+  5. Build the project
      - How to use with mingw: (Windows)
        - Execute cmake -S . -B Build -G "MinGW Makefiles"
        - Execute cd Build
        - Execute mingw32-make
      - How to use with msys2: (Windows)
        - Execute cmake -S . -B Build -G "MSYS Makefiles"
+       - Execute cd Build
+       - Execute make
+     - How to use with make: (Linux)
+       - Execute cmake -S . -B Build
        - Execute cd Build
        - Execute make
 
@@ -57,7 +72,7 @@ Follow these steps to install [IAT2](#iat2-id):
 | ``2at2 --help`` | ``2at2 -h`` | Display the list of command for [2at2](#2at2-id) | |
 | ``2at2 --version`` | ``2at2 -v`` | Display the version of [2at2](#2at2-id) | |
 | ``2at2 <file> --debug`` | ``2at2 <file> -d`` | Compile the program with the debugger | 2at2.log |
-| ``2at2 <file> --verbose`` | ``2at2 <file> -V`` | Compile the pragram with the advanced debugger | 2at2.log |
+
 
 #### Virtual Processor
 
@@ -70,6 +85,7 @@ Type: ``vat2`` to run the virtual processor and open the virtual terminal.
 | ``<path/binary_file>``| Execute your binary file |
 | ``help`` |  Display the list of command for [vat2](#vat2-id) |
 | ``clear`` | Clear the terminal |
+| ``version`` | Display the version of [vat2](#vat2-id) |
 | ``exit`` | Close the terminal | 
 
 ## 4. Troubleshooting
@@ -78,7 +94,7 @@ Type: ``vat2`` to run the virtual processor and open the virtual terminal.
 
 |Issue | Solution |
 |---|---|
-|||
+| Writing on register 3 | Don't write on register 3 |
 
 Your issue is not here ?<br>
 You can also refer to [GitHub Issues](https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/issues).

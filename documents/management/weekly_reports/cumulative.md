@@ -34,6 +34,10 @@ Quick Access:
     - [Plans for next week](#plans-for-next-week-3)
     - [Conclusion](#conclusion-5)
   - [Weekly Report - Week 7](#weekly-report---week-7)
+    - [Accomplishments](#accomplishments-6)
+    - [Challenges](#challenges-6)
+    - [Plans for next week](#plans-for-next-week-4)
+    - [Conclusion](#conclusion-6)
   - [Weekly Report - Week 8](#weekly-report---week-8)
 
 ## Weekly Report - Week 1
@@ -240,8 +244,30 @@ The team is tired due to the overcharge of work, it can be good to add more proj
 This week saw substantial advancements in the project, notably in enhancing the assembler and completing the Test Plan, while addressing challenges such as efficient reworking and binary code visualization. Although the team is generally doing well, addressing recent concerns is crucial to prevent potential project impact.
 
 ## Weekly Report - Week 7
-[Detailed File (WIP)](week_7.md)
-(WIP)
+[Detailed File](week_7.md)
+
+### Accomplishments
+
+1. Completed the development of assembler and virtual processor.
+2. Executed and completed unit tests.
+3. Introduced a helpful `--help` command displaying the entire command list.
+4. Created a comprehensive user manual for user guidance.
+
+
+### Challenges
+
+1. Successfully navigated challenges to adhere to the project deadline.
+
+### Plans for next week
+
+1. Create a engaging and informative presentation.
+2. Outline the key points and allocate roles for each team member.
+3. Conduct rehearsals to ensure a smooth and confident delivery.
+4. Present the project to the client, highlighting achievements and addressing queries.
+
+### Conclusion
+
+This week marked significant strides in our project, with successful completion of the assembler and Virtual Processor development. The team efficiently tackled challenges, ensuring adherence to project deadlines.
 
 ## Weekly Report - Week 8
 [Detailed File (WIP)](week_8.md)
