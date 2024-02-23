@@ -1,7 +1,7 @@
 # [2024] - IAT2️⃣
 
 
-<div style="text-align: center;">
+<div align="center">
     <a target="_blank" href="https://en.wikipedia.org/wiki/Vierzon">
         <img src="https://img.shields.io/badge/Made%20in-Vierzon-success.svg" alt="Made in Vierzon">
     </a>
@@ -9,7 +9,11 @@
         <img src="https://img.shields.io/badge/Made%20at-ALGOSUP-blue.svg" alt="Made at ALGOSUP">
     </a>
 </div>
-<img style="width:200px; display: block; margin: auto;"  src="documents\images\IAT2\png\iat2_logo_256px.png" alt="Assembly Team 2">
+<div align="center">
+
+  ![](./documents\images\IAT2\png\iat2_logo_256px.png)
+  
+</div>
 
 
 
