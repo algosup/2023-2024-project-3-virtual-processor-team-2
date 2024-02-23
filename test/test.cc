@@ -607,9 +607,9 @@ TEST(buildProgram, ParsingAndBuilding) {
   varList_t *varList = createEmptyVarList();  
   instList_t *nodeList = createEmptyInstList();
   labelList_t *labelList = createEmptyLabelList();
-  char *fileName = const_cast<char *>("../test/test.aop");
+  char *fileName = const_cast<char *>("../test/aop/test.aop");
   bool parsing = false;
-  parseFile(nodeList, fileName, varList, errData);
+  parseFile(nodeList, fileName, varList, labelList, errData);
   if (nodeList->head != NULL) {
     parsing = true;
   }
