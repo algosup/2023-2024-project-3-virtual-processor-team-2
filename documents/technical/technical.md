@@ -544,7 +544,7 @@ The following table outlines the key dependencies of our solution:
 
 **Virtual memory:**
 
-![Virtual Memory Diagram](../images/technical_images/v-mmu.png)
+![!\[alt text\](image.png)](../images/technical_images/v-mmu.png)
 
 ---
 
