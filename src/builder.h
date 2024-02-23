@@ -99,6 +99,16 @@ enum regKind getRegKind(char *str, long lineNb, asm_error_t *errData);
 */
 int getVarDatasize(char *str);
 
+/*
+    build interrupt operation
+    params:
+        node: pointer to the instruction node
+        errData: pointer to the error struct
+    returns:
+        bool: true if the operation was built
+*/
+bool buildIntOpe(instNode_t *node, asm_error_t *errData);
+
 #ifdef __cplusplus
 }
 #endif

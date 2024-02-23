@@ -1,0 +1,16 @@
+// Test lsh implementation (ASSERT_TRUE)
+
+// Test lsh with register <- immediate value
+mov rg0, 19394
+lsh rg0, 4
+// rg0 == 48160
+
+// Test lsh with register <- register
+mov rg1, 3
+lsh rg0, rg1
+// rg0 == 57600
+
+// Test lsh with register <- variable
+var var1, 3
+lsh rg0, var1
+// rg0 == 2048

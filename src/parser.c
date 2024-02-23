@@ -62,7 +62,7 @@ void flagsSet(char *flag, flags_t *flags, asm_error_t *errData){
     }
 }
 
-void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData){
+void parseFile(instList_t *nodeList, char *filename, varList_t *varList, labelList_t *labelList, asm_error_t *errData){
     // check if the file exists
     FILE *file = fopen(filename, "r");
     if(file == NULL){
@@ -80,13 +80,13 @@ void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_err
 
     // read the file line by line
     while(fgets(line, LINE_MAX_SIZE, file)){
-            // Check if one of the file's line doesn't exceed 64 characters
+        // Check if one of the file's line doesn't exceed 64 characters
         if (!checkLineSize(line, file)){
             errorLineSize(lineNb, errData);
         }
 
         // parse the line
-        instNode_t *node = parseLine(line, nodeId, lineNb, varList, errData);
+        instNode_t *node = parseLine(line, nodeId, lineNb, varList, labelList, errData);
         // continue if the line is empty
         if(node == NULL){
             ++ lineNb;
@@ -108,7 +108,7 @@ void parseFile(instList_t *nodeList, char *filename, varList_t *varList, asm_err
     fclose(file);
 }
 
-instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, asm_error_t *errData){
+instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, labelList_t *labelList, asm_error_t *errData){
     // check if the line is empty or a comment
     if(line[0] == '\n' || strncmp(cleanString(line, errData), "//", 2) == 0){
         return NULL;
@@ -117,6 +117,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, 
     instNode_t *newNode = createEmptyInstNode(errData);
     newNode->id = nodeId;
     newNode->lineNb = lineNb;
+    newNode->inputReg = RG_0;
 
     // Get the instruction
     char *inst = getInst(line, lineNb, errData);
@@ -132,7 +133,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, 
         
     bool isThatKind = false;
     // Set the instruction
-    isThatKind = isOp(inst, newNode, varList, errData);
+    isThatKind = isOp(inst, newNode, varList, labelList, errData);
     if(isThatKind){
         return newNode;
     }
@@ -142,7 +143,7 @@ instNode_t *parseLine(char *line, long nodeId, long lineNb, varList_t *varList, 
     return newNode;
 }
 
-bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errData){
+bool isOp(char *inst, instNode_t *newNode, varList_t *varList, labelList_t *labelList, asm_error_t *errData){
     if(strcmp(inst, "mov") == 0){
         newNode->op = OP_MOV;
     }
@@ -165,7 +166,6 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
         if(newNode->arg1 == NULL){
             errorNoArg(newNode->lineNb, errData);
         }
-
     }
     else if(strcmp(inst, "pop") == 0){
         newNode->op = OP_POP;
@@ -228,29 +228,23 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
     }
     else if(strcmp(inst, "not") == 0 || strcmp(inst, "!") == 0){
         newNode->op = OP_B_NOT;
-        // check if first argument is null
-        if(newNode->arg1 == NULL){
-            errorNoArg(newNode->lineNb, errData);
-        }
     }
     else if(strcmp(inst, "inc") == 0 || strcmp(inst, "++") == 0){
         newNode->op = OP_ADD;
-        // check if first argument is null
-        newNode->arg1 = "1";
-        if(newNode->arg1 == NULL){
-            errorNoArg(newNode->lineNb, errData);
-        }
+        newNode->arg1 = malloc(2);
+        strcpy(newNode->arg1, "1");
+
     }
     else if(strcmp(inst, "dec") == 0 || strcmp(inst, "--") == 0){
         newNode->op = OP_SUB;
-        newNode->arg1 = "1";
-        // check if first argument is null
-        if(newNode->arg1 == NULL){
-            errorNoArg(newNode->lineNb, errData);
-        }
+        newNode->arg1 = malloc(2);
+        strcpy(newNode->arg1, "1");
+
     }
     else if(strcmp(inst, "lab") == 0){
         newNode->op = OP_LAB;
+        // add label to labelList
+        addLabel(labelList, newNode->arg0, newNode->id, newNode->lineNb, errData);
     }
     else if(strcmp(inst, "var") == 0){
         newNode->op = OP_VAR;
@@ -272,72 +266,57 @@ bool isOp(char *inst, instNode_t *newNode, varList_t *varList, asm_error_t *errD
     else if(strcmp(inst, "ngr") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "0";
+        newNode->inter = INT_EXIT;
     }
     else if(strcmp(inst, "draw") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "1";
+        newNode->inter = INT_DRAW;
     }
     else if(strcmp(inst, "ob1") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "2";
-    }
-    else if(strcmp(inst, "or") == 0){
-        newNode->op = OP_INT;
-        newNode->isInter = true;
-        newNode->arg0 = "3";
-    }
-    else if(strcmp(inst, "if_and") == 0){
-        newNode->op = OP_INT;
-        newNode->isInter = true;
-        newNode->arg0 = "4";
-    }
-    else if(strcmp(inst, "if_xor") == 0){
-        newNode->op = OP_INT;
-        newNode->isInter = true;
-        newNode->arg0 = "5";
+        newNode->inter = INT_OB1;
     }
     else if(strcmp(inst, "if_lt") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "6";
+        newNode->inter = INT_LT;
     }
     else if(strcmp(inst, "if_lte") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "7";
+        newNode->inter = INT_LTE;
     }
     else if(strcmp(inst, "if_gt") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "8";
+        newNode->inter = INT_GT;
     }
     else if(strcmp(inst, "if_gte") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "9";
+        newNode->inter = INT_GTE;
     }
     else if(strcmp(inst, "if_eq") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "10";
+        newNode->inter = INT_EQ;
     }
     else if(strcmp(inst, "if_neq") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "11";
+        newNode->inter = INT_NEQ;
     }
     else if(strcmp(inst, "pusha") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "12";
+        newNode->inter = INT_PUSHA;
     }
     else if(strcmp(inst, "popa") == 0){
         newNode->op = OP_INT;
         newNode->isInter = true;
-        newNode->arg0 = "13";
+        newNode->inter = INT_POPA;
     }
     else{
         errorInstruction(inst, newNode->lineNb, errData);
@@ -389,7 +368,6 @@ char **getInstArgs(char *line, long lineNb, asm_error_t *errData){
         token = strtok(NULL, ",");
         if (!token) {
             if (i == 0) {
-                errorNoArg(lineNb, errData);
                 return args;
             }
             args[i] = NULL;

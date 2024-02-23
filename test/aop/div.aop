@@ -1,0 +1,16 @@
+// Test div implementation (ASSERT_TRUE)
+
+// Test div with register <- immediate value
+mov rg0, 50
+div rg0, 2
+// rg0 == 25
+
+// Test div with register <- register
+mov rg1, 200
+div rg1, rg0
+// rg1 == 8
+
+// Test div with register <- variable
+var var1, 4
+div rg1, var1
+// rg1 == 2

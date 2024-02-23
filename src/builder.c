@@ -36,14 +36,34 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_
         case OP_CALL:
             buildCall(node, labeList, errData);
             break;
+        case OP_INT:
+            node->isBuilt = buildIntOpe(node, errData);
+            break;
+        case OP_B_NOT:
+            // Check if input register is register 3
+            if(node->inputReg == RG_3){
+                // error read only reg
+                errorReadOnly(errData);
+            }
+            node->isBuilt = true;
+            break;
+        case OP_B_XOR: case OP_DIV: case OP_ADD: case OP_SUB: case OP_MUL: case OP_R_SHIFT: case OP_L_SHIFT: case OP_B_AND: case OP_B_OR: case OP_MOD:
+            buildOperation(node, varList, errData);
+            break;
+        case OP_PUSH:
+            node->isBuilt = true;
+            break;
+        case OP_RET:
+            node->isBuilt = true;
+            break;
         case OP_VAR:
             buildVar(node, varList, errData);
             break;
         case OP_LAB:
             buildLabel(node, labeList, errData);
-            break;
-        case OP_B_XOR: case OP_DIV: case OP_ADD: case OP_SUB: case OP_MUL: case OP_R_SHIFT: case OP_L_SHIFT: case OP_B_AND: case OP_B_OR: case OP_B_NOT: case OP_MOD:
-            buildOperation(node, varList, errData);
+            break;       
+        case OP_POP:
+            node->isBuilt = true;
             break;
         default:
             unknowError("Operation code not found during build", errData);
@@ -143,7 +163,7 @@ void buildVar(instNode_t *node, varList_t *varList, asm_error_t *errData){
 
 void buildLabel(instNode_t *node, labelList_t *labelList, asm_error_t *errData){
     // try to add the label to the list
-    int labId = addLabel(labelList, node->arg0, node->id, node->lineNb, errData);
+    int labId = isLabelExist(labelList, node->arg0);
     if(labId == -1){
         errorLabelNotFound(node->lineNb, node->arg0, errData);
     }
@@ -461,5 +481,20 @@ int getVarDatasize(char *str){
     }
     else{
         return (int)strlen(str);
+    }
+}
+
+bool buildIntOpe(instNode_t *node, asm_error_t *errData){
+    switch (node->inter)
+    {
+    case INT_LT: case INT_GT: case INT_LTE: case INT_GTE: case INT_EQ: case INT_NEQ:
+        // check if next node is a goto
+        if(node->next == NULL || node->next->op != OP_GOTO){
+            errorIfInt(node->lineNb, errData);
+            return false;
+        }
+        return true;    
+    default:
+        return true;
     }
 }

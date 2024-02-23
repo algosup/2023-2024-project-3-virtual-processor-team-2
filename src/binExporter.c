@@ -11,7 +11,7 @@
 #include "error.h"
 #include "debug.h"
 
-void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_error_t *errData){
+void exportToBin(instList_t *nodeList, char *filename, asm_error_t *errData){
     // Open the file
     FILE *file = fopen(filename, "wb");
 
@@ -46,13 +46,13 @@ void exportToBin(instList_t *nodeList, char *filename, varList_t *varList, asm_e
         } else {
             // write the argument
             if(node->arg0 != NULL){
-                fwrite(stringToBinary(node->arg0, errData), 1, strlen(node->arg0) * 8, file);
+                fwrite(stringToBinary(node->arg0, errData), 1, sizeof(char)*8, file);
             }
             else if(node->arg1 != NULL){
-                fwrite(stringToBinary(node->arg1, errData), 1, strlen(node->arg1) * 8, file);
+                fwrite(stringToBinary(node->arg1, errData), 1, sizeof(char)*8, file);
             }
             else {
-                fwrite("00000000", 1, 8, file);
+                fwrite("00000000", 1, sizeof(char)*8, file);
             }
         }
 
@@ -158,12 +158,6 @@ char *interToBinCode(enum interruptKind inter){
         return "00000001";
     case INT_OB1:
         return "00000010";
-    case INT_OR:
-        return "00000011";
-    case INT_AND:
-        return "00000100";
-    case INT_XOR:
-        return "00000101";
     case INT_LT:
         return "00000110";
     case INT_LTE:
@@ -182,10 +176,6 @@ char *interToBinCode(enum interruptKind inter){
         return "00001101";
     case INT_MOV_F_REG:
         return "00001110";
-    case INT_ELSE:
-        return "00001111";
-    case INT_END:
-        return "00010000";
     default:
         return NULL;
     }
@@ -204,10 +194,13 @@ char *stringToBinary(char *s, asm_error_t *errData) {
         for (int i = 7; i >= 0; i--) {
             bin[i] = (num >> (7 - i)) & 1 ? '1' : '0';
         }
-        bin[8] = '\0'; //
+        bin[8] = '\0';
         return bin;
     } else {
         // Convert char to byte
+        if(strcmp(s, "\0")==0){
+            return "00000000";
+        }
         char *bin = (char *)malloc(strlen(s) * 8 + 1);
         if (bin == NULL) {
             errorMemAlloc(errData);
