@@ -14,7 +14,7 @@ set(CMAKE_C_COMPILER "gcc")
 
 project(
   Interpreter-AT2
-  VERSION 1.1.0
+  VERSION 1.1.1
   LANGUAGES CXX C
 )
 
