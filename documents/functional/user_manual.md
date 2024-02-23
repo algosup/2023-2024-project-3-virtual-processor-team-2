@@ -94,7 +94,7 @@ Type: ``vat2`` to run the virtual processor and open the virtual terminal.
 
 |Issue | Solution |
 |---|---|
-|||
+| Writing on register 3 | Don't write on register 3 |
 
 Your issue is not here ?<br>
 You can also refer to [GitHub Issues](https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/issues).
