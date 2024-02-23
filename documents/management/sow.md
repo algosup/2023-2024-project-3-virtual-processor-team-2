@@ -265,7 +265,7 @@ Key:
 | I      | Informed    | Those who are kept up-to-date on progress, often only on completion of the task or deliverable, and with whom there is just one-way communication |
 |        | -           | Not involved                                                                                                                                      |
 
-RACI colored spreadsheet easily readable can be found [HERE](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing).
+A readable and colored RACI spreadsheet can be found [HERE](https://docs.google.com/spreadsheets/d/17-31PYeuYhOWX956qyZJER-_5GFUCzEy7xImLAHIEhA/edit?usp=sharing).
 
 ## Context
 
