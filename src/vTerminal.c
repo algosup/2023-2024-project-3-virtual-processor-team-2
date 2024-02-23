@@ -8,7 +8,7 @@
 
 #include "vTerminal.h"
 
-#define VERSION "1.0.0"
+#define VERSION "1.1.0"
 
 void runVTerminal(asm_error_t *errData){
     char *command = (char *)malloc(100 * sizeof(char));

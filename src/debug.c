@@ -113,12 +113,6 @@ char *getInterName(enum interruptKind kind){
             return "DRAW";
         case INT_OB1:
             return "OB1";
-        case INT_OR:
-            return "OR";
-        case INT_AND:
-            return "AND";
-        case INT_XOR:
-            return "XOR";
         case INT_LT:
             return "LT";
         case INT_LTE:
@@ -137,10 +131,6 @@ char *getInterName(enum interruptKind kind){
             return "POPA";
         case INT_MOV_F_REG:
             return "MOV_F_REG";
-        case INT_ELSE:
-            return "ELSE";
-        case INT_END:
-            return "END";
         default:
             return "UNKNOWN";
     }
