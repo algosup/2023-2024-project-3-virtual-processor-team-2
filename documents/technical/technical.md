@@ -400,7 +400,7 @@ The following table outlines the key dependencies of our solution:
 
 ## Data model
 
-![Data Model Diagram](../images/technical_images/data_model.png)
+![!\[alt text\](image.png)](../images/technical_images/data_model.png)
 
 **Diagram explanation**:
 
