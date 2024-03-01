@@ -6,6 +6,7 @@ This document contains the main management artifacts:
 - [Work Breakdown Structure](#work-breakdown-structure)
 - [MoSCoW](#moscow)
 - [Key Performance Indicators](#key-performance-indicators)
+- [Post Mortem](#post-mortem)
 - [Appendix](#appendix)
     - [1. Product Logo](#1-product-logo)
     - [2. Management Tools](#2-management-tools)
@@ -82,6 +83,17 @@ A readable and colored RACI spreadsheet can be found [HERE](https://docs.google.
 # Key Performance Indicators
 
 The spreadsheet for the KPI's data and graphs can be found [HERE](https://docs.google.com/spreadsheets/d/13n8fdWMEYFlJKhJ_OWILYcpX_c6CvLBpt4ebboLiU18/edit?usp=sharing).
+
+# Post Mortem
+
+|  | What you learned | Problem encountered | How do you handle it | What to improve | What you liked | What you don't liked | What are you proud |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| Mathias<br>(SCRUM Master) | - Communication<br>- English<br>- Management | - First time in management, no real guidance from other students<br>- Difficulty to blame other  | - Lot of research on internet<br>- Asking some advice to Franck (Superior) | - I need to develop more and more my KPIs<br>- I need to do more documentation at the beginning of the project to help everyone to stay on track | - The atmosphere of work, It was very close to work in companies' open-space | - I didn't code a lot in C, it didn't improved my C understanding and utility | - I'm proud of the project<br>- How the team has worked efficiently |
+| Guillaume Des | - Learn a bit of C<br>- Learn a lot of team work | - Global overview of the project | - Making schematics and sketches | - make more research about the topic<br> | - Great Management<br>- Full English | - Didn't ask to the PM more document (MoSCoW, etc...) <br>- Maxime | - Understand a lot of the code.<br>- Proud of the synergy of the team |
+| Guillaume Der | - English improvement<br>- REAL Basics of basics of C<br>- How to use GitHub | - Copy pasted another team's technical forcing him to restart from scratch <br>- Not enough skills led to a lack of motivation and an abandon of project<br>- Difficulty to understand what maxime explained multiple times<br>- Problem of communication with the rest of the team | - We need to explain him what to do | - Overall motivation, keeping it during the project duration | - Speaking in English but was disappointed at start<br>- A great Project Management<br>- Maxime knowledge in C<br>- Good atmosphere<br>- Everyone worked | - Being dismotivated and doing shit on internet | - Result of the project<br>- Team English progress<br>- To help a bit on the code |
+| Paul | - memory allocation<br>- Basics of CMake | - Difficulty to install CMake and the compiler | - Maxime helped him to install everything | - Needed to find the best way to run the code (cmd or run button)<br>- Learned more about CMake and the other assisting systems | - Knowing what he has to do<br>- Fun to work with new students<br>- to be useful in the project<br>- Be more confident to ask and answer questions | - No enough coding | - Finding the idea to simplify the error system |
+| Maxime | - Communication<br>- English (whole project in english) | - He accepted to replace the tech lead due to a lack of knowledge from him<br>- Struggled with the time due to a non-global project overview | - He worked more, worked on his free time (proud of the final product) | - first phase, better stepback and a global overview | - Speaking English during the whole project<br>- Calm work environment which helped us to be focus<br>- Worked with a lot a first years who are sometimes better than previous promotions | - Guillaume Der didn't work as hard as other members | - proud of the English improvement<br>- paul's work<br>- Guillaume's der advancement |
+| Enzo | - C programming language<br>- How to really work as a team<br>- How to emphases the quality of a product | - When he set up the GitHub action, he had difficulties to understand how to do<br>- Understand as well the architecture of the project<br>- No native behavior to open GitHub issues | - Helped by maxime, looked how to setup a runner<br>- Reading it, created unit tests<br>- forced to do it and it became native | - best understanding at the beginning<br>- Be more motivated on a project that doesn't feel exiting, because we learn from each project<br>- Project global overview | - Only English in project sessions<br>- The QA role<br>- Maxime knew more C than us and brought us further in the project | - Maxime did 95% of the product | - Himself because he learned new things about GitHub and programming, Great QA job<br>- The team, we worked well and we have a quite nice product<br>- Proud of the english improvement of the entire team |
 
 # Appendix
 
