@@ -6,7 +6,8 @@ These versions are currently updated and can include security patches:
 
 | Version     | Supported          |
 | ----------- | ------------------ |
-| > 1.1.0     | :white_check_mark: |
+| > 1.1.1     | :white_check_mark: |
+| &emsp;1.1.0 | :white_check_mark: |
 | &emsp;1.0.0 | :white_check_mark: |
 | &emsp;0.5.0 | :x: |
 | &emsp;0.4.0 | :x: |

@@ -39,6 +39,10 @@ Quick Access:
     - [Plans for Next week](#plans-for-next-week-4)
     - [Conclusion](#conclusion-6)
   - [Weekly Report - Week 8](#weekly-report---week-8)
+    - [Accomplishments](#accomplishments-7)
+    - [Challenges](#challenges-7)
+    - [Plans for Next week](#plans-for-next-week-5)
+    - [Conclusion](#conclusion-7)
 
 ## Weekly Report - Week 1
 [Detailed File](week_1.md)
@@ -270,5 +274,24 @@ This week saw substantial advancements in the project, notably in enhancing the 
 This week marked significant strides in our project, with successful completion of the assembler and Virtual Processor development. The team efficiently tackled challenges, ensuring adherence to project deadlines.
 
 ## Weekly Report - Week 8
-[Detailed File (WIP)](week_8.md)
-(WIP)
+[Detailed File](week_8.md)
+
+### Accomplishments
+
+1. Successfully crafted an engaging and informative presentation support.
+2. Dedicated time and effort to rehearse the presentation for a seamless delivery.
+
+### Challenges
+
+1. Striving to adhere to the 15-minute time limit for an effective presentation.
+2. Focused efforts on maintaining a smooth and cohesive flow during the presentation.
+
+### Plans for Next week
+
+- After the culmination of this significant project, the team plans to take a well-deserved break.
+
+### Conclusion
+
+The team's dedication to meticulous preparations and effective communication shines through a confident and impactful final presentation.
+
+The team takes pride in the accomplishments of the project and the collective effort invested throughout this period. They are delighted to begin their well-deserved vacation.
