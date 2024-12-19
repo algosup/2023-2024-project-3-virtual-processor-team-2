@@ -435,7 +435,7 @@ void errorIntCodeNotSupported(long code, asm_error_t *errData){
     displayError(errType, errDetails, NULL, errorFile, errData);
 }
 
-void unknowError(char *details, asm_error_t *errData){
+void unknownError(char *details, asm_error_t *errData){
     char *errType = "Unknown Error";
     displayError(errType, details, NULL, errorFile, errData);
 }

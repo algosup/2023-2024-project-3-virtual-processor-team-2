@@ -93,7 +93,7 @@ bool addVar(varList_t *varList, char *name, char *value, long lineNb, asm_error_
             return true;
         }
     }
-    unknowError("On variable declaration", errData);
+    unknownError("On variable declaration", errData);
     return false;
 }
 
@@ -197,7 +197,7 @@ int addLabel(labelList_t *labelList, char *name, long nodeId, long lineNb, asm_e
         }
     }
 
-    unknowError("On label declaration", errData);
+    unknownError("On label declaration", errData);
     return -1;
 }
 
