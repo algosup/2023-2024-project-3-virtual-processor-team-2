@@ -17,7 +17,7 @@ void exportToBin(instList_t *nodeList, char *filename, asm_error_t *errData){
 
     // Check if the file was opened
     if(file == NULL){
-        unknowError("File cannot be opened", errData);
+        unknownError("File cannot be opened", errData);
         return;
     }
     instNode_t *node = nodeList->head;

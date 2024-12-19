@@ -339,7 +339,7 @@ void errorIntCodeNotSupported(long code, asm_error_t *errData);
         details: Details about the error
         errData: Error history
 */
-void unknowError(char *details, asm_error_t *errData);
+void unknownError(char *details, asm_error_t *errData);
 
 /*
     Display error messages for binary conversion issues

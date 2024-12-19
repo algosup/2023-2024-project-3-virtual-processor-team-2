@@ -24,7 +24,7 @@ void printAst(instList_t *nodeList, asm_error_t *errData){
 void printNodeData(instNode_t *node, asm_error_t *errData){
     FILE *file = fopen(logFile, "ab");
     if(file == NULL){
-        unknowError("File cannot be opened", errData);
+        unknownError("File cannot be opened", errData);
         exit(EXIT_FAILURE);
     }
     // Get current time

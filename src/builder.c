@@ -66,7 +66,7 @@ void buildNode(instNode_t *node, varList_t *varList, labelList_t *labeList, asm_
             node->isBuilt = true;
             break;
         default:
-            unknowError("Operation code not found during build", errData);
+            unknownError("Operation code not found during build", errData);
             node->isBuilt = true;
             break;
     }
@@ -341,7 +341,7 @@ void buildMov(instNode_t *node, varList_t *varList, asm_error_t *errData){
             return;
         }
     }
-    unknowError("Mov build is failed", errData);
+    unknownError("Mov build is failed", errData);
 
     return;
 }
@@ -441,7 +441,7 @@ void buildOperation(instNode_t *node, varList_t *varList, asm_error_t *errData){
 
         return;
     }
-    unknowError("Operation connot be built", errData);
+    unknownError("Operation cannot be built", errData);
     return;
 }
 
