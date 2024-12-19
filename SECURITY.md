@@ -6,18 +6,19 @@ These versions are currently updated and can include security patches:
 
 | Version     | Supported          |
 | ----------- | ------------------ |
-| > 1.1.1     | :white_check_mark: |
+| > 1.1.2     | :white_check_mark: |
+| &emsp;1.1.1 | :white_check_mark: |
 | &emsp;1.1.0 | :white_check_mark: |
 | &emsp;1.0.0 | :white_check_mark: |
-| &emsp;0.5.0 | :x: |
-| &emsp;0.4.0 | :x: |
-| &emsp;0.3.0 | :x: |
-| &emsp;0.2.0 | :x: |
-| &emsp;0.1.1 | :x: |
-| &emsp;0.0.4 | :x: |
-| &emsp;0.0.3 | :x: |
-| &emsp;0.0.2 | :x: |
-| &emsp;0.0.1 | :x: |
+| &emsp;0.5.0 | :x:                |
+| &emsp;0.4.0 | :x:                |
+| &emsp;0.3.0 | :x:                |
+| &emsp;0.2.0 | :x:                |
+| &emsp;0.1.1 | :x:                |
+| &emsp;0.0.4 | :x:                |
+| &emsp;0.0.3 | :x:                |
+| &emsp;0.0.2 | :x:                |
+| &emsp;0.0.1 | :x:                |
 
 ## Reporting a Vulnerability
 
